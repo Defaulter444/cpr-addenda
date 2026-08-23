@@ -29,7 +29,7 @@
       "suppressiveFire": false
     },
     "humanityLoss": {
-      "roll": "9d6+2",
+      "roll": "9d6 + ceil(1d6/2)",
       "static": 32
     },
     "ignoreArmorPercent": 0,

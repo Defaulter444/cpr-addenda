@@ -17,6 +17,7 @@ import { MODULE_ID, SETTINGS } from "./constants.js";
 import { loadSystemConfig } from "./cpr-config.js";
 import { registerItemPatches } from "./item-patches.js";
 import { registerAimedShotPatch } from "./aimed-shot.js";
+import { registerFormulaPatch } from "./roll-formula.js";
 import { registerSheetHooks } from "./upgrade-sheet.js";
 import { registerCarrierHooks } from "./carrier-slots.js";
 import {
@@ -113,6 +114,9 @@ Hooks.once("babele.init", (babele) => {
 
 Hooks.once("ready", async () => {
   await loadSystemConfig();
+  // Ставим до всего прочего: без этого предметы модуля со сложными
+  // формулами броска роняют установку.
+  await registerFormulaPatch();
   await checkDvTableSetting();
 
   const api = {

@@ -76,20 +76,17 @@ def price_of(text):
     return int(digits) if digits else 0
 
 
-# Среднее значение записи «[XdY/2 округлить вверх]» из документа.
-# Система не понимает функций в формуле броска (её разбор ищет один XdY,
-# а остальное пропускает через Number()), поэтому эту часть заменяем
-# постоянной прибавкой, равной среднему.
-HALF_DIE_AVERAGE = {"1d6": 2, "2d6": 4, "3d6": 5}
-
-
 def humanity_of(text):
     """
     Разбирает «52 ([2d6/2 round up] + 15d6)» на фиксированное значение и формулу.
 
-    Формула приводится к виду «XdY+K» — единственному, который система
-    разбирает верно. Скобочная половина броска становится прибавкой K, равной
-    её среднему: точная запись всё равно сохранена в описании предмета.
+    Формула переносится из документа точно, скобочная запись превращается в
+    штатную функцию Foundry: «[2d6/2 округлить вверх]» — это ceil(2d6/2).
+    Порядок слагаемых меняем так, чтобы кубик стоял первым: по первому члену
+    формулы система показывает выпавшие грани в карточке броска.
+
+    Такую формулу разбор системы сам по себе не осилит — за это отвечает
+    патч в `scripts/roll-formula.js`.
     """
     static_match = re.match(r"\s*(\d+)", text or "")
     static = int(static_match.group(1)) if static_match else 0
@@ -97,28 +94,22 @@ def humanity_of(text):
     formula_match = re.search(r"\((.+)\)\s*$", (text or "").strip())
     raw = formula_match.group(1).strip() if formula_match else ""
 
-    bonus = 0
     half = re.search(
         r"\[\s*(\d+d\d+)\s*/\s*2\s*(?:round up|округлить вверх)\s*\]",
         raw,
         flags=re.IGNORECASE,
     )
+    half_part = f"ceil({half.group(1)}/2)" if half else ""
     if half:
-        bonus = HALF_DIE_AVERAGE.get(half.group(1), 3)
         raw = raw[: half.start()] + raw[half.end():]
 
-    # Основной кубик — самый крупный XdY из оставшегося.
-    dice = re.findall(r"(\d+)d(\d+)", raw)
-    if not dice:
+    dice = re.findall(r"\d+d\d+", raw)
+    if not dice and not half_part:
         return static, "1d6"
-    count, faces = max(dice, key=lambda d: int(d[0]))
 
-    # Пробелы недопустимы: разбор системы режет формулу по ним и ломается
-    # на пустых кусках.
-    formula = f"{count}d{faces}"
-    if bonus:
-        formula += f"+{bonus}"
-    return static, formula
+    # Кубик первым, функция следом.
+    parts = dice + ([half_part] if half_part else [])
+    return static, " + ".join(parts)
 
 
 # Кавычки в выгрузке идут вперемешку: удвоенные прямые, одинарные прямые и
