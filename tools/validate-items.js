@@ -140,6 +140,123 @@ async function loadReferences() {
  * @param {String} label - имя файла для сообщений
  * @param {Map} seenIds - общий реестр идентификаторов
  */
+/**
+ * Проверяет комплект корпуса ПКТ.
+ *
+ * Комплект едет в своём флаге и раскладывается модулем: фундаменты — в
+ * персонажа, опции — в фундамент своего типа, покрытия — в сам корпус.
+ * Проверяем то, на что эта раскладка опирается: типы, слоты и обнулённую
+ * потерю человечности. Разойдись данные с раскладкой — модуль молча поставит
+ * меньше, чем написано в книге.
+ *
+ * @param {Object} doc - корпус
+ * @param {String} label - как называть предмет в сообщениях
+ * @param {Map} seenIds - занятые идентификаторы, общие на весь модуль
+ * @param {Function} report - куда сообщать о находках
+ */
+function checkPktKit(doc, label, seenIds, report) {
+  const kit = doc.flags?.["cpr-addenda"]?.pktKit;
+  if (kit === undefined) return;
+
+  if (!Array.isArray(kit.foundations) || !Array.isArray(kit.carried)) {
+    report(label, "комплект должен состоять из списков foundations и carried");
+    return;
+  }
+
+  const checkPart = (part, where) => {
+    if (!/^[a-zA-Z0-9]{16}$/.test(part._id ?? "")) {
+      report(where, `«${part.name}»: _id должен быть 16 символов`);
+    } else if (seenIds.has(part._id)) {
+      report(
+        where,
+        `_id «${part._id}» уже занят (${seenIds.get(part._id)}) — ` +
+          "у каждого экземпляра импланта должен быть свой"
+      );
+    } else {
+      seenIds.set(part._id, where);
+    }
+    if (!part.name) report(where, "у импланта комплекта нет имени");
+    if (!part.type) report(where, `имплант «${part.name}» без типа`);
+    if (!part.system) report(where, `имплант «${part.name}» без данных`);
+
+    // Потеря человечности за комплект назначена корпусу одной строкой из
+    // книги; оставь имплантам их собственную — и система спишет её повторно,
+    // да ещё бросит кубик за каждый из двух десятков.
+    const loss = part.system?.humanityLoss ?? {};
+    if (loss.static !== 0 || String(loss.roll) !== "0") {
+      report(
+        where,
+        `«${part.name}»: потеря человечности должна быть обнулена, ` +
+          `а стоит ${loss.static}/${loss.roll}`
+      );
+    }
+    if (part.system?.installedItems?.list?.length) {
+      report(where, `«${part.name}»: список установленного должен быть пуст`);
+    }
+  };
+
+  for (const group of kit.foundations) {
+    const host = group?.item;
+    if (!host) {
+      report(label, "в комплекте есть фундамент без предмета");
+      continue;
+    }
+    const where = `${label} → «${host.name}»`;
+    checkPart(host, label);
+
+    if (!host.system?.isFoundational) {
+      report(label, `«${host.name}» стоит фундаментом, но таковым не помечен`);
+    }
+
+    const options = group.options ?? [];
+    for (const option of options) {
+      checkPart(option, where);
+      // Опция обязана быть того же типа: по нему система ищет, куда её
+      // вернуть, если игрок снимет имплант и захочет поставить обратно.
+      if (option.system?.type !== host.system?.type) {
+        report(
+          where,
+          `«${option.name}» типа ${option.system?.type} стоит в фундаменте ` +
+            `типа ${host.system?.type}`
+        );
+      }
+    }
+
+    const needed = options.reduce((sum, o) => sum + (o.system?.size ?? 1), 0);
+    const slots = host.system?.installedItems?.slots ?? 0;
+    if (needed > slots) {
+      report(where, `опциям нужно ${needed} слотов, а у фундамента ${slots}`);
+    }
+    if (needed && host.system?.installedItems?.allowed !== true) {
+      report(where, "фундамент с опциями должен принимать установку");
+    }
+  }
+
+  for (const part of kit.carried) {
+    checkPart(part, label);
+    if (part.system?.isFoundational) {
+      report(label, `«${part.name}» фундаментален — ему место не в корпусе`);
+    }
+  }
+
+  const carriedSize = kit.carried.reduce(
+    (sum, p) => sum + (p.system?.size ?? 1),
+    0
+  );
+  const installed = doc.system?.installedItems ?? {};
+  if ((installed.slots ?? 0) < carriedSize) {
+    report(label, `корпусу нужно ${carriedSize} слотов, а есть ${installed.slots}`);
+  }
+  // Комплект разворачивает модуль, поэтому у предмета в компендиуме ничего
+  // установленного быть не должно.
+  if (installed.list?.length || installed.usedSlots) {
+    report(label, "у корпуса в компендиуме не должно быть установленного");
+  }
+  if (doc.flags?.cprInstallTree) {
+    report(label, "системное дерево установки больше не используется");
+  }
+}
+
 function validateTable(doc, label, seenIds) {
   if (!/^[a-zA-Z0-9]{16}$/.test(doc._id ?? "")) {
     fail(label, `_id таблицы должен быть 16 символов, получено "${doc._id}"`);
@@ -280,99 +397,6 @@ function validateJournal(doc, label, seenIds) {
     manifest.packs.map((p) => [p.name, p.type])
   );
 
-  /**
- * Проверяет комплект вложенных предметов.
- *
- * Комплект корпуса ПКТ двухуровневый: в корпусе стоят фундаменты — киберруки,
- * киберглаза, набор кибераудио, — а в них уже опции. Система разворачивает
- * такую вложенность рекурсивно (`createInstalledItemsOnActor`), поэтому и
- * проверять её надо рекурсивно: разойдись флаг со списком на любом уровне,
- * часть комплекта потеряется молча.
- *
- * @param {Object} node - предмет с комплектом
- * @param {String} label - как называть предмет в сообщениях
- * @param {Map} seenIds - занятые идентификаторы, общие на весь модуль
- * @param {Function} fail - куда сообщать о находках
- * @param {Number} depth - текущий уровень вложенности
- */
-function checkInstallTree(node, label, seenIds, fail, depth = 0) {
-  const tree = node.flags?.cprInstallTree;
-  if (tree === undefined) return;
-
-  const where = depth === 0 ? label : `${label} → «${node.name}»`;
-  if (!Array.isArray(tree)) {
-    fail(where, "cprInstallTree должен быть списком предметов");
-    return;
-  }
-
-  const installed = node.system?.installedItems ?? {};
-  const list = installed.list ?? [];
-  const treeIds = tree.map((t) => t._id);
-
-  if (list.length !== treeIds.length) {
-    fail(
-      where,
-      `в комплекте ${treeIds.length} предметов, а в списке установленного ${list.length}`
-    );
-  }
-  const missingInList = treeIds.filter((id) => !list.includes(id));
-  if (missingInList.length) {
-    fail(
-      where,
-      `предметы комплекта отсутствуют в списке установленного: ${missingInList.length}`
-    );
-  }
-
-  // Слоты система считает по размеру вложенного, а не по их числу.
-  const needed = tree.reduce((sum, t) => sum + (t.system?.size ?? 1), 0);
-  const slots = installed.slots ?? 0;
-  if (slots < needed) {
-    fail(where, `комплекту нужно ${needed} слотов, а есть ${slots}`);
-  }
-  // Занятые места система пересчитывает только при снятии импланта, поэтому
-  // счётчик должен приехать уже верным.
-  if ((installed.usedSlots ?? 0) !== needed) {
-    fail(
-      where,
-      `занято слотов должно быть ${needed}, а записано ${installed.usedSlots ?? 0}`
-    );
-  }
-  if (installed.allowed !== true) {
-    fail(where, "предмет с комплектом должен принимать установку");
-  }
-
-  for (const nested of tree) {
-    if (!/^[a-zA-Z0-9]{16}$/.test(nested._id ?? "")) {
-      fail(where, `предмет комплекта «${nested.name}»: _id должен быть 16 символов`);
-    } else if (seenIds.has(nested._id)) {
-      fail(
-        where,
-        `_id «${nested._id}» уже занят (${seenIds.get(nested._id)}) — ` +
-          "у каждого экземпляра импланта должен быть свой"
-      );
-    } else {
-      seenIds.set(nested._id, where);
-    }
-    if (!nested.name) fail(where, "у предмета комплекта нет имени");
-    if (!nested.type) fail(where, `предмет комплекта «${nested.name}» без типа`);
-    if (!nested.system) fail(where, `предмет комплекта «${nested.name}» без данных`);
-
-    // Опция обязана лежать в фундаменте своего типа: по этому полю система
-    // ищет, куда её ставить, когда игрок снимет и захочет вернуть обратно.
-    if (depth > 0 && nested.system?.type !== node.system?.type) {
-      fail(
-        where,
-        `«${nested.name}» типа ${nested.system?.type} стоит в фундаменте ` +
-          `типа ${node.system?.type}`
-      );
-    }
-    if (depth > 0 && nested.flags?.cprInstallTree) {
-      fail(where, `«${nested.name}»: комплект глубже двух уровней не собираем`);
-    }
-
-    checkInstallTree(nested, label, seenIds, fail, depth + 1);
-  }
-}
 
 const seenIds = new Map();
   let count = 0;
@@ -566,12 +590,9 @@ const seenIds = new Map();
       }
 
       // 3e. Комплект вложенных предметов.
-      // Система разворачивает его при переносе на актёра, читая флаг
-      // cprInstallTree и список installedItems.list. Если они разойдутся,
-      // часть комплекта потеряется молча — предмет создастся, но не
-      // установится ни во что.
-      const tree = doc.flags?.cprInstallTree;
-      if (tree !== undefined) checkInstallTree(doc, label, seenIds, fail);
+      // Комплект раскладывает модуль, а не система: проверяем то, на что
+      // эта раскладка опирается.
+      checkPktKit(doc, label, seenIds, fail);
 
       // 4. Числовые границы из схемы данных.
       const numeric = [

@@ -7,20 +7,12 @@
   "sort": 0,
   "effects": [],
   "flags": {
-    "cprInstallTree": [
-      {
-        "_id": "cprAddImp0005900",
-        "effects": [],
-        "flags": {
-          "cyberpunk-red-core": {
-            "_migration": {
-              "current": 33,
-              "previous": "24"
-            }
-          },
-          "cprInstallTree": [
-            {
-              "_id": "cprAddImp0007800",
+    "cpr-addenda": {
+      "pktKit": {
+        "foundations": [
+          {
+            "item": {
+              "_id": "cprAddImp0005900",
               "effects": [],
               "flags": {
                 "cyberpunk-red-core": {
@@ -30,8 +22,8 @@
                   }
                 }
               },
-              "img": "systems/cyberpunk-red-core/icons/compendium/black-chrome/reinforced-cyberarm.svg",
-              "name": "Усиление киберруки",
+              "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/cyberarm.svg",
+              "name": "Киберрука",
               "system": {
                 "ammoVariety": [],
                 "attackmod": 0,
@@ -44,7 +36,7 @@
                 "core": false,
                 "damage": "1d6",
                 "description": {
-                  "value": "Требует киберруку. Киберруку, в которую установлено это улучшение, невозможно сломать."
+                  "value": "Кибернетическая рука. Бесплатная кисть в комплекте."
                 },
                 "dvTable": "",
                 "favorite": false,
@@ -53,23 +45,23 @@
                   "suppressiveFire": false
                 },
                 "humanityLoss": {
-                  "roll": "1d6",
-                  "static": 3
+                  "roll": "0",
+                  "static": 0
                 },
                 "ignoreArmorPercent": 50,
-                "installLocation": "clinic",
+                "installLocation": "hospital",
                 "installedItems": {
-                  "allowed": false,
+                  "allowed": true,
                   "allowedTypes": [
                     "itemUpgrade",
-                    "ammo"
+                    "cyberware"
                   ],
                   "list": [],
-                  "slots": 3,
+                  "slots": 4,
                   "usedSlots": 0
                 },
                 "isElectronic": true,
-                "isFoundational": false,
+                "isFoundational": true,
                 "isRanged": false,
                 "isWeapon": false,
                 "magazine": {
@@ -78,707 +70,1459 @@
                   "value": 0
                 },
                 "price": {
-                  "market": 1000
+                  "market": 500
                 },
                 "providesHardening": false,
                 "revealed": true,
                 "rof": 1,
-                "size": 1,
-                "source": {
-                  "book": "BC",
-                  "page": 21
-                },
-                "type": "cyberArm",
-                "unarmedAutomaticCalculation": true,
-                "usage": "toggled",
-                "usesType": "magazine",
-                "weaponSkill": "Archery",
-                "weaponType": "assaultRifle"
-              },
-              "type": "cyberware",
-              "folder": null,
-              "sort": 0,
-              "ownership": {
-                "default": 0
-              }
-            },
-            {
-              "_id": "cprAddImp0007900",
-              "effects": [],
-              "flags": {
-                "cyberpunk-red-core": {
-                  "_migration": {
-                    "current": 33,
-                    "previous": "24"
-                  }
-                }
-              },
-              "img": "systems/cyberpunk-red-core/icons/compendium/black-chrome/reinforced-cyberarm.svg",
-              "name": "Усиление киберруки",
-              "system": {
-                "ammoVariety": [],
-                "attackmod": 0,
-                "brand": "",
-                "canIgnoreArmor": true,
-                "concealable": {
-                  "concealable": false,
-                  "isConcealed": false
-                },
-                "core": false,
-                "damage": "1d6",
-                "description": {
-                  "value": "Требует киберруку. Киберруку, в которую установлено это улучшение, невозможно сломать."
-                },
-                "dvTable": "",
-                "favorite": false,
-                "fireModes": {
-                  "autoFire": 0,
-                  "suppressiveFire": false
-                },
-                "humanityLoss": {
-                  "roll": "1d6",
-                  "static": 3
-                },
-                "ignoreArmorPercent": 50,
-                "installLocation": "clinic",
-                "installedItems": {
-                  "allowed": false,
-                  "allowedTypes": [
-                    "itemUpgrade",
-                    "ammo"
-                  ],
-                  "list": [],
-                  "slots": 3,
-                  "usedSlots": 0
-                },
-                "isElectronic": true,
-                "isFoundational": false,
-                "isRanged": false,
-                "isWeapon": false,
-                "magazine": {
-                  "ammoData": null,
-                  "max": 0,
-                  "value": 0
-                },
-                "price": {
-                  "market": 1000
-                },
-                "providesHardening": false,
-                "revealed": true,
-                "rof": 1,
-                "size": 1,
-                "source": {
-                  "book": "BC",
-                  "page": 21
-                },
-                "type": "cyberArm",
-                "unarmedAutomaticCalculation": true,
-                "usage": "toggled",
-                "usesType": "magazine",
-                "weaponSkill": "Archery",
-                "weaponType": "assaultRifle"
-              },
-              "type": "cyberware",
-              "folder": null,
-              "sort": 0,
-              "ownership": {
-                "default": 0
-              }
-            },
-            {
-              "_id": "cprAddImp0008000",
-              "effects": [],
-              "flags": {
-                "cyberpunk-red-core": {
-                  "_migration": {
-                    "current": 33,
-                    "previous": "24"
-                  }
-                }
-              },
-              "img": "systems/cyberpunk-red-core/icons/compendium/black-chrome/reinforced-cyberarm.svg",
-              "name": "Усиление киберруки",
-              "system": {
-                "ammoVariety": [],
-                "attackmod": 0,
-                "brand": "",
-                "canIgnoreArmor": true,
-                "concealable": {
-                  "concealable": false,
-                  "isConcealed": false
-                },
-                "core": false,
-                "damage": "1d6",
-                "description": {
-                  "value": "Требует киберруку. Киберруку, в которую установлено это улучшение, невозможно сломать."
-                },
-                "dvTable": "",
-                "favorite": false,
-                "fireModes": {
-                  "autoFire": 0,
-                  "suppressiveFire": false
-                },
-                "humanityLoss": {
-                  "roll": "1d6",
-                  "static": 3
-                },
-                "ignoreArmorPercent": 50,
-                "installLocation": "clinic",
-                "installedItems": {
-                  "allowed": false,
-                  "allowedTypes": [
-                    "itemUpgrade",
-                    "ammo"
-                  ],
-                  "list": [],
-                  "slots": 3,
-                  "usedSlots": 0
-                },
-                "isElectronic": true,
-                "isFoundational": false,
-                "isRanged": false,
-                "isWeapon": false,
-                "magazine": {
-                  "ammoData": null,
-                  "max": 0,
-                  "value": 0
-                },
-                "price": {
-                  "market": 1000
-                },
-                "providesHardening": false,
-                "revealed": true,
-                "rof": 1,
-                "size": 1,
-                "source": {
-                  "book": "BC",
-                  "page": 21
-                },
-                "type": "cyberArm",
-                "unarmedAutomaticCalculation": true,
-                "usage": "toggled",
-                "usesType": "magazine",
-                "weaponSkill": "Archery",
-                "weaponType": "assaultRifle"
-              },
-              "type": "cyberware",
-              "folder": null,
-              "sort": 0,
-              "ownership": {
-                "default": 0
-              }
-            },
-            {
-              "_id": "cprAddImp0008100",
-              "effects": [],
-              "flags": {
-                "cyberpunk-red-core": {
-                  "_migration": {
-                    "current": 33,
-                    "previous": "24"
-                  }
-                }
-              },
-              "img": "systems/cyberpunk-red-core/icons/compendium/black-chrome/reinforced-cyberarm.svg",
-              "name": "Усиление киберруки",
-              "system": {
-                "ammoVariety": [],
-                "attackmod": 0,
-                "brand": "",
-                "canIgnoreArmor": true,
-                "concealable": {
-                  "concealable": false,
-                  "isConcealed": false
-                },
-                "core": false,
-                "damage": "1d6",
-                "description": {
-                  "value": "Требует киберруку. Киберруку, в которую установлено это улучшение, невозможно сломать."
-                },
-                "dvTable": "",
-                "favorite": false,
-                "fireModes": {
-                  "autoFire": 0,
-                  "suppressiveFire": false
-                },
-                "humanityLoss": {
-                  "roll": "1d6",
-                  "static": 3
-                },
-                "ignoreArmorPercent": 50,
-                "installLocation": "clinic",
-                "installedItems": {
-                  "allowed": false,
-                  "allowedTypes": [
-                    "itemUpgrade",
-                    "ammo"
-                  ],
-                  "list": [],
-                  "slots": 3,
-                  "usedSlots": 0
-                },
-                "isElectronic": true,
-                "isFoundational": false,
-                "isRanged": false,
-                "isWeapon": false,
-                "magazine": {
-                  "ammoData": null,
-                  "max": 0,
-                  "value": 0
-                },
-                "price": {
-                  "market": 1000
-                },
-                "providesHardening": false,
-                "revealed": true,
-                "rof": 1,
-                "size": 1,
-                "source": {
-                  "book": "BC",
-                  "page": 21
-                },
-                "type": "cyberArm",
-                "unarmedAutomaticCalculation": true,
-                "usage": "toggled",
-                "usesType": "magazine",
-                "weaponSkill": "Archery",
-                "weaponType": "assaultRifle"
-              },
-              "type": "cyberware",
-              "folder": null,
-              "sort": 0,
-              "ownership": {
-                "default": 0
-              }
-            }
-          ]
-        },
-        "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/cyberarm.svg",
-        "name": "Киберрука",
-        "system": {
-          "ammoVariety": [],
-          "attackmod": 0,
-          "brand": "",
-          "canIgnoreArmor": true,
-          "concealable": {
-            "concealable": false,
-            "isConcealed": false
-          },
-          "core": false,
-          "damage": "1d6",
-          "description": {
-            "value": "Кибернетическая рука. Бесплатная кисть в комплекте."
-          },
-          "dvTable": "",
-          "favorite": false,
-          "fireModes": {
-            "autoFire": 0,
-            "suppressiveFire": false
-          },
-          "humanityLoss": {
-            "roll": "2d6",
-            "static": 7
-          },
-          "ignoreArmorPercent": 50,
-          "installLocation": "hospital",
-          "installedItems": {
-            "allowed": true,
-            "allowedTypes": [
-              "itemUpgrade",
-              "cyberware"
-            ],
-            "list": [
-              "cprAddImp0007800",
-              "cprAddImp0007900",
-              "cprAddImp0008000",
-              "cprAddImp0008100"
-            ],
-            "slots": 4,
-            "usedSlots": 4
-          },
-          "isElectronic": true,
-          "isFoundational": true,
-          "isRanged": false,
-          "isWeapon": false,
-          "magazine": {
-            "ammoData": null,
-            "max": 0,
-            "value": 0
-          },
-          "price": {
-            "market": 500
-          },
-          "providesHardening": false,
-          "revealed": true,
-          "rof": 1,
-          "size": 0,
-          "source": {
-            "book": "Core",
-            "page": 364
-          },
-          "type": "cyberArm",
-          "unarmedAutomaticCalculation": true,
-          "usage": "toggled",
-          "usesType": "magazine",
-          "weaponSkill": "Archery",
-          "weaponType": "assaultRifle"
-        },
-        "type": "cyberware",
-        "folder": null,
-        "sort": 0,
-        "ownership": {
-          "default": 0
-        }
-      },
-      {
-        "_id": "cprAddImp0006000",
-        "effects": [],
-        "flags": {
-          "cyberpunk-red-core": {
-            "_migration": {
-              "current": 33,
-              "previous": "24"
-            }
-          }
-        },
-        "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/cyberarm.svg",
-        "name": "Киберрука",
-        "system": {
-          "ammoVariety": [],
-          "attackmod": 0,
-          "brand": "",
-          "canIgnoreArmor": true,
-          "concealable": {
-            "concealable": false,
-            "isConcealed": false
-          },
-          "core": false,
-          "damage": "1d6",
-          "description": {
-            "value": "Кибернетическая рука. Бесплатная кисть в комплекте."
-          },
-          "dvTable": "",
-          "favorite": false,
-          "fireModes": {
-            "autoFire": 0,
-            "suppressiveFire": false
-          },
-          "humanityLoss": {
-            "roll": "2d6",
-            "static": 7
-          },
-          "ignoreArmorPercent": 50,
-          "installLocation": "hospital",
-          "installedItems": {
-            "allowed": true,
-            "allowedTypes": [
-              "itemUpgrade",
-              "cyberware"
-            ],
-            "list": [],
-            "slots": 4,
-            "usedSlots": 0
-          },
-          "isElectronic": true,
-          "isFoundational": true,
-          "isRanged": false,
-          "isWeapon": false,
-          "magazine": {
-            "ammoData": null,
-            "max": 0,
-            "value": 0
-          },
-          "price": {
-            "market": 500
-          },
-          "providesHardening": false,
-          "revealed": true,
-          "rof": 1,
-          "size": 0,
-          "source": {
-            "book": "Core",
-            "page": 364
-          },
-          "type": "cyberArm",
-          "unarmedAutomaticCalculation": true,
-          "usage": "toggled",
-          "usesType": "magazine",
-          "weaponSkill": "Archery",
-          "weaponType": "assaultRifle"
-        },
-        "type": "cyberware",
-        "folder": null,
-        "sort": 0,
-        "ownership": {
-          "default": 0
-        }
-      },
-      {
-        "_id": "cprAddImp0006100",
-        "effects": [],
-        "flags": {
-          "cyberpunk-red-core": {
-            "_migration": {
-              "current": 33,
-              "previous": "24"
-            }
-          },
-          "cprInstallTree": [
-            {
-              "_id": "cprAddImp0007500",
-              "effects": [
-                "B7AClIITge5cYBso"
-              ],
-              "flags": {
-                "cyberpunk-red-core": {
-                  "_migration": {
-                    "current": 33,
-                    "previous": "24"
-                  }
-                }
-              },
-              "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/internal_agent.svg",
-              "name": "Внутренний агент",
-              "system": {
-                "ammoVariety": [],
-                "attackmod": 0,
-                "brand": "",
-                "canIgnoreArmor": true,
-                "concealable": {
-                  "concealable": false,
-                  "isConcealed": false
-                },
-                "core": false,
-                "damage": "1d6",
-                "description": {
-                  "value": "Встроенный агент. По умолчанию только звук, но можно подключить к другим иплантам."
-                },
-                "dvTable": "",
-                "favorite": false,
-                "fireModes": {
-                  "autoFire": 0,
-                  "suppressiveFire": false
-                },
-                "humanityLoss": {
-                  "roll": "1d6",
-                  "static": 3
-                },
-                "ignoreArmorPercent": 50,
-                "installLocation": "mall",
-                "installedItems": {
-                  "allowed": false,
-                  "allowedTypes": [
-                    "itemUpgrade"
-                  ],
-                  "list": [],
-                  "slots": 3,
-                  "usedSlots": 0
-                },
-                "isElectronic": true,
-                "isFoundational": false,
-                "isRanged": false,
-                "isWeapon": false,
-                "magazine": {
-                  "ammoData": null,
-                  "max": 0,
-                  "value": 0
-                },
-                "price": {
-                  "market": 100
-                },
-                "providesHardening": false,
-                "revealed": true,
-                "rof": 1,
-                "size": 1,
+                "size": 0,
                 "source": {
                   "book": "Core",
-                  "page": 362
+                  "page": 364
+                },
+                "type": "cyberArm",
+                "unarmedAutomaticCalculation": true,
+                "usage": "toggled",
+                "usesType": "magazine",
+                "weaponSkill": "Archery",
+                "weaponType": "assaultRifle"
+              },
+              "type": "cyberware",
+              "folder": null,
+              "sort": 0,
+              "ownership": {
+                "default": 0
+              }
+            },
+            "options": [
+              {
+                "_id": "cprAddImp0007800",
+                "effects": [],
+                "flags": {
+                  "cyberpunk-red-core": {
+                    "_migration": {
+                      "current": 33,
+                      "previous": "24"
+                    }
+                  }
+                },
+                "img": "systems/cyberpunk-red-core/icons/compendium/black-chrome/reinforced-cyberarm.svg",
+                "name": "Усиление киберруки",
+                "system": {
+                  "ammoVariety": [],
+                  "attackmod": 0,
+                  "brand": "",
+                  "canIgnoreArmor": true,
+                  "concealable": {
+                    "concealable": false,
+                    "isConcealed": false
+                  },
+                  "core": false,
+                  "damage": "1d6",
+                  "description": {
+                    "value": "Требует киберруку. Киберруку, в которую установлено это улучшение, невозможно сломать."
+                  },
+                  "dvTable": "",
+                  "favorite": false,
+                  "fireModes": {
+                    "autoFire": 0,
+                    "suppressiveFire": false
+                  },
+                  "humanityLoss": {
+                    "roll": "0",
+                    "static": 0
+                  },
+                  "ignoreArmorPercent": 50,
+                  "installLocation": "clinic",
+                  "installedItems": {
+                    "allowed": false,
+                    "allowedTypes": [
+                      "itemUpgrade",
+                      "ammo"
+                    ],
+                    "list": [],
+                    "slots": 3,
+                    "usedSlots": 0
+                  },
+                  "isElectronic": true,
+                  "isFoundational": false,
+                  "isRanged": false,
+                  "isWeapon": false,
+                  "magazine": {
+                    "ammoData": null,
+                    "max": 0,
+                    "value": 0
+                  },
+                  "price": {
+                    "market": 1000
+                  },
+                  "providesHardening": false,
+                  "revealed": true,
+                  "rof": 1,
+                  "size": 1,
+                  "source": {
+                    "book": "BC",
+                    "page": 21
+                  },
+                  "type": "cyberArm",
+                  "unarmedAutomaticCalculation": true,
+                  "usage": "toggled",
+                  "usesType": "magazine",
+                  "weaponSkill": "Archery",
+                  "weaponType": "assaultRifle"
+                },
+                "type": "cyberware",
+                "folder": null,
+                "sort": 0,
+                "ownership": {
+                  "default": 0
+                }
+              },
+              {
+                "_id": "cprAddImp0007900",
+                "effects": [],
+                "flags": {
+                  "cyberpunk-red-core": {
+                    "_migration": {
+                      "current": 33,
+                      "previous": "24"
+                    }
+                  }
+                },
+                "img": "systems/cyberpunk-red-core/icons/compendium/black-chrome/reinforced-cyberarm.svg",
+                "name": "Усиление киберруки",
+                "system": {
+                  "ammoVariety": [],
+                  "attackmod": 0,
+                  "brand": "",
+                  "canIgnoreArmor": true,
+                  "concealable": {
+                    "concealable": false,
+                    "isConcealed": false
+                  },
+                  "core": false,
+                  "damage": "1d6",
+                  "description": {
+                    "value": "Требует киберруку. Киберруку, в которую установлено это улучшение, невозможно сломать."
+                  },
+                  "dvTable": "",
+                  "favorite": false,
+                  "fireModes": {
+                    "autoFire": 0,
+                    "suppressiveFire": false
+                  },
+                  "humanityLoss": {
+                    "roll": "0",
+                    "static": 0
+                  },
+                  "ignoreArmorPercent": 50,
+                  "installLocation": "clinic",
+                  "installedItems": {
+                    "allowed": false,
+                    "allowedTypes": [
+                      "itemUpgrade",
+                      "ammo"
+                    ],
+                    "list": [],
+                    "slots": 3,
+                    "usedSlots": 0
+                  },
+                  "isElectronic": true,
+                  "isFoundational": false,
+                  "isRanged": false,
+                  "isWeapon": false,
+                  "magazine": {
+                    "ammoData": null,
+                    "max": 0,
+                    "value": 0
+                  },
+                  "price": {
+                    "market": 1000
+                  },
+                  "providesHardening": false,
+                  "revealed": true,
+                  "rof": 1,
+                  "size": 1,
+                  "source": {
+                    "book": "BC",
+                    "page": 21
+                  },
+                  "type": "cyberArm",
+                  "unarmedAutomaticCalculation": true,
+                  "usage": "toggled",
+                  "usesType": "magazine",
+                  "weaponSkill": "Archery",
+                  "weaponType": "assaultRifle"
+                },
+                "type": "cyberware",
+                "folder": null,
+                "sort": 0,
+                "ownership": {
+                  "default": 0
+                }
+              },
+              {
+                "_id": "cprAddImp0008000",
+                "effects": [],
+                "flags": {
+                  "cyberpunk-red-core": {
+                    "_migration": {
+                      "current": 33,
+                      "previous": "24"
+                    }
+                  }
+                },
+                "img": "systems/cyberpunk-red-core/icons/compendium/black-chrome/reinforced-cyberarm.svg",
+                "name": "Усиление киберруки",
+                "system": {
+                  "ammoVariety": [],
+                  "attackmod": 0,
+                  "brand": "",
+                  "canIgnoreArmor": true,
+                  "concealable": {
+                    "concealable": false,
+                    "isConcealed": false
+                  },
+                  "core": false,
+                  "damage": "1d6",
+                  "description": {
+                    "value": "Требует киберруку. Киберруку, в которую установлено это улучшение, невозможно сломать."
+                  },
+                  "dvTable": "",
+                  "favorite": false,
+                  "fireModes": {
+                    "autoFire": 0,
+                    "suppressiveFire": false
+                  },
+                  "humanityLoss": {
+                    "roll": "0",
+                    "static": 0
+                  },
+                  "ignoreArmorPercent": 50,
+                  "installLocation": "clinic",
+                  "installedItems": {
+                    "allowed": false,
+                    "allowedTypes": [
+                      "itemUpgrade",
+                      "ammo"
+                    ],
+                    "list": [],
+                    "slots": 3,
+                    "usedSlots": 0
+                  },
+                  "isElectronic": true,
+                  "isFoundational": false,
+                  "isRanged": false,
+                  "isWeapon": false,
+                  "magazine": {
+                    "ammoData": null,
+                    "max": 0,
+                    "value": 0
+                  },
+                  "price": {
+                    "market": 1000
+                  },
+                  "providesHardening": false,
+                  "revealed": true,
+                  "rof": 1,
+                  "size": 1,
+                  "source": {
+                    "book": "BC",
+                    "page": 21
+                  },
+                  "type": "cyberArm",
+                  "unarmedAutomaticCalculation": true,
+                  "usage": "toggled",
+                  "usesType": "magazine",
+                  "weaponSkill": "Archery",
+                  "weaponType": "assaultRifle"
+                },
+                "type": "cyberware",
+                "folder": null,
+                "sort": 0,
+                "ownership": {
+                  "default": 0
+                }
+              },
+              {
+                "_id": "cprAddImp0008100",
+                "effects": [],
+                "flags": {
+                  "cyberpunk-red-core": {
+                    "_migration": {
+                      "current": 33,
+                      "previous": "24"
+                    }
+                  }
+                },
+                "img": "systems/cyberpunk-red-core/icons/compendium/black-chrome/reinforced-cyberarm.svg",
+                "name": "Усиление киберруки",
+                "system": {
+                  "ammoVariety": [],
+                  "attackmod": 0,
+                  "brand": "",
+                  "canIgnoreArmor": true,
+                  "concealable": {
+                    "concealable": false,
+                    "isConcealed": false
+                  },
+                  "core": false,
+                  "damage": "1d6",
+                  "description": {
+                    "value": "Требует киберруку. Киберруку, в которую установлено это улучшение, невозможно сломать."
+                  },
+                  "dvTable": "",
+                  "favorite": false,
+                  "fireModes": {
+                    "autoFire": 0,
+                    "suppressiveFire": false
+                  },
+                  "humanityLoss": {
+                    "roll": "0",
+                    "static": 0
+                  },
+                  "ignoreArmorPercent": 50,
+                  "installLocation": "clinic",
+                  "installedItems": {
+                    "allowed": false,
+                    "allowedTypes": [
+                      "itemUpgrade",
+                      "ammo"
+                    ],
+                    "list": [],
+                    "slots": 3,
+                    "usedSlots": 0
+                  },
+                  "isElectronic": true,
+                  "isFoundational": false,
+                  "isRanged": false,
+                  "isWeapon": false,
+                  "magazine": {
+                    "ammoData": null,
+                    "max": 0,
+                    "value": 0
+                  },
+                  "price": {
+                    "market": 1000
+                  },
+                  "providesHardening": false,
+                  "revealed": true,
+                  "rof": 1,
+                  "size": 1,
+                  "source": {
+                    "book": "BC",
+                    "page": 21
+                  },
+                  "type": "cyberArm",
+                  "unarmedAutomaticCalculation": true,
+                  "usage": "toggled",
+                  "usesType": "magazine",
+                  "weaponSkill": "Archery",
+                  "weaponType": "assaultRifle"
+                },
+                "type": "cyberware",
+                "folder": null,
+                "sort": 0,
+                "ownership": {
+                  "default": 0
+                }
+              }
+            ]
+          },
+          {
+            "item": {
+              "_id": "cprAddImp0006000",
+              "effects": [],
+              "flags": {
+                "cyberpunk-red-core": {
+                  "_migration": {
+                    "current": 33,
+                    "previous": "24"
+                  }
+                }
+              },
+              "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/cyberarm.svg",
+              "name": "Киберрука",
+              "system": {
+                "ammoVariety": [],
+                "attackmod": 0,
+                "brand": "",
+                "canIgnoreArmor": true,
+                "concealable": {
+                  "concealable": false,
+                  "isConcealed": false
+                },
+                "core": false,
+                "damage": "1d6",
+                "description": {
+                  "value": "Кибернетическая рука. Бесплатная кисть в комплекте."
+                },
+                "dvTable": "",
+                "favorite": false,
+                "fireModes": {
+                  "autoFire": 0,
+                  "suppressiveFire": false
+                },
+                "humanityLoss": {
+                  "roll": "0",
+                  "static": 0
+                },
+                "ignoreArmorPercent": 50,
+                "installLocation": "hospital",
+                "installedItems": {
+                  "allowed": true,
+                  "allowedTypes": [
+                    "itemUpgrade",
+                    "cyberware"
+                  ],
+                  "list": [],
+                  "slots": 4,
+                  "usedSlots": 0
+                },
+                "isElectronic": true,
+                "isFoundational": true,
+                "isRanged": false,
+                "isWeapon": false,
+                "magazine": {
+                  "ammoData": null,
+                  "max": 0,
+                  "value": 0
+                },
+                "price": {
+                  "market": 500
+                },
+                "providesHardening": false,
+                "revealed": true,
+                "rof": 1,
+                "size": 0,
+                "source": {
+                  "book": "Core",
+                  "page": 364
+                },
+                "type": "cyberArm",
+                "unarmedAutomaticCalculation": true,
+                "usage": "toggled",
+                "usesType": "magazine",
+                "weaponSkill": "Archery",
+                "weaponType": "assaultRifle"
+              },
+              "type": "cyberware",
+              "folder": null,
+              "sort": 0,
+              "ownership": {
+                "default": 0
+              }
+            },
+            "options": []
+          },
+          {
+            "item": {
+              "_id": "cprAddImp0006100",
+              "effects": [],
+              "flags": {
+                "cyberpunk-red-core": {
+                  "_migration": {
+                    "current": 33,
+                    "previous": "24"
+                  }
+                }
+              },
+              "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/cyberaudio_suite.svg",
+              "name": "Набор кибераудио",
+              "system": {
+                "ammoVariety": [],
+                "attackmod": 0,
+                "brand": "",
+                "canIgnoreArmor": true,
+                "concealable": {
+                  "concealable": false,
+                  "isConcealed": false
+                },
+                "core": false,
+                "damage": "1d6",
+                "description": {
+                  "value": "Интерфейс для улучшений аудио."
+                },
+                "dvTable": "",
+                "favorite": false,
+                "fireModes": {
+                  "autoFire": 0,
+                  "suppressiveFire": false
+                },
+                "humanityLoss": {
+                  "roll": "0",
+                  "static": 0
+                },
+                "ignoreArmorPercent": 50,
+                "installLocation": "clinic",
+                "installedItems": {
+                  "allowed": true,
+                  "allowedTypes": [
+                    "itemUpgrade",
+                    "cyberware"
+                  ],
+                  "list": [],
+                  "slots": 3,
+                  "usedSlots": 0
+                },
+                "isElectronic": true,
+                "isFoundational": true,
+                "isRanged": false,
+                "isWeapon": false,
+                "magazine": {
+                  "ammoData": null,
+                  "max": 0,
+                  "value": 0
+                },
+                "price": {
+                  "market": 500
+                },
+                "providesHardening": false,
+                "revealed": true,
+                "rof": 1,
+                "size": 0,
+                "source": {
+                  "book": "Core",
+                  "page": 361
                 },
                 "type": "cyberAudioSuite",
                 "unarmedAutomaticCalculation": true,
+                "usage": "toggled",
+                "usesType": "magazine",
+                "weaponSkill": "Archery",
+                "weaponType": "assaultRifle"
+              },
+              "type": "cyberware",
+              "folder": null,
+              "sort": 0,
+              "ownership": {
+                "default": 0
+              }
+            },
+            "options": [
+              {
+                "_id": "cprAddImp0007500",
+                "effects": [
+                  "B7AClIITge5cYBso"
+                ],
+                "flags": {
+                  "cyberpunk-red-core": {
+                    "_migration": {
+                      "current": 33,
+                      "previous": "24"
+                    }
+                  }
+                },
+                "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/internal_agent.svg",
+                "name": "Внутренний агент",
+                "system": {
+                  "ammoVariety": [],
+                  "attackmod": 0,
+                  "brand": "",
+                  "canIgnoreArmor": true,
+                  "concealable": {
+                    "concealable": false,
+                    "isConcealed": false
+                  },
+                  "core": false,
+                  "damage": "1d6",
+                  "description": {
+                    "value": "Встроенный агент. По умолчанию только звук, но можно подключить к другим иплантам."
+                  },
+                  "dvTable": "",
+                  "favorite": false,
+                  "fireModes": {
+                    "autoFire": 0,
+                    "suppressiveFire": false
+                  },
+                  "humanityLoss": {
+                    "roll": "0",
+                    "static": 0
+                  },
+                  "ignoreArmorPercent": 50,
+                  "installLocation": "mall",
+                  "installedItems": {
+                    "allowed": false,
+                    "allowedTypes": [
+                      "itemUpgrade"
+                    ],
+                    "list": [],
+                    "slots": 3,
+                    "usedSlots": 0
+                  },
+                  "isElectronic": true,
+                  "isFoundational": false,
+                  "isRanged": false,
+                  "isWeapon": false,
+                  "magazine": {
+                    "ammoData": null,
+                    "max": 0,
+                    "value": 0
+                  },
+                  "price": {
+                    "market": 100
+                  },
+                  "providesHardening": false,
+                  "revealed": true,
+                  "rof": 1,
+                  "size": 1,
+                  "source": {
+                    "book": "Core",
+                    "page": 362
+                  },
+                  "type": "cyberAudioSuite",
+                  "unarmedAutomaticCalculation": true,
+                  "usage": "installed",
+                  "usesType": "magazine",
+                  "weaponSkill": "Archery",
+                  "weaponType": "assaultRifle"
+                },
+                "type": "cyberware",
+                "folder": null,
+                "sort": 0,
+                "ownership": {
+                  "default": 0
+                }
+              }
+            ]
+          },
+          {
+            "item": {
+              "_id": "cprAddImp0006200",
+              "effects": [],
+              "flags": {
+                "cyberpunk-red-core": {
+                  "_migration": {
+                    "current": 33,
+                    "previous": "24"
+                  }
+                }
+              },
+              "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/cybereye.svg",
+              "name": "Киберглаз",
+              "system": {
+                "ammoVariety": [],
+                "attackmod": 0,
+                "brand": "",
+                "canIgnoreArmor": true,
+                "concealable": {
+                  "concealable": false,
+                  "isConcealed": false
+                },
+                "core": false,
+                "damage": "1d6",
+                "description": {
+                  "value": "Искусственный глаз. Выбирай оптику Кироси!"
+                },
+                "dvTable": "",
+                "favorite": false,
+                "fireModes": {
+                  "autoFire": 0,
+                  "suppressiveFire": false
+                },
+                "humanityLoss": {
+                  "roll": "0",
+                  "static": 0
+                },
+                "ignoreArmorPercent": 50,
+                "installLocation": "clinic",
+                "installedItems": {
+                  "allowed": true,
+                  "allowedTypes": [
+                    "itemUpgrade",
+                    "cyberware"
+                  ],
+                  "list": [],
+                  "slots": 3,
+                  "usedSlots": 0
+                },
+                "isElectronic": true,
+                "isFoundational": true,
+                "isRanged": false,
+                "isWeapon": false,
+                "magazine": {
+                  "ammoData": null,
+                  "max": 0,
+                  "value": 0
+                },
+                "price": {
+                  "market": 100
+                },
+                "providesHardening": false,
+                "revealed": true,
+                "rof": 1,
+                "size": 0,
+                "source": {
+                  "book": "Core",
+                  "page": 360
+                },
+                "type": "cyberEye",
+                "unarmedAutomaticCalculation": true,
+                "usage": "toggled",
+                "usesType": "magazine",
+                "weaponSkill": "Archery",
+                "weaponType": "assaultRifle"
+              },
+              "type": "cyberware",
+              "folder": null,
+              "sort": 0,
+              "ownership": {
+                "default": 0
+              }
+            },
+            "options": [
+              {
+                "_id": "cprAddImp0006900",
+                "effects": [],
+                "flags": {
+                  "cyberpunk-red-core": {
+                    "_migration": {
+                      "current": 33,
+                      "previous": "24"
+                    }
+                  }
+                },
+                "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/anti_dazzle.svg",
+                "name": "Антиослепление",
+                "system": {
+                  "ammoVariety": [],
+                  "attackmod": 0,
+                  "brand": "",
+                  "canIgnoreArmor": true,
+                  "concealable": {
+                    "concealable": false,
+                    "isConcealed": false
+                  },
+                  "core": false,
+                  "damage": "1d6",
+                  "description": {
+                    "value": "Работают в паре. Иммунитет к ослепляющим эффектам (например от светошумовых гранат)."
+                  },
+                  "dvTable": "",
+                  "favorite": false,
+                  "fireModes": {
+                    "autoFire": 0,
+                    "suppressiveFire": false
+                  },
+                  "humanityLoss": {
+                    "roll": "0",
+                    "static": 0
+                  },
+                  "ignoreArmorPercent": 50,
+                  "installLocation": "mall",
+                  "installedItems": {
+                    "allowed": false,
+                    "allowedTypes": [
+                      "itemUpgrade"
+                    ],
+                    "list": [],
+                    "slots": 3,
+                    "usedSlots": 0
+                  },
+                  "isElectronic": true,
+                  "isFoundational": false,
+                  "isRanged": false,
+                  "isWeapon": false,
+                  "magazine": {
+                    "ammoData": null,
+                    "max": 0,
+                    "value": 0
+                  },
+                  "price": {
+                    "market": 100
+                  },
+                  "providesHardening": false,
+                  "revealed": true,
+                  "rof": 1,
+                  "size": 1,
+                  "source": {
+                    "book": "Core",
+                    "page": 360
+                  },
+                  "type": "cyberEye",
+                  "unarmedAutomaticCalculation": true,
+                  "usage": "toggled",
+                  "usesType": "magazine",
+                  "weaponSkill": "Archery",
+                  "weaponType": "assaultRifle"
+                },
+                "type": "cyberware",
+                "folder": null,
+                "sort": 0,
+                "ownership": {
+                  "default": 0
+                }
+              },
+              {
+                "_id": "cprAddImp0007000",
+                "effects": [],
+                "flags": {
+                  "cyberpunk-red-core": {
+                    "_migration": {
+                      "current": 33,
+                      "previous": "24"
+                    }
+                  }
+                },
+                "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/anti_dazzle.svg",
+                "name": "Антиослепление",
+                "system": {
+                  "ammoVariety": [],
+                  "attackmod": 0,
+                  "brand": "",
+                  "canIgnoreArmor": true,
+                  "concealable": {
+                    "concealable": false,
+                    "isConcealed": false
+                  },
+                  "core": false,
+                  "damage": "1d6",
+                  "description": {
+                    "value": "Работают в паре. Иммунитет к ослепляющим эффектам (например от светошумовых гранат)."
+                  },
+                  "dvTable": "",
+                  "favorite": false,
+                  "fireModes": {
+                    "autoFire": 0,
+                    "suppressiveFire": false
+                  },
+                  "humanityLoss": {
+                    "roll": "0",
+                    "static": 0
+                  },
+                  "ignoreArmorPercent": 50,
+                  "installLocation": "mall",
+                  "installedItems": {
+                    "allowed": false,
+                    "allowedTypes": [
+                      "itemUpgrade"
+                    ],
+                    "list": [],
+                    "slots": 3,
+                    "usedSlots": 0
+                  },
+                  "isElectronic": true,
+                  "isFoundational": false,
+                  "isRanged": false,
+                  "isWeapon": false,
+                  "magazine": {
+                    "ammoData": null,
+                    "max": 0,
+                    "value": 0
+                  },
+                  "price": {
+                    "market": 100
+                  },
+                  "providesHardening": false,
+                  "revealed": true,
+                  "rof": 1,
+                  "size": 1,
+                  "source": {
+                    "book": "Core",
+                    "page": 360
+                  },
+                  "type": "cyberEye",
+                  "unarmedAutomaticCalculation": true,
+                  "usage": "toggled",
+                  "usesType": "magazine",
+                  "weaponSkill": "Archery",
+                  "weaponType": "assaultRifle"
+                },
+                "type": "cyberware",
+                "folder": null,
+                "sort": 0,
+                "ownership": {
+                  "default": 0
+                }
+              },
+              {
+                "_id": "cprAddImp0007100",
+                "effects": [],
+                "flags": {
+                  "cyberpunk-red-core": {
+                    "_migration": {
+                      "current": 33,
+                      "previous": "24"
+                    }
+                  }
+                },
+                "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/chyron.svg",
+                "name": "Хирон",
+                "system": {
+                  "ammoVariety": [],
+                  "attackmod": 0,
+                  "brand": "",
+                  "canIgnoreArmor": true,
+                  "concealable": {
+                    "concealable": false,
+                    "isConcealed": false
+                  },
+                  "core": false,
+                  "damage": "1d6",
+                  "description": {
+                    "value": "Маленький экранчик в глазу. Показывает картинку в картинке, чтобы скрасить скуку."
+                  },
+                  "dvTable": "",
+                  "favorite": false,
+                  "fireModes": {
+                    "autoFire": 0,
+                    "suppressiveFire": false
+                  },
+                  "humanityLoss": {
+                    "roll": "0",
+                    "static": 0
+                  },
+                  "ignoreArmorPercent": 50,
+                  "installLocation": "mall",
+                  "installedItems": {
+                    "allowed": false,
+                    "allowedTypes": [
+                      "itemUpgrade"
+                    ],
+                    "list": [],
+                    "slots": 3,
+                    "usedSlots": 0
+                  },
+                  "isElectronic": true,
+                  "isFoundational": false,
+                  "isRanged": false,
+                  "isWeapon": false,
+                  "magazine": {
+                    "ammoData": null,
+                    "max": 0,
+                    "value": 0
+                  },
+                  "price": {
+                    "market": 100
+                  },
+                  "providesHardening": false,
+                  "revealed": true,
+                  "rof": 1,
+                  "size": 1,
+                  "source": {
+                    "book": "Core",
+                    "page": 360
+                  },
+                  "type": "cyberEye",
+                  "unarmedAutomaticCalculation": true,
+                  "usage": "toggled",
+                  "usesType": "magazine",
+                  "weaponSkill": "Archery",
+                  "weaponType": "assaultRifle"
+                },
+                "type": "cyberware",
+                "folder": null,
+                "sort": 0,
+                "ownership": {
+                  "default": 0
+                }
+              }
+            ]
+          },
+          {
+            "item": {
+              "_id": "cprAddImp0006300",
+              "effects": [],
+              "flags": {
+                "cyberpunk-red-core": {
+                  "_migration": {
+                    "current": 33,
+                    "previous": "24"
+                  }
+                }
+              },
+              "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/cybereye.svg",
+              "name": "Киберглаз",
+              "system": {
+                "ammoVariety": [],
+                "attackmod": 0,
+                "brand": "",
+                "canIgnoreArmor": true,
+                "concealable": {
+                  "concealable": false,
+                  "isConcealed": false
+                },
+                "core": false,
+                "damage": "1d6",
+                "description": {
+                  "value": "Искусственный глаз. Выбирай оптику Кироси!"
+                },
+                "dvTable": "",
+                "favorite": false,
+                "fireModes": {
+                  "autoFire": 0,
+                  "suppressiveFire": false
+                },
+                "humanityLoss": {
+                  "roll": "0",
+                  "static": 0
+                },
+                "ignoreArmorPercent": 50,
+                "installLocation": "clinic",
+                "installedItems": {
+                  "allowed": true,
+                  "allowedTypes": [
+                    "itemUpgrade",
+                    "cyberware"
+                  ],
+                  "list": [],
+                  "slots": 4,
+                  "usedSlots": 0
+                },
+                "isElectronic": true,
+                "isFoundational": true,
+                "isRanged": false,
+                "isWeapon": false,
+                "magazine": {
+                  "ammoData": null,
+                  "max": 0,
+                  "value": 0
+                },
+                "price": {
+                  "market": 100
+                },
+                "providesHardening": false,
+                "revealed": true,
+                "rof": 1,
+                "size": 0,
+                "source": {
+                  "book": "Core",
+                  "page": 360
+                },
+                "type": "cyberEye",
+                "unarmedAutomaticCalculation": true,
+                "usage": "toggled",
+                "usesType": "magazine",
+                "weaponSkill": "Archery",
+                "weaponType": "assaultRifle"
+              },
+              "type": "cyberware",
+              "folder": null,
+              "sort": 0,
+              "ownership": {
+                "default": 0
+              }
+            },
+            "options": [
+              {
+                "_id": "cprAddImp0007600",
+                "effects": [],
+                "flags": {
+                  "cyberpunk-red-core": {
+                    "_migration": {
+                      "current": 33,
+                      "previous": "24"
+                    }
+                  }
+                },
+                "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/lowlight_ir_uv.svg",
+                "name": "ПНВ/ИК/УФ",
+                "system": {
+                  "ammoVariety": [],
+                  "attackmod": 0,
+                  "brand": "",
+                  "canIgnoreArmor": true,
+                  "concealable": {
+                    "concealable": false,
+                    "isConcealed": false
+                  },
+                  "core": false,
+                  "damage": "1d6",
+                  "description": {
+                    "value": "Работают в паре. Иммунитет к штрафам на зрение из-за освещения, тумана или дыма."
+                  },
+                  "dvTable": "",
+                  "favorite": false,
+                  "fireModes": {
+                    "autoFire": 0,
+                    "suppressiveFire": false
+                  },
+                  "humanityLoss": {
+                    "roll": "0",
+                    "static": 0
+                  },
+                  "ignoreArmorPercent": 50,
+                  "installLocation": "mall",
+                  "installedItems": {
+                    "allowed": false,
+                    "allowedTypes": [
+                      "itemUpgrade"
+                    ],
+                    "list": [],
+                    "slots": 3,
+                    "usedSlots": 0
+                  },
+                  "isElectronic": true,
+                  "isFoundational": false,
+                  "isRanged": false,
+                  "isWeapon": false,
+                  "magazine": {
+                    "ammoData": null,
+                    "max": 0,
+                    "value": 0
+                  },
+                  "price": {
+                    "market": 500
+                  },
+                  "providesHardening": false,
+                  "revealed": true,
+                  "rof": 1,
+                  "size": 2,
+                  "source": {
+                    "book": "Core",
+                    "page": 360
+                  },
+                  "type": "cyberEye",
+                  "unarmedAutomaticCalculation": true,
+                  "usage": "toggled",
+                  "usesType": "magazine",
+                  "weaponSkill": "Archery",
+                  "weaponType": "assaultRifle"
+                },
+                "type": "cyberware",
+                "folder": null,
+                "sort": 0,
+                "ownership": {
+                  "default": 0
+                }
+              },
+              {
+                "_id": "cprAddImp0007700",
+                "effects": [],
+                "flags": {
+                  "cyberpunk-red-core": {
+                    "_migration": {
+                      "current": 33,
+                      "previous": "24"
+                    }
+                  }
+                },
+                "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/lowlight_ir_uv.svg",
+                "name": "ПНВ/ИК/УФ",
+                "system": {
+                  "ammoVariety": [],
+                  "attackmod": 0,
+                  "brand": "",
+                  "canIgnoreArmor": true,
+                  "concealable": {
+                    "concealable": false,
+                    "isConcealed": false
+                  },
+                  "core": false,
+                  "damage": "1d6",
+                  "description": {
+                    "value": "Работают в паре. Иммунитет к штрафам на зрение из-за освещения, тумана или дыма."
+                  },
+                  "dvTable": "",
+                  "favorite": false,
+                  "fireModes": {
+                    "autoFire": 0,
+                    "suppressiveFire": false
+                  },
+                  "humanityLoss": {
+                    "roll": "0",
+                    "static": 0
+                  },
+                  "ignoreArmorPercent": 50,
+                  "installLocation": "mall",
+                  "installedItems": {
+                    "allowed": false,
+                    "allowedTypes": [
+                      "itemUpgrade"
+                    ],
+                    "list": [],
+                    "slots": 3,
+                    "usedSlots": 0
+                  },
+                  "isElectronic": true,
+                  "isFoundational": false,
+                  "isRanged": false,
+                  "isWeapon": false,
+                  "magazine": {
+                    "ammoData": null,
+                    "max": 0,
+                    "value": 0
+                  },
+                  "price": {
+                    "market": 500
+                  },
+                  "providesHardening": false,
+                  "revealed": true,
+                  "rof": 1,
+                  "size": 2,
+                  "source": {
+                    "book": "Core",
+                    "page": 360
+                  },
+                  "type": "cyberEye",
+                  "unarmedAutomaticCalculation": true,
+                  "usage": "toggled",
+                  "usesType": "magazine",
+                  "weaponSkill": "Archery",
+                  "weaponType": "assaultRifle"
+                },
+                "type": "cyberware",
+                "folder": null,
+                "sort": 0,
+                "ownership": {
+                  "default": 0
+                }
+              }
+            ]
+          },
+          {
+            "item": {
+              "_id": "cprAddImp0006400",
+              "effects": [],
+              "flags": {
+                "cyberpunk-red-core": {
+                  "_migration": {
+                    "current": 33,
+                    "previous": "24"
+                  }
+                }
+              },
+              "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/cyberleg.svg",
+              "name": "Кибернога",
+              "system": {
+                "ammoVariety": [],
+                "attackmod": 0,
+                "brand": "",
+                "canIgnoreArmor": true,
+                "concealable": {
+                  "concealable": false,
+                  "isConcealed": false
+                },
+                "core": false,
+                "damage": "1d6",
+                "description": {
+                  "value": "Кибернетическая нога. Бесплатная ступня в комплекте."
+                },
+                "dvTable": "",
+                "favorite": false,
+                "fireModes": {
+                  "autoFire": 0,
+                  "suppressiveFire": false
+                },
+                "humanityLoss": {
+                  "roll": "0",
+                  "static": 0
+                },
+                "ignoreArmorPercent": 50,
+                "installLocation": "hospital",
+                "installedItems": {
+                  "allowed": true,
+                  "allowedTypes": [
+                    "itemUpgrade",
+                    "cyberware"
+                  ],
+                  "list": [],
+                  "slots": 3,
+                  "usedSlots": 0
+                },
+                "isElectronic": true,
+                "isFoundational": true,
+                "isRanged": false,
+                "isWeapon": false,
+                "magazine": {
+                  "ammoData": null,
+                  "max": 0,
+                  "value": 0
+                },
+                "price": {
+                  "market": 100
+                },
+                "providesHardening": false,
+                "revealed": true,
+                "rof": 1,
+                "size": 0,
+                "source": {
+                  "book": "Core",
+                  "page": 366
+                },
+                "type": "cyberLeg",
+                "unarmedAutomaticCalculation": true,
+                "usage": "toggled",
+                "usesType": "magazine",
+                "weaponSkill": "Archery",
+                "weaponType": "assaultRifle"
+              },
+              "type": "cyberware",
+              "folder": null,
+              "sort": 0,
+              "ownership": {
+                "default": 0
+              }
+            },
+            "options": []
+          },
+          {
+            "item": {
+              "_id": "cprAddImp0006500",
+              "effects": [],
+              "flags": {
+                "cyberpunk-red-core": {
+                  "_migration": {
+                    "current": 33,
+                    "previous": "24"
+                  }
+                }
+              },
+              "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/cyberleg.svg",
+              "name": "Кибернога",
+              "system": {
+                "ammoVariety": [],
+                "attackmod": 0,
+                "brand": "",
+                "canIgnoreArmor": true,
+                "concealable": {
+                  "concealable": false,
+                  "isConcealed": false
+                },
+                "core": false,
+                "damage": "1d6",
+                "description": {
+                  "value": "Кибернетическая нога. Бесплатная ступня в комплекте."
+                },
+                "dvTable": "",
+                "favorite": false,
+                "fireModes": {
+                  "autoFire": 0,
+                  "suppressiveFire": false
+                },
+                "humanityLoss": {
+                  "roll": "0",
+                  "static": 0
+                },
+                "ignoreArmorPercent": 50,
+                "installLocation": "hospital",
+                "installedItems": {
+                  "allowed": true,
+                  "allowedTypes": [
+                    "itemUpgrade",
+                    "cyberware"
+                  ],
+                  "list": [],
+                  "slots": 3,
+                  "usedSlots": 0
+                },
+                "isElectronic": true,
+                "isFoundational": true,
+                "isRanged": false,
+                "isWeapon": false,
+                "magazine": {
+                  "ammoData": null,
+                  "max": 0,
+                  "value": 0
+                },
+                "price": {
+                  "market": 100
+                },
+                "providesHardening": false,
+                "revealed": true,
+                "rof": 1,
+                "size": 0,
+                "source": {
+                  "book": "Core",
+                  "page": 366
+                },
+                "type": "cyberLeg",
+                "unarmedAutomaticCalculation": true,
+                "usage": "toggled",
+                "usesType": "magazine",
+                "weaponSkill": "Archery",
+                "weaponType": "assaultRifle"
+              },
+              "type": "cyberware",
+              "folder": null,
+              "sort": 0,
+              "ownership": {
+                "default": 0
+              }
+            },
+            "options": []
+          },
+          {
+            "item": {
+              "_id": "cprAddImp0006700",
+              "name": "Имплантированный Эндоскелет Омега",
+              "type": "cyberware",
+              "img": "modules/cpr-addenda/assets/icons/borgware.svg",
+              "folder": null,
+              "sort": 0,
+              "effects": [],
+              "flags": {},
+              "system": {
+                "ammoVariety": [],
+                "attackmod": 0,
+                "brand": "",
+                "canIgnoreArmor": false,
+                "concealable": {
+                  "concealable": false,
+                  "isConcealed": false
+                },
+                "core": false,
+                "critFailEffect": "jammed",
+                "damage": "1d6",
+                "description": {
+                  "value": "<p>Внутренний каркас класса «Омега» — тяжелее и прочнее «Сигмы». Входит в комплект корпуса ПКТ.</p>"
+                },
+                "dvTable": "",
+                "favorite": false,
+                "fireModes": {
+                  "autoFire": 0,
+                  "suppressiveFire": false
+                },
+                "humanityLoss": {
+                  "roll": "0",
+                  "static": 0
+                },
+                "ignoreArmorPercent": 0,
+                "ignoreBelowSP": 0,
+                "installLocation": "hospital",
+                "installedItems": {
+                  "allowed": true,
+                  "allowedTypes": [
+                    "itemUpgrade",
+                    "cyberware"
+                  ],
+                  "list": [],
+                  "slots": 3,
+                  "usedSlots": 0
+                },
+                "isElectronic": true,
+                "isFoundational": true,
+                "isRanged": false,
+                "isWeapon": false,
+                "magazine": {
+                  "ammoData": null,
+                  "max": 0,
+                  "value": 0
+                },
+                "price": {
+                  "market": 0
+                },
+                "providesHardening": false,
+                "revealed": true,
+                "rof": 1,
+                "size": 1,
+                "source": {
+                  "book": "DataPool",
+                  "page": 0
+                },
+                "type": "borgware",
+                "unarmedAutomaticCalculation": true,
                 "usage": "installed",
                 "usesType": "magazine",
-                "weaponSkill": "Archery",
-                "weaponType": "assaultRifle"
-              },
-              "type": "cyberware",
-              "folder": null,
-              "sort": 0,
-              "ownership": {
-                "default": 0
-              }
-            }
-          ]
-        },
-        "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/cyberaudio_suite.svg",
-        "name": "Набор кибераудио",
-        "system": {
-          "ammoVariety": [],
-          "attackmod": 0,
-          "brand": "",
-          "canIgnoreArmor": true,
-          "concealable": {
-            "concealable": false,
-            "isConcealed": false
-          },
-          "core": false,
-          "damage": "1d6",
-          "description": {
-            "value": "Интерфейс для улучшений аудио."
-          },
-          "dvTable": "",
-          "favorite": false,
-          "fireModes": {
-            "autoFire": 0,
-            "suppressiveFire": false
-          },
-          "humanityLoss": {
-            "roll": "2d6",
-            "static": 7
-          },
-          "ignoreArmorPercent": 50,
-          "installLocation": "clinic",
-          "installedItems": {
-            "allowed": true,
-            "allowedTypes": [
-              "itemUpgrade",
-              "cyberware"
-            ],
-            "list": [
-              "cprAddImp0007500"
-            ],
-            "slots": 3,
-            "usedSlots": 1
-          },
-          "isElectronic": true,
-          "isFoundational": true,
-          "isRanged": false,
-          "isWeapon": false,
-          "magazine": {
-            "ammoData": null,
-            "max": 0,
-            "value": 0
-          },
-          "price": {
-            "market": 500
-          },
-          "providesHardening": false,
-          "revealed": true,
-          "rof": 1,
-          "size": 0,
-          "source": {
-            "book": "Core",
-            "page": 361
-          },
-          "type": "cyberAudioSuite",
-          "unarmedAutomaticCalculation": true,
-          "usage": "toggled",
-          "usesType": "magazine",
-          "weaponSkill": "Archery",
-          "weaponType": "assaultRifle"
-        },
-        "type": "cyberware",
-        "folder": null,
-        "sort": 0,
-        "ownership": {
-          "default": 0
-        }
-      },
-      {
-        "_id": "cprAddImp0006200",
-        "effects": [],
-        "flags": {
-          "cyberpunk-red-core": {
-            "_migration": {
-              "current": 33,
-              "previous": "24"
-            }
-          },
-          "cprInstallTree": [
-            {
-              "_id": "cprAddImp0006900",
-              "effects": [],
-              "flags": {
-                "cyberpunk-red-core": {
-                  "_migration": {
-                    "current": 33,
-                    "previous": "24"
-                  }
-                }
-              },
-              "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/anti_dazzle.svg",
-              "name": "Антиослепление",
-              "system": {
-                "ammoVariety": [],
-                "attackmod": 0,
-                "brand": "",
-                "canIgnoreArmor": true,
-                "concealable": {
-                  "concealable": false,
-                  "isConcealed": false
-                },
-                "core": false,
-                "damage": "1d6",
-                "description": {
-                  "value": "Работают в паре. Иммунитет к ослепляющим эффектам (например от светошумовых гранат)."
-                },
-                "dvTable": "",
-                "favorite": false,
-                "fireModes": {
-                  "autoFire": 0,
-                  "suppressiveFire": false
-                },
-                "humanityLoss": {
-                  "roll": "1d3",
-                  "static": 2
-                },
-                "ignoreArmorPercent": 50,
-                "installLocation": "mall",
-                "installedItems": {
-                  "allowed": false,
-                  "allowedTypes": [
-                    "itemUpgrade"
-                  ],
-                  "list": [],
-                  "slots": 3,
-                  "usedSlots": 0
-                },
-                "isElectronic": true,
-                "isFoundational": false,
-                "isRanged": false,
-                "isWeapon": false,
-                "magazine": {
-                  "ammoData": null,
-                  "max": 0,
-                  "value": 0
-                },
-                "price": {
-                  "market": 100
-                },
-                "providesHardening": false,
-                "revealed": true,
-                "rof": 1,
-                "size": 1,
-                "source": {
-                  "book": "Core",
-                  "page": 360
-                },
-                "type": "cyberEye",
-                "unarmedAutomaticCalculation": true,
-                "usage": "toggled",
-                "usesType": "magazine",
-                "weaponSkill": "Archery",
-                "weaponType": "assaultRifle"
-              },
-              "type": "cyberware",
-              "folder": null,
-              "sort": 0,
-              "ownership": {
-                "default": 0
+                "weaponSkill": "",
+                "weaponType": ""
               }
             },
-            {
-              "_id": "cprAddImp0007000",
+            "options": []
+          },
+          {
+            "item": {
+              "_id": "cprAddImp0006800",
               "effects": [],
               "flags": {
                 "cyberpunk-red-core": {
@@ -788,8 +1532,8 @@
                   }
                 }
               },
-              "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/anti_dazzle.svg",
-              "name": "Антиослепление",
+              "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/neural_link.svg",
+              "name": "Нейролинк",
               "system": {
                 "ammoVariety": [],
                 "attackmod": 0,
@@ -802,7 +1546,7 @@
                 "core": false,
                 "damage": "1d6",
                 "description": {
-                  "value": "Работают в паре. Иммунитет к ослепляющим эффектам (например от светошумовых гранат)."
+                  "value": "Доступ к нервной системе."
                 },
                 "dvTable": "",
                 "favorite": false,
@@ -811,843 +1555,23 @@
                   "suppressiveFire": false
                 },
                 "humanityLoss": {
-                  "roll": "1d3",
-                  "static": 2
-                },
-                "ignoreArmorPercent": 50,
-                "installLocation": "mall",
-                "installedItems": {
-                  "allowed": false,
-                  "allowedTypes": [
-                    "itemUpgrade"
-                  ],
-                  "list": [],
-                  "slots": 3,
-                  "usedSlots": 0
-                },
-                "isElectronic": true,
-                "isFoundational": false,
-                "isRanged": false,
-                "isWeapon": false,
-                "magazine": {
-                  "ammoData": null,
-                  "max": 0,
-                  "value": 0
-                },
-                "price": {
-                  "market": 100
-                },
-                "providesHardening": false,
-                "revealed": true,
-                "rof": 1,
-                "size": 1,
-                "source": {
-                  "book": "Core",
-                  "page": 360
-                },
-                "type": "cyberEye",
-                "unarmedAutomaticCalculation": true,
-                "usage": "toggled",
-                "usesType": "magazine",
-                "weaponSkill": "Archery",
-                "weaponType": "assaultRifle"
-              },
-              "type": "cyberware",
-              "folder": null,
-              "sort": 0,
-              "ownership": {
-                "default": 0
-              }
-            },
-            {
-              "_id": "cprAddImp0007100",
-              "effects": [],
-              "flags": {
-                "cyberpunk-red-core": {
-                  "_migration": {
-                    "current": 33,
-                    "previous": "24"
-                  }
-                }
-              },
-              "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/chyron.svg",
-              "name": "Хирон",
-              "system": {
-                "ammoVariety": [],
-                "attackmod": 0,
-                "brand": "",
-                "canIgnoreArmor": true,
-                "concealable": {
-                  "concealable": false,
-                  "isConcealed": false
-                },
-                "core": false,
-                "damage": "1d6",
-                "description": {
-                  "value": "Маленький экранчик в глазу. Показывает картинку в картинке, чтобы скрасить скуку."
-                },
-                "dvTable": "",
-                "favorite": false,
-                "fireModes": {
-                  "autoFire": 0,
-                  "suppressiveFire": false
-                },
-                "humanityLoss": {
-                  "roll": "1d3",
-                  "static": 2
-                },
-                "ignoreArmorPercent": 50,
-                "installLocation": "mall",
-                "installedItems": {
-                  "allowed": false,
-                  "allowedTypes": [
-                    "itemUpgrade"
-                  ],
-                  "list": [],
-                  "slots": 3,
-                  "usedSlots": 0
-                },
-                "isElectronic": true,
-                "isFoundational": false,
-                "isRanged": false,
-                "isWeapon": false,
-                "magazine": {
-                  "ammoData": null,
-                  "max": 0,
-                  "value": 0
-                },
-                "price": {
-                  "market": 100
-                },
-                "providesHardening": false,
-                "revealed": true,
-                "rof": 1,
-                "size": 1,
-                "source": {
-                  "book": "Core",
-                  "page": 360
-                },
-                "type": "cyberEye",
-                "unarmedAutomaticCalculation": true,
-                "usage": "toggled",
-                "usesType": "magazine",
-                "weaponSkill": "Archery",
-                "weaponType": "assaultRifle"
-              },
-              "type": "cyberware",
-              "folder": null,
-              "sort": 0,
-              "ownership": {
-                "default": 0
-              }
-            }
-          ]
-        },
-        "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/cybereye.svg",
-        "name": "Киберглаз",
-        "system": {
-          "ammoVariety": [],
-          "attackmod": 0,
-          "brand": "",
-          "canIgnoreArmor": true,
-          "concealable": {
-            "concealable": false,
-            "isConcealed": false
-          },
-          "core": false,
-          "damage": "1d6",
-          "description": {
-            "value": "Искусственный глаз. Выбирай оптику Кироси!"
-          },
-          "dvTable": "",
-          "favorite": false,
-          "fireModes": {
-            "autoFire": 0,
-            "suppressiveFire": false
-          },
-          "humanityLoss": {
-            "roll": "2d6",
-            "static": 7
-          },
-          "ignoreArmorPercent": 50,
-          "installLocation": "clinic",
-          "installedItems": {
-            "allowed": true,
-            "allowedTypes": [
-              "itemUpgrade",
-              "cyberware"
-            ],
-            "list": [
-              "cprAddImp0006900",
-              "cprAddImp0007000",
-              "cprAddImp0007100"
-            ],
-            "slots": 3,
-            "usedSlots": 3
-          },
-          "isElectronic": true,
-          "isFoundational": true,
-          "isRanged": false,
-          "isWeapon": false,
-          "magazine": {
-            "ammoData": null,
-            "max": 0,
-            "value": 0
-          },
-          "price": {
-            "market": 100
-          },
-          "providesHardening": false,
-          "revealed": true,
-          "rof": 1,
-          "size": 0,
-          "source": {
-            "book": "Core",
-            "page": 360
-          },
-          "type": "cyberEye",
-          "unarmedAutomaticCalculation": true,
-          "usage": "toggled",
-          "usesType": "magazine",
-          "weaponSkill": "Archery",
-          "weaponType": "assaultRifle"
-        },
-        "type": "cyberware",
-        "folder": null,
-        "sort": 0,
-        "ownership": {
-          "default": 0
-        }
-      },
-      {
-        "_id": "cprAddImp0006300",
-        "effects": [],
-        "flags": {
-          "cyberpunk-red-core": {
-            "_migration": {
-              "current": 33,
-              "previous": "24"
-            }
-          },
-          "cprInstallTree": [
-            {
-              "_id": "cprAddImp0007600",
-              "effects": [],
-              "flags": {
-                "cyberpunk-red-core": {
-                  "_migration": {
-                    "current": 33,
-                    "previous": "24"
-                  }
-                }
-              },
-              "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/lowlight_ir_uv.svg",
-              "name": "ПНВ/ИК/УФ",
-              "system": {
-                "ammoVariety": [],
-                "attackmod": 0,
-                "brand": "",
-                "canIgnoreArmor": true,
-                "concealable": {
-                  "concealable": false,
-                  "isConcealed": false
-                },
-                "core": false,
-                "damage": "1d6",
-                "description": {
-                  "value": "Работают в паре. Иммунитет к штрафам на зрение из-за освещения, тумана или дыма."
-                },
-                "dvTable": "",
-                "favorite": false,
-                "fireModes": {
-                  "autoFire": 0,
-                  "suppressiveFire": false
-                },
-                "humanityLoss": {
-                  "roll": "1d6",
-                  "static": 3
-                },
-                "ignoreArmorPercent": 50,
-                "installLocation": "mall",
-                "installedItems": {
-                  "allowed": false,
-                  "allowedTypes": [
-                    "itemUpgrade"
-                  ],
-                  "list": [],
-                  "slots": 3,
-                  "usedSlots": 0
-                },
-                "isElectronic": true,
-                "isFoundational": false,
-                "isRanged": false,
-                "isWeapon": false,
-                "magazine": {
-                  "ammoData": null,
-                  "max": 0,
-                  "value": 0
-                },
-                "price": {
-                  "market": 500
-                },
-                "providesHardening": false,
-                "revealed": true,
-                "rof": 1,
-                "size": 2,
-                "source": {
-                  "book": "Core",
-                  "page": 360
-                },
-                "type": "cyberEye",
-                "unarmedAutomaticCalculation": true,
-                "usage": "toggled",
-                "usesType": "magazine",
-                "weaponSkill": "Archery",
-                "weaponType": "assaultRifle"
-              },
-              "type": "cyberware",
-              "folder": null,
-              "sort": 0,
-              "ownership": {
-                "default": 0
-              }
-            },
-            {
-              "_id": "cprAddImp0007700",
-              "effects": [],
-              "flags": {
-                "cyberpunk-red-core": {
-                  "_migration": {
-                    "current": 33,
-                    "previous": "24"
-                  }
-                }
-              },
-              "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/lowlight_ir_uv.svg",
-              "name": "ПНВ/ИК/УФ",
-              "system": {
-                "ammoVariety": [],
-                "attackmod": 0,
-                "brand": "",
-                "canIgnoreArmor": true,
-                "concealable": {
-                  "concealable": false,
-                  "isConcealed": false
-                },
-                "core": false,
-                "damage": "1d6",
-                "description": {
-                  "value": "Работают в паре. Иммунитет к штрафам на зрение из-за освещения, тумана или дыма."
-                },
-                "dvTable": "",
-                "favorite": false,
-                "fireModes": {
-                  "autoFire": 0,
-                  "suppressiveFire": false
-                },
-                "humanityLoss": {
-                  "roll": "1d6",
-                  "static": 3
-                },
-                "ignoreArmorPercent": 50,
-                "installLocation": "mall",
-                "installedItems": {
-                  "allowed": false,
-                  "allowedTypes": [
-                    "itemUpgrade"
-                  ],
-                  "list": [],
-                  "slots": 3,
-                  "usedSlots": 0
-                },
-                "isElectronic": true,
-                "isFoundational": false,
-                "isRanged": false,
-                "isWeapon": false,
-                "magazine": {
-                  "ammoData": null,
-                  "max": 0,
-                  "value": 0
-                },
-                "price": {
-                  "market": 500
-                },
-                "providesHardening": false,
-                "revealed": true,
-                "rof": 1,
-                "size": 2,
-                "source": {
-                  "book": "Core",
-                  "page": 360
-                },
-                "type": "cyberEye",
-                "unarmedAutomaticCalculation": true,
-                "usage": "toggled",
-                "usesType": "magazine",
-                "weaponSkill": "Archery",
-                "weaponType": "assaultRifle"
-              },
-              "type": "cyberware",
-              "folder": null,
-              "sort": 0,
-              "ownership": {
-                "default": 0
-              }
-            }
-          ]
-        },
-        "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/cybereye.svg",
-        "name": "Киберглаз",
-        "system": {
-          "ammoVariety": [],
-          "attackmod": 0,
-          "brand": "",
-          "canIgnoreArmor": true,
-          "concealable": {
-            "concealable": false,
-            "isConcealed": false
-          },
-          "core": false,
-          "damage": "1d6",
-          "description": {
-            "value": "Искусственный глаз. Выбирай оптику Кироси!"
-          },
-          "dvTable": "",
-          "favorite": false,
-          "fireModes": {
-            "autoFire": 0,
-            "suppressiveFire": false
-          },
-          "humanityLoss": {
-            "roll": "2d6",
-            "static": 7
-          },
-          "ignoreArmorPercent": 50,
-          "installLocation": "clinic",
-          "installedItems": {
-            "allowed": true,
-            "allowedTypes": [
-              "itemUpgrade",
-              "cyberware"
-            ],
-            "list": [
-              "cprAddImp0007600",
-              "cprAddImp0007700"
-            ],
-            "slots": 4,
-            "usedSlots": 4
-          },
-          "isElectronic": true,
-          "isFoundational": true,
-          "isRanged": false,
-          "isWeapon": false,
-          "magazine": {
-            "ammoData": null,
-            "max": 0,
-            "value": 0
-          },
-          "price": {
-            "market": 100
-          },
-          "providesHardening": false,
-          "revealed": true,
-          "rof": 1,
-          "size": 0,
-          "source": {
-            "book": "Core",
-            "page": 360
-          },
-          "type": "cyberEye",
-          "unarmedAutomaticCalculation": true,
-          "usage": "toggled",
-          "usesType": "magazine",
-          "weaponSkill": "Archery",
-          "weaponType": "assaultRifle"
-        },
-        "type": "cyberware",
-        "folder": null,
-        "sort": 0,
-        "ownership": {
-          "default": 0
-        }
-      },
-      {
-        "_id": "cprAddImp0006400",
-        "effects": [],
-        "flags": {
-          "cyberpunk-red-core": {
-            "_migration": {
-              "current": 33,
-              "previous": "24"
-            }
-          }
-        },
-        "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/cyberleg.svg",
-        "name": "Кибернога",
-        "system": {
-          "ammoVariety": [],
-          "attackmod": 0,
-          "brand": "",
-          "canIgnoreArmor": true,
-          "concealable": {
-            "concealable": false,
-            "isConcealed": false
-          },
-          "core": false,
-          "damage": "1d6",
-          "description": {
-            "value": "Кибернетическая нога. Бесплатная ступня в комплекте."
-          },
-          "dvTable": "",
-          "favorite": false,
-          "fireModes": {
-            "autoFire": 0,
-            "suppressiveFire": false
-          },
-          "humanityLoss": {
-            "roll": "1d6",
-            "static": 3
-          },
-          "ignoreArmorPercent": 50,
-          "installLocation": "hospital",
-          "installedItems": {
-            "allowed": true,
-            "allowedTypes": [
-              "itemUpgrade",
-              "cyberware"
-            ],
-            "list": [],
-            "slots": 3,
-            "usedSlots": 0
-          },
-          "isElectronic": true,
-          "isFoundational": true,
-          "isRanged": false,
-          "isWeapon": false,
-          "magazine": {
-            "ammoData": null,
-            "max": 0,
-            "value": 0
-          },
-          "price": {
-            "market": 100
-          },
-          "providesHardening": false,
-          "revealed": true,
-          "rof": 1,
-          "size": 0,
-          "source": {
-            "book": "Core",
-            "page": 366
-          },
-          "type": "cyberLeg",
-          "unarmedAutomaticCalculation": true,
-          "usage": "toggled",
-          "usesType": "magazine",
-          "weaponSkill": "Archery",
-          "weaponType": "assaultRifle"
-        },
-        "type": "cyberware",
-        "folder": null,
-        "sort": 0,
-        "ownership": {
-          "default": 0
-        }
-      },
-      {
-        "_id": "cprAddImp0006500",
-        "effects": [],
-        "flags": {
-          "cyberpunk-red-core": {
-            "_migration": {
-              "current": 33,
-              "previous": "24"
-            }
-          }
-        },
-        "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/cyberleg.svg",
-        "name": "Кибернога",
-        "system": {
-          "ammoVariety": [],
-          "attackmod": 0,
-          "brand": "",
-          "canIgnoreArmor": true,
-          "concealable": {
-            "concealable": false,
-            "isConcealed": false
-          },
-          "core": false,
-          "damage": "1d6",
-          "description": {
-            "value": "Кибернетическая нога. Бесплатная ступня в комплекте."
-          },
-          "dvTable": "",
-          "favorite": false,
-          "fireModes": {
-            "autoFire": 0,
-            "suppressiveFire": false
-          },
-          "humanityLoss": {
-            "roll": "1d6",
-            "static": 3
-          },
-          "ignoreArmorPercent": 50,
-          "installLocation": "hospital",
-          "installedItems": {
-            "allowed": true,
-            "allowedTypes": [
-              "itemUpgrade",
-              "cyberware"
-            ],
-            "list": [],
-            "slots": 3,
-            "usedSlots": 0
-          },
-          "isElectronic": true,
-          "isFoundational": true,
-          "isRanged": false,
-          "isWeapon": false,
-          "magazine": {
-            "ammoData": null,
-            "max": 0,
-            "value": 0
-          },
-          "price": {
-            "market": 100
-          },
-          "providesHardening": false,
-          "revealed": true,
-          "rof": 1,
-          "size": 0,
-          "source": {
-            "book": "Core",
-            "page": 366
-          },
-          "type": "cyberLeg",
-          "unarmedAutomaticCalculation": true,
-          "usage": "toggled",
-          "usesType": "magazine",
-          "weaponSkill": "Archery",
-          "weaponType": "assaultRifle"
-        },
-        "type": "cyberware",
-        "folder": null,
-        "sort": 0,
-        "ownership": {
-          "default": 0
-        }
-      },
-      {
-        "_id": "cprAddImp0006600",
-        "name": "Киберчереп",
-        "type": "cyberware",
-        "img": "modules/cpr-addenda/assets/icons/borgware.svg",
-        "folder": null,
-        "sort": 0,
-        "effects": [],
-        "flags": {},
-        "system": {
-          "ammoVariety": [],
-          "attackmod": 0,
-          "brand": "",
-          "canIgnoreArmor": false,
-          "concealable": {
-            "concealable": false,
-            "isConcealed": false
-          },
-          "core": false,
-          "critFailEffect": "jammed",
-          "damage": "1d6",
-          "description": {
-            "value": "<p>Бронированная замена черепной коробки. Входит в комплект корпуса ПКТ.</p>"
-          },
-          "dvTable": "",
-          "favorite": false,
-          "fireModes": {
-            "autoFire": 0,
-            "suppressiveFire": false
-          },
-          "humanityLoss": {
-            "roll": "1d6",
-            "static": 0
-          },
-          "ignoreArmorPercent": 0,
-          "ignoreBelowSP": 0,
-          "installLocation": "hospital",
-          "installedItems": {
-            "allowed": false,
-            "allowedTypes": [
-              "itemUpgrade",
-              "cyberware"
-            ],
-            "list": [],
-            "slots": 0,
-            "usedSlots": 0
-          },
-          "isElectronic": true,
-          "isFoundational": false,
-          "isRanged": false,
-          "isWeapon": false,
-          "magazine": {
-            "ammoData": null,
-            "max": 0,
-            "value": 0
-          },
-          "price": {
-            "market": 0
-          },
-          "providesHardening": false,
-          "revealed": true,
-          "rof": 1,
-          "size": 1,
-          "source": {
-            "book": "DataPool",
-            "page": 0
-          },
-          "type": "cyberwareInternal",
-          "unarmedAutomaticCalculation": true,
-          "usage": "installed",
-          "usesType": "magazine",
-          "weaponSkill": "",
-          "weaponType": ""
-        }
-      },
-      {
-        "_id": "cprAddImp0006700",
-        "name": "Имплантированный Эндоскелет Омега",
-        "type": "cyberware",
-        "img": "modules/cpr-addenda/assets/icons/borgware.svg",
-        "folder": null,
-        "sort": 0,
-        "effects": [],
-        "flags": {},
-        "system": {
-          "ammoVariety": [],
-          "attackmod": 0,
-          "brand": "",
-          "canIgnoreArmor": false,
-          "concealable": {
-            "concealable": false,
-            "isConcealed": false
-          },
-          "core": false,
-          "critFailEffect": "jammed",
-          "damage": "1d6",
-          "description": {
-            "value": "<p>Внутренний каркас класса «Омега» — тяжелее и прочнее «Сигмы». Входит в комплект корпуса ПКТ.</p>"
-          },
-          "dvTable": "",
-          "favorite": false,
-          "fireModes": {
-            "autoFire": 0,
-            "suppressiveFire": false
-          },
-          "humanityLoss": {
-            "roll": "1d6",
-            "static": 0
-          },
-          "ignoreArmorPercent": 0,
-          "ignoreBelowSP": 0,
-          "installLocation": "hospital",
-          "installedItems": {
-            "allowed": true,
-            "allowedTypes": [
-              "itemUpgrade",
-              "cyberware"
-            ],
-            "list": [],
-            "slots": 3,
-            "usedSlots": 0
-          },
-          "isElectronic": true,
-          "isFoundational": true,
-          "isRanged": false,
-          "isWeapon": false,
-          "magazine": {
-            "ammoData": null,
-            "max": 0,
-            "value": 0
-          },
-          "price": {
-            "market": 0
-          },
-          "providesHardening": false,
-          "revealed": true,
-          "rof": 1,
-          "size": 1,
-          "source": {
-            "book": "DataPool",
-            "page": 0
-          },
-          "type": "borgware",
-          "unarmedAutomaticCalculation": true,
-          "usage": "installed",
-          "usesType": "magazine",
-          "weaponSkill": "",
-          "weaponType": ""
-        }
-      },
-      {
-        "_id": "cprAddImp0006800",
-        "effects": [],
-        "flags": {
-          "cyberpunk-red-core": {
-            "_migration": {
-              "current": 33,
-              "previous": "24"
-            }
-          },
-          "cprInstallTree": [
-            {
-              "_id": "cprAddImp0008200",
-              "effects": [],
-              "flags": {
-                "cyberpunk-red-core": {
-                  "_migration": {
-                    "current": 33,
-                    "previous": "24"
-                  }
-                }
-              },
-              "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/interface_plugs.svg",
-              "name": "Интерфейсные разъёмы",
-              "system": {
-                "ammoVariety": [],
-                "attackmod": 0,
-                "brand": "",
-                "canIgnoreArmor": true,
-                "concealable": {
-                  "concealable": false,
-                  "isConcealed": false
-                },
-                "core": false,
-                "damage": "1d6",
-                "description": {
-                  "value": "Разъёмы в кисти или в голове для подключения к машинам/системам."
-                },
-                "dvTable": "",
-                "favorite": false,
-                "fireModes": {
-                  "autoFire": 0,
-                  "suppressiveFire": false
-                },
-                "humanityLoss": {
-                  "roll": "2d6",
-                  "static": 7
+                  "roll": "0",
+                  "static": 0
                 },
                 "ignoreArmorPercent": 50,
                 "installLocation": "clinic",
                 "installedItems": {
-                  "allowed": false,
+                  "allowed": true,
                   "allowedTypes": [
-                    "itemUpgrade"
+                    "itemUpgrade",
+                    "cyberware"
                   ],
                   "list": [],
-                  "slots": 3,
+                  "slots": 5,
                   "usedSlots": 0
                 },
                 "isElectronic": true,
-                "isFoundational": false,
+                "isFoundational": true,
                 "isRanged": false,
                 "isWeapon": false,
                 "magazine": {
@@ -1661,7 +1585,7 @@
                 "providesHardening": false,
                 "revealed": true,
                 "rof": 1,
-                "size": 1,
+                "size": 0,
                 "source": {
                   "book": "Core",
                   "page": 359
@@ -1680,482 +1604,569 @@
                 "default": 0
               }
             },
-            {
-              "_id": "cprAddImp0008300",
-              "effects": [],
-              "flags": {
-                "cyberpunk-red-core": {
-                  "_migration": {
-                    "current": 33,
-                    "previous": "24"
+            "options": [
+              {
+                "_id": "cprAddImp0008200",
+                "effects": [],
+                "flags": {
+                  "cyberpunk-red-core": {
+                    "_migration": {
+                      "current": 33,
+                      "previous": "24"
+                    }
                   }
+                },
+                "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/interface_plugs.svg",
+                "name": "Интерфейсные разъёмы",
+                "system": {
+                  "ammoVariety": [],
+                  "attackmod": 0,
+                  "brand": "",
+                  "canIgnoreArmor": true,
+                  "concealable": {
+                    "concealable": false,
+                    "isConcealed": false
+                  },
+                  "core": false,
+                  "damage": "1d6",
+                  "description": {
+                    "value": "Разъёмы в кисти или в голове для подключения к машинам/системам."
+                  },
+                  "dvTable": "",
+                  "favorite": false,
+                  "fireModes": {
+                    "autoFire": 0,
+                    "suppressiveFire": false
+                  },
+                  "humanityLoss": {
+                    "roll": "0",
+                    "static": 0
+                  },
+                  "ignoreArmorPercent": 50,
+                  "installLocation": "clinic",
+                  "installedItems": {
+                    "allowed": false,
+                    "allowedTypes": [
+                      "itemUpgrade"
+                    ],
+                    "list": [],
+                    "slots": 3,
+                    "usedSlots": 0
+                  },
+                  "isElectronic": true,
+                  "isFoundational": false,
+                  "isRanged": false,
+                  "isWeapon": false,
+                  "magazine": {
+                    "ammoData": null,
+                    "max": 0,
+                    "value": 0
+                  },
+                  "price": {
+                    "market": 500
+                  },
+                  "providesHardening": false,
+                  "revealed": true,
+                  "rof": 1,
+                  "size": 1,
+                  "source": {
+                    "book": "Core",
+                    "page": 359
+                  },
+                  "type": "neuralWare",
+                  "unarmedAutomaticCalculation": true,
+                  "usage": "toggled",
+                  "usesType": "magazine",
+                  "weaponSkill": "Archery",
+                  "weaponType": "assaultRifle"
+                },
+                "type": "cyberware",
+                "folder": null,
+                "sort": 0,
+                "ownership": {
+                  "default": 0
                 }
               },
-              "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/interface_plugs.svg",
-              "name": "Интерфейсные разъёмы",
-              "system": {
-                "ammoVariety": [],
-                "attackmod": 0,
-                "brand": "",
-                "canIgnoreArmor": true,
-                "concealable": {
-                  "concealable": false,
-                  "isConcealed": false
+              {
+                "_id": "cprAddImp0008300",
+                "effects": [],
+                "flags": {
+                  "cyberpunk-red-core": {
+                    "_migration": {
+                      "current": 33,
+                      "previous": "24"
+                    }
+                  }
                 },
-                "core": false,
-                "damage": "1d6",
-                "description": {
-                  "value": "Разъёмы в кисти или в голове для подключения к машинам/системам."
+                "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/interface_plugs.svg",
+                "name": "Интерфейсные разъёмы",
+                "system": {
+                  "ammoVariety": [],
+                  "attackmod": 0,
+                  "brand": "",
+                  "canIgnoreArmor": true,
+                  "concealable": {
+                    "concealable": false,
+                    "isConcealed": false
+                  },
+                  "core": false,
+                  "damage": "1d6",
+                  "description": {
+                    "value": "Разъёмы в кисти или в голове для подключения к машинам/системам."
+                  },
+                  "dvTable": "",
+                  "favorite": false,
+                  "fireModes": {
+                    "autoFire": 0,
+                    "suppressiveFire": false
+                  },
+                  "humanityLoss": {
+                    "roll": "0",
+                    "static": 0
+                  },
+                  "ignoreArmorPercent": 50,
+                  "installLocation": "clinic",
+                  "installedItems": {
+                    "allowed": false,
+                    "allowedTypes": [
+                      "itemUpgrade"
+                    ],
+                    "list": [],
+                    "slots": 3,
+                    "usedSlots": 0
+                  },
+                  "isElectronic": true,
+                  "isFoundational": false,
+                  "isRanged": false,
+                  "isWeapon": false,
+                  "magazine": {
+                    "ammoData": null,
+                    "max": 0,
+                    "value": 0
+                  },
+                  "price": {
+                    "market": 500
+                  },
+                  "providesHardening": false,
+                  "revealed": true,
+                  "rof": 1,
+                  "size": 1,
+                  "source": {
+                    "book": "Core",
+                    "page": 359
+                  },
+                  "type": "neuralWare",
+                  "unarmedAutomaticCalculation": true,
+                  "usage": "toggled",
+                  "usesType": "magazine",
+                  "weaponSkill": "Archery",
+                  "weaponType": "assaultRifle"
                 },
-                "dvTable": "",
-                "favorite": false,
-                "fireModes": {
-                  "autoFire": 0,
-                  "suppressiveFire": false
-                },
-                "humanityLoss": {
-                  "roll": "2d6",
-                  "static": 7
-                },
-                "ignoreArmorPercent": 50,
-                "installLocation": "clinic",
-                "installedItems": {
-                  "allowed": false,
-                  "allowedTypes": [
-                    "itemUpgrade"
-                  ],
-                  "list": [],
-                  "slots": 3,
-                  "usedSlots": 0
-                },
-                "isElectronic": true,
-                "isFoundational": false,
-                "isRanged": false,
-                "isWeapon": false,
-                "magazine": {
-                  "ammoData": null,
-                  "max": 0,
-                  "value": 0
-                },
-                "price": {
-                  "market": 500
-                },
-                "providesHardening": false,
-                "revealed": true,
-                "rof": 1,
-                "size": 1,
-                "source": {
-                  "book": "Core",
-                  "page": 359
-                },
-                "type": "neuralWare",
-                "unarmedAutomaticCalculation": true,
-                "usage": "toggled",
-                "usesType": "magazine",
-                "weaponSkill": "Archery",
-                "weaponType": "assaultRifle"
-              },
-              "type": "cyberware",
-              "folder": null,
-              "sort": 0,
-              "ownership": {
-                "default": 0
+                "type": "cyberware",
+                "folder": null,
+                "sort": 0,
+                "ownership": {
+                  "default": 0
+                }
               }
+            ]
+          }
+        ],
+        "carried": [
+          {
+            "_id": "cprAddImp0006600",
+            "name": "Киберчереп",
+            "type": "cyberware",
+            "img": "modules/cpr-addenda/assets/icons/borgware.svg",
+            "folder": null,
+            "sort": 0,
+            "effects": [],
+            "flags": {},
+            "system": {
+              "ammoVariety": [],
+              "attackmod": 0,
+              "brand": "",
+              "canIgnoreArmor": false,
+              "concealable": {
+                "concealable": false,
+                "isConcealed": false
+              },
+              "core": false,
+              "critFailEffect": "jammed",
+              "damage": "1d6",
+              "description": {
+                "value": "<p>Бронированная замена черепной коробки. Входит в комплект корпуса ПКТ.</p>"
+              },
+              "dvTable": "",
+              "favorite": false,
+              "fireModes": {
+                "autoFire": 0,
+                "suppressiveFire": false
+              },
+              "humanityLoss": {
+                "roll": "0",
+                "static": 0
+              },
+              "ignoreArmorPercent": 0,
+              "ignoreBelowSP": 0,
+              "installLocation": "hospital",
+              "installedItems": {
+                "allowed": false,
+                "allowedTypes": [
+                  "itemUpgrade",
+                  "cyberware"
+                ],
+                "list": [],
+                "slots": 0,
+                "usedSlots": 0
+              },
+              "isElectronic": true,
+              "isFoundational": false,
+              "isRanged": false,
+              "isWeapon": false,
+              "magazine": {
+                "ammoData": null,
+                "max": 0,
+                "value": 0
+              },
+              "price": {
+                "market": 0
+              },
+              "providesHardening": false,
+              "revealed": true,
+              "rof": 1,
+              "size": 1,
+              "source": {
+                "book": "DataPool",
+                "page": 0
+              },
+              "type": "cyberwareInternal",
+              "unarmedAutomaticCalculation": true,
+              "usage": "installed",
+              "usesType": "magazine",
+              "weaponSkill": "",
+              "weaponType": ""
             }
-          ]
-        },
-        "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/neural_link.svg",
-        "name": "Нейролинк",
-        "system": {
-          "ammoVariety": [],
-          "attackmod": 0,
-          "brand": "",
-          "canIgnoreArmor": true,
-          "concealable": {
-            "concealable": false,
-            "isConcealed": false
           },
-          "core": false,
-          "damage": "1d6",
-          "description": {
-            "value": "Доступ к нервной системе."
+          {
+            "_id": "cprAddImp0007200",
+            "name": "Защитное Покрытие Драгун",
+            "type": "cyberware",
+            "img": "modules/cpr-addenda/assets/icons/borgware.svg",
+            "folder": null,
+            "sort": 0,
+            "effects": [],
+            "flags": {},
+            "system": {
+              "ammoVariety": [],
+              "attackmod": 0,
+              "brand": "",
+              "canIgnoreArmor": false,
+              "concealable": {
+                "concealable": false,
+                "isConcealed": false
+              },
+              "core": false,
+              "critFailEffect": "jammed",
+              "damage": "1d6",
+              "description": {
+                "value": "<p>Броневое покрытие военной платформы «Драгун». Входит в комплект корпуса ПКТ.</p>"
+              },
+              "dvTable": "",
+              "favorite": false,
+              "fireModes": {
+                "autoFire": 0,
+                "suppressiveFire": false
+              },
+              "humanityLoss": {
+                "roll": "0",
+                "static": 0
+              },
+              "ignoreArmorPercent": 0,
+              "ignoreBelowSP": 0,
+              "installLocation": "hospital",
+              "installedItems": {
+                "allowed": false,
+                "allowedTypes": [
+                  "itemUpgrade",
+                  "cyberware"
+                ],
+                "list": [],
+                "slots": 0,
+                "usedSlots": 0
+              },
+              "isElectronic": true,
+              "isFoundational": false,
+              "isRanged": false,
+              "isWeapon": false,
+              "magazine": {
+                "ammoData": null,
+                "max": 0,
+                "value": 0
+              },
+              "price": {
+                "market": 0
+              },
+              "providesHardening": false,
+              "revealed": true,
+              "rof": 1,
+              "size": 1,
+              "source": {
+                "book": "DataPool",
+                "page": 0
+              },
+              "type": "borgware",
+              "unarmedAutomaticCalculation": true,
+              "usage": "installed",
+              "usesType": "magazine",
+              "weaponSkill": "",
+              "weaponType": ""
+            }
           },
-          "dvTable": "",
-          "favorite": false,
-          "fireModes": {
-            "autoFire": 0,
-            "suppressiveFire": false
+          {
+            "_id": "cprAddImp0007300",
+            "effects": [],
+            "flags": {
+              "cyberpunk-red-core": {
+                "_migration": {
+                  "current": 33,
+                  "previous": "24"
+                }
+              }
+            },
+            "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/hardend_shielding.svg",
+            "name": "Усиленное экранирование (боргимплант)",
+            "system": {
+              "ammoVariety": [],
+              "attackmod": 0,
+              "brand": "",
+              "canIgnoreArmor": true,
+              "concealable": {
+                "concealable": false,
+                "isConcealed": false
+              },
+              "core": false,
+              "damage": "1d6",
+              "description": {
+                "value": "Боргимплант. Имплант с этим расширением игнорируют ЭМИ."
+              },
+              "dvTable": "",
+              "favorite": false,
+              "fireModes": {
+                "autoFire": 0,
+                "suppressiveFire": false
+              },
+              "humanityLoss": {
+                "roll": "0",
+                "static": 0
+              },
+              "ignoreArmorPercent": 50,
+              "installLocation": "hospital",
+              "installedItems": {
+                "allowed": false,
+                "allowedTypes": [
+                  "itemUpgrade",
+                  "ammo"
+                ],
+                "list": [],
+                "slots": 0,
+                "usedSlots": 0
+              },
+              "isElectronic": true,
+              "isFoundational": false,
+              "isRanged": false,
+              "isWeapon": false,
+              "magazine": {
+                "ammoData": null,
+                "max": 0,
+                "value": 0
+              },
+              "price": {
+                "market": 1000
+              },
+              "providesHardening": true,
+              "revealed": true,
+              "rof": 1,
+              "size": 1,
+              "source": {
+                "book": "BC",
+                "page": 17
+              },
+              "type": "borgware",
+              "unarmedAutomaticCalculation": true,
+              "usage": "toggled",
+              "usesType": "magazine",
+              "weaponSkill": "Archery",
+              "weaponType": "assaultRifle"
+            },
+            "type": "cyberware",
+            "folder": null,
+            "sort": 0,
+            "ownership": {
+              "default": 0
+            }
           },
-          "humanityLoss": {
-            "roll": "2d6",
-            "static": 7
+          {
+            "_id": "cprAddImp0007400",
+            "effects": [],
+            "flags": {
+              "cyberpunk-red-core": {
+                "_migration": {
+                  "current": 33,
+                  "previous": "24"
+                }
+              }
+            },
+            "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/hardend_shielding.svg",
+            "name": "Усиленное экранирование (боргимплант)",
+            "system": {
+              "ammoVariety": [],
+              "attackmod": 0,
+              "brand": "",
+              "canIgnoreArmor": true,
+              "concealable": {
+                "concealable": false,
+                "isConcealed": false
+              },
+              "core": false,
+              "damage": "1d6",
+              "description": {
+                "value": "Боргимплант. Имплант с этим расширением игнорируют ЭМИ."
+              },
+              "dvTable": "",
+              "favorite": false,
+              "fireModes": {
+                "autoFire": 0,
+                "suppressiveFire": false
+              },
+              "humanityLoss": {
+                "roll": "0",
+                "static": 0
+              },
+              "ignoreArmorPercent": 50,
+              "installLocation": "hospital",
+              "installedItems": {
+                "allowed": false,
+                "allowedTypes": [
+                  "itemUpgrade",
+                  "ammo"
+                ],
+                "list": [],
+                "slots": 0,
+                "usedSlots": 0
+              },
+              "isElectronic": true,
+              "isFoundational": false,
+              "isRanged": false,
+              "isWeapon": false,
+              "magazine": {
+                "ammoData": null,
+                "max": 0,
+                "value": 0
+              },
+              "price": {
+                "market": 1000
+              },
+              "providesHardening": true,
+              "revealed": true,
+              "rof": 1,
+              "size": 1,
+              "source": {
+                "book": "BC",
+                "page": 17
+              },
+              "type": "borgware",
+              "unarmedAutomaticCalculation": true,
+              "usage": "toggled",
+              "usesType": "magazine",
+              "weaponSkill": "Archery",
+              "weaponType": "assaultRifle"
+            },
+            "type": "cyberware",
+            "folder": null,
+            "sort": 0,
+            "ownership": {
+              "default": 0
+            }
           },
-          "ignoreArmorPercent": 50,
-          "installLocation": "clinic",
-          "installedItems": {
-            "allowed": true,
-            "allowedTypes": [
-              "itemUpgrade",
-              "cyberware"
-            ],
-            "list": [
-              "cprAddImp0008200",
-              "cprAddImp0008300"
-            ],
-            "slots": 5,
-            "usedSlots": 2
-          },
-          "isElectronic": true,
-          "isFoundational": true,
-          "isRanged": false,
-          "isWeapon": false,
-          "magazine": {
-            "ammoData": null,
-            "max": 0,
-            "value": 0
-          },
-          "price": {
-            "market": 500
-          },
-          "providesHardening": false,
-          "revealed": true,
-          "rof": 1,
-          "size": 0,
-          "source": {
-            "book": "Core",
-            "page": 359
-          },
-          "type": "neuralWare",
-          "unarmedAutomaticCalculation": true,
-          "usage": "toggled",
-          "usesType": "magazine",
-          "weaponSkill": "Archery",
-          "weaponType": "assaultRifle"
-        },
-        "type": "cyberware",
-        "folder": null,
-        "sort": 0,
-        "ownership": {
-          "default": 0
-        }
-      },
-      {
-        "_id": "cprAddImp0007200",
-        "name": "Защитное Покрытие Драгун",
-        "type": "cyberware",
-        "img": "modules/cpr-addenda/assets/icons/borgware.svg",
-        "folder": null,
-        "sort": 0,
-        "effects": [],
-        "flags": {},
-        "system": {
-          "ammoVariety": [],
-          "attackmod": 0,
-          "brand": "",
-          "canIgnoreArmor": false,
-          "concealable": {
-            "concealable": false,
-            "isConcealed": false
-          },
-          "core": false,
-          "critFailEffect": "jammed",
-          "damage": "1d6",
-          "description": {
-            "value": "<p>Броневое покрытие военной платформы «Драгун». Входит в комплект корпуса ПКТ.</p>"
-          },
-          "dvTable": "",
-          "favorite": false,
-          "fireModes": {
-            "autoFire": 0,
-            "suppressiveFire": false
-          },
-          "humanityLoss": {
-            "roll": "1d6",
-            "static": 0
-          },
-          "ignoreArmorPercent": 0,
-          "ignoreBelowSP": 0,
-          "installLocation": "hospital",
-          "installedItems": {
-            "allowed": false,
-            "allowedTypes": [
-              "itemUpgrade",
-              "cyberware"
-            ],
-            "list": [],
-            "slots": 0,
-            "usedSlots": 0
-          },
-          "isElectronic": true,
-          "isFoundational": false,
-          "isRanged": false,
-          "isWeapon": false,
-          "magazine": {
-            "ammoData": null,
-            "max": 0,
-            "value": 0
-          },
-          "price": {
-            "market": 0
-          },
-          "providesHardening": false,
-          "revealed": true,
-          "rof": 1,
-          "size": 1,
-          "source": {
-            "book": "DataPool",
-            "page": 0
-          },
-          "type": "borgware",
-          "unarmedAutomaticCalculation": true,
-          "usage": "installed",
-          "usesType": "magazine",
-          "weaponSkill": "",
-          "weaponType": ""
-        }
-      },
-      {
-        "_id": "cprAddImp0007300",
-        "effects": [],
-        "flags": {
-          "cyberpunk-red-core": {
-            "_migration": {
-              "current": 33,
-              "previous": "24"
+          {
+            "_id": "cprAddImp0008400",
+            "name": "Модернизация Внутренней Гидравлики",
+            "type": "cyberware",
+            "img": "modules/cpr-addenda/assets/icons/borgware.svg",
+            "folder": null,
+            "sort": 0,
+            "effects": [],
+            "flags": {},
+            "system": {
+              "ammoVariety": [],
+              "attackmod": 0,
+              "brand": "",
+              "canIgnoreArmor": false,
+              "concealable": {
+                "concealable": false,
+                "isConcealed": false
+              },
+              "core": false,
+              "critFailEffect": "jammed",
+              "damage": "1d6",
+              "description": {
+                "value": "<p>Усиленная гидравлика корпуса. Входит в комплект корпуса ПКТ.</p>"
+              },
+              "dvTable": "",
+              "favorite": false,
+              "fireModes": {
+                "autoFire": 0,
+                "suppressiveFire": false
+              },
+              "humanityLoss": {
+                "roll": "0",
+                "static": 0
+              },
+              "ignoreArmorPercent": 0,
+              "ignoreBelowSP": 0,
+              "installLocation": "hospital",
+              "installedItems": {
+                "allowed": false,
+                "allowedTypes": [
+                  "itemUpgrade",
+                  "cyberware"
+                ],
+                "list": [],
+                "slots": 0,
+                "usedSlots": 0
+              },
+              "isElectronic": true,
+              "isFoundational": false,
+              "isRanged": false,
+              "isWeapon": false,
+              "magazine": {
+                "ammoData": null,
+                "max": 0,
+                "value": 0
+              },
+              "price": {
+                "market": 0
+              },
+              "providesHardening": false,
+              "revealed": true,
+              "rof": 1,
+              "size": 1,
+              "source": {
+                "book": "DataPool",
+                "page": 0
+              },
+              "type": "borgware",
+              "unarmedAutomaticCalculation": true,
+              "usage": "installed",
+              "usesType": "magazine",
+              "weaponSkill": "",
+              "weaponType": ""
             }
           }
-        },
-        "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/hardend_shielding.svg",
-        "name": "Усиленное экранирование (боргимплант)",
-        "system": {
-          "ammoVariety": [],
-          "attackmod": 0,
-          "brand": "",
-          "canIgnoreArmor": true,
-          "concealable": {
-            "concealable": false,
-            "isConcealed": false
-          },
-          "core": false,
-          "damage": "1d6",
-          "description": {
-            "value": "Боргимплант. Имплант с этим расширением игнорируют ЭМИ."
-          },
-          "dvTable": "",
-          "favorite": false,
-          "fireModes": {
-            "autoFire": 0,
-            "suppressiveFire": false
-          },
-          "humanityLoss": {
-            "roll": "4d6",
-            "static": 14
-          },
-          "ignoreArmorPercent": 50,
-          "installLocation": "hospital",
-          "installedItems": {
-            "allowed": false,
-            "allowedTypes": [
-              "itemUpgrade",
-              "ammo"
-            ],
-            "list": [],
-            "slots": 0,
-            "usedSlots": 0
-          },
-          "isElectronic": true,
-          "isFoundational": false,
-          "isRanged": false,
-          "isWeapon": false,
-          "magazine": {
-            "ammoData": null,
-            "max": 0,
-            "value": 0
-          },
-          "price": {
-            "market": 1000
-          },
-          "providesHardening": true,
-          "revealed": true,
-          "rof": 1,
-          "size": 1,
-          "source": {
-            "book": "BC",
-            "page": 17
-          },
-          "type": "borgware",
-          "unarmedAutomaticCalculation": true,
-          "usage": "toggled",
-          "usesType": "magazine",
-          "weaponSkill": "Archery",
-          "weaponType": "assaultRifle"
-        },
-        "type": "cyberware",
-        "folder": null,
-        "sort": 0,
-        "ownership": {
-          "default": 0
-        }
-      },
-      {
-        "_id": "cprAddImp0007400",
-        "effects": [],
-        "flags": {
-          "cyberpunk-red-core": {
-            "_migration": {
-              "current": 33,
-              "previous": "24"
-            }
-          }
-        },
-        "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/hardend_shielding.svg",
-        "name": "Усиленное экранирование (боргимплант)",
-        "system": {
-          "ammoVariety": [],
-          "attackmod": 0,
-          "brand": "",
-          "canIgnoreArmor": true,
-          "concealable": {
-            "concealable": false,
-            "isConcealed": false
-          },
-          "core": false,
-          "damage": "1d6",
-          "description": {
-            "value": "Боргимплант. Имплант с этим расширением игнорируют ЭМИ."
-          },
-          "dvTable": "",
-          "favorite": false,
-          "fireModes": {
-            "autoFire": 0,
-            "suppressiveFire": false
-          },
-          "humanityLoss": {
-            "roll": "4d6",
-            "static": 14
-          },
-          "ignoreArmorPercent": 50,
-          "installLocation": "hospital",
-          "installedItems": {
-            "allowed": false,
-            "allowedTypes": [
-              "itemUpgrade",
-              "ammo"
-            ],
-            "list": [],
-            "slots": 0,
-            "usedSlots": 0
-          },
-          "isElectronic": true,
-          "isFoundational": false,
-          "isRanged": false,
-          "isWeapon": false,
-          "magazine": {
-            "ammoData": null,
-            "max": 0,
-            "value": 0
-          },
-          "price": {
-            "market": 1000
-          },
-          "providesHardening": true,
-          "revealed": true,
-          "rof": 1,
-          "size": 1,
-          "source": {
-            "book": "BC",
-            "page": 17
-          },
-          "type": "borgware",
-          "unarmedAutomaticCalculation": true,
-          "usage": "toggled",
-          "usesType": "magazine",
-          "weaponSkill": "Archery",
-          "weaponType": "assaultRifle"
-        },
-        "type": "cyberware",
-        "folder": null,
-        "sort": 0,
-        "ownership": {
-          "default": 0
-        }
-      },
-      {
-        "_id": "cprAddImp0008400",
-        "name": "Модернизация Внутренней Гидравлики",
-        "type": "cyberware",
-        "img": "modules/cpr-addenda/assets/icons/borgware.svg",
-        "folder": null,
-        "sort": 0,
-        "effects": [],
-        "flags": {},
-        "system": {
-          "ammoVariety": [],
-          "attackmod": 0,
-          "brand": "",
-          "canIgnoreArmor": false,
-          "concealable": {
-            "concealable": false,
-            "isConcealed": false
-          },
-          "core": false,
-          "critFailEffect": "jammed",
-          "damage": "1d6",
-          "description": {
-            "value": "<p>Усиленная гидравлика корпуса. Входит в комплект корпуса ПКТ.</p>"
-          },
-          "dvTable": "",
-          "favorite": false,
-          "fireModes": {
-            "autoFire": 0,
-            "suppressiveFire": false
-          },
-          "humanityLoss": {
-            "roll": "1d6",
-            "static": 0
-          },
-          "ignoreArmorPercent": 0,
-          "ignoreBelowSP": 0,
-          "installLocation": "hospital",
-          "installedItems": {
-            "allowed": false,
-            "allowedTypes": [
-              "itemUpgrade",
-              "cyberware"
-            ],
-            "list": [],
-            "slots": 0,
-            "usedSlots": 0
-          },
-          "isElectronic": true,
-          "isFoundational": false,
-          "isRanged": false,
-          "isWeapon": false,
-          "magazine": {
-            "ammoData": null,
-            "max": 0,
-            "value": 0
-          },
-          "price": {
-            "market": 0
-          },
-          "providesHardening": false,
-          "revealed": true,
-          "rof": 1,
-          "size": 1,
-          "source": {
-            "book": "DataPool",
-            "page": 0
-          },
-          "type": "borgware",
-          "unarmedAutomaticCalculation": true,
-          "usage": "installed",
-          "usesType": "magazine",
-          "weaponSkill": "",
-          "weaponType": ""
-        }
+        ]
       }
-    ]
+    }
   },
   "system": {
     "ammoVariety": [],
@@ -2191,24 +2202,9 @@
         "itemUpgrade",
         "cyberware"
       ],
-      "list": [
-        "cprAddImp0005900",
-        "cprAddImp0006000",
-        "cprAddImp0006100",
-        "cprAddImp0006200",
-        "cprAddImp0006300",
-        "cprAddImp0006400",
-        "cprAddImp0006500",
-        "cprAddImp0006600",
-        "cprAddImp0006700",
-        "cprAddImp0006800",
-        "cprAddImp0007200",
-        "cprAddImp0007300",
-        "cprAddImp0007400",
-        "cprAddImp0008400"
-      ],
-      "slots": 6,
-      "usedSlots": 6
+      "list": [],
+      "slots": 5,
+      "usedSlots": 0
     },
     "isElectronic": true,
     "isFoundational": true,

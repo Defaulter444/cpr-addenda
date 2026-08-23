@@ -42,5 +42,12 @@
   "CPRADDENDA.aimed.replacedSource": "Aimed shot ({upgrade})",
   "CPRADDENDA.settings.aimedShotPatch.name": "Replace the aimed shot penalty",
   "CPRADDENDA.settings.aimedShotPatch.hint": "Lets targeting upgrades (Superscanner) replace the system's −8 penalty with their own value. This is the only place the module touches a roll — turn it off if you suspect a conflict with other modules.",
-  "CPRADDENDA.dv.restored": "The system DV table compendium has been restored."
+  "CPRADDENDA.dv.restored": "The system DV table compendium has been restored.",
+  "CPRADDENDA": {
+    "pkt": {
+      "deployed": "{frame}: kit installed, {count} implants.",
+      "removed": "{frame}: kit removed, {count} implants.",
+      "failed": "{frame}: could not deploy the kit. See the console (F12) for details."
+    }
+  }
 }

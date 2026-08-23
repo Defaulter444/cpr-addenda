@@ -18,6 +18,7 @@ import { loadSystemConfig } from "./cpr-config.js";
 import { registerItemPatches } from "./item-patches.js";
 import { registerAimedShotPatch } from "./aimed-shot.js";
 import { registerFormulaPatch } from "./roll-formula.js";
+import { registerPktHooks, registerPktHumanityPatches } from "./pkt-kit.js";
 import { registerSheetHooks } from "./upgrade-sheet.js";
 import { registerCarrierHooks } from "./carrier-slots.js";
 import {
@@ -101,6 +102,7 @@ Hooks.once("init", () => {
   registerSheetHooks();
   registerCarrierHooks();
   registerDvHooks();
+  registerPktHooks();
 });
 
 /**
@@ -117,6 +119,7 @@ Hooks.once("ready", async () => {
   // Ставим до всего прочего: без этого предметы модуля со сложными
   // формулами броска роняют установку.
   await registerFormulaPatch();
+  await registerPktHumanityPatches();
   await checkDvTableSetting();
 
   const api = {

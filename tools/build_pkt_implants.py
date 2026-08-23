@@ -2,15 +2,20 @@
 Вкладывает импланты в корпуса ПКТ.
 
 Комплект корпуса — это не список в описании, а полтора десятка настоящих
-имплантов, которые должны появиться у персонажа вместе с корпусом. Система это
-умеет: если у предмета непустой `installedItems.list` и флаг `cprInstallTree`
-с данными, при переносе на актёра она создаст всю вложенность сама
-(`createInstalledItemsOnActor` в cpr-container.js).
+имплантов, которые должны появиться у персонажа вместе с корпусом.
 
-Здесь этот флаг и собирается. Данные имплантов берутся из компендиумов
-системы — так у них остаются верные цена, потеря человечности и слоты. Тем,
-чего в системе нет (киберчереп, покрытия корпусов), модуль заводит собственные
-предметы: без них комплект неполон.
+Разворачивать его системным флагом `cprInstallTree` не годится: тот кладёт всё
+внутрь корпуса, а киберруки, киберноги и киберглаза — самостоятельная
+фундаментальная кибернетика. Лист рисует разделы по `actor.system.installedItems`,
+поэтому вложенный комплект целиком уезжает в «Боргирование», хотя у руки и
+глаза есть собственные графы. Поэтому комплект едет в своём флаге, а
+раскладывает его модуль (`scripts/pkt-kit.js`): фундаменты ставит в персонажа,
+опции — в фундаменты, покрытия — в сам корпус.
+
+Данные имплантов берутся из компендиумов системы — так у них остаются верные
+цена и слоты. Потеря человечности обнуляется: документ задаёт её один раз за
+весь комплект, отдельной строкой у корпуса. Тем, чего в системе нет
+(киберчереп, покрытия корпусов), модуль заводит собственные предметы.
 
 Соответствие записей документа предметам системы описано в
 `docs/implant-map.json`.
@@ -27,6 +32,8 @@ import tempfile
 from pathlib import Path
 
 sys.stdout.reconfigure(encoding="utf-8")
+
+MODULE_ID = "cpr-addenda"
 
 MODULE_ROOT = Path(__file__).resolve().parent.parent
 DATA_ROOT = MODULE_ROOT.parent.parent
@@ -307,48 +314,60 @@ def instance_from_system(doc, doc_id, translations):
     return copy
 
 
+def strip_humanity(item):
+    """
+    Убирает потерю человечности у импланта из комплекта.
+
+    В документе за комплект платят один раз: у корпуса стоит своя формула
+    («70 ([3d6/2 round up] + 19d6)»), и она уже включает всё, что в него
+    входит. Оставь имплантам родные формулы — и система при установке корпуса
+    сложит их со своей, а потом бросит кубик за каждый из двух десятков.
+
+    Ноль в `static` важен и сам по себе: по нему `_calcMaxHumanity` снимает
+    ещё по два очка максимума за каждый имплант.
+    """
+    item["system"]["humanityLoss"] = {"roll": "0", "static": 0}
+    return item
+
+
 def free_slots(host):
-    used = sum(c["system"].get("size", 1) for c in host.get("_children", []))
+    used = sum(c["system"].get("size", 1) for c in host.get("_options", []))
     return host["system"]["installedItems"]["slots"] - used
 
 
-def arrange(tree, frame_type):
+def build_kit(tree, frame_type):
     """
-    Раскладывает комплект по фундаментам.
+    Раскладывает комплект на три части: фундаменты, их опции и то, что несёт
+    сам корпус.
 
     По правилам опциональная кибернетика ставится не в тело, а в фундамент
     своего типа: подсветка — в киберглаз, радио — в набор кибераудио, деки и
     выкидное оружие — в киберруку. Система придерживается того же: при ручной
     установке `installCyberware` ищет фундамент с совпадающим `system.type`.
-    Значит и комплект корпуса должен приезжать собранным так же, иначе игрок
-    получит два десятка имплантов, сваленных в корпус, — снять и переставить
-    их потом система уже не даст.
+    Значит и комплект корпуса должен собираться так же, иначе игрок не сможет
+    снять имплант и вернуть его обратно.
 
-    Возвращает верхний уровень: сами фундаменты и то, что несёт корпус.
-    Опции складываются в поле `_children` своего фундамента.
+    Покрытия и прочее борговое остаётся в корпусе: он сам фундаментальный
+    борг-носитель, и по типу подходит только он.
     """
     foundations = [i for i in tree if i["system"].get("isFoundational")]
     by_type = {}
     for item in foundations:
         by_type.setdefault(item["system"]["type"], []).append(item)
 
-    top = []
-    nested = 0
+    carried = []
     widened = []
 
     for item in tree:
         data = item["system"]
-        # Фундаменты и то, что того же типа, что сам корпус (покрытия,
-        # эндоскелеты), остаются на верхнем уровне: их носитель — корпус.
-        if data.get("isFoundational") or data["type"] == frame_type:
-            top.append(item)
+        if data.get("isFoundational"):
             continue
 
         hosts = by_type.get(data["type"])
-        if not hosts:
-            # Внутренняя, внешняя и фэшнверная кибернетика фундамента в
-            # комплекте не имеет — её тоже несёт корпус.
-            top.append(item)
+        if data["type"] == frame_type or not hosts:
+            # Борговое — в корпус; внутренняя, внешняя и фэшнверная
+            # кибернетика фундамента в комплекте не имеет, её тоже несёт он.
+            carried.append(item)
             continue
 
         size = data.get("size", 1)
@@ -360,24 +379,20 @@ def arrange(tree, frame_type):
             host["system"]["installedItems"]["slots"] += size - free_slots(host)
             widened.append(host["name"])
 
-        host.setdefault("_children", []).append(item)
-        nested += 1
+        host.setdefault("_options", []).append(item)
 
-    return top, nested, widened
+    kit = {"foundations": [], "carried": [strip_humanity(i) for i in carried]}
+    for item in foundations:
+        options = [strip_humanity(o) for o in item.pop("_options", [])]
+        installed = item["system"]["installedItems"]
+        installed["allowed"] = bool(installed["slots"])
+        installed["list"] = []
+        installed["usedSlots"] = 0
+        kit["foundations"].append(
+            {"item": strip_humanity(item), "options": options}
+        )
 
-
-def close_host(host):
-    """Переносит вложенные опции фундамента в его флаг и список."""
-    children = host.pop("_children", [])
-    if not children:
-        return host
-    host["flags"] = dict(host.get("flags") or {})
-    host["flags"]["cprInstallTree"] = children
-    installed = host["system"]["installedItems"]
-    installed["allowed"] = True
-    installed["list"] = [c["_id"] for c in children]
-    installed["usedSlots"] = sum(c["system"].get("size", 1) for c in children)
-    return host
+    return kit, widened
 
 
 def main():
@@ -461,33 +476,39 @@ def main():
                                 instance_from_system(source, doc_id, translations)
                             )
 
-        top, nested, widened = arrange(tree, frame["system"]["type"])
-        top = [close_host(item) for item in top]
+        kit, widened = build_kit(tree, frame["system"]["type"])
         widened_total.extend(widened)
 
-        frame["flags"]["cprInstallTree"] = top
-        frame["system"]["installedItems"]["list"] = [i["_id"] for i in top]
-        # Слотов должно хватать на весь верхний уровень: система считает
-        # занятые места по размеру каждого импланта, а фундаменты, у которых
-        # размер нулевой, мест не занимают вовсе.
-        used = sum(i["system"].get("size", 1) for i in top)
-        frame["system"]["installedItems"]["slots"] = max(used, 1)
-        # Разворачивая комплект, система переписывает только список: занятые
-        # места она пересчитывает лишь при снятии импланта. Поэтому счётчик
-        # проставляем сами, иначе корпус приедет с пустой шкалой слотов и в
-        # него можно будет доставить ещё столько же.
-        frame["system"]["installedItems"]["usedSlots"] = used
+        frame["flags"].pop("cprInstallTree", None)
+        frame["flags"].setdefault(MODULE_ID, {})["pktKit"] = kit
+
+        # Сам корпус несёт только покрытия: всё остальное модуль поставит в
+        # персонажа и в фундаменты. Слоты считаются по размеру, а не по числу
+        # предметов, поэтому и здесь складываем размеры.
+        carried_slots = sum(i["system"].get("size", 1) for i in kit["carried"])
+        frame["system"]["installedItems"].update(
+            {
+                "allowed": True,
+                "list": [],
+                "slots": max(carried_slots, 1),
+                "usedSlots": 0,
+            }
+        )
+
+        nested = sum(len(f["options"]) for f in kit["foundations"])
+        report.append(
+            (frame["name"], len(tree), len(kit["foundations"]), nested, len(kit["carried"]))
+        )
 
         frame_file.write_text(
             json.dumps(frame, ensure_ascii=False, indent=2), encoding="utf-8"
         )
-        report.append((frame["name"], len(tree), len(top), nested))
 
     print(f"\nКорпусов собрано: {len(report)}")
-    for name, count, top_count, nested in sorted(report):
+    for name, count, foundations, nested, carried in sorted(report):
         print(
-            f"  {name[:38]:40} имплантов {count:3}  "
-            f"в корпусе {top_count:3}  в фундаментах {nested:3}"
+            f"  {name[:36]:38} всего {count:3}  фундаментов {foundations:3}  "
+            f"опций {nested:3}  в корпусе {carried:3}"
         )
 
     print(f"\nСобственных имплантов заведено: {len(own_items)}")

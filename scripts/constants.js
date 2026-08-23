@@ -19,6 +19,10 @@ export const FLAGS = {
   deniedWeaponTypes: "deniedWeaponTypes",
   /** Строка-источник: книга и страница, откуда взята позиция. */
   source: "source",
+  /** Комплект имплантов корпуса ПКТ: {foundations: [...], carried: [...]}. */
+  pktKit: "pktKit",
+  /** Метка импланта из комплекта: {frame: <id корпуса>, slot: <номер места>}. */
+  pktPart: "pktPart",
 };
 
 export const SETTINGS = {
