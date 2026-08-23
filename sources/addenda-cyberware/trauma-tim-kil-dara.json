@@ -1,0 +1,75 @@
+{
+  "_id": "cprAddPkt0013000",
+  "name": "ТРАУМА ТИМ «КИЛЬ-ДАРА»",
+  "type": "cyberware",
+  "img": "modules/cpr-addenda/assets/icons/borgware.svg",
+  "folder": null,
+  "sort": 0,
+  "effects": [],
+  "flags": {},
+  "system": {
+    "ammoVariety": [],
+    "attackmod": 0,
+    "brand": "",
+    "canIgnoreArmor": false,
+    "concealable": {
+      "concealable": false,
+      "isConcealed": false
+    },
+    "core": false,
+    "critFailEffect": "jammed",
+    "damage": "1d6",
+    "description": {
+      "value": "<p>Секретное оружие Траума Тим в борьбе за здоровье и благополучие своих пациентов. «Киль- Дара» - это чудо медицины. Их надежные руки делают пользователей лучшими хирургами в мире. Ни один хирург не может быть таким же выносливым в своем стремлении обеспечить своим пациентам наилучшее лечение. Руководители Траума Тим лично доверяют свои жизни «Киль-Дара», и вы тоже должны это сделать.</p><p><strong>Входит в комплект (без потери человечности):</strong> Киберруки х2, Кибераудио, Киберноги х2, Киберчереп, Имплантированный Эндоскелет Сигма, Кироши «\u0001», Нейролинк.</p><p><strong>Входит в комплект (с потерей человечности):</strong> Усиленный Слух, Хирон, Усилитель Картинки, Слабое освещение/ИК/УФ, Медсканер, МикроОптика, Рация, Рэйвен Микрокиб МикроВальдо, ТАп (установлен Аэрогиппо) Рука- Мультитул, Техсканер.</p><p><strong>Установка:</strong> Госпиталь (Необходима Биосистема).</p><p><strong>Потеря человечности за комплект:</strong> 39 ([3d6/2 округлить вверх] + 10d6).</p>"
+    },
+    "dvTable": "",
+    "favorite": false,
+    "fireModes": {
+      "autoFire": 0,
+      "suppressiveFire": false
+    },
+    "humanityLoss": {
+      "roll": "ceil(3d6/2) + 10d6",
+      "static": 39
+    },
+    "ignoreArmorPercent": 0,
+    "ignoreBelowSP": 0,
+    "installLocation": "hospital",
+    "installedItems": {
+      "allowed": true,
+      "allowedTypes": [
+        "itemUpgrade",
+        "cyberware"
+      ],
+      "list": [],
+      "slots": 10,
+      "usedSlots": 0
+    },
+    "isElectronic": true,
+    "isFoundational": true,
+    "isRanged": false,
+    "isWeapon": false,
+    "magazine": {
+      "ammoData": null,
+      "max": 0,
+      "value": 0
+    },
+    "price": {
+      "market": 12200
+    },
+    "providesHardening": false,
+    "revealed": true,
+    "rof": 1,
+    "size": 0,
+    "source": {
+      "book": "DataPool",
+      "page": 0
+    },
+    "type": "borgware",
+    "unarmedAutomaticCalculation": true,
+    "usage": "installed",
+    "usesType": "magazine",
+    "weaponSkill": "",
+    "weaponType": ""
+  }
+}

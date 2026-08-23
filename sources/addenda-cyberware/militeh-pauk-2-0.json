@@ -1,0 +1,75 @@
+{
+  "_id": "cprAddPkt0006000",
+  "name": "МИЛИТЕХ «ПАУК 2.0»",
+  "type": "cyberware",
+  "img": "modules/cpr-addenda/assets/icons/borgware.svg",
+  "folder": null,
+  "sort": 0,
+  "effects": [],
+  "flags": {},
+  "system": {
+    "ammoVariety": [],
+    "attackmod": 0,
+    "brand": "",
+    "canIgnoreArmor": false,
+    "concealable": {
+      "concealable": false,
+      "isConcealed": false
+    },
+    "core": false,
+    "critFailEffect": "jammed",
+    "damage": "1d6",
+    "description": {
+      "value": "<p>Мы в Милитех думали, что создав оригинального «Паука», мы закрыли потребность в корпусе для проведения секретных операций. Но мы разработали Spyder 2.0 - идеального борга- шпиона! При правильном подборе пользователя Милитех «Паук 2.0» может обеспечить вас оперативной информацией, которая окупит корпус за одну операцию. Купите его раньше, чем это сделают ваши конкуренты!.</p><p><strong>Входит в комплект (без потери человечности):</strong> Киберруки х4 Кибераудио, Киберноги х2, Киберчереп, Кироши «\u0001», Имплантированный Эндоскелет Бета, Нейролинк.</p><p><strong>Входит в комплект (с потерей человечности):</strong> Усиленный Слух, Искусственное Плечо, Разъем для Щепок, ПКТ Покрытие «\u0001» х1, Рукохват х4, Цепкие Подошвы х2, Усилитель Картинки, Внутренний Агент, Слабое освещение/ИК/УФ, МикроВидео, Тактильное усиление, ТелеОптика.</p><p><strong>Установка:</strong> Госпиталь (Необходима Биосистема).</p><p><strong>Потеря человечности за комплект:</strong> 73 ([1d6/2 round up] + 22d6).</p>"
+    },
+    "dvTable": "",
+    "favorite": false,
+    "fireModes": {
+      "autoFire": 0,
+      "suppressiveFire": false
+    },
+    "humanityLoss": {
+      "roll": "ceil(1d6/2) + 22d6",
+      "static": 73
+    },
+    "ignoreArmorPercent": 0,
+    "ignoreBelowSP": 0,
+    "installLocation": "hospital",
+    "installedItems": {
+      "allowed": true,
+      "allowedTypes": [
+        "itemUpgrade",
+        "cyberware"
+      ],
+      "list": [],
+      "slots": 12,
+      "usedSlots": 0
+    },
+    "isElectronic": true,
+    "isFoundational": true,
+    "isRanged": false,
+    "isWeapon": false,
+    "magazine": {
+      "ammoData": null,
+      "max": 0,
+      "value": 0
+    },
+    "price": {
+      "market": 24900
+    },
+    "providesHardening": false,
+    "revealed": true,
+    "rof": 1,
+    "size": 0,
+    "source": {
+      "book": "DataPool",
+      "page": 0
+    },
+    "type": "borgware",
+    "unarmedAutomaticCalculation": true,
+    "usage": "installed",
+    "usesType": "magazine",
+    "weaponSkill": "",
+    "weaponType": ""
+  }
+}

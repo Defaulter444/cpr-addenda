@@ -1,0 +1,75 @@
+{
+  "_id": "cprAddPkt0007000",
+  "name": "МИЛИТЕХ «СТРАЖ ПОРЯДКА»",
+  "type": "cyberware",
+  "img": "modules/cpr-addenda/assets/icons/borgware.svg",
+  "folder": null,
+  "sort": 0,
+  "effects": [],
+  "flags": {},
+  "system": {
+    "ammoVariety": [],
+    "attackmod": 0,
+    "brand": "",
+    "canIgnoreArmor": false,
+    "concealable": {
+      "concealable": false,
+      "isConcealed": false
+    },
+    "core": false,
+    "critFailEffect": "jammed",
+    "damage": "1d6",
+    "description": {
+      "value": "<p>Компания Милитех понимает, что нужно чтобы предать преступников правосудию - нужен «Страж Порядка». Его создали чтобы вы могли выдержать самые горячие ситуации на работе, и доставить вас домой в целости и сохранности к вашей семье. «Страж Порядка» - это корпус ПКТ, который необходим вам для защиты и службы.</p><p><strong>Входит в комплект (без потери человечности):</strong> Киберруки х2, Кибераудио, Киберноги х2, Киберчереп, Кироши «\u0001», Имплантированный Эндоскелет Сигма, Нейролинк.</p><p><strong>Входит в комплект (с потерей человечности):</strong> Анти-Ослепление, Диктофон, Тяжелая Подкожная Броня, Скрытая Кобура, Низкое освещение/ИК/УФ, Выкидной Гранатомет, Выкидное Оружие Ближнего Боя (Дубинка-Шокер), Рация, Смартлинк, Тактический Прицел, Анализатор Голосового Стресса.</p><p><strong>Установка:</strong> Госпиталь (Необходима Биосистема).</p><p><strong>Потеря человечности за комплект:</strong> 53 ([3d6/2 round up] + 13d6).</p>"
+    },
+    "dvTable": "",
+    "favorite": false,
+    "fireModes": {
+      "autoFire": 0,
+      "suppressiveFire": false
+    },
+    "humanityLoss": {
+      "roll": "ceil(3d6/2) + 13d6",
+      "static": 53
+    },
+    "ignoreArmorPercent": 0,
+    "ignoreBelowSP": 0,
+    "installLocation": "hospital",
+    "installedItems": {
+      "allowed": true,
+      "allowedTypes": [
+        "itemUpgrade",
+        "cyberware"
+      ],
+      "list": [],
+      "slots": 11,
+      "usedSlots": 0
+    },
+    "isElectronic": true,
+    "isFoundational": true,
+    "isRanged": false,
+    "isWeapon": false,
+    "magazine": {
+      "ammoData": null,
+      "max": 0,
+      "value": 0
+    },
+    "price": {
+      "market": 16800
+    },
+    "providesHardening": false,
+    "revealed": true,
+    "rof": 1,
+    "size": 0,
+    "source": {
+      "book": "DataPool",
+      "page": 0
+    },
+    "type": "borgware",
+    "unarmedAutomaticCalculation": true,
+    "usage": "installed",
+    "usesType": "magazine",
+    "weaponSkill": "",
+    "weaponType": ""
+  }
+}

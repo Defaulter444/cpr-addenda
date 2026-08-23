@@ -1,0 +1,75 @@
+{
+  "_id": "cprAddPkt0004000",
+  "name": "МИЛИТЕХ «ДРАГУН» ИЗМ. ВОЕН. ПЛАТФОРМА",
+  "type": "cyberware",
+  "img": "modules/cpr-addenda/assets/icons/borgware.svg",
+  "folder": null,
+  "sort": 0,
+  "effects": [],
+  "flags": {},
+  "system": {
+    "ammoVariety": [],
+    "attackmod": 0,
+    "brand": "",
+    "canIgnoreArmor": false,
+    "concealable": {
+      "concealable": false,
+      "isConcealed": false
+    },
+    "core": false,
+    "critFailEffect": "jammed",
+    "damage": "1d6",
+    "description": {
+      "value": "<p>Полностью переработанная модель бесспорно эффективного военного корпуса ПКТ, выигравшего 4-ю корпоративную войну, обновленный «Драгун» готов выиграть и следующую! Эта новая модель отличается улучшенной ударопрочностью, самой низкой смертностью среди пилотов и полностью приспособлена к современным боевым действиям. А главное, вы сами выбираете, как настроить комплект вооружения вашего «Драгуна» (продается отдельно) для каждой миссии! Для получения справочной информации свяжитесь с представителем Милитех!.</p><p><strong>Входит в комплект (без потери человечности):</strong> Киберруки х2, Кибераудио, Киберглаза х2, Киберноги х2, Киберчереп, Имплантированный Эндоскелет Омега, Нейролинк.</p><p><strong>Входит в комплект (с потерей человечности):</strong> Анти-Ослепление х2, Хирон, Защитное Покрытие Драгун, ПКТ ЭМИ Защита х2, Встроенный Агент, Слабое Освещение/УК/ИФ х2, Обновленная Усиленная Киберконечность х4, Смартлинк х2, Тюнинг вер. Модернизация Внутренней Гидравлики.</p><p><strong>Установка:</strong> Госпиталь (Необходима Биосистема).</p><p><strong>Потеря человечности за комплект:</strong> 64 ([3d6/2 округлить вверх] + 18d6).</p>"
+    },
+    "dvTable": "",
+    "favorite": false,
+    "fireModes": {
+      "autoFire": 0,
+      "suppressiveFire": false
+    },
+    "humanityLoss": {
+      "roll": "ceil(3d6/2) + 18d6",
+      "static": 64
+    },
+    "ignoreArmorPercent": 0,
+    "ignoreBelowSP": 0,
+    "installLocation": "hospital",
+    "installedItems": {
+      "allowed": true,
+      "allowedTypes": [
+        "itemUpgrade",
+        "cyberware"
+      ],
+      "list": [],
+      "slots": 9,
+      "usedSlots": 0
+    },
+    "isElectronic": true,
+    "isFoundational": true,
+    "isRanged": false,
+    "isWeapon": false,
+    "magazine": {
+      "ammoData": null,
+      "max": 0,
+      "value": 0
+    },
+    "price": {
+      "market": 35000
+    },
+    "providesHardening": false,
+    "revealed": true,
+    "rof": 1,
+    "size": 0,
+    "source": {
+      "book": "DataPool",
+      "page": 0
+    },
+    "type": "borgware",
+    "unarmedAutomaticCalculation": true,
+    "usage": "installed",
+    "usesType": "magazine",
+    "weaponSkill": "",
+    "weaponType": ""
+  }
+}

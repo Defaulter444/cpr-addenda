@@ -1,0 +1,75 @@
+{
+  "_id": "cprAddPkt0012000",
+  "name": "РОКЛИН АУГМЕНТИКС «КЛАСС АЛЬФА»",
+  "type": "cyberware",
+  "img": "modules/cpr-addenda/assets/icons/borgware.svg",
+  "folder": null,
+  "sort": 0,
+  "effects": [],
+  "flags": {},
+  "system": {
+    "ammoVariety": [],
+    "attackmod": 0,
+    "brand": "",
+    "canIgnoreArmor": false,
+    "concealable": {
+      "concealable": false,
+      "isConcealed": false
+    },
+    "core": false,
+    "critFailEffect": "jammed",
+    "damage": "1d6",
+    "description": {
+      "value": "<p>Класс Альфа - это квинтэссенция корпуса ПКТ. Высокий стандарт, проверенный временем. Привлекательная и доступная модель начального уровня, «Класс Альфа» - это первое, что приходит на ум при слове «Борг». Выбирайте золотой стандарт! Выбирайте Альфа!.</p><p><strong>Входит в комплект (без потери человечности):</strong> Киберруки х2, Кибераудио, Киберглаза х2, Киберноги х2, Киберчереп, Имплантированный Эндоскелет Сигма, Нейролинк.</p><p><strong>Входит в комплект (с потерей человечности):</strong> Личный Порт, Подкожная Броня.</p><p><strong>Установка:</strong> Госпиталь (Необходима Биосистема).</p><p><strong>Потеря человечности за комплект:</strong> 21 (6d6).</p>"
+    },
+    "dvTable": "",
+    "favorite": false,
+    "fireModes": {
+      "autoFire": 0,
+      "suppressiveFire": false
+    },
+    "humanityLoss": {
+      "roll": "6d6",
+      "static": 21
+    },
+    "ignoreArmorPercent": 0,
+    "ignoreBelowSP": 0,
+    "installLocation": "hospital",
+    "installedItems": {
+      "allowed": true,
+      "allowedTypes": [
+        "itemUpgrade",
+        "cyberware"
+      ],
+      "list": [],
+      "slots": 3,
+      "usedSlots": 0
+    },
+    "isElectronic": true,
+    "isFoundational": true,
+    "isRanged": false,
+    "isWeapon": false,
+    "magazine": {
+      "ammoData": null,
+      "max": 0,
+      "value": 0
+    },
+    "price": {
+      "market": 9900
+    },
+    "providesHardening": false,
+    "revealed": true,
+    "rof": 1,
+    "size": 0,
+    "source": {
+      "book": "DataPool",
+      "page": 0
+    },
+    "type": "borgware",
+    "unarmedAutomaticCalculation": true,
+    "usage": "installed",
+    "usesType": "magazine",
+    "weaponSkill": "",
+    "weaponType": ""
+  }
+}

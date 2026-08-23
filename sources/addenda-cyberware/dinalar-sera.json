@@ -1,0 +1,75 @@
+{
+  "_id": "cprAddPkt0002000",
+  "name": "ДИНАЛАР «СЕРА»",
+  "type": "cyberware",
+  "img": "modules/cpr-addenda/assets/icons/borgware.svg",
+  "folder": null,
+  "sort": 0,
+  "effects": [],
+  "flags": {},
+  "system": {
+    "ammoVariety": [],
+    "attackmod": 0,
+    "brand": "",
+    "canIgnoreArmor": false,
+    "concealable": {
+      "concealable": false,
+      "isConcealed": false
+    },
+    "core": false,
+    "critFailEffect": "jammed",
+    "damage": "1d6",
+    "description": {
+      "value": "<p>Полностью огнеупорный инженерный шедевр Диналар. «Сера» была создан, чтобы победить величайшее орудие и врага человечества: Огонь! В современной модели «Серы» предпочтение отдается магнитному запуску взрывчатых средств пожаротушения на основе С02, а не водяным шлангам прошлых лет.</p><p><strong>Входит в комплект (без потери человечности):</strong> Киберруки х2, Кибераудио, Киберглаза х2, Киберноги х2, Киберчереп, Имплантированный Эндоскелет Сигма, Нейролинк.</p><p><strong>Входит в комплект (с потерей человечности):</strong> Усиленный Слух, Покрытие «\u0001» для ПКТ, Тяжелая Подкожная Броня, Слабое освещение/УФ/ИК, Радар/Сонар, Рация, ТАп (+1 Вместимость Магазина), Встроенный Гранатомет x2.</p><p><strong>Установка:</strong> Госпиталь (Необходима Биосистема).</p><p><strong>Потеря человечности за комплект:</strong> 53 ([1d6/2 округлить вверх] + 15d6).</p>"
+    },
+    "dvTable": "",
+    "favorite": false,
+    "fireModes": {
+      "autoFire": 0,
+      "suppressiveFire": false
+    },
+    "humanityLoss": {
+      "roll": "ceil(1d6/2) + 15d6",
+      "static": 53
+    },
+    "ignoreArmorPercent": 0,
+    "ignoreBelowSP": 0,
+    "installLocation": "hospital",
+    "installedItems": {
+      "allowed": true,
+      "allowedTypes": [
+        "itemUpgrade",
+        "cyberware"
+      ],
+      "list": [],
+      "slots": 8,
+      "usedSlots": 0
+    },
+    "isElectronic": true,
+    "isFoundational": true,
+    "isRanged": false,
+    "isWeapon": false,
+    "magazine": {
+      "ammoData": null,
+      "max": 0,
+      "value": 0
+    },
+    "price": {
+      "market": 17600
+    },
+    "providesHardening": false,
+    "revealed": true,
+    "rof": 1,
+    "size": 0,
+    "source": {
+      "book": "DataPool",
+      "page": 0
+    },
+    "type": "borgware",
+    "unarmedAutomaticCalculation": true,
+    "usage": "installed",
+    "usesType": "magazine",
+    "weaponSkill": "",
+    "weaponType": ""
+  }
+}

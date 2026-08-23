@@ -1,0 +1,75 @@
+{
+  "_id": "cprAddPkt0008000",
+  "name": "МУР ТЕХНОЛОДЖИС «ЯМА»",
+  "type": "cyberware",
+  "img": "modules/cpr-addenda/assets/icons/borgware.svg",
+  "folder": null,
+  "sort": 0,
+  "effects": [],
+  "flags": {},
+  "system": {
+    "ammoVariety": [],
+    "attackmod": 0,
+    "brand": "",
+    "canIgnoreArmor": false,
+    "concealable": {
+      "concealable": false,
+      "isConcealed": false
+    },
+    "core": false,
+    "critFailEffect": "jammed",
+    "damage": "1d6",
+    "description": {
+      "value": "<p>Платформа «Яма» от Мур Технолоджис разработана для выполнения самых опасных операций, которые только можно придумать. Цена этого корпуса весьма доступна, даже если учесть затраты, связанные с заменой пользователей, которые не могут справиться со смертельно опасной работой. Инвестируйте в хорошие вещи! Инвестируйте в «Яму», ведь это первоклассный борг для самых опасных операций. Выбирайте качество, выбирайте «Яму».</p><p><strong>Входит в комплект (без потери человечности):</strong> Киберруки х2, Кибераудио, Киберглаза х2, Киберноги х2, Киберчереп, Имплантированный Эндоскелет Бета, Нейролинк.</p><p><strong>Входит в комплект (с потерей человечности):</strong> Химический Анализатор, Разъем для Щепок, Хирон, Тяжелая Подкожная Броня, Внутренний Агент, Детектор Радиации.</p><p><strong>Установка:</strong> Госпиталь (Необходима Биосистема).</p><p><strong>Потеря человечности за комплект:</strong> 32 ([1d6/2 округлить вверх] + 9d6).</p>"
+    },
+    "dvTable": "",
+    "favorite": false,
+    "fireModes": {
+      "autoFire": 0,
+      "suppressiveFire": false
+    },
+    "humanityLoss": {
+      "roll": "ceil(1d6/2) + 9d6",
+      "static": 32
+    },
+    "ignoreArmorPercent": 0,
+    "ignoreBelowSP": 0,
+    "installLocation": "hospital",
+    "installedItems": {
+      "allowed": true,
+      "allowedTypes": [
+        "itemUpgrade",
+        "cyberware"
+      ],
+      "list": [],
+      "slots": 6,
+      "usedSlots": 0
+    },
+    "isElectronic": true,
+    "isFoundational": true,
+    "isRanged": false,
+    "isWeapon": false,
+    "magazine": {
+      "ammoData": null,
+      "max": 0,
+      "value": 0
+    },
+    "price": {
+      "market": 19600
+    },
+    "providesHardening": false,
+    "revealed": true,
+    "rof": 1,
+    "size": 0,
+    "source": {
+      "book": "DataPool",
+      "page": 0
+    },
+    "type": "borgware",
+    "unarmedAutomaticCalculation": true,
+    "usage": "installed",
+    "usesType": "magazine",
+    "weaponSkill": "",
+    "weaponType": ""
+  }
+}
