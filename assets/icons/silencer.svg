@@ -1,0 +1,26 @@
+<svg width="512" height="512" viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <g transform="rotate(-20 256 256)">
+    <!-- Дульная часть ствола -->
+    <rect x="64" y="228" width="96" height="56" rx="6" fill="#1b1f21"/>
+    <rect x="150" y="238" width="26" height="36" rx="4" fill="#1b1f21"/>
+    <!-- Корпус глушителя -->
+    <rect x="176" y="212" width="248" height="88" rx="44" fill="#1b1f21"/>
+    <!-- Рифление -->
+    <g fill="#e64539">
+      <rect x="212" y="228" width="10" height="56" rx="5"/>
+      <rect x="242" y="228" width="10" height="56" rx="5"/>
+      <rect x="272" y="228" width="10" height="56" rx="5"/>
+      <rect x="302" y="228" width="10" height="56" rx="5"/>
+      <rect x="332" y="228" width="10" height="56" rx="5"/>
+    </g>
+    <!-- Дульный срез -->
+    <circle cx="394" cy="256" r="20" fill="#e64539"/>
+    <circle cx="394" cy="256" r="9" fill="#1b1f21"/>
+  </g>
+  <!-- Перечёркнутая звуковая волна -->
+  <g fill="none" stroke="#1b1f21" stroke-width="16" stroke-linecap="round">
+    <path d="M 372 372 a 44 44 0 0 1 0 62"/>
+    <path d="M 404 348 a 88 88 0 0 1 0 110"/>
+  </g>
+  <line x1="352" y1="464" x2="448" y2="336" stroke="#e64539" stroke-width="22" stroke-linecap="round"/>
+</svg>

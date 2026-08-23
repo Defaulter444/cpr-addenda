@@ -1,0 +1,163 @@
+{
+  "_id": "cprAddWm00100000",
+  "name": "Узел автоматического управления огнём",
+  "type": "itemUpgrade",
+  "img": "modules/cpr-addenda/assets/icons/upgrade.svg",
+  "folder": null,
+  "sort": 0,
+  "effects": [],
+  "flags": {
+    "cpr-addenda": {
+      "allowedWeaponTypes": [
+        "shotgun"
+      ],
+      "deniedWeaponTypes": [],
+      "carrierChanges": {
+        "system.fireModes.autoFire": {
+          "op": "set",
+          "value": 3
+        }
+      }
+    }
+  },
+  "system": {
+    "ammoVariety": [],
+    "attackmod": 0,
+    "brand": "",
+    "canIgnoreArmor": false,
+    "concealable": {
+      "concealable": false,
+      "isConcealed": false
+    },
+    "critFailEffect": "jammed",
+    "damage": "1d6",
+    "description": {
+      "value": "<p>Сделать дробовик способным к автоматическому огню значительно сложнее, чем пистолет. Требуется модификация узла управления огнём, а это работа для опытного оружейника. Это приспособление не требует слота приспособлений и может устанавливаться на экзотическоеоружие. Установка требует проверки навыка Оружейная техника СЛ 17. Можно установить только один узел автоматического управления огнём. При заряженных жаканах оружие получает автоогонь (Автоматический пистолет 3), либо автоогонь (Автоматический пистолет 4), если оружие отличного качества или уже имело автоогонь (новый режим заменяет старый). В режиме автоогня оружие расходует 4 жакана за выстрел. При заряженной дроби, при использовании альтернативного режима стрельбы дробовика, пользователь может потратить 4 дроби вместо 1 и совершить атаку с использованием навыка автоогонь вместо длинноствольного оружия. Любой, кто пытается уклониться от этой атаки, получает штраф −3 к проверке навыка. Урон рассчитывается как обычно для дроби. Источник: Соло Удачи 2045</p>"
+    },
+    "dvTable": "",
+    "favorite": false,
+    "fireModes": {
+      "autoFire": 0,
+      "suppressiveFire": false
+    },
+    "handsReq": 0,
+    "ignoreArmorPercent": 0,
+    "installLocation": "mall",
+    "installedItems": {
+      "allowed": false,
+      "allowedTypes": [
+        "itemUpgrade"
+      ],
+      "list": [],
+      "slots": 0,
+      "usedSlots": 0
+    },
+    "isElectronic": false,
+    "isRanged": false,
+    "magazine": {
+      "ammoData": null,
+      "max": 0,
+      "value": 0
+    },
+    "modifiers": {
+      "Wardrobe & Style": {
+        "isSituational": false,
+        "onByDefault": false,
+        "type": "modifier",
+        "value": null
+      },
+      "attackmod": {
+        "isSituational": false,
+        "onByDefault": false,
+        "type": "modifier",
+        "value": null
+      },
+      "bodySp": {
+        "isSituational": false,
+        "onByDefault": false,
+        "type": "modifier",
+        "value": null
+      },
+      "cool": {
+        "isSituational": false,
+        "onByDefault": false,
+        "type": "modifier",
+        "value": null
+      },
+      "damage": {
+        "isSituational": false,
+        "onByDefault": false,
+        "type": "modifier",
+        "value": null
+      },
+      "headSp": {
+        "isSituational": false,
+        "onByDefault": false,
+        "type": "modifier",
+        "value": null
+      },
+      "magazine": {
+        "isSituational": false,
+        "onByDefault": false,
+        "type": "modifier",
+        "value": null
+      },
+      "rof": {
+        "isSituational": false,
+        "onByDefault": false,
+        "type": "modifier",
+        "value": null
+      },
+      "sdp": {
+        "isSituational": false,
+        "onByDefault": false,
+        "type": "modifier",
+        "value": null
+      },
+      "seats": {
+        "isSituational": false,
+        "onByDefault": false,
+        "type": "modifier",
+        "value": null
+      },
+      "shieldHp": {
+        "isSituational": false,
+        "onByDefault": false,
+        "type": "modifier",
+        "value": null
+      },
+      "slots": {
+        "isSituational": false,
+        "onByDefault": false,
+        "type": "modifier",
+        "value": null
+      },
+      "speedCombat": {
+        "isSituational": false,
+        "onByDefault": false,
+        "type": "modifier",
+        "value": null
+      },
+      "secondaryWeapon": {
+        "configured": false
+      }
+    },
+    "price": {
+      "market": 100
+    },
+    "providesHardening": false,
+    "revealed": true,
+    "rof": 1,
+    "size": 0,
+    "source": {
+      "book": "DataPool",
+      "page": 11
+    },
+    "type": "weapon",
+    "unarmedAutomaticCalculation": true,
+    "usage": "toggled",
+    "usesType": "magazine",
+    "weaponSkill": "",
+    "weaponType": ""
+  }
+}

@@ -1,0 +1,150 @@
+{
+  "_id": "cprAddTe00580000",
+  "name": "Маяк-вспышка",
+  "type": "itemUpgrade",
+  "img": "modules/cpr-addenda/assets/icons/upgrade.svg",
+  "folder": null,
+  "sort": 0,
+  "effects": [],
+  "flags": {},
+  "system": {
+    "ammoVariety": [],
+    "attackmod": 0,
+    "brand": "",
+    "canIgnoreArmor": false,
+    "concealable": {
+      "concealable": false,
+      "isConcealed": false
+    },
+    "critFailEffect": "jammed",
+    "damage": "1d6",
+    "description": {
+      "value": "<p>СЛ Модификации: 21</p><p>Стоимость №1: Стоимость улучшаемого предмета</p><p>Стоимость №2: 500eb</p><p>Термометр: Ситуативный апгрейд оружия, который улучшает универсальность оружия в бою, например, улучшает скрытность оружия, изменяет таблицу дальности или имитирует эффект подствольного оружия. Рефери решил, что это эквивалентно добавлению подствольного устройства, даже если сам предмет таковым не является. Хочешь сделать свой транспорт больше, мощнее и страшнее? Тогда тебе точно нужно место для установки аккумулятора высокой мощности, чтобы запустить маяк-вспышку. Ты полюбишь это устройство. Мы установим его на крышу твоей машины, и ты сможешь прицелиться и вспышкой ослепить кого-то.</p><p>Изобретённый техапгрейд. Должен быть установлен в тюнинг тяжёлого шасси транспортного средства. В качестве действия пользователь может заставить цель с функциональными мясными глазами или кибероптикой, находящуюся в пределах 50 м, пройти проверку на сопротивление пыткам/ наркотикам СЛ15. Для этого действия не требуется проверка. Если цель не справится, она получит критическую травму повреждение глаза на 1 минуту. Существующая защита, такая как опция киберглаз анти-ослепление, защищает от этого эффекта</p>"
+    },
+    "dvTable": "",
+    "favorite": false,
+    "fireModes": {
+      "autoFire": 0,
+      "suppressiveFire": false
+    },
+    "handsReq": 0,
+    "ignoreArmorPercent": 0,
+    "installLocation": "mall",
+    "installedItems": {
+      "allowed": false,
+      "allowedTypes": [
+        "itemUpgrade"
+      ],
+      "list": [],
+      "slots": 0,
+      "usedSlots": 0
+    },
+    "isElectronic": false,
+    "isRanged": false,
+    "magazine": {
+      "ammoData": null,
+      "max": 0,
+      "value": 0
+    },
+    "modifiers": {
+      "Wardrobe & Style": {
+        "isSituational": false,
+        "onByDefault": false,
+        "type": "modifier",
+        "value": null
+      },
+      "attackmod": {
+        "isSituational": false,
+        "onByDefault": false,
+        "type": "modifier",
+        "value": null
+      },
+      "bodySp": {
+        "isSituational": false,
+        "onByDefault": false,
+        "type": "modifier",
+        "value": null
+      },
+      "cool": {
+        "isSituational": false,
+        "onByDefault": false,
+        "type": "modifier",
+        "value": null
+      },
+      "damage": {
+        "isSituational": false,
+        "onByDefault": false,
+        "type": "modifier",
+        "value": null
+      },
+      "headSp": {
+        "isSituational": false,
+        "onByDefault": false,
+        "type": "modifier",
+        "value": null
+      },
+      "magazine": {
+        "isSituational": false,
+        "onByDefault": false,
+        "type": "modifier",
+        "value": null
+      },
+      "rof": {
+        "isSituational": false,
+        "onByDefault": false,
+        "type": "modifier",
+        "value": null
+      },
+      "sdp": {
+        "isSituational": false,
+        "onByDefault": false,
+        "type": "modifier",
+        "value": null
+      },
+      "seats": {
+        "isSituational": false,
+        "onByDefault": false,
+        "type": "modifier",
+        "value": null
+      },
+      "shieldHp": {
+        "isSituational": false,
+        "onByDefault": false,
+        "type": "modifier",
+        "value": null
+      },
+      "slots": {
+        "isSituational": false,
+        "onByDefault": false,
+        "type": "modifier",
+        "value": null
+      },
+      "speedCombat": {
+        "isSituational": false,
+        "onByDefault": false,
+        "type": "modifier",
+        "value": null
+      },
+      "secondaryWeapon": {
+        "configured": false
+      }
+    },
+    "price": {
+      "market": 500
+    },
+    "providesHardening": false,
+    "revealed": true,
+    "rof": 1,
+    "size": 1,
+    "source": {
+      "book": "DataPool",
+      "page": 0
+    },
+    "type": "vehicle",
+    "unarmedAutomaticCalculation": true,
+    "usage": "toggled",
+    "usesType": "magazine",
+    "weaponSkill": "",
+    "weaponType": ""
+  }
+}

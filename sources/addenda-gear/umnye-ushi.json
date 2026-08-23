@@ -1,0 +1,43 @@
+{
+  "_id": "cprAddGe00360000",
+  "name": "Умные уши",
+  "type": "gear",
+  "img": "modules/cpr-addenda/assets/icons/gear.svg",
+  "folder": null,
+  "sort": 0,
+  "effects": [],
+  "flags": {},
+  "system": {
+    "amount": 1,
+    "brand": "",
+    "concealable": {
+      "concealable": false,
+      "isConcealed": false
+    },
+    "description": {
+      "value": "<p>Пусть музыка течёт сквозь тебя — с Умными Ушами! Музыка создана, чтобы быть свободной. Как и ты. Твои Smart Ears легко настраиваются под твой вкус. Созданные сообществом аудиофилов, они могут быть напечатаны в сотнях форм и размеров, чтобы идеально подойти под твои нужды и стиль. Умные Уши поставляются со встроенным радиосканером/ музыкальным плеером (несъёмным) и двумя слотами для опций кибераудио.Когда уши надеты, ты получаешь доступ ко всем встроенным опциям. Установка или извлечение опции кибераудио занимает один час. Одновременно можно носить только одну пару Умных Ушей.</p>"
+    },
+    "equipped": "owned",
+    "favorite": false,
+    "installedItems": {
+      "allowed": false,
+      "allowedTypes": [
+        "itemUpgrade"
+      ],
+      "list": [],
+      "slots": 0,
+      "usedSlots": 0
+    },
+    "isElectronic": false,
+    "price": {
+      "market": 1000
+    },
+    "providesHardening": false,
+    "revealed": true,
+    "source": {
+      "book": "DataPool",
+      "page": 40
+    },
+    "usage": "toggled"
+  }
+}

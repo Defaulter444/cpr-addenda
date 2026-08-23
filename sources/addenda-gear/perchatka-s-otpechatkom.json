@@ -1,0 +1,43 @@
+{
+  "_id": "cprAddGe00310000",
+  "name": "Перчатка с Отпечатком",
+  "type": "gear",
+  "img": "modules/cpr-addenda/assets/icons/gear.svg",
+  "folder": null,
+  "sort": 0,
+  "effects": [],
+  "flags": {},
+  "system": {
+    "amount": 1,
+    "brand": "",
+    "concealable": {
+      "concealable": false,
+      "isConcealed": false
+    },
+    "description": {
+      "value": "<p>Если вы проникнете в достаточное количество защищённых мест, рано или поздно наткнётесь на сканер отпечатков рук. Эта технология устарела и ненадёжна по сравнению с современными мерами безопасности, но при этом дешёвая… а Корпораты, конечно, любят экономить! Перчатка из материала RealskinnTM с отпечатком руки (включая отпечатки пальцев). Перчатка обманет сканер безопасности, но не оставит настоящих отпечатков на поверхностях. Каждая перчатка с отпечатком руки должна быть заказана индивидуально, а отпечаток для копирования должен быть предоставлен специалисту, который её изготовит. Воспользуйтесь нашим приложением для Агента, чтобы отсканировать отпечаток!</p>"
+    },
+    "equipped": "owned",
+    "favorite": false,
+    "installedItems": {
+      "allowed": false,
+      "allowedTypes": [
+        "itemUpgrade"
+      ],
+      "list": [],
+      "slots": 0,
+      "usedSlots": 0
+    },
+    "isElectronic": false,
+    "price": {
+      "market": 500
+    },
+    "providesHardening": false,
+    "revealed": true,
+    "source": {
+      "book": "DataPool",
+      "page": 31
+    },
+    "usage": "toggled"
+  }
+}

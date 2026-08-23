@@ -1,0 +1,84 @@
+{
+  "_id": "cprAddDv02400000",
+  "name": "Штурмовая винтовка (Autofire)",
+  "description": "<p>Расширенная таблица СЛ по дистанции (Data Pool).</p>",
+  "displayRoll": false,
+  "formula": "",
+  "img": "systems/cyberpunk-red-core/icons/compendium/default/Default_DV_Table.svg",
+  "replacement": false,
+  "results": [
+    {
+      "_id": "cprAddDr02400000",
+      "documentId": null,
+      "drawn": false,
+      "img": "systems/cyberpunk-red-core/icons/compendium/default/Default_DV_Table.svg",
+      "range": [
+        0,
+        6
+      ],
+      "text": "22",
+      "type": "text",
+      "weight": 1,
+      "flags": {}
+    },
+    {
+      "_id": "cprAddDr02400100",
+      "documentId": null,
+      "drawn": false,
+      "img": "systems/cyberpunk-red-core/icons/compendium/default/Default_DV_Table.svg",
+      "range": [
+        7,
+        12
+      ],
+      "text": "20",
+      "type": "text",
+      "weight": 1,
+      "flags": {}
+    },
+    {
+      "_id": "cprAddDr02400200",
+      "documentId": null,
+      "drawn": false,
+      "img": "systems/cyberpunk-red-core/icons/compendium/default/Default_DV_Table.svg",
+      "range": [
+        13,
+        25
+      ],
+      "text": "17",
+      "type": "text",
+      "weight": 1,
+      "flags": {}
+    },
+    {
+      "_id": "cprAddDr02400300",
+      "documentId": null,
+      "drawn": false,
+      "img": "systems/cyberpunk-red-core/icons/compendium/default/Default_DV_Table.svg",
+      "range": [
+        26,
+        50
+      ],
+      "text": "20",
+      "type": "text",
+      "weight": 1,
+      "flags": {}
+    },
+    {
+      "_id": "cprAddDr02400400",
+      "documentId": null,
+      "drawn": false,
+      "img": "systems/cyberpunk-red-core/icons/compendium/default/Default_DV_Table.svg",
+      "range": [
+        51,
+        100
+      ],
+      "text": "25",
+      "type": "text",
+      "weight": 1,
+      "flags": {}
+    }
+  ],
+  "folder": null,
+  "sort": 0,
+  "flags": {}
+}

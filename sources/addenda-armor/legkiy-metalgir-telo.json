@@ -1,0 +1,58 @@
+{
+  "_id": "cprAddAr00130000",
+  "name": "Лёгкий Металгир (тело)",
+  "type": "armor",
+  "img": "modules/cpr-addenda/assets/icons/armor.svg",
+  "folder": null,
+  "sort": 0,
+  "effects": [],
+  "flags": {},
+  "system": {
+    "bodyLocation": {
+      "ablation": 0,
+      "sp": 16
+    },
+    "brand": "",
+    "concealable": {
+      "concealable": false,
+      "isConcealed": false
+    },
+    "description": {
+      "value": "<p>Лучшее решение для полной боевой защиты вышло на новый уровень. Современные поля боя требуют большей скорости — и мы ответили. Наша новая облегчённая модель сохраняет ту же панцирную защиту, к которой ты привык, но теперь в куда более подвижном формате. Сегментированность — это новая модульность.</p>"
+    },
+    "equipped": "owned",
+    "favorite": false,
+    "headLocation": {
+      "ablation": 0,
+      "sp": 0
+    },
+    "installedItems": {
+      "allowed": true,
+      "allowedTypes": [
+        "itemUpgrade"
+      ],
+      "list": [],
+      "slots": 3,
+      "usedSlots": 0
+    },
+    "isBodyLocation": true,
+    "isElectronic": false,
+    "isHeadLocation": false,
+    "isShield": false,
+    "penalty": -3,
+    "price": {
+      "market": 1000
+    },
+    "providesHardening": false,
+    "revealed": true,
+    "shieldHitPoints": {
+      "max": 0,
+      "value": 0
+    },
+    "source": {
+      "book": "DataPool",
+      "page": 2
+    },
+    "usage": "equipped"
+  }
+}

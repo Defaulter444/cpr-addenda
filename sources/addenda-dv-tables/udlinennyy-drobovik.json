@@ -1,0 +1,126 @@
+{
+  "_id": "cprAddDv00800000",
+  "name": "Удлинённый дробовик",
+  "description": "<p>Расширенная таблица СЛ по дистанции (Data Pool).</p>",
+  "displayRoll": false,
+  "formula": "",
+  "img": "systems/cyberpunk-red-core/icons/compendium/default/Default_DV_Table.svg",
+  "replacement": false,
+  "results": [
+    {
+      "_id": "cprAddDr00800000",
+      "documentId": null,
+      "drawn": false,
+      "img": "systems/cyberpunk-red-core/icons/compendium/default/Default_DV_Table.svg",
+      "range": [
+        0,
+        6
+      ],
+      "text": "14",
+      "type": "text",
+      "weight": 1,
+      "flags": {}
+    },
+    {
+      "_id": "cprAddDr00800100",
+      "documentId": null,
+      "drawn": false,
+      "img": "systems/cyberpunk-red-core/icons/compendium/default/Default_DV_Table.svg",
+      "range": [
+        7,
+        12
+      ],
+      "text": "16",
+      "type": "text",
+      "weight": 1,
+      "flags": {}
+    },
+    {
+      "_id": "cprAddDr00800200",
+      "documentId": null,
+      "drawn": false,
+      "img": "systems/cyberpunk-red-core/icons/compendium/default/Default_DV_Table.svg",
+      "range": [
+        13,
+        25
+      ],
+      "text": "15",
+      "type": "text",
+      "weight": 1,
+      "flags": {}
+    },
+    {
+      "_id": "cprAddDr00800300",
+      "documentId": null,
+      "drawn": false,
+      "img": "systems/cyberpunk-red-core/icons/compendium/default/Default_DV_Table.svg",
+      "range": [
+        26,
+        50
+      ],
+      "text": "18",
+      "type": "text",
+      "weight": 1,
+      "flags": {}
+    },
+    {
+      "_id": "cprAddDr00800400",
+      "documentId": null,
+      "drawn": false,
+      "img": "systems/cyberpunk-red-core/icons/compendium/default/Default_DV_Table.svg",
+      "range": [
+        51,
+        100
+      ],
+      "text": "25",
+      "type": "text",
+      "weight": 1,
+      "flags": {}
+    },
+    {
+      "_id": "cprAddDr00800500",
+      "documentId": null,
+      "drawn": false,
+      "img": "systems/cyberpunk-red-core/icons/compendium/default/Default_DV_Table.svg",
+      "range": [
+        101,
+        200
+      ],
+      "text": "28",
+      "type": "text",
+      "weight": 1,
+      "flags": {}
+    },
+    {
+      "_id": "cprAddDr00800600",
+      "documentId": null,
+      "drawn": false,
+      "img": "systems/cyberpunk-red-core/icons/compendium/default/Default_DV_Table.svg",
+      "range": [
+        201,
+        400
+      ],
+      "text": "N/A",
+      "type": "text",
+      "weight": 1,
+      "flags": {}
+    },
+    {
+      "_id": "cprAddDr00800700",
+      "documentId": null,
+      "drawn": false,
+      "img": "systems/cyberpunk-red-core/icons/compendium/default/Default_DV_Table.svg",
+      "range": [
+        401,
+        800
+      ],
+      "text": "N/A",
+      "type": "text",
+      "weight": 1,
+      "flags": {}
+    }
+  ],
+  "folder": null,
+  "sort": 0,
+  "flags": {}
+}

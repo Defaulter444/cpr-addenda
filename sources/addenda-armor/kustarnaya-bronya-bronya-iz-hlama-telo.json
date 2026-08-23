@@ -1,0 +1,58 @@
+{
+  "_id": "cprAddAr00190000",
+  "name": "Кустарная броня, броня из хлама (тело)",
+  "type": "armor",
+  "img": "modules/cpr-addenda/assets/icons/armor.svg",
+  "folder": null,
+  "sort": 0,
+  "effects": [],
+  "flags": {},
+  "system": {
+    "bodyLocation": {
+      "ablation": 0,
+      "sp": 11
+    },
+    "brand": "",
+    "concealable": {
+      "concealable": false,
+      "isConcealed": false
+    },
+    "description": {
+      "value": "<p>«Джуди изготовила его. Он хорошо справляется со своей задачей и даже имеет застежки и другие удобные штуки. Хорошая броня может стоить дорого. Но этот вариант решает проблему. Стоило приложить немного усилий и изобретательности. Так держать, Джуди!» Кустарная броня — это бронежилет с ОС11. После истощения ОС его невозможно восстановить. При 0 ОС он падает с владельца.</p>"
+    },
+    "equipped": "owned",
+    "favorite": false,
+    "headLocation": {
+      "ablation": 0,
+      "sp": 0
+    },
+    "installedItems": {
+      "allowed": true,
+      "allowedTypes": [
+        "itemUpgrade"
+      ],
+      "list": [],
+      "slots": 3,
+      "usedSlots": 0
+    },
+    "isBodyLocation": true,
+    "isElectronic": false,
+    "isHeadLocation": false,
+    "isShield": false,
+    "penalty": 0,
+    "price": {
+      "market": 50
+    },
+    "providesHardening": false,
+    "revealed": true,
+    "shieldHitPoints": {
+      "max": 0,
+      "value": 0
+    },
+    "source": {
+      "book": "DataPool",
+      "page": 7
+    },
+    "usage": "equipped"
+  }
+}

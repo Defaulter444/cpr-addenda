@@ -1,0 +1,177 @@
+{
+  "_id": "cprAddWm00040000",
+  "name": "Модуль совместимости боеприпасов",
+  "type": "itemUpgrade",
+  "img": "modules/cpr-addenda/assets/icons/upgrade.svg",
+  "folder": null,
+  "sort": 0,
+  "effects": [],
+  "flags": {
+    "cpr-addenda": {
+      "allowedWeaponTypes": [
+        "medPistol",
+        "heavyPistol",
+        "vHeavyPistol",
+        "smg",
+        "heavySmg",
+        "assaultRifle",
+        "sniperRifle",
+        "shotgun"
+      ],
+      "deniedWeaponTypes": [],
+      "carrierChanges": {
+        "system.ammoVariety": {
+          "op": "add",
+          "value": [
+            "medPistol",
+            "heavyPistol",
+            "vHeavyPistol",
+            "rifle",
+            "shotgunShell",
+            "shotgunSlug"
+          ]
+        }
+      }
+    }
+  },
+  "system": {
+    "ammoVariety": [],
+    "attackmod": 0,
+    "brand": "",
+    "canIgnoreArmor": false,
+    "concealable": {
+      "concealable": false,
+      "isConcealed": false
+    },
+    "critFailEffect": "jammed",
+    "damage": "1d6",
+    "description": {
+      "value": "<p>Запихивать что-то туда, где этому не место не всегда хорошая идея. И, эй, возможно, была причина, по которой тебе не стоило заряжать зажигательные патроны в пластиковую винтовку. Именно для того, чтобы такие идеи не взрывались у тебя в руках, и нужны опыт и мудрость оружейника. Сделай всё правильно и результат может оказаться лучше, чем ты ожидал. Это приспособление не требует слота приспособлений и может устанавливаться на экзотическое оружие. Установка требует проверки навыка Оружейная Техника СЛ17. Можно установить только один такой модуль. После установки его нельзя снять. Оружие получает возможность стрелять всеми небазовыми боеприпасами любой категории (тяжёлый пистолет, штурмовая винтовка и т. п.), которыми оно могло стрелять до установки. Источник: Соло Удачи 2045</p>"
+    },
+    "dvTable": "",
+    "favorite": false,
+    "fireModes": {
+      "autoFire": 0,
+      "suppressiveFire": false
+    },
+    "handsReq": 0,
+    "ignoreArmorPercent": 0,
+    "installLocation": "mall",
+    "installedItems": {
+      "allowed": false,
+      "allowedTypes": [
+        "itemUpgrade"
+      ],
+      "list": [],
+      "slots": 0,
+      "usedSlots": 0
+    },
+    "isElectronic": false,
+    "isRanged": false,
+    "magazine": {
+      "ammoData": null,
+      "max": 0,
+      "value": 0
+    },
+    "modifiers": {
+      "Wardrobe & Style": {
+        "isSituational": false,
+        "onByDefault": false,
+        "type": "modifier",
+        "value": null
+      },
+      "attackmod": {
+        "isSituational": false,
+        "onByDefault": false,
+        "type": "modifier",
+        "value": null
+      },
+      "bodySp": {
+        "isSituational": false,
+        "onByDefault": false,
+        "type": "modifier",
+        "value": null
+      },
+      "cool": {
+        "isSituational": false,
+        "onByDefault": false,
+        "type": "modifier",
+        "value": null
+      },
+      "damage": {
+        "isSituational": false,
+        "onByDefault": false,
+        "type": "modifier",
+        "value": null
+      },
+      "headSp": {
+        "isSituational": false,
+        "onByDefault": false,
+        "type": "modifier",
+        "value": null
+      },
+      "magazine": {
+        "isSituational": false,
+        "onByDefault": false,
+        "type": "modifier",
+        "value": null
+      },
+      "rof": {
+        "isSituational": false,
+        "onByDefault": false,
+        "type": "modifier",
+        "value": null
+      },
+      "sdp": {
+        "isSituational": false,
+        "onByDefault": false,
+        "type": "modifier",
+        "value": null
+      },
+      "seats": {
+        "isSituational": false,
+        "onByDefault": false,
+        "type": "modifier",
+        "value": null
+      },
+      "shieldHp": {
+        "isSituational": false,
+        "onByDefault": false,
+        "type": "modifier",
+        "value": null
+      },
+      "slots": {
+        "isSituational": false,
+        "onByDefault": false,
+        "type": "modifier",
+        "value": null
+      },
+      "speedCombat": {
+        "isSituational": false,
+        "onByDefault": false,
+        "type": "modifier",
+        "value": null
+      },
+      "secondaryWeapon": {
+        "configured": false
+      }
+    },
+    "price": {
+      "market": 100
+    },
+    "providesHardening": false,
+    "revealed": true,
+    "rof": 1,
+    "size": 0,
+    "source": {
+      "book": "DataPool",
+      "page": 6
+    },
+    "type": "weapon",
+    "unarmedAutomaticCalculation": true,
+    "usage": "toggled",
+    "usesType": "magazine",
+    "weaponSkill": "",
+    "weaponType": ""
+  }
+}

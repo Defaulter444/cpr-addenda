@@ -1,0 +1,43 @@
+{
+  "_id": "cprAddGe00200000",
+  "name": "Внешний экзоскелет Ω (ОМЕГА)",
+  "type": "gear",
+  "img": "modules/cpr-addenda/assets/icons/gear.svg",
+  "folder": null,
+  "sort": 0,
+  "effects": [],
+  "flags": {},
+  "system": {
+    "amount": 1,
+    "brand": "",
+    "concealable": {
+      "concealable": false,
+      "isConcealed": false
+    },
+    "description": {
+      "value": "<p>Усовершенствованный экзоскелет с питанием, дающий пользователю ультимативную силу. • Пользователь увеличивает свой ТЕЛ до 16, пока подключен к раме. Не может увеличить ТЕЛ пользователя до 17 или выше. Не увеличивает ПЗ пользователя и не изменяет его спасбросок от смерти. • Для подключения требуется 3 Личных Порта.</p>"
+    },
+    "equipped": "owned",
+    "favorite": false,
+    "installedItems": {
+      "allowed": false,
+      "allowedTypes": [
+        "itemUpgrade"
+      ],
+      "list": [],
+      "slots": 0,
+      "usedSlots": 0
+    },
+    "isElectronic": false,
+    "price": {
+      "market": 10000
+    },
+    "providesHardening": false,
+    "revealed": true,
+    "source": {
+      "book": "DataPool",
+      "page": 7
+    },
+    "usage": "toggled"
+  }
+}

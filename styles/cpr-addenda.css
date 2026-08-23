@@ -1,0 +1,83 @@
+/* Строка выбора типов оружия на листе модификации. */
+
+.cpr-addenda-weapon-types .cpr-addenda-summary {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 16rem;
+  text-align: right;
+}
+
+.cpr-addenda-weapon-types .cpr-addenda-edit {
+  margin-left: 0.5rem;
+  flex: 0 0 auto;
+  cursor: pointer;
+}
+
+/* Диалог выбора типов оружия. */
+
+.cpr-addenda-dialog .notes {
+  margin: 0 0 0.5rem;
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+.cpr-addenda-dialog .cpr-addenda-mode {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--color-border-light-tertiary, #bbb);
+}
+
+.cpr-addenda-dialog .cpr-addenda-mode label {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  white-space: nowrap;
+}
+
+.cpr-addenda-dialog .cpr-addenda-types {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.25rem 1rem;
+}
+
+.cpr-addenda-dialog .cpr-addenda-type {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  line-height: 1.4;
+}
+
+.cpr-addenda-dialog .cpr-addenda-type input {
+  flex: 0 0 auto;
+  margin: 0;
+}
+
+/* Переключатель «Принимает модификации» на листе носителя. */
+
+.cpr-addenda-accepts .cpr-addenda-toggle {
+  cursor: pointer;
+}
+
+.cpr-addenda-carrier .cpr-addenda-summary {
+  opacity: 0.9;
+}
+
+/* Подсказка про таблицы дальности в чате. */
+
+.cpr-addenda-hint h3 {
+  margin: 0 0 0.4rem;
+}
+
+.cpr-addenda-hint .notes {
+  font-size: 0.85rem;
+  opacity: 0.85;
+  margin: 0.4rem 0;
+}
+
+.cpr-addenda-hint button {
+  width: 100%;
+  margin: 0.5rem 0;
+}

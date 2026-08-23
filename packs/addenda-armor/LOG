@@ -1,0 +1,7 @@
+2026/08/23-17:08:06.654 3fe4 Recovering log #66
+2026/08/23-17:08:06.657 3fe4 Delete type=0 #66
+2026/08/23-17:08:06.657 3fe4 Delete type=3 #65
+2026/08/23-17:11:36.745 4f34 Level-0 table #70: started
+2026/08/23-17:11:36.745 4f34 Level-0 table #70: 0 bytes OK
+2026/08/23-17:11:36.746 4f34 Delete type=0 #68
+2026/08/23-17:11:36.748 4f34 Manual compaction at level-0 from '!items!cprAddAr00120000' @ 72057594037927935 : 1 .. '!items!cprAddAr00190000' @ 0 : 0; will stop at (end)

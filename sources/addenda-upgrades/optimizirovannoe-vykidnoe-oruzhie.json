@@ -1,0 +1,150 @@
+{
+  "_id": "cprAddTe00510000",
+  "name": "Оптимизированное Выкидное Оружие",
+  "type": "itemUpgrade",
+  "img": "modules/cpr-addenda/assets/icons/upgrade.svg",
+  "folder": null,
+  "sort": 0,
+  "effects": [],
+  "flags": {},
+  "system": {
+    "ammoVariety": [],
+    "attackmod": 0,
+    "brand": "",
+    "canIgnoreArmor": false,
+    "concealable": {
+      "concealable": false,
+      "isConcealed": false
+    },
+    "critFailEffect": "jammed",
+    "damage": "1d6",
+    "description": {
+      "value": "<p>СЛ Модификации: 24</p><p>Стоимость №1: Стоимость улучшаемого предмета</p><p>Стоимость №2: 1,000eb</p><p>Термометр: Улучшает существующие слоты на предметах на два с дополнительным недостатком. Рефери решил, что противоположным эффектом (уменьшению количества слотов, занимаемых предметом) будет большая цена. Наверное, разобрал сотню киберрук, прежде чем я отточил этот трюк. Оно использует ту же стратегию оптимизации, что и моё комбинированное подствольное приспособление, но применяется к киберконечностям и выкидному оружию.</p><p>Изобретённый техапгрейд. Должен быть установлен в киберруку. Оптимизированное выкидное оружие перестраивает киберруку, чтобы она могла принимать одно дальнобойное выкидное оружие без использования слота для опций. Оружие должно быть куплено отдельно и не может быть оснащено приспособлениями, которые занимают слоты приспособлений, за исключением интерфейса умного оружия. Потеря человечности остаётся неизменной. Не может быть установлено в эквивалентное снаряжение, такое как боевая перчатка</p>"
+    },
+    "dvTable": "",
+    "favorite": false,
+    "fireModes": {
+      "autoFire": 0,
+      "suppressiveFire": false
+    },
+    "handsReq": 0,
+    "ignoreArmorPercent": 0,
+    "installLocation": "mall",
+    "installedItems": {
+      "allowed": false,
+      "allowedTypes": [
+        "itemUpgrade"
+      ],
+      "list": [],
+      "slots": 0,
+      "usedSlots": 0
+    },
+    "isElectronic": false,
+    "isRanged": false,
+    "magazine": {
+      "ammoData": null,
+      "max": 0,
+      "value": 0
+    },
+    "modifiers": {
+      "Wardrobe & Style": {
+        "isSituational": false,
+        "onByDefault": false,
+        "type": "modifier",
+        "value": null
+      },
+      "attackmod": {
+        "isSituational": false,
+        "onByDefault": false,
+        "type": "modifier",
+        "value": null
+      },
+      "bodySp": {
+        "isSituational": false,
+        "onByDefault": false,
+        "type": "modifier",
+        "value": null
+      },
+      "cool": {
+        "isSituational": false,
+        "onByDefault": false,
+        "type": "modifier",
+        "value": null
+      },
+      "damage": {
+        "isSituational": false,
+        "onByDefault": false,
+        "type": "modifier",
+        "value": null
+      },
+      "headSp": {
+        "isSituational": false,
+        "onByDefault": false,
+        "type": "modifier",
+        "value": null
+      },
+      "magazine": {
+        "isSituational": false,
+        "onByDefault": false,
+        "type": "modifier",
+        "value": null
+      },
+      "rof": {
+        "isSituational": false,
+        "onByDefault": false,
+        "type": "modifier",
+        "value": null
+      },
+      "sdp": {
+        "isSituational": false,
+        "onByDefault": false,
+        "type": "modifier",
+        "value": null
+      },
+      "seats": {
+        "isSituational": false,
+        "onByDefault": false,
+        "type": "modifier",
+        "value": null
+      },
+      "shieldHp": {
+        "isSituational": false,
+        "onByDefault": false,
+        "type": "modifier",
+        "value": null
+      },
+      "slots": {
+        "isSituational": false,
+        "onByDefault": false,
+        "type": "modifier",
+        "value": null
+      },
+      "speedCombat": {
+        "isSituational": false,
+        "onByDefault": false,
+        "type": "modifier",
+        "value": null
+      },
+      "secondaryWeapon": {
+        "configured": false
+      }
+    },
+    "price": {
+      "market": 1000
+    },
+    "providesHardening": false,
+    "revealed": true,
+    "rof": 1,
+    "size": 1,
+    "source": {
+      "book": "DataPool",
+      "page": 0
+    },
+    "type": "cyberware",
+    "unarmedAutomaticCalculation": true,
+    "usage": "toggled",
+    "usesType": "magazine",
+    "weaponSkill": "",
+    "weaponType": ""
+  }
+}

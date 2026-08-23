@@ -1,0 +1,43 @@
+{
+  "_id": "cprAddGe00400000",
+  "name": "Segotari RUSH Revolution",
+  "type": "gear",
+  "img": "modules/cpr-addenda/assets/icons/gear.svg",
+  "folder": null,
+  "sort": 0,
+  "effects": [],
+  "flags": {},
+  "system": {
+    "amount": 1,
+    "brand": "",
+    "concealable": {
+      "concealable": false,
+      "isConcealed": false
+    },
+    "description": {
+      "value": "<p>Свежая консоль 2040 года выпуска. Подробнее в соответствующем разделе.</p>"
+    },
+    "equipped": "owned",
+    "favorite": false,
+    "installedItems": {
+      "allowed": false,
+      "allowedTypes": [
+        "itemUpgrade"
+      ],
+      "list": [],
+      "slots": 0,
+      "usedSlots": 0
+    },
+    "isElectronic": false,
+    "price": {
+      "market": 500
+    },
+    "providesHardening": false,
+    "revealed": true,
+    "source": {
+      "book": "DataPool",
+      "page": 46
+    },
+    "usage": "toggled"
+  }
+}

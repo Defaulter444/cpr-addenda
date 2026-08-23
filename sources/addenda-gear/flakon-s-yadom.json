@@ -1,0 +1,43 @@
+{
+  "_id": "cprAddGe00380000",
+  "name": "Флакон с ядом",
+  "type": "gear",
+  "img": "modules/cpr-addenda/assets/icons/gear.svg",
+  "folder": null,
+  "sort": 0,
+  "effects": [],
+  "flags": {},
+  "system": {
+    "amount": 1,
+    "brand": "",
+    "concealable": {
+      "concealable": false,
+      "isConcealed": false
+    },
+    "description": {
+      "value": "<p>Потратив Действие, можно смазать любое Лёгкое Оружие Ближнего Боя. В течение следующих 30 минут, вместо обычного урона, оружие смазанное ядом, заставляет \"мясную\" цель выполнить проверку \"Сопротивление Пыткам/Наркотикам\" СЛ 13. Если проверка провалена, то цель получает 2d6 урона сразу в ПЗ (минуя броню). Броня не повреждается, так как этот урон игнорирует броню.</p>"
+    },
+    "equipped": "owned",
+    "favorite": false,
+    "installedItems": {
+      "allowed": false,
+      "allowedTypes": [
+        "itemUpgrade"
+      ],
+      "list": [],
+      "slots": 0,
+      "usedSlots": 0
+    },
+    "isElectronic": false,
+    "price": {
+      "market": 100
+    },
+    "providesHardening": false,
+    "revealed": true,
+    "source": {
+      "book": "DataPool",
+      "page": 42
+    },
+    "usage": "toggled"
+  }
+}

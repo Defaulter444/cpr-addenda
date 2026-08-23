@@ -1,0 +1,161 @@
+{
+  "_id": "cprAddWm00030000",
+  "name": "Штык-Аэрогипо",
+  "type": "itemUpgrade",
+  "img": "modules/cpr-addenda/assets/icons/upgrade.svg",
+  "folder": null,
+  "sort": 0,
+  "effects": [],
+  "flags": {
+    "cpr-addenda": {
+      "allowedWeaponTypes": [
+        "assaultRifle",
+        "sniperRifle",
+        "shotgun",
+        "grenadeLauncher",
+        "rocketLauncher"
+      ],
+      "deniedWeaponTypes": []
+    }
+  },
+  "system": {
+    "ammoVariety": [],
+    "attackmod": 0,
+    "brand": "",
+    "canIgnoreArmor": false,
+    "concealable": {
+      "concealable": false,
+      "isConcealed": false
+    },
+    "critFailEffect": "jammed",
+    "damage": "1d6",
+    "description": {
+      "value": "<p>Инъекционная модификация стандартного штыка. С помощью этой насадки вы не повредите плоть, но вы можете накачать кого-нибудь любым веществом, которое вы загрузите в резервуар. Простой в использовании прибор для инъекции наркотиков, крепящийся на ствол огнестрельного оружия. Вместо того, чтобы наносить урон при ударе, штык- Аэрогипо использует быстрый выброс сжатого воздуха, чтобы протолкнуть жидкость через кожу, доставляя дозу заряженного вещества в организм цели. Если проверка атаки оружием ближнего боя провалена, доза не теряется. Резервуар Аэрогипо может содержать до одной дозы одного вещества. Перезарядка резервуара требует действия.</p>"
+    },
+    "dvTable": "",
+    "favorite": false,
+    "fireModes": {
+      "autoFire": 0,
+      "suppressiveFire": false
+    },
+    "handsReq": 0,
+    "ignoreArmorPercent": 0,
+    "installLocation": "mall",
+    "installedItems": {
+      "allowed": false,
+      "allowedTypes": [
+        "itemUpgrade"
+      ],
+      "list": [],
+      "slots": 0,
+      "usedSlots": 0
+    },
+    "isElectronic": false,
+    "isRanged": false,
+    "magazine": {
+      "ammoData": null,
+      "max": 0,
+      "value": 0
+    },
+    "modifiers": {
+      "Wardrobe & Style": {
+        "isSituational": false,
+        "onByDefault": false,
+        "type": "modifier",
+        "value": null
+      },
+      "attackmod": {
+        "isSituational": false,
+        "onByDefault": false,
+        "type": "modifier",
+        "value": null
+      },
+      "bodySp": {
+        "isSituational": false,
+        "onByDefault": false,
+        "type": "modifier",
+        "value": null
+      },
+      "cool": {
+        "isSituational": false,
+        "onByDefault": false,
+        "type": "modifier",
+        "value": null
+      },
+      "damage": {
+        "isSituational": false,
+        "onByDefault": false,
+        "type": "modifier",
+        "value": null
+      },
+      "headSp": {
+        "isSituational": false,
+        "onByDefault": false,
+        "type": "modifier",
+        "value": null
+      },
+      "magazine": {
+        "isSituational": false,
+        "onByDefault": false,
+        "type": "modifier",
+        "value": null
+      },
+      "rof": {
+        "isSituational": false,
+        "onByDefault": false,
+        "type": "modifier",
+        "value": null
+      },
+      "sdp": {
+        "isSituational": false,
+        "onByDefault": false,
+        "type": "modifier",
+        "value": null
+      },
+      "seats": {
+        "isSituational": false,
+        "onByDefault": false,
+        "type": "modifier",
+        "value": null
+      },
+      "shieldHp": {
+        "isSituational": false,
+        "onByDefault": false,
+        "type": "modifier",
+        "value": null
+      },
+      "slots": {
+        "isSituational": false,
+        "onByDefault": false,
+        "type": "modifier",
+        "value": null
+      },
+      "speedCombat": {
+        "isSituational": false,
+        "onByDefault": false,
+        "type": "modifier",
+        "value": null
+      },
+      "secondaryWeapon": {
+        "configured": false
+      }
+    },
+    "price": {
+      "market": 100
+    },
+    "providesHardening": false,
+    "revealed": true,
+    "rof": 1,
+    "size": 1,
+    "source": {
+      "book": "DataPool",
+      "page": 4
+    },
+    "type": "weapon",
+    "unarmedAutomaticCalculation": true,
+    "usage": "toggled",
+    "usesType": "magazine",
+    "weaponSkill": "",
+    "weaponType": ""
+  }
+}

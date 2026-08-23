@@ -1,0 +1,43 @@
+{
+  "_id": "cprAddEx00760000",
+  "name": "Ароматизированные Сигареты",
+  "type": "gear",
+  "img": "modules/cpr-addenda/assets/icons/cigarettes.svg",
+  "folder": null,
+  "sort": 0,
+  "effects": [],
+  "flags": {},
+  "system": {
+    "amount": 1,
+    "brand": "Biotechnica",
+    "concealable": {
+      "concealable": false,
+      "isConcealed": false
+    },
+    "description": {
+      "value": "<p>«Новинка от Biotechnica!»</p><p>Образец новейшего творения Biotechnica с настоящим, генетически изменённым табаком. Специальная линия ароматизированных сигарет Biotechnica обещает длительное удовольствие от курения. 2eb/упаковка, 15eb/коробка.</p><p>Доступны следующие ароматы: Настоящий мужчина — Острый перец, Следопыт — Копчёный бекон, Сладкие Альпы — Шоколад, Зелёные друзья — Клубника, Итальяно — Пицца, Высшая улица — Гашиш.</p>"
+    },
+    "equipped": "owned",
+    "favorite": false,
+    "installedItems": {
+      "allowed": false,
+      "allowedTypes": [
+        "itemUpgrade"
+      ],
+      "list": [],
+      "slots": 0,
+      "usedSlots": 0
+    },
+    "isElectronic": false,
+    "price": {
+      "market": 2
+    },
+    "providesHardening": false,
+    "revealed": true,
+    "source": {
+      "book": "Chromebook",
+      "page": 0
+    },
+    "usage": "toggled"
+  }
+}

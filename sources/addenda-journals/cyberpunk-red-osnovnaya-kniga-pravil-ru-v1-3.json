@@ -1,0 +1,618 @@
+{
+  "_id": "cprAddJn00010000",
+  "name": "Cyberpunk RED — Основная книга правил (RU, v1.3)",
+  "pages": [
+    {
+      "_id": "cprAddJp00010000",
+      "name": "Содержание",
+      "type": "text",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Книга разложена по главам: каждая качается отдельно и остаётся в кеше браузера, поэтому открывается быстро. Номера страниц — как напечатано в книге.</p><h2>Быстрые ссылки</h2><p>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.rah0emtTbIkRUh9s#page=130]{Список навыков} — с. 130 &middot; @UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.0lY1GTegGziSPnxp#page=168]{Действия в бою} — с. 168 &middot; @UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.0lY1GTegGziSPnxp#page=170]{Дистанционный бой} — с. 170 &middot; @UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.0lY1GTegGziSPnxp#page=175]{Рукопашный бой} — с. 175 &middot; @UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.TzwSivd05kAyGniI#page=220]{Критические травмы} — с. 220 &middot; @UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.TzwSivd05kAyGniI#page=222]{Стабилизация и лечение} — с. 222 &middot; @UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.HTF21R0SxpaSiNbk#page=110]{Киберимпланты} — с. 110 &middot; @UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.HTF21R0SxpaSiNbk#page=108]{Киберпсихоз} — с. 108 &middot; @UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.KyzJbQHnFNYeGjEx#page=201]{Программы нетраннера} — с. 201 &middot; @UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.yg7z5iPpQXZeJEfa#page=343]{Ночной рынок (цены)} — с. 343 &middot; @UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.yg7z5iPpQXZeJEfa#page=346]{Приложение к ночному рынку} — с. 346 &middot; @UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.S66EDRoGKS2RPPID#page=397]{Бит-чарт} — с. 397</p><h2>Главы</h2><h3>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.fhjxIe9ERs09oNFi#page=0]{Введение и содержание} <span style=\"opacity:.6\">— с. 0–4, 2.62 МБ</span></h3><h3>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.wSNMxk9xJmkV82iG#page=5]{Never Fade Away} <span style=\"opacity:.6\">— с. 5–16, 1.53 МБ</span></h3><h3>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.LO5MCXMXmf5orzbi#page=17]{Взгляд с грани} <span style=\"opacity:.6\">— с. 17–26, 3.18 МБ</span></h3><ul><li>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.LO5MCXMXmf5orzbi#page=22]{Пример настольной ролевой игры} — с. 22</li><li>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.LO5MCXMXmf5orzbi#page=24]{Уличный сленг} — с. 24</li></ul><h3>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.bFSTJHqxSfium4nv#page=27]{Душа и новая машина} <span style=\"opacity:.6\">— с. 27–42, 5.11 МБ</span></h3><ul><li>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.bFSTJHqxSfium4nv#page=29]{Роли} — с. 29</li><li>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.bFSTJHqxSfium4nv#page=40]{Три метода создания персонажа} — с. 40</li></ul><h3>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.kE6aqRP8CyMwhlKF#page=43]{Сказки с улиц} <span style=\"opacity:.6\">— с. 43–70, 5.06 МБ</span></h3><h3>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.GFah8i75aMRp15MU#page=71]{Пригоден для будущего} <span style=\"opacity:.6\">— с. 71–106, 3.3 МБ</span></h3><ul><li>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.GFah8i75aMRp15MU#page=72]{Что такое характеристики} — с. 72</li><li>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.GFah8i75aMRp15MU#page=81]{Навыки} — с. 81</li><li>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.GFah8i75aMRp15MU#page=91]{Оружие и броня} — с. 91</li><li>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.GFah8i75aMRp15MU#page=99]{Экипировка} — с. 99</li></ul><h3>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.HTF21R0SxpaSiNbk#page=107]{Внедряем кибер в панк} <span style=\"opacity:.6\">— с. 107–120, 1.67 МБ</span></h3><ul><li>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.HTF21R0SxpaSiNbk#page=108]{Киберпсихоз} — с. 108</li><li>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.HTF21R0SxpaSiNbk#page=110]{Киберимпланты} — с. 110</li></ul><h3>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.ZI0M8MM3zDr3gNmT#page=121]{Падение башен} <span style=\"opacity:.6\">— с. 121–124, 0.85 МБ</span></h3><h3>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.rah0emtTbIkRUh9s#page=125]{Доводим дело до конца} <span style=\"opacity:.6\">— с. 125–166, 5.25 МБ</span></h3><ul><li>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.rah0emtTbIkRUh9s#page=126]{Разбираем сцену} — с. 126</li><li>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.rah0emtTbIkRUh9s#page=128]{Проверка действий с навыками} — с. 128</li><li>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.rah0emtTbIkRUh9s#page=130]{Список навыков} — с. 130</li><li>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.rah0emtTbIkRUh9s#page=142]{Ролевые навыки} — с. 142</li><li>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.rah0emtTbIkRUh9s#page=143]{Мультиклассирование ролей} — с. 143</li></ul><h3>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.0lY1GTegGziSPnxp#page=167]{Перестрелка в пятницу вечером} <span style=\"opacity:.6\">— с. 167–194, 3.67 МБ</span></h3><ul><li>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.0lY1GTegGziSPnxp#page=168]{Во время боя} — с. 168</li><li>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.0lY1GTegGziSPnxp#page=168]{Действия} — с. 168</li><li>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.0lY1GTegGziSPnxp#page=170]{Дистанционный бой} — с. 170</li><li>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.0lY1GTegGziSPnxp#page=175]{Рукопашный бой} — с. 175</li><li>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.0lY1GTegGziSPnxp#page=180]{Другие способы получить урон} — с. 180</li><li>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.0lY1GTegGziSPnxp#page=182]{Прежде чем получить урон} — с. 182</li><li>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.0lY1GTegGziSPnxp#page=186]{Когда броня не спасает} — с. 186</li><li>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.0lY1GTegGziSPnxp#page=189]{Бой на транспорте} — с. 189</li><li>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.0lY1GTegGziSPnxp#page=193]{Репутация} — с. 193</li></ul><h3>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.KyzJbQHnFNYeGjEx#page=195]{Нетраннинг} <span style=\"opacity:.6\">— с. 195–218, 1.65 МБ</span></h3><ul><li>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.KyzJbQHnFNYeGjEx#page=197]{Делаем дела в сети} — с. 197</li><li>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.KyzJbQHnFNYeGjEx#page=201]{Сетевой бой} — с. 201</li><li>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.KyzJbQHnFNYeGjEx#page=201]{Программы} — с. 201</li><li>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.KyzJbQHnFNYeGjEx#page=208]{Различные улучшения} — с. 208</li><li>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.KyzJbQHnFNYeGjEx#page=208]{Железо для кибердеки} — с. 208</li><li>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.KyzJbQHnFNYeGjEx#page=208]{Выполняем нетран} — с. 208</li><li>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.KyzJbQHnFNYeGjEx#page=210]{Создание архитектуры сети} — с. 210</li></ul><h3>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.TzwSivd05kAyGniI#page=219]{Trauma Team} <span style=\"opacity:.6\">— с. 219–232, 1.46 МБ</span></h3><ul><li>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.TzwSivd05kAyGniI#page=220]{Состояния ранений и критические травмы} — с. 220</li><li>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.TzwSivd05kAyGniI#page=222]{Стабилизация и лечение} — с. 222</li><li>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.TzwSivd05kAyGniI#page=223]{Trauma Team} — с. 223</li><li>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.TzwSivd05kAyGniI#page=227]{Уличные наркотики} — с. 227</li><li>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.TzwSivd05kAyGniI#page=229]{Терапия и ты} — с. 229</li><li>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.TzwSivd05kAyGniI#page=230]{Киберпсихоз} — с. 230</li></ul><h3>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.Cfgi0BrHNT4KEt4S#page=233]{Приветствуем в Тёмном будущем} <span style=\"opacity:.6\">— с. 233–258, 3.04 МБ</span></h3><ul><li>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.Cfgi0BrHNT4KEt4S#page=234]{Падение Америки} — с. 234</li><li>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.Cfgi0BrHNT4KEt4S#page=236]{Отсчёт Тёмного будущего} — с. 236</li><li>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.Cfgi0BrHNT4KEt4S#page=242]{До Красного} — с. 242</li><li>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.Cfgi0BrHNT4KEt4S#page=251]{4ая корпоративная война} — с. 251</li></ul><h3>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.8XSOfVVqjYiv5bXz#page=259]{Красное время} <span style=\"opacity:.6\">— с. 259–284, 1.85 МБ</span></h3><ul><li>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.8XSOfVVqjYiv5bXz#page=260]{Последствия} — с. 260</li><li>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.8XSOfVVqjYiv5bXz#page=260]{США в Красное время} — с. 260</li><li>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.8XSOfVVqjYiv5bXz#page=262]{Мир за пределами} — с. 262</li><li>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.8XSOfVVqjYiv5bXz#page=267]{Неокорпы} — с. 267</li><li>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.8XSOfVVqjYiv5bXz#page=269]{Профили корпораций} — с. 269</li></ul><h3>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.Ez8InweWJ2AVNqkg#page=285]{Добро пожаловать в Найт-Сити} <span style=\"opacity:.6\">— с. 285–322, 10.31 МБ</span></h3><ul><li>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.Ez8InweWJ2AVNqkg#page=286]{Немного истории Найт-Сити} — с. 286</li><li>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.Ez8InweWJ2AVNqkg#page=290]{Найт-Сити 2020} — с. 290</li><li>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.Ez8InweWJ2AVNqkg#page=293]{Найт-Сити наконец счастлив?} — с. 293</li><li>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.Ez8InweWJ2AVNqkg#page=294]{Найт-Сити в Красное время} — с. 294</li><li>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.Ez8InweWJ2AVNqkg#page=302]{Подробности} — с. 302</li><li>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.Ez8InweWJ2AVNqkg#page=306]{Люди Найт-Сити} — с. 306</li><li>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.Ez8InweWJ2AVNqkg#page=309]{Банды Найт-Сити} — с. 309</li><li>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.Ez8InweWJ2AVNqkg#page=312]{Места Найт-Сити и его окрестностей} — с. 312</li></ul><h3>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.xhRf3ILFvvsiDkLd#page=323]{Повседневная жизнь} <span style=\"opacity:.6\">— с. 323–338, 1.96 МБ</span></h3><ul><li>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.xhRf3ILFvvsiDkLd#page=324]{Не попадай в неприятности} — с. 324</li><li>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.xhRf3ILFvvsiDkLd#page=327]{Как оставаться на связи} — с. 327</li><li>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.xhRf3ILFvvsiDkLd#page=328]{Что у тебя в кобуре} — с. 328</li><li>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.xhRf3ILFvvsiDkLd#page=330]{Как ты передвигаешься} — с. 330</li><li>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.xhRf3ILFvvsiDkLd#page=333]{Как ты узнаёшь новости} — с. 333</li><li>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.xhRf3ILFvvsiDkLd#page=334]{Что ты носишь} — с. 334</li><li>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.xhRf3ILFvvsiDkLd#page=335]{Что ты ешь} — с. 335</li><li>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.xhRf3ILFvvsiDkLd#page=336]{Как ты развлекаешься} — с. 336</li><li>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.xhRf3ILFvvsiDkLd#page=337]{Где ты добываешь вещи} — с. 337</li></ul><h3>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.yg7z5iPpQXZeJEfa#page=339]{Новая экономика улиц} <span style=\"opacity:.6\">— с. 339–388, 2.43 МБ</span></h3><ul><li>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.yg7z5iPpQXZeJEfa#page=343]{Ночной рынок} — с. 343</li><li>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.yg7z5iPpQXZeJEfa#page=346]{Приложение к ночному рынку} — с. 346</li><li>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.yg7z5iPpQXZeJEfa#page=384]{Как зарабатывать на жизнь} — с. 384</li></ul><h3>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.S66EDRoGKS2RPPID#page=389]{Запускаем Cyberpunk} <span style=\"opacity:.6\">— с. 389–434, 4.35 МБ</span></h3><ul><li>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.S66EDRoGKS2RPPID#page=397]{Бит-чарт} — с. 397</li><li>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.S66EDRoGKS2RPPID#page=410]{Становимся лучше} — с. 410</li><li>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.S66EDRoGKS2RPPID#page=414]{Шестёрки и пушечное мясо} — с. 414</li><li>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.S66EDRoGKS2RPPID#page=419]{Встречи в Красное время} — с. 419</li></ul><h3>@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.q8s2xRJfYSb6o9zW#page=435]{Чёрный пёс} <span style=\"opacity:.6\">— с. 435–457, 3.24 МБ</span></h3><hr /><p style=\"opacity:.7\">Последняя страница журнала — вся книга одним файлом (57 МБ). Она нужна для поиска по всему тексту и для ссылок «источник» на карточках предметов; открывается медленно, для чтения лучше пользоваться главами.</p>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {},
+      "sort": 100000,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {}
+    },
+    {
+      "_id": "cprAddJp00020000",
+      "name": "Введение и содержание книги",
+      "type": "pdf",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": "pdfs/cpr-core-ru/00-vvedenie.pdf",
+      "system": {},
+      "sort": 200000,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {
+        "pdf-pager": {
+          "pageOffset": 1
+        }
+      }
+    },
+    {
+      "_id": "cprAddJp00030000",
+      "name": "Never Fade Away (с. 5–16)",
+      "type": "pdf",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": "pdfs/cpr-core-ru/01-never-fade-away.pdf",
+      "system": {},
+      "sort": 201000,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {
+        "pdf-pager": {
+          "pageOffset": -4
+        }
+      }
+    },
+    {
+      "_id": "cprAddJp00040000",
+      "name": "Взгляд с грани (с. 17–26)",
+      "type": "pdf",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": "pdfs/cpr-core-ru/02-vzglyad-s-grani.pdf",
+      "system": {},
+      "sort": 202000,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {
+        "pdf-pager": {
+          "pageOffset": -16
+        }
+      }
+    },
+    {
+      "_id": "cprAddJp00050000",
+      "name": "Душа и новая машина (с. 27–42)",
+      "type": "pdf",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": "pdfs/cpr-core-ru/03-dusha-i-mashina.pdf",
+      "system": {},
+      "sort": 203000,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {
+        "pdf-pager": {
+          "pageOffset": -26
+        }
+      }
+    },
+    {
+      "_id": "cprAddJp00060000",
+      "name": "Сказки с улиц (с. 43–70)",
+      "type": "pdf",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": "pdfs/cpr-core-ru/04-skazki-s-ulits.pdf",
+      "system": {},
+      "sort": 204000,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {
+        "pdf-pager": {
+          "pageOffset": -42
+        }
+      }
+    },
+    {
+      "_id": "cprAddJp00070000",
+      "name": "Пригоден для будущего (с. 71–106)",
+      "type": "pdf",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": "pdfs/cpr-core-ru/05-prigoden-dlya-budushchego.pdf",
+      "system": {},
+      "sort": 205000,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {
+        "pdf-pager": {
+          "pageOffset": -70
+        }
+      }
+    },
+    {
+      "_id": "cprAddJp00080000",
+      "name": "Внедряем кибер в панк (с. 107–120)",
+      "type": "pdf",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": "pdfs/cpr-core-ru/06-kiber-v-punk.pdf",
+      "system": {},
+      "sort": 206000,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {
+        "pdf-pager": {
+          "pageOffset": -106
+        }
+      }
+    },
+    {
+      "_id": "cprAddJp00090000",
+      "name": "Падение башен (с. 121–124)",
+      "type": "pdf",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": "pdfs/cpr-core-ru/07-padenie-bashen.pdf",
+      "system": {},
+      "sort": 207000,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {
+        "pdf-pager": {
+          "pageOffset": -120
+        }
+      }
+    },
+    {
+      "_id": "cprAddJp00100000",
+      "name": "Доводим дело до конца (с. 125–166)",
+      "type": "pdf",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": "pdfs/cpr-core-ru/08-dovodim-delo.pdf",
+      "system": {},
+      "sort": 208000,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {
+        "pdf-pager": {
+          "pageOffset": -124
+        }
+      }
+    },
+    {
+      "_id": "cprAddJp00110000",
+      "name": "Перестрелка в пятницу вечером (с. 167–194)",
+      "type": "pdf",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": "pdfs/cpr-core-ru/09-perestrelka.pdf",
+      "system": {},
+      "sort": 209000,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {
+        "pdf-pager": {
+          "pageOffset": -166
+        }
+      }
+    },
+    {
+      "_id": "cprAddJp00120000",
+      "name": "Нетраннинг (с. 195–218)",
+      "type": "pdf",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": "pdfs/cpr-core-ru/10-netranning.pdf",
+      "system": {},
+      "sort": 210000,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {
+        "pdf-pager": {
+          "pageOffset": -194
+        }
+      }
+    },
+    {
+      "_id": "cprAddJp00130000",
+      "name": "Trauma Team (с. 219–232)",
+      "type": "pdf",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": "pdfs/cpr-core-ru/11-trauma-team.pdf",
+      "system": {},
+      "sort": 211000,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {
+        "pdf-pager": {
+          "pageOffset": -218
+        }
+      }
+    },
+    {
+      "_id": "cprAddJp00140000",
+      "name": "Приветствуем в Тёмном будущем (с. 233–258)",
+      "type": "pdf",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": "pdfs/cpr-core-ru/12-temnoe-budushchee.pdf",
+      "system": {},
+      "sort": 212000,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {
+        "pdf-pager": {
+          "pageOffset": -232
+        }
+      }
+    },
+    {
+      "_id": "cprAddJp00150000",
+      "name": "Красное время (с. 259–284)",
+      "type": "pdf",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": "pdfs/cpr-core-ru/13-krasnoe-vremya.pdf",
+      "system": {},
+      "sort": 213000,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {
+        "pdf-pager": {
+          "pageOffset": -258
+        }
+      }
+    },
+    {
+      "_id": "cprAddJp00160000",
+      "name": "Добро пожаловать в Найт-Сити (с. 285–322)",
+      "type": "pdf",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": "pdfs/cpr-core-ru/14-nayt-siti.pdf",
+      "system": {},
+      "sort": 214000,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {
+        "pdf-pager": {
+          "pageOffset": -284
+        }
+      }
+    },
+    {
+      "_id": "cprAddJp00170000",
+      "name": "Повседневная жизнь (с. 323–338)",
+      "type": "pdf",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": "pdfs/cpr-core-ru/15-povsednevnaya-zhizn.pdf",
+      "system": {},
+      "sort": 215000,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {
+        "pdf-pager": {
+          "pageOffset": -322
+        }
+      }
+    },
+    {
+      "_id": "cprAddJp00180000",
+      "name": "Новая экономика улиц (с. 339–388)",
+      "type": "pdf",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": "pdfs/cpr-core-ru/16-ekonomika-ulits.pdf",
+      "system": {},
+      "sort": 216000,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {
+        "pdf-pager": {
+          "pageOffset": -338
+        }
+      }
+    },
+    {
+      "_id": "cprAddJp00190000",
+      "name": "Запускаем Cyberpunk (с. 389–434)",
+      "type": "pdf",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": "pdfs/cpr-core-ru/17-zapuskaem-cyberpunk.pdf",
+      "system": {},
+      "sort": 217000,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {
+        "pdf-pager": {
+          "pageOffset": -388
+        }
+      }
+    },
+    {
+      "_id": "cprAddJp00200000",
+      "name": "Чёрный пёс (с. 435–457)",
+      "type": "pdf",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": "pdfs/cpr-core-ru/18-chernyy-pes.pdf",
+      "system": {},
+      "sort": 218000,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {
+        "pdf-pager": {
+          "pageOffset": -434
+        }
+      }
+    },
+    {
+      "_id": "cprAddJp00210000",
+      "name": "Вся книга одним файлом (медленно)",
+      "type": "pdf",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": ""
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": "pdfs/cyberpunk-red-core-ru-v13.pdf",
+      "system": {},
+      "sort": 900000,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {
+        "pdf-pager": {
+          "pageOffset": 1,
+          "code": "Core"
+        }
+      }
+    }
+  ],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {}
+}

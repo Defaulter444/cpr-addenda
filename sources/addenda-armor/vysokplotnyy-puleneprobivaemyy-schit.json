@@ -1,0 +1,58 @@
+{
+  "_id": "cprAddAr00120000",
+  "name": "Высокплотный Пуленепробиваемый щит",
+  "type": "armor",
+  "img": "modules/cpr-addenda/assets/icons/armor.svg",
+  "folder": null,
+  "sort": 0,
+  "effects": [],
+  "flags": {},
+  "system": {
+    "bodyLocation": {
+      "ablation": 0,
+      "sp": 0
+    },
+    "brand": "",
+    "concealable": {
+      "concealable": false,
+      "isConcealed": false
+    },
+    "description": {
+      "value": "<p>Когда копы поняли, что их боссы закупают самое дешёвое барахло, лишь бы сэкономить на щитах для отдела, они попытались сколотить что-то своё, на скорую руку… но банды быстро просекли, что кислотой можно расплавить изоленту, которой они приматывали несколько щитов друг к другу. После почти сотни травм, вызванных \"неисправностью щита\", начальство наконец поняло намёк и заказало вариант получше. Щит с 15 ПЗ. Не может быть встроен в имплант Выдвижной щит.</p>"
+    },
+    "equipped": "owned",
+    "favorite": false,
+    "headLocation": {
+      "ablation": 0,
+      "sp": 0
+    },
+    "installedItems": {
+      "allowed": true,
+      "allowedTypes": [
+        "itemUpgrade"
+      ],
+      "list": [],
+      "slots": 3,
+      "usedSlots": 0
+    },
+    "isBodyLocation": false,
+    "isElectronic": false,
+    "isHeadLocation": false,
+    "isShield": true,
+    "penalty": 0,
+    "price": {
+      "market": 200
+    },
+    "providesHardening": false,
+    "revealed": true,
+    "shieldHitPoints": {
+      "max": 15,
+      "value": 15
+    },
+    "source": {
+      "book": "DataPool",
+      "page": 3
+    },
+    "usage": "equipped"
+  }
+}

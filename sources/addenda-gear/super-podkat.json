@@ -1,0 +1,43 @@
+{
+  "_id": "cprAddTe00540000",
+  "name": "Супер Подкат",
+  "type": "gear",
+  "img": "modules/cpr-addenda/assets/icons/gear.svg",
+  "folder": null,
+  "sort": 0,
+  "effects": [],
+  "flags": {},
+  "system": {
+    "amount": 1,
+    "brand": "",
+    "concealable": {
+      "concealable": false,
+      "isConcealed": false
+    },
+    "description": {
+      "value": "<p>СЛ Модификации: 24</p><p>Стоимость №1: Стоимость улучшаемого предмета</p><p>Стоимость №2: 1,000eb</p><p>Термометр: Универсально полезный защитный апгрейд. Настоящие нетраннеры не ограничиваются... ну, ограничениями. Улучши свои деки. Улучши своё снаряжение. Улучши своё железо. Улучши свои программы. Улучши всё!</p><p>Изобретённый техапгрейд. Должен быть установлен на программу \"Быстрый Гонзалез\" или \"Червь\". Когда программа с апгрейдом \"супер подкат\" активируется, пользователь может использовать подкат дважды за ход</p>"
+    },
+    "equipped": "owned",
+    "favorite": false,
+    "installedItems": {
+      "allowed": false,
+      "allowedTypes": [
+        "itemUpgrade"
+      ],
+      "list": [],
+      "slots": 0,
+      "usedSlots": 0
+    },
+    "isElectronic": false,
+    "price": {
+      "market": 1000
+    },
+    "providesHardening": false,
+    "revealed": true,
+    "source": {
+      "book": "DataPool",
+      "page": 0
+    },
+    "usage": "toggled"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "_id": "cprAddAr00150000",
+  "name": "Тяжёлый Metalgear® (тело)",
+  "type": "armor",
+  "img": "modules/cpr-addenda/assets/icons/armor.svg",
+  "folder": null,
+  "sort": 0,
+  "effects": [],
+  "flags": {},
+  "system": {
+    "bodyLocation": {
+      "ablation": 0,
+      "sp": 19
+    },
+    "brand": "",
+    "concealable": {
+      "concealable": false,
+      "isConcealed": false
+    },
+    "description": {
+      "value": "<p>Жар некоторых полей боя соперничает с адским пламенем. Наша модель с максимальными жёсткими бронеплитами обеспечивает предельную защиту, позволяя выжить в самых ожесточённых перестрелках. Источник: Соло Удачи 2045 [Штрафы по документу: −4 РЕА, −5 ЛВК, −5 СКО. Система применяет единый штраф -4 к РЕА, ЛВК и СКО.]</p>"
+    },
+    "equipped": "owned",
+    "favorite": false,
+    "headLocation": {
+      "ablation": 0,
+      "sp": 0
+    },
+    "installedItems": {
+      "allowed": true,
+      "allowedTypes": [
+        "itemUpgrade"
+      ],
+      "list": [],
+      "slots": 3,
+      "usedSlots": 0
+    },
+    "isBodyLocation": true,
+    "isElectronic": false,
+    "isHeadLocation": false,
+    "isShield": false,
+    "penalty": -4,
+    "price": {
+      "market": 5000
+    },
+    "providesHardening": false,
+    "revealed": true,
+    "shieldHitPoints": {
+      "max": 0,
+      "value": 0
+    },
+    "source": {
+      "book": "DataPool",
+      "page": 7
+    },
+    "usage": "equipped"
+  }
+}

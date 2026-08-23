@@ -1,0 +1,58 @@
+{
+  "_id": "cprAddAr00180000",
+  "name": "Гибридный Metalgear® (голова)",
+  "type": "armor",
+  "img": "modules/cpr-addenda/assets/icons/armor.svg",
+  "folder": null,
+  "sort": 0,
+  "effects": [],
+  "flags": {},
+  "system": {
+    "bodyLocation": {
+      "ablation": 0,
+      "sp": 0
+    },
+    "brand": "",
+    "concealable": {
+      "concealable": false,
+      "isConcealed": false
+    },
+    "description": {
+      "value": "<p>Потребности поля боя не знают передышки и требуют идеального баланса атаки и защиты. Наша полу- сегментированная модель даёт ту же всестороннюю защиту Metalgear®, к которой ты привык, но с подвижностью коленей и локтей, как у лёгкого Metalgear®. Источник: Соло Удачи 2045 [Штрафы по документу: −3 РЕА, −4 ЛВК, −4 СКО. Система применяет единый штраф -3 к РЕА, ЛВК и СКО.]</p>"
+    },
+    "equipped": "owned",
+    "favorite": false,
+    "headLocation": {
+      "ablation": 0,
+      "sp": 17
+    },
+    "installedItems": {
+      "allowed": true,
+      "allowedTypes": [
+        "itemUpgrade"
+      ],
+      "list": [],
+      "slots": 3,
+      "usedSlots": 0
+    },
+    "isBodyLocation": false,
+    "isElectronic": false,
+    "isHeadLocation": true,
+    "isShield": false,
+    "penalty": -3,
+    "price": {
+      "market": 2552
+    },
+    "providesHardening": false,
+    "revealed": true,
+    "shieldHitPoints": {
+      "max": 0,
+      "value": 0
+    },
+    "source": {
+      "book": "DataPool",
+      "page": 7
+    },
+    "usage": "equipped"
+  }
+}

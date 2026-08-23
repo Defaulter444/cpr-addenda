@@ -1,0 +1,172 @@
+{
+  "id": "cpr-addenda",
+  "title": "Cyberpunk RED: Addenda",
+  "description": "<p>Добавляет в систему Cyberpunk RED предметы, которых нет в штатных компендиумах, и механику для них: ограничение установки модификаций по типам оружия и эффекты, работающие только пока модификация установлена.</p>",
+  "version": "0.1.0",
+  "authors": [
+    {
+      "name": "Horusian"
+    }
+  ],
+  "compatibility": {
+    "minimum": "12",
+    "verified": "12.343"
+  },
+  "relationships": {
+    "systems": [
+      {
+        "id": "cyberpunk-red-core",
+        "type": "system",
+        "compatibility": {
+          "minimum": "0.92.0",
+          "verified": "0.92.4"
+        }
+      }
+    ],
+    "requires": [
+      {
+        "id": "lib-wrapper",
+        "type": "module",
+        "compatibility": {}
+      }
+    ],
+    "recommends": [
+      {
+        "id": "babele",
+        "type": "module",
+        "compatibility": {}
+      }
+    ]
+  },
+  "esmodules": [
+    "scripts/main.js"
+  ],
+  "styles": [
+    "styles/cpr-addenda.css"
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    },
+    {
+      "lang": "ru",
+      "name": "Русский",
+      "path": "lang/ru.json"
+    }
+  ],
+  "packs": [
+    {
+      "name": "addenda-upgrades",
+      "label": "Addenda: Модификации",
+      "path": "packs/addenda-upgrades",
+      "type": "Item",
+      "system": "cyberpunk-red-core",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
+    },
+    {
+      "name": "addenda-weapons",
+      "label": "Addenda: Оружие",
+      "path": "packs/addenda-weapons",
+      "type": "Item",
+      "system": "cyberpunk-red-core",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
+    },
+    {
+      "name": "addenda-gear",
+      "label": "Addenda: Снаряжение",
+      "path": "packs/addenda-gear",
+      "type": "Item",
+      "system": "cyberpunk-red-core",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
+    },
+    {
+      "name": "addenda-cyberware",
+      "label": "Addenda: Кибернетика",
+      "path": "packs/addenda-cyberware",
+      "type": "Item",
+      "system": "cyberpunk-red-core",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
+    },
+    {
+      "name": "addenda-armor",
+      "label": "Addenda: Броня и одежда",
+      "path": "packs/addenda-armor",
+      "type": "Item",
+      "system": "cyberpunk-red-core",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
+    },
+    {
+      "name": "addenda-ammo",
+      "label": "Addenda: Боеприпасы",
+      "path": "packs/addenda-ammo",
+      "type": "Item",
+      "system": "cyberpunk-red-core",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
+    },
+    {
+      "name": "addenda-dv-tables",
+      "label": "Addenda: Таблицы дальности",
+      "path": "packs/addenda-dv-tables",
+      "type": "RollTable",
+      "system": "cyberpunk-red-core",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
+    },
+    {
+      "name": "addenda-journals",
+      "label": "Addenda: Книги и справочники",
+      "path": "packs/addenda-journals",
+      "type": "JournalEntry",
+      "system": "cyberpunk-red-core",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
+    }
+  ],
+  "packFolders": [
+    {
+      "name": "Cyberpunk RED: Addenda",
+      "sorting": "m",
+      "color": "#7a1f2b",
+      "packs": [
+        "addenda-upgrades",
+        "addenda-weapons",
+        "addenda-gear",
+        "addenda-cyberware",
+        "addenda-armor",
+        "addenda-ammo",
+        "addenda-dv-tables",
+        "addenda-journals"
+      ]
+    }
+  ],
+  "url": "https://github.com/Defaulter444/cpr-addenda",
+  "manifest": "https://github.com/Defaulter444/cpr-addenda/releases/latest/download/module.json",
+  "download": "https://github.com/Defaulter444/cpr-addenda/releases/download/v0.1.0/module.zip",
+  "readme": "https://github.com/Defaulter444/cpr-addenda#readme",
+  "bugs": "https://github.com/Defaulter444/cpr-addenda/issues",
+  "license": "LICENSE"
+}
