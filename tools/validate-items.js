@@ -280,7 +280,101 @@ function validateJournal(doc, label, seenIds) {
     manifest.packs.map((p) => [p.name, p.type])
   );
 
-  const seenIds = new Map();
+  /**
+ * Проверяет комплект вложенных предметов.
+ *
+ * Комплект корпуса ПКТ двухуровневый: в корпусе стоят фундаменты — киберруки,
+ * киберглаза, набор кибераудио, — а в них уже опции. Система разворачивает
+ * такую вложенность рекурсивно (`createInstalledItemsOnActor`), поэтому и
+ * проверять её надо рекурсивно: разойдись флаг со списком на любом уровне,
+ * часть комплекта потеряется молча.
+ *
+ * @param {Object} node - предмет с комплектом
+ * @param {String} label - как называть предмет в сообщениях
+ * @param {Map} seenIds - занятые идентификаторы, общие на весь модуль
+ * @param {Function} fail - куда сообщать о находках
+ * @param {Number} depth - текущий уровень вложенности
+ */
+function checkInstallTree(node, label, seenIds, fail, depth = 0) {
+  const tree = node.flags?.cprInstallTree;
+  if (tree === undefined) return;
+
+  const where = depth === 0 ? label : `${label} → «${node.name}»`;
+  if (!Array.isArray(tree)) {
+    fail(where, "cprInstallTree должен быть списком предметов");
+    return;
+  }
+
+  const installed = node.system?.installedItems ?? {};
+  const list = installed.list ?? [];
+  const treeIds = tree.map((t) => t._id);
+
+  if (list.length !== treeIds.length) {
+    fail(
+      where,
+      `в комплекте ${treeIds.length} предметов, а в списке установленного ${list.length}`
+    );
+  }
+  const missingInList = treeIds.filter((id) => !list.includes(id));
+  if (missingInList.length) {
+    fail(
+      where,
+      `предметы комплекта отсутствуют в списке установленного: ${missingInList.length}`
+    );
+  }
+
+  // Слоты система считает по размеру вложенного, а не по их числу.
+  const needed = tree.reduce((sum, t) => sum + (t.system?.size ?? 1), 0);
+  const slots = installed.slots ?? 0;
+  if (slots < needed) {
+    fail(where, `комплекту нужно ${needed} слотов, а есть ${slots}`);
+  }
+  // Занятые места система пересчитывает только при снятии импланта, поэтому
+  // счётчик должен приехать уже верным.
+  if ((installed.usedSlots ?? 0) !== needed) {
+    fail(
+      where,
+      `занято слотов должно быть ${needed}, а записано ${installed.usedSlots ?? 0}`
+    );
+  }
+  if (installed.allowed !== true) {
+    fail(where, "предмет с комплектом должен принимать установку");
+  }
+
+  for (const nested of tree) {
+    if (!/^[a-zA-Z0-9]{16}$/.test(nested._id ?? "")) {
+      fail(where, `предмет комплекта «${nested.name}»: _id должен быть 16 символов`);
+    } else if (seenIds.has(nested._id)) {
+      fail(
+        where,
+        `_id «${nested._id}» уже занят (${seenIds.get(nested._id)}) — ` +
+          "у каждого экземпляра импланта должен быть свой"
+      );
+    } else {
+      seenIds.set(nested._id, where);
+    }
+    if (!nested.name) fail(where, "у предмета комплекта нет имени");
+    if (!nested.type) fail(where, `предмет комплекта «${nested.name}» без типа`);
+    if (!nested.system) fail(where, `предмет комплекта «${nested.name}» без данных`);
+
+    // Опция обязана лежать в фундаменте своего типа: по этому полю система
+    // ищет, куда её ставить, когда игрок снимет и захочет вернуть обратно.
+    if (depth > 0 && nested.system?.type !== node.system?.type) {
+      fail(
+        where,
+        `«${nested.name}» типа ${nested.system?.type} стоит в фундаменте ` +
+          `типа ${node.system?.type}`
+      );
+    }
+    if (depth > 0 && nested.flags?.cprInstallTree) {
+      fail(where, `«${nested.name}»: комплект глубже двух уровней не собираем`);
+    }
+
+    checkInstallTree(nested, label, seenIds, fail, depth + 1);
+  }
+}
+
+const seenIds = new Map();
   let count = 0;
   let tableCount = 0;
   let journalCount = 0;
@@ -470,6 +564,14 @@ function validateJournal(doc, label, seenIds) {
           );
         }
       }
+
+      // 3e. Комплект вложенных предметов.
+      // Система разворачивает его при переносе на актёра, читая флаг
+      // cprInstallTree и список installedItems.list. Если они разойдутся,
+      // часть комплекта потеряется молча — предмет создастся, но не
+      // установится ни во что.
+      const tree = doc.flags?.cprInstallTree;
+      if (tree !== undefined) checkInstallTree(doc, label, seenIds, fail);
 
       // 4. Числовые границы из схемы данных.
       const numeric = [
