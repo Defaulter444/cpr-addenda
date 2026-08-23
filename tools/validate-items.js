@@ -439,6 +439,26 @@ function validateJournal(doc, label, seenIds) {
         }
       }
 
+      // 3d. Формула потери человечности.
+      const humanity = system.humanityLoss;
+      if (humanity) {
+        if (!Number.isInteger(humanity.static) || humanity.static < 0) {
+          fail(label, `потеря человечности: «${humanity.static}» не целое число`);
+        }
+        // Разбор формулы в системе примитивен: он находит первый XdY, а всё
+        // остальное прогоняет через Number(). Любая функция, скобка или даже
+        // пробел превращаются в NaN, и установка падает с «humanity must be
+        // an integer». Поэтому допускаем только «XdY», «XdY+N» и «XdY-N».
+        const formula = String(humanity.roll ?? "");
+        if (!/^\d+d\d+([+-]\d+)?$/.test(formula)) {
+          fail(
+            label,
+            `формула потери человечности «${formula}» системе не по зубам: ` +
+              "допустимы только XdY, XdY+N и XdY-N, без пробелов и функций"
+          );
+        }
+      }
+
       // 4. Числовые границы из схемы данных.
       const numeric = [
         ["system.size", system.size, 0, null],

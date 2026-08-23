@@ -1,5 +1,5 @@
-2026/08/23-20:34:06.812 4f64 Recovering log #6
-2026/08/23-20:34:06.813 4f64 Level-0 table #8: started
-2026/08/23-20:34:06.815 4f64 Level-0 table #8: 8413 bytes OK
-2026/08/23-20:34:06.823 4f64 Delete type=0 #6
-2026/08/23-20:34:06.823 4f64 Delete type=3 #4
+2026/08/23-20:37:50.752 373c Recovering log #9
+2026/08/23-20:37:50.753 373c Level-0 table #11: started
+2026/08/23-20:37:50.754 373c Level-0 table #11: 8412 bytes OK
+2026/08/23-20:37:50.757 373c Delete type=0 #9
+2026/08/23-20:37:50.757 373c Delete type=3 #7
