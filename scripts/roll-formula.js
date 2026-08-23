@@ -1,26 +1,24 @@
 /**
  * Поддержка составных формул броска.
  *
- * Разбор формул в системе рассчитан ровно на один член вида «XdY» — это
- * записано прямо в комментарии к её конструктору. Всё, что стоит рядом, она
- * пытается превратить в плоские модификаторы через `Number()`, поэтому запись
- * из книги вида «15d6 + [2d6/2 округлить вверх]» разваливается: до броска
- * доходит только `2d6`, а остаток становится `NaN`. У корпусов ПКТ это
- * заканчивалось ошибкой «humanity: value must be an integer» — потеря
- * человечности считалась нечислом, и имплант не вставал.
+ * Формулы вида «15d6 + ceil(2d6/2)» — обычная запись в книге, но система с
+ * ними не работает, и мешают этому две вещи сразу.
  *
- * При этом сам Foundry такие формулы считает прекрасно: `ceil()` — его штатная
- * функция. Ломается именно предварительный разбор.
+ * Первая: разбор формулы рассчитан ровно на один член «XdY», о чём сказано в
+ * комментарии к конструктору. Всё, что стоит рядом, она пытается превратить в
+ * плоский модификатор через `Number()`, поэтому от составной формулы до броска
+ * доходит только первый кубик, а остаток становится `NaN`.
  *
- * Поэтому здесь для составных формул разбор пропускается: формула уходит в
- * Foundry целиком, как есть. Простые формулы обрабатывает сама система —
- * её логика с превращением «+2» в модификатор броска нужна, чтобы прибавки
- * были видны в карточке отдельной строкой.
+ * Вторая: собирая выпавшие грани для карточки, система лезет в `terms[0]` и
+ * ждёт там кубик. Когда в формуле есть функция, разбор Foundry может положить
+ * первым другой член — и всё падает на `results.map` с «Cannot read properties
+ * of undefined».
  *
- * Требование к записи одно: кубик должен стоять первым слагаемым
- * («15d6 + ceil(2d6/2)», а не наоборот). Система берёт первый член формулы,
- * чтобы показать выпавшие грани, и если там окажется функция, показывать
- * будет нечего.
+ * Поэтому для составных формул модуль берёт бросок на себя: отдаёт формулу
+ * Foundry целиком (её математику он понимает прекрасно) и собирает грани со
+ * всех кубиков, какие в ней нашлись. Простые формулы остаются за системой —
+ * её разбор нужен, чтобы прибавки вроде «+2» были видны в карточке отдельной
+ * строкой.
  */
 
 import { MODULE_ID, SYSTEM_ID } from "./constants.js";
@@ -32,7 +30,7 @@ const COMPOUND = /[a-zа-я]+\s*\(/i;
 const FIRST_DIE = /d\d+/;
 
 /**
- * Проверяет, что формулу можно отдать Foundry целиком.
+ * Можно ли отдать формулу Foundry целиком, минуя разбор системы.
  *
  * @param {String} formula - формула броска
  * @returns {Boolean}
@@ -42,14 +40,49 @@ export function isCompoundFormula(formula) {
 }
 
 /**
- * Учит систему не ломать составные формулы.
+ * Собирает выпавшие грани со всех кубиков броска.
+ *
+ * Система смотрит только на первый член формулы; здесь берём каждый, у кого
+ * есть результаты, — тогда в карточке видно все кости, включая те, что
+ * попали внутрь функции.
+ *
+ * @param {Roll} roll - вычисленный бросок Foundry
+ * @returns {Array<Number>}
+ */
+export function collectFaces(roll) {
+  const faces = [];
+
+  const walk = (terms) => {
+    for (const term of terms ?? []) {
+      if (Array.isArray(term?.results) && term.results.length) {
+        faces.push(...term.results.map((r) => r.result));
+      }
+      // Кубики внутри функций и скобок лежат во вложенных бросках.
+      if (Array.isArray(term?.terms)) walk(term.terms);
+      if (Array.isArray(term?.rolls)) {
+        for (const nested of term.rolls) walk(nested?.terms);
+      }
+    }
+  };
+
+  walk(roll?.terms);
+  return faces;
+}
+
+/**
+ * Учит систему не ломаться на составных формулах.
  *
  * @async
  */
 export async function registerFormulaPatch() {
   let rolls;
+  let diceHandler;
   try {
     rolls = await import(`/systems/${SYSTEM_ID}/modules/rolls/cpr-rolls.js`);
+    const handlerModule = await import(
+      `/systems/${SYSTEM_ID}/modules/extern/cpr-dice-handler.js`
+    );
+    diceHandler = handlerModule.default ?? handlerModule.DiceHandler;
   } catch (err) {
     console.warn(
       `${MODULE_ID} | Не удалось подключиться к броскам системы: составные формулы работать не будут.`,
@@ -61,23 +94,45 @@ export async function registerFormulaPatch() {
   const CPRRoll = rolls.CPRRoll ?? rolls.default;
   if (!CPRRoll?.prototype?._processFormula) return;
 
-  // libWrapper работает с путями от globalThis, а класс системы наружу
-  // не выставлен — публикуем ссылку на него под своим именем.
+  // libWrapper работает с путями от globalThis, а классы системы наружу
+  // не выставлены — публикуем ссылку под своим именем.
   globalThis.cprAddendaRollClass = CPRRoll;
 
+  // 1. Не даём разбору искалечить формулу.
   libWrapper.register(
     MODULE_ID,
     "cprAddendaRollClass.prototype._processFormula",
     function cprAddendaProcessFormula(wrapped, formula) {
       if (!isCompoundFormula(formula)) return wrapped(formula);
 
-      // Тип кости система выставляет сама внутри разбора; раз мы его
-      // пропускаем, проставляем здесь — иначе карточка броска останется
-      // без подписи.
       const die = String(formula).match(FIRST_DIE);
       this.die = die ? die[0] : null;
-
       return String(formula);
+    },
+    "MIXED"
+  );
+
+  // 2. Сам бросок для таких формул выполняем самостоятельно: системная
+  //    сборка граней рассчитана на единственный кубик в начале формулы.
+  libWrapper.register(
+    MODULE_ID,
+    "cprAddendaRollClass.prototype.roll",
+    async function cprAddendaRoll(wrapped, ...args) {
+      if (!isCompoundFormula(this.formula)) return wrapped(...args);
+
+      this._roll = await new Roll(this.formula).evaluate();
+      await diceHandler.handle3dDice(this._roll);
+
+      this.initialRoll = this._roll.total;
+      this.resultTotal = this.initialRoll + this.totalMods();
+      this.faces = collectFaces(this._roll);
+
+      // Критические события считаются по одной кости, а в составной формуле
+      // их много: сама система в таких случаях тоже ничего не решает.
+      this.criticalRoll = 0;
+
+      this._computeResult();
+      return this;
     },
     "MIXED"
   );

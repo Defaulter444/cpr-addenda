@@ -46,7 +46,7 @@ function systemProcessFormula(formula, mods) {
   };
 }
 
-const { isCompoundFormula } = await import(
+const { isCompoundFormula, collectFaces } = await import(
   pathToFileURL(path.join(prepare(), "roll-formula.mjs")).href
 );
 
@@ -102,7 +102,39 @@ function expect(ok, message) {
   expect(!isCompoundFormula("4d6-2"), "бросок с вычетом принят за составной");
 }
 
-// --- 3. Формулы предметов модуля --------------------------------------------
+// --- 3. Сбор выпавших граней ------------------------------------------------
+// Система смотрит только на первый член формулы и падает, если там оказалась
+// функция. Наш сбор обходит бросок целиком, включая кубики внутри функций.
+
+{
+  // Так Foundry раскладывает «15d6 + ceil(2d6/2)»: кубик, оператор, функция
+  // с вложенным броском.
+  const rollLike = {
+    terms: [
+      { results: [{ result: 4 }, { result: 6 }] },
+      {},
+      { rolls: [{ terms: [{ results: [{ result: 3 }] }] }] },
+    ],
+  };
+  const faces = collectFaces(rollLike);
+  expect(
+    JSON.stringify(faces) === JSON.stringify([4, 6, 3]),
+    `грани собраны неверно: ${JSON.stringify(faces)}`
+  );
+
+  // Случай, на котором падала система: первым идёт функция без результатов.
+  const functionFirst = {
+    terms: [{ formula: "ceil(2d6/2)" }, {}, { results: [{ result: 5 }] }],
+  };
+  expect(
+    JSON.stringify(collectFaces(functionFirst)) === JSON.stringify([5]),
+    "сбор граней спотыкается о функцию в начале формулы"
+  );
+
+  expect(collectFaces(undefined).length === 0, "пустой бросок должен давать пустой список граней");
+}
+
+// --- 4. Формулы предметов модуля --------------------------------------------
 
 {
   let compound = 0;
