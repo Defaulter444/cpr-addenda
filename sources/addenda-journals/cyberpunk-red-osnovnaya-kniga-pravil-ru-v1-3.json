@@ -44,7 +44,7 @@
         "controls": true,
         "volume": 0.5
       },
-      "src": "pdfs/cpr-core-ru/00-vvedenie.pdf",
+      "src": "modules/cpr-addenda/pdfs/cpr-core-ru/00-vvedenie.pdf",
       "system": {},
       "sort": 200000,
       "ownership": {
@@ -73,7 +73,7 @@
         "controls": true,
         "volume": 0.5
       },
-      "src": "pdfs/cpr-core-ru/01-never-fade-away.pdf",
+      "src": "modules/cpr-addenda/pdfs/cpr-core-ru/01-never-fade-away.pdf",
       "system": {},
       "sort": 201000,
       "ownership": {
@@ -102,7 +102,7 @@
         "controls": true,
         "volume": 0.5
       },
-      "src": "pdfs/cpr-core-ru/02-vzglyad-s-grani.pdf",
+      "src": "modules/cpr-addenda/pdfs/cpr-core-ru/02-vzglyad-s-grani.pdf",
       "system": {},
       "sort": 202000,
       "ownership": {
@@ -131,7 +131,7 @@
         "controls": true,
         "volume": 0.5
       },
-      "src": "pdfs/cpr-core-ru/03-dusha-i-mashina.pdf",
+      "src": "modules/cpr-addenda/pdfs/cpr-core-ru/03-dusha-i-mashina.pdf",
       "system": {},
       "sort": 203000,
       "ownership": {
@@ -160,7 +160,7 @@
         "controls": true,
         "volume": 0.5
       },
-      "src": "pdfs/cpr-core-ru/04-skazki-s-ulits.pdf",
+      "src": "modules/cpr-addenda/pdfs/cpr-core-ru/04-skazki-s-ulits.pdf",
       "system": {},
       "sort": 204000,
       "ownership": {
@@ -189,7 +189,7 @@
         "controls": true,
         "volume": 0.5
       },
-      "src": "pdfs/cpr-core-ru/05-prigoden-dlya-budushchego.pdf",
+      "src": "modules/cpr-addenda/pdfs/cpr-core-ru/05-prigoden-dlya-budushchego.pdf",
       "system": {},
       "sort": 205000,
       "ownership": {
@@ -218,7 +218,7 @@
         "controls": true,
         "volume": 0.5
       },
-      "src": "pdfs/cpr-core-ru/06-kiber-v-punk.pdf",
+      "src": "modules/cpr-addenda/pdfs/cpr-core-ru/06-kiber-v-punk.pdf",
       "system": {},
       "sort": 206000,
       "ownership": {
@@ -247,7 +247,7 @@
         "controls": true,
         "volume": 0.5
       },
-      "src": "pdfs/cpr-core-ru/07-padenie-bashen.pdf",
+      "src": "modules/cpr-addenda/pdfs/cpr-core-ru/07-padenie-bashen.pdf",
       "system": {},
       "sort": 207000,
       "ownership": {
@@ -276,7 +276,7 @@
         "controls": true,
         "volume": 0.5
       },
-      "src": "pdfs/cpr-core-ru/08-dovodim-delo.pdf",
+      "src": "modules/cpr-addenda/pdfs/cpr-core-ru/08-dovodim-delo.pdf",
       "system": {},
       "sort": 208000,
       "ownership": {
@@ -305,7 +305,7 @@
         "controls": true,
         "volume": 0.5
       },
-      "src": "pdfs/cpr-core-ru/09-perestrelka.pdf",
+      "src": "modules/cpr-addenda/pdfs/cpr-core-ru/09-perestrelka.pdf",
       "system": {},
       "sort": 209000,
       "ownership": {
@@ -334,7 +334,7 @@
         "controls": true,
         "volume": 0.5
       },
-      "src": "pdfs/cpr-core-ru/10-netranning.pdf",
+      "src": "modules/cpr-addenda/pdfs/cpr-core-ru/10-netranning.pdf",
       "system": {},
       "sort": 210000,
       "ownership": {
@@ -363,7 +363,7 @@
         "controls": true,
         "volume": 0.5
       },
-      "src": "pdfs/cpr-core-ru/11-trauma-team.pdf",
+      "src": "modules/cpr-addenda/pdfs/cpr-core-ru/11-trauma-team.pdf",
       "system": {},
       "sort": 211000,
       "ownership": {
@@ -392,7 +392,7 @@
         "controls": true,
         "volume": 0.5
       },
-      "src": "pdfs/cpr-core-ru/12-temnoe-budushchee.pdf",
+      "src": "modules/cpr-addenda/pdfs/cpr-core-ru/12-temnoe-budushchee.pdf",
       "system": {},
       "sort": 212000,
       "ownership": {
@@ -421,7 +421,7 @@
         "controls": true,
         "volume": 0.5
       },
-      "src": "pdfs/cpr-core-ru/13-krasnoe-vremya.pdf",
+      "src": "modules/cpr-addenda/pdfs/cpr-core-ru/13-krasnoe-vremya.pdf",
       "system": {},
       "sort": 213000,
       "ownership": {
@@ -450,7 +450,7 @@
         "controls": true,
         "volume": 0.5
       },
-      "src": "pdfs/cpr-core-ru/14-nayt-siti.pdf",
+      "src": "modules/cpr-addenda/pdfs/cpr-core-ru/14-nayt-siti.pdf",
       "system": {},
       "sort": 214000,
       "ownership": {
@@ -479,7 +479,7 @@
         "controls": true,
         "volume": 0.5
       },
-      "src": "pdfs/cpr-core-ru/15-povsednevnaya-zhizn.pdf",
+      "src": "modules/cpr-addenda/pdfs/cpr-core-ru/15-povsednevnaya-zhizn.pdf",
       "system": {},
       "sort": 215000,
       "ownership": {
@@ -508,7 +508,7 @@
         "controls": true,
         "volume": 0.5
       },
-      "src": "pdfs/cpr-core-ru/16-ekonomika-ulits.pdf",
+      "src": "modules/cpr-addenda/pdfs/cpr-core-ru/16-ekonomika-ulits.pdf",
       "system": {},
       "sort": 216000,
       "ownership": {
@@ -537,7 +537,7 @@
         "controls": true,
         "volume": 0.5
       },
-      "src": "pdfs/cpr-core-ru/17-zapuskaem-cyberpunk.pdf",
+      "src": "modules/cpr-addenda/pdfs/cpr-core-ru/17-zapuskaem-cyberpunk.pdf",
       "system": {},
       "sort": 217000,
       "ownership": {
@@ -566,7 +566,7 @@
         "controls": true,
         "volume": 0.5
       },
-      "src": "pdfs/cpr-core-ru/18-chernyy-pes.pdf",
+      "src": "modules/cpr-addenda/pdfs/cpr-core-ru/18-chernyy-pes.pdf",
       "system": {},
       "sort": 218000,
       "ownership": {
@@ -595,7 +595,7 @@
         "controls": true,
         "volume": 0.5
       },
-      "src": "pdfs/cyberpunk-red-core-ru-v13.pdf",
+      "src": "modules/cpr-addenda/pdfs/cyberpunk-red-core-ru-v13.pdf",
       "system": {},
       "sort": 900000,
       "ownership": {

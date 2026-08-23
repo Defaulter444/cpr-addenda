@@ -216,8 +216,20 @@ function validateJournal(doc, label, seenIds) {
     }
     seenIds.set(page._id, label);
     if (!page.name) fail(label, "у страницы нет имени");
-    if (page.type === "pdf" && !page.src) {
-      fail(label, `страница "${page.name}": тип PDF, но не указан файл`);
+    if (page.type === "pdf") {
+      if (!page.src) {
+        fail(label, `страница "${page.name}": тип PDF, но не указан файл`);
+      } else {
+        // Ссылка на файл внутри модуля должна вести на существующий файл,
+        // иначе страница откроется пустой уже у игроков.
+        const local = page.src.replace(/^modules\/cpr-addenda\//, "");
+        const full = page.src.startsWith("modules/cpr-addenda/")
+          ? path.join(MODULE_ROOT, local)
+          : path.join(DATA_ROOT, page.src);
+        if (!fs.existsSync(full)) {
+          fail(label, `страница "${page.name}": файл не найден — ${page.src}`);
+        }
+      }
     }
     if (page.type === "text" && !page.text?.content) {
       fail(label, `страница "${page.name}": текстовая, но пустая`);

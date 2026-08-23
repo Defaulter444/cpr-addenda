@@ -12,9 +12,11 @@
 https://github.com/Defaulter444/cpr-addenda/releases/latest/download/module.json
 ```
 
-Требуется [libWrapper](https://foundryvtt.com/packages/lib-wrapper).
-[Babele](https://foundryvtt.com/packages/babele) не обязателен — предметы уже
-названы по-русски.
+Модуль сам попросит доустановить то, что ему нужно:
+[libWrapper](https://foundryvtt.com/packages/lib-wrapper) и
+[PDF Pager](https://foundryvtt.com/packages/pdf-pager) — Foundry предложит их
+поставить прямо при установке. [Babele](https://foundryvtt.com/packages/babele)
+не нужен: предметы уже названы по-русски.
 
 После установки включите модуль в мире и загляните в чат: мастеру придёт
 сообщение с кнопкой, которая переключает систему на расширенные таблицы
@@ -26,14 +28,12 @@ https://github.com/Defaulter444/cpr-addenda/releases/latest/download/module.json
 оглавление и двадцать глав с уже выставленными смещениями страниц, чтобы номер
 в PDF совпадал с номером в книге.
 
-**Файлов книги в модуле нет** — это коммерческое издание. Чтобы журнал ожил,
-положите свои файлы в `Data/pdfs/cpr-core-ru/` под теми же именами
-(`00-vvedenie.pdf`, `01-never-fade-away.pdf` и так далее — полный список
-виден на страницах журнала). Для просмотра нужен модуль
-[PDF Pager](https://foundryvtt.com/packages/pdf-pager).
+Файлы книги входят в модуль — докладывать ничего не нужно. После установки
+журнал открывается и листается сразу, номера страниц в PDF совпадают с
+номерами в книге.
 
-Без файлов журнал остаётся рабочим оглавлением: структура и разбивка по главам
-на месте.
+Книга лежит и главами (`pdfs/cpr-core-ru/`), и одним файлом целиком, так что
+можно и прыгать по разделам, и искать по всему тексту.
 
 ## Что внутри
 
