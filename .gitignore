@@ -5,3 +5,6 @@ tools/index.json
 # Черновики и временное.
 drafts/
 *.log
+
+# Архив релиза: собирается командой make_release.
+module.zip
