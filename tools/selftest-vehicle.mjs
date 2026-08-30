@@ -824,7 +824,12 @@ console.log("Собранный пак актёров: предметы отде
     const actors = new Map();
     const items = new Map();
     const db = new ClassicLevel(packDir, { valueEncoding: "json" });
+    let opened = false;
     try {
+      // Пока Foundry запущен, база пака заблокирована им. Это не повод падать:
+      // проверка про содержимое пака, а не про то, играет ли сейчас мастер.
+      await db.open();
+      opened = true;
       for await (const [key, value] of db.iterator()) {
         if (key.startsWith("!actors.items!")) {
           items.set(key.slice("!actors.items!".length), value);
@@ -832,10 +837,18 @@ console.log("Собранный пак актёров: предметы отде
           actors.set(key.slice("!actors!".length), value);
         }
       }
+    } catch (error) {
+      console.log(`  пропущено: пак недоступен (${error.code ?? error.message}) — закройте Foundry`);
     } finally {
-      await db.close();
+      if (opened) await db.close();
     }
 
+    if (!opened) {
+      // Дальше сверять нечего.
+      actors.clear();
+    }
+
+    if (opened) {
     // Сколько предметов должно быть — считаем по исходникам.
     const sourceDir = path.join(MODULE_ROOT, "sources", "addenda-actors");
     const expected = new Map();
@@ -900,6 +913,7 @@ console.log("Собранный пак актёров: предметы отде
       `записей предметов ${items.size}, а собрано по актёрам ${totalItems} — есть осиротевшие`
     );
     console.log(`  актёров ${actors.size}, предметов ${items.size}`);
+    }
   }
 }
 
