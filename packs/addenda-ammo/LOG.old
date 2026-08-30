@@ -1,3 +1,7 @@
-2026/08/30-20:59:13.477 2bc4 Recovering log #131
-2026/08/30-20:59:13.480 2bc4 Delete type=0 #131
-2026/08/30-20:59:13.480 2bc4 Delete type=3 #130
+2026/08/30-21:29:42.439 3848 Recovering log #139
+2026/08/30-21:29:42.442 3848 Delete type=0 #139
+2026/08/30-21:29:42.442 3848 Delete type=3 #138
+2026/08/30-21:29:42.443 3d8 Level-0 table #143: started
+2026/08/30-21:29:42.443 3d8 Level-0 table #143: 0 bytes OK
+2026/08/30-21:29:42.444 3d8 Delete type=0 #141
+2026/08/30-21:29:42.445 3d8 Manual compaction at level-0 from '!' @ 72057594037927935 : 1 .. '\xef\xbf\xbf' @ 0 : 0; will stop at (end)
