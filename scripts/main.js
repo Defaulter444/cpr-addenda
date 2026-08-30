@@ -93,6 +93,15 @@ function registerSettings() {
     default: true,
   });
 
+  game.settings.register(MODULE_ID, SETTINGS.explosiveTemplates, {
+    name: "CPRADDENDA.settings.explosiveTemplates.name",
+    hint: "CPRADDENDA.settings.explosiveTemplates.hint",
+    scope: "world",
+    config: true,
+    type: Boolean,
+    default: true,
+  });
+
   game.settings.register(MODULE_ID, SETTINGS.showSheetControls, {
     name: "CPRADDENDA.settings.showSheetControls.name",
     hint: "CPRADDENDA.settings.showSheetControls.hint",

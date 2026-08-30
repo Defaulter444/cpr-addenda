@@ -183,5 +183,13 @@
   "CPRADDENDA.corebook.imported": "The rulebook was added to the world — source page links now work.",
   "CPRADDENDA.corebook.alreadyHere": "The rulebook is already in this world: “{journal}”. Nothing was added.",
   "CPRADDENDA.corebook.failed": "Could not add the rulebook to the world — see the console (F12).",
-  "CPRADDENDA.corebook.needPdfPager": "Source page links will not work: the PDF Pager module is not enabled. Enable it in module management — it renders the PDF and resolves the page code."
+  "CPRADDENDA.corebook.needPdfPager": "Source page links will not work: the PDF Pager module is not enabled. Enable it in module management — it renders the PDF and resolves the page code.",
+  "CPRADDENDA.settings.explosiveTemplates.name": "Place blast areas",
+  "CPRADDENDA.settings.explosiveTemplates.hint": "When a rocket or grenade launcher is fired from a vehicle position, the module places a 5 × 5 square area on the target and posts the Explosives rule to chat. Damage and dodges are not rolled automatically: where a miss lands is the GM's call, and dodging is the player's choice.",
+  "CPRADDENDA.vehicle.blast.title": "blast area {squares} × {squares} squares ({size} × {size} {units})",
+  "CPRADDENDA.vehicle.blast.damageOnce": "Damage is rolled <strong>once</strong> and applied to every target in the area, environment included. Armor reduces it as usual.",
+  "CPRADDENDA.vehicle.blast.dodge": "Anyone in the area with <strong>REF 8 or higher</strong> may try to dodge: their roll must beat <strong>{total}</strong>. On a success they move out of the area.",
+  "CPRADDENDA.vehicle.blast.miss": "If the roll fell short of the DV to hit the target, the GM decides where inside this square the blast actually went off and moves the area there.",
+  "CPRADDENDA.vehicle.blast.noTarget": "No target selected, so there is nowhere to place the blast area for “{name}”. Target a token (press T over it) and fire again.",
+  "CPRADDENDA.vehicle.blast.failed": "The blast area was not placed: {message}"
 }

@@ -75,6 +75,8 @@ export const SETTINGS = {
   vehicleMigration: "vehicleMigration",
   /** Класть ли книгу правил в мир, чтобы работали ссылки на её страницы. */
   importCorebook: "importCorebook",
+  /** Ставить ли зону поражения при выстреле из взрывающегося оружия. */
+  explosiveTemplates: "explosiveTemplates",
 };
 
 /**

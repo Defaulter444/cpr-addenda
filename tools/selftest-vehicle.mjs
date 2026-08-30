@@ -1044,6 +1044,127 @@ console.log("Несостоявшийся бросок объясняет себ
   }
 }
 
+console.log("Зона поражения взрывающегося оружия");
+{
+  const explosives = await load("vehicle-explosives");
+
+  expect(
+    explosives.isExplosive({ system: { weaponType: "rocketLauncher" } }),
+    "ракетница не опознана как взрывающееся оружие"
+  );
+  expect(
+    explosives.isExplosive({ system: { weaponType: "grenadeLauncher" } }),
+    "гранатомёт не опознан как взрывающееся оружие"
+  );
+  for (const type of ["assaultRifle", "heavySmg", "sniperRifle", "heavyMelee"]) {
+    expect(
+      !explosives.isExplosive({ system: { weaponType: type } }),
+      `"${type}" зря считается взрывающимся`
+    );
+  }
+  expect(!explosives.isExplosive(undefined), "undefined принят за оружие");
+
+  // --- геометрия квадрата ---
+  const created = [];
+  const said = [];
+  const chat = [];
+
+  // Сетка Cyberpunk RED: 2 метра на клетку, 100 пикселей.
+  const GRID = { distance: 2, size: 100, units: "m" };
+  const CENTER = { x: 1000, y: 700 };
+
+  globalThis.canvas = {
+    scene: {
+      grid: GRID,
+      createEmbeddedDocuments: async (type, [data]) => {
+        created.push([type, data]);
+        return [data];
+      },
+    },
+  };
+  globalThis.ChatMessage = {
+    create: async (data) => chat.push(data),
+    getSpeaker: () => ({}),
+  };
+  globalThis.ui = {
+    notifications: {
+      warn: (m) => said.push(m),
+      error: (m) => said.push(m),
+      info: () => {},
+    },
+  };
+  globalThis.game.user = { id: "user000000000001", color: "#ff0000", targets: new Set() };
+  globalThis.game.settings = { get: () => true };
+
+  const weapon = { name: "Ракетница", system: { weaponType: "rocketLauncher" }, actor: null };
+
+  // Без цели ставить некуда — предупреждаем и ничего не создаём.
+  {
+    created.length = 0; said.length = 0;
+    const result = await explosives.placeBlast(weapon, 17);
+    expect(result === null, "без цели зона всё-таки поставлена");
+    expect(created.length === 0, "без цели создан шаблон");
+    expect(said.length === 1 && said[0].includes("noTarget"), `не то сообщение: ${said[0]}`);
+  }
+
+  // С целью — ровный квадрат 5 × 5 клеток по центру цели.
+  {
+    created.length = 0; said.length = 0; chat.length = 0;
+    game.user.targets = new Set([{ center: CENTER }]);
+    await explosives.placeBlast(weapon, 17);
+
+    expect(created.length === 1, `создано шаблонов ${created.length}`);
+    const [type, tpl] = created[0] ?? [];
+    expect(type === "MeasuredTemplate", `создан документ типа ${type}`);
+    expect(tpl?.t === "rect", `тип шаблона "${tpl?.t}", а нужен rect`);
+    expect(tpl?.direction === 45, `направление ${tpl?.direction}, а нужно 45`);
+
+    // Диагональ квадрата: сторона 5 клеток по 2 метра = 10 метров.
+    const side = 5 * GRID.distance;
+    expect(
+      Math.abs(tpl.distance - side * Math.SQRT2) < 1e-9,
+      `диагональ ${tpl.distance}, а нужна ${side * Math.SQRT2}`
+    );
+
+    // Foundry рисует прямоугольник из угла: ширина = distance * cos(45°).
+    // Проверяем, что получается ровно 5 клеток и что квадрат центрирован.
+    const widthUnits = tpl.distance * Math.cos(Math.PI / 4);
+    expect(
+      Math.abs(widthUnits - side) < 1e-9,
+      `сторона выходит ${widthUnits}, а нужна ${side}`
+    );
+    const widthPixels = (widthUnits / GRID.distance) * GRID.size;
+    expect(
+      Math.abs(widthPixels - 5 * GRID.size) < 1e-9,
+      `сторона в пикселях ${widthPixels}, а нужна ${5 * GRID.size}`
+    );
+    expect(
+      Math.abs(tpl.x + widthPixels / 2 - CENTER.x) < 1e-9,
+      `квадрат смещён по X: угол ${tpl.x}, центр вышел ${tpl.x + widthPixels / 2}`
+    );
+    expect(
+      Math.abs(tpl.y + widthPixels / 2 - CENTER.y) < 1e-9,
+      `квадрат смещён по Y: угол ${tpl.y}, центр вышел ${tpl.y + widthPixels / 2}`
+    );
+
+    // Напоминание правила уходит в чат и называет число для уклонения.
+    expect(chat.length === 1, `сообщений в чат ${chat.length}`);
+    expect(
+      chat[0]?.content?.includes("17"),
+      "в напоминании нет числа, которое надо превзойти"
+    );
+  }
+
+  // Выключенная настройка запрещает вмешательство.
+  {
+    created.length = 0;
+    game.settings.get = () => false;
+    const result = await explosives.placeBlast(weapon, 17);
+    expect(result === null && created.length === 0, "настройка выключена, а зона поставлена");
+    game.settings.get = () => true;
+  }
+}
+
 fs.rmSync(tmp, { recursive: true, force: true });
 
 console.log(`\nПроверок выполнено: ${checks}, провалов: ${failures}`);

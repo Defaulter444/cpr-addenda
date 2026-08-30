@@ -30,6 +30,7 @@ import {
   reconcileEffects,
 } from "./vehicle-effects.js";
 import { findSkill, skillNamesHint } from "./vehicle-skills.js";
+import { isExplosive, placeBlast } from "./vehicle-explosives.js";
 
 /**
  * Утилиты системы. Нужны ровно в одном месте — за списком таблиц дальности при
@@ -1000,10 +1001,15 @@ export class VehicleSheet extends ActorSheet {
 
     // Навык оружия система ищет у стрелка точным именем и без него падает на
     // пустой ссылке. Проверяем заранее, чтобы сказать это человеческими словами.
+    //
+    // Только для атаки: урон навыка не требует — он катится по формуле оружия,
+    // и раньше эта проверка зря резала бросок урона вместе с атакой.
     const needed =
-      rollType === "autofire" || rollType === "suppressive"
-        ? "Autofire"
-        : item.system.weaponSkill;
+      rollType === "damage"
+        ? null
+        : rollType === "autofire" || rollType === "suppressive"
+          ? "Autofire"
+          : item.system.weaponSkill;
     if (
       needed &&
       !gunner.items.some((i) => i.type === "skill" && i.name === needed)
@@ -1063,6 +1069,12 @@ export class VehicleSheet extends ActorSheet {
         `/systems/${SYSTEM_ID}/modules/chat/cpr-chat.js`
       );
       await CPRChat.default.RenderRollCard(cprRoll);
+
+      // Ракетница и гранатомёт бьют по площади: ставим зону поражения и
+      // напоминаем правило. Только на атаке — бросок урона зону не двигает.
+      if (rollTypeFromButton === "attack" && isExplosive(item)) {
+        await placeBlast(item, cprRoll.resultTotal);
+      }
 
       // Мастеру анимацию рисует сам Automated Animations по карточке чата, а
       // игроку — нет: карточка приходит от чужого актёра. Запускаем вручную.
