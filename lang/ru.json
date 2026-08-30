@@ -193,7 +193,16 @@
   "CPRADDENDA.vehicle.blast.noTarget": "Цель не выбрана, ставить зону поражения «{name}» некуда. Наведитесь на цель (клавиша T по токену) и выстрелите снова.",
   "CPRADDENDA.vehicle.blast.failed": "Зона поражения не поставлена: {message}",
   "CPRADDENDA.vehicle.blast.inZone": "В зоне поражения:",
-  "CPRADDENDA.vehicle.blast.mayDodge": "может уклониться",
   "CPRADDENDA.vehicle.blast.cannotDodge": "уклониться не может (нужен РЕФ 8 или выше)",
+  "CPRADDENDA.vehicle.blast.ref": "РЕФ",
+  "CPRADDENDA.vehicle.blast.damageButton": "Бросить урон по зоне ({damage})",
+  "CPRADDENDA.vehicle.blast.dodgeButton": "Уклониться",
+  "CPRADDENDA.vehicle.blast.dodgeSuccess": "<strong>{name}</strong> уклоняется: {result} против {total}. Успел выйти за пределы зоны, урона нет.",
+  "CPRADDENDA.vehicle.blast.dodgeFail": "<strong>{name}</strong> не уклонился: {result} против {total}. Остаётся в зоне и получает урон взрыва.",
+  "CPRADDENDA.vehicle.blast.noEvasion": "У «{name}» нет навыка «Уклонение» — бросить уклонение не от чего. Добавьте навык на лист.",
+  "CPRADDENDA.vehicle.blast.dodgeNotYours": "«{name}» — не ваш персонаж. Уклоняться за него должен его игрок или мастер.",
+  "CPRADDENDA.vehicle.blast.damageNotYours": "Урон по зоне бросает тот, кто стрелял, или мастер.",
+  "CPRADDENDA.vehicle.blast.weaponGone": "Оружие этого выстрела больше не найти: его удалили или сменили мир. Выстрелите заново.",
+  "CPRADDENDA.vehicle.blast.tokenGone": "Этой фигуры больше нет на сцене — уклоняться некому.",
   "CPRADDENDA.vehicle.blast.empty": "В зоне никого нет."
 }

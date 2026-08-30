@@ -1081,7 +1081,7 @@ export class VehicleSheet extends ActorSheet {
       // Ракетница и гранатомёт бьют по площади: ставим зону поражения и
       // напоминаем правило. Только на атаке — бросок урона зону не двигает.
       if (rollTypeFromButton === "attack" && isExplosive(item)) {
-        await placeBlast(item, cprRoll.resultTotal);
+        await placeBlast(item, cprRoll.resultTotal, gunner);
       }
 
       // Мастеру анимацию рисует сам Automated Animations по карточке чата, а

@@ -296,6 +296,12 @@ console.log("Локализация: все ключи на месте");
     for (const match of body.matchAll(/"(CPRADDENDA\.vehicle\.[a-zA-Z.]+)"/g)) {
       used.add(match[1]);
     }
+    // Ключ не всегда стоит прямо в скобках `localize`: его выбирают условием
+    // («уклонился» или «не уклонился») и передают переменной. Такой ключ ровно
+    // так же используется, поэтому считаем и голые строки-ключи.
+    for (const match of body.matchAll(/"(vehicle\.[a-z][a-zA-Z]*\.[a-zA-Z.]+)"/g)) {
+      used.add(`CPRADDENDA.${match[1]}`);
+    }
   }
 
   expect(used.size > 100, `ключей найдено подозрительно мало: ${used.size}`);
@@ -1073,10 +1079,11 @@ console.log("Зона поражения взрывающегося оружия
   const GRID = { distance: 2, size: 100, units: "m" };
   const CENTER = { x: 1000, y: 700 };
 
-  /** Фигура на столе: центр и РЕФ владельца. */
+  /** Фигура на столе: центр, РЕФ владельца и ссылка, по которой её вернуть. */
   const placeable = (name, x, y, ref) => ({
     name,
     center: { x, y },
+    document: { uuid: `Scene.s1.Token.${name.replace(/\s/g, "")}` },
     actor: { system: { stats: { ref: { value: ref } } } },
   });
 
@@ -1104,6 +1111,8 @@ console.log("Зона поражения взрывающегося оружия
     create: async (data) => chat.push(data),
     getSpeaker: () => ({}),
   };
+  // Карточка экранирует имена через Handlebars — в Foundry он глобальный.
+  globalThis.Handlebars = { escapeExpression: (t) => String(t) };
   globalThis.ui = {
     notifications: {
       warn: (m) => said.push(m),
@@ -1114,7 +1123,13 @@ console.log("Зона поражения взрывающегося оружия
   globalThis.game.user = { id: "user000000000001", color: "#ff0000", targets: new Set() };
   globalThis.game.settings = { get: () => true };
 
-  const weapon = { name: "Ракетница", system: { weaponType: "rocketLauncher" }, actor: null };
+  const weapon = {
+    name: "Ракетница",
+    uuid: "Actor.veh0000000000001.Item.rocket0000000001",
+    system: { weaponType: "rocketLauncher", damage: "8d6" },
+    actor: null,
+  };
+  const gunner = { uuid: "Actor.gunner000000001" };
 
   // Без цели ставить некуда — предупреждаем и ничего не создаём.
   {
@@ -1129,7 +1144,7 @@ console.log("Зона поражения взрывающегося оружия
   {
     created.length = 0; said.length = 0; chat.length = 0;
     game.user.targets = new Set([{ center: CENTER }]);
-    await explosives.placeBlast(weapon, 17);
+    await explosives.placeBlast(weapon, 17, gunner);
 
     expect(created.length === 1, `создано шаблонов ${created.length}`);
     const [type, tpl] = created[0] ?? [];
@@ -1177,11 +1192,33 @@ console.log("Зона поражения взрывающегося оружия
     for (const who of ["Снаружи по X", "Снаружи по Y"]) {
       expect(!card.includes(who), `"${who}" попал в перечень, хотя вне зоны`);
     }
-    // РЕФ решает, кому предлагать уклонение.
+    // РЕФ решает, кому давать кнопку уклонения.
+    const dodgeButtons = card.match(/data-action="cprAddendaBlastDodge"/g) ?? [];
     expect(
-      card.includes("mayDodge"),
-      "никому не предложено уклониться, хотя есть РЕФ 8+"
+      dodgeButtons.length === 2,
+      `кнопок уклонения ${dodgeButtons.length}, а РЕФ 8+ у двоих из зоны`
     );
+    expect(
+      card.includes('data-token-uuid="Scene.s1.Token.Вцентре"'),
+      "кнопка уклонения не знает, за кого бросать"
+    );
+    expect(
+      !card.includes("Scene.s1.Token.СнаружипоX"),
+      "кнопка уклонения досталась тому, кто вне зоны"
+    );
+
+    // Урон бросается один раз на всю зону — значит, и кнопка ровно одна.
+    const damageButtons = card.match(/data-action="cprAddendaBlastDamage"/g) ?? [];
+    expect(
+      damageButtons.length === 1,
+      `кнопок урона ${damageButtons.length}, а урон бросается один раз`
+    );
+
+    // Кнопкам нужны ссылки на документы, а не подписи: держим их во флагах.
+    const blast = chat[0]?.flags?.["cpr-addenda"]?.blast;
+    expect(blast?.weapon === weapon.uuid, `во флаге не то оружие: ${blast?.weapon}`);
+    expect(blast?.gunner === gunner.uuid, `во флаге не тот стрелок: ${blast?.gunner}`);
+    expect(blast?.attack === 17, `во флаге не тот бросок атаки: ${blast?.attack}`);
     expect(
       card.includes("cannotDodge"),
       "не отмечен тот, кому РЕФ не позволяет уклоняться"
@@ -1195,6 +1232,89 @@ console.log("Зона поражения взрывающегося оружия
     const result = await explosives.placeBlast(weapon, 17);
     expect(result === null && created.length === 0, "настройка выключена, а зона поставлена");
     game.settings.get = () => true;
+  }
+
+  // --- кнопки карточки: каждый отказ должен быть слышен ---
+  //
+  // Кнопка, которая при нажатии молча ничего не делает, — худшее, что тут может
+  // случиться: со стороны это неотличимо от сломанного модуля. Поэтому каждый
+  // путь, на котором бросок не состоится, обязан сказать, почему.
+  {
+    const { rollBlastDamage, rollBlastDodge } = explosives.__test;
+    const world = new Map();
+    globalThis.fromUuid = async (uuid) => world.get(uuid) ?? null;
+    game.user.isGM = false;
+
+    const blast = { weapon: weapon.uuid, gunner: gunner.uuid, attack: 17 };
+
+    // Оружия больше нет — например, удалили актёра брони.
+    said.length = 0;
+    await rollBlastDamage({}, blast);
+    expect(
+      said.length === 1 && said[0].includes("weaponGone"),
+      `пропавшее оружие: сказано "${said[0]}"`
+    );
+
+    // Оружие чужое, и мы не мастер.
+    world.set(weapon.uuid, { ...weapon, isOwner: false });
+    said.length = 0;
+    await rollBlastDamage({}, blast);
+    expect(
+      said.length === 1 && said[0].includes("damageNotYours"),
+      `чужое оружие: сказано "${said[0]}"`
+    );
+
+    // Мастер бросает за кого угодно: до отказа по владению дело не доходит,
+    // и упирается всё уже в отсутствие стрелка, а не в права.
+    game.user.isGM = true;
+    said.length = 0;
+    await rollBlastDamage({}, { ...blast, gunner: null, weapon: weapon.uuid });
+    expect(
+      said.length === 1 && said[0].includes("weaponGone"),
+      `мастеру отказали по владению: сказано "${said[0]}"`
+    );
+    game.user.isGM = false;
+
+    // Фигуры на сцене больше нет.
+    said.length = 0;
+    await rollBlastDodge({}, blast, "Scene.s1.Token.нет");
+    expect(
+      said.length === 1 && said[0].includes("tokenGone"),
+      `пропавшая фигура: сказано "${said[0]}"`
+    );
+
+    // Уклоняться за чужого персонажа нельзя — это отобранный у игрока выбор.
+    world.set("Scene.s1.Token.чужой", {
+      id: "tok00000000000001",
+      actor: { name: "Чужой", isOwner: false, items: [] },
+    });
+    said.length = 0;
+    await rollBlastDodge({}, blast, "Scene.s1.Token.чужой");
+    expect(
+      said.length === 1 && said[0].includes("dodgeNotYours"),
+      `чужой персонаж: сказано "${said[0]}"`
+    );
+
+    // Свой персонаж, но навыка «Уклонение» на листе нет.
+    world.set("Scene.s1.Token.свой", {
+      id: "tok00000000000002",
+      actor: { name: "Свой", isOwner: true, items: [] },
+    });
+    said.length = 0;
+    await rollBlastDodge({}, blast, "Scene.s1.Token.свой");
+    expect(
+      said.length === 1 && said[0].includes("noEvasion"),
+      `нет навыка уклонения: сказано "${said[0]}"`
+    );
+
+    // Порог из книги — РЕФ 8, а не 7 и не 9.
+    expect(
+      explosives.__test.DODGE_REF === 8,
+      `порог уклонения ${explosives.__test.DODGE_REF}, а в книге 8`
+    );
+
+    delete globalThis.fromUuid;
+    delete game.user.isGM;
   }
 }
 

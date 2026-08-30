@@ -193,7 +193,16 @@
   "CPRADDENDA.vehicle.blast.noTarget": "No target selected, so there is nowhere to place the blast area for “{name}”. Target a token (press T over it) and fire again.",
   "CPRADDENDA.vehicle.blast.failed": "The blast area was not placed: {message}",
   "CPRADDENDA.vehicle.blast.inZone": "Caught in the blast:",
-  "CPRADDENDA.vehicle.blast.mayDodge": "may dodge",
   "CPRADDENDA.vehicle.blast.cannotDodge": "cannot dodge (REF 8 or higher required)",
+  "CPRADDENDA.vehicle.blast.ref": "REF",
+  "CPRADDENDA.vehicle.blast.damageButton": "Roll blast damage ({damage})",
+  "CPRADDENDA.vehicle.blast.dodgeButton": "Dodge",
+  "CPRADDENDA.vehicle.blast.dodgeSuccess": "<strong>{name}</strong> dodges: {result} against {total}. Moved clear of the area, no damage.",
+  "CPRADDENDA.vehicle.blast.dodgeFail": "<strong>{name}</strong> fails to dodge: {result} against {total}. Stays in the area and takes the blast damage.",
+  "CPRADDENDA.vehicle.blast.noEvasion": "{name} has no Evasion skill, so there is nothing to roll. Add the skill to the sheet.",
+  "CPRADDENDA.vehicle.blast.dodgeNotYours": "{name} is not your character. Their player or the GM rolls the dodge.",
+  "CPRADDENDA.vehicle.blast.damageNotYours": "Blast damage is rolled by whoever fired, or by the GM.",
+  "CPRADDENDA.vehicle.blast.weaponGone": "The weapon from this shot can no longer be found — it was deleted or the world changed. Fire again.",
+  "CPRADDENDA.vehicle.blast.tokenGone": "That token is no longer on the scene, so there is nobody to dodge.",
   "CPRADDENDA.vehicle.blast.empty": "Nobody is in the area."
 }

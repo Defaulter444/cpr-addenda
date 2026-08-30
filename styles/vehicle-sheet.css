@@ -1413,3 +1413,26 @@ html[data-cpr-theme="default"] .vas-dialog {
   color: var(--cpr-text-chat-normal, #eaeaea) !important;
   font-size: 12px !important;
 }
+/* Карточка зоны поражения взрывающегося оружия.
+   Кнопки в чате Foundry по умолчанию растягиваются на всю ширину строки —
+   для кнопки уклонения рядом с именем это выглядит нелепо, поэтому ширину
+   задаём по содержимому. */
+.cpr-addenda-blast-actions {
+  margin: 0.35rem 0;
+}
+
+.cpr-addenda-blast-actions button,
+button.cpr-addenda-blast-dodge {
+  width: auto;
+  line-height: 1.4;
+  padding: 0 0.5rem;
+  font-size: 0.85rem;
+}
+
+button.cpr-addenda-blast-dodge {
+  margin-left: 0.25rem;
+}
+
+.cpr-addenda-blast-actions button {
+  font-weight: bold;
+}
