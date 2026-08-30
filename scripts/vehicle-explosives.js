@@ -172,6 +172,7 @@ export async function placeBlast(item, attackTotal, gunner = null) {
         })}</p>` +
         `<p>${localize("vehicle.blast.damageOnce")}</p>` +
         `<div class="cpr-addenda-blast-actions">${damageButton}</div>` +
+        `<p class="cpr-addenda-blast-hint">${localize("vehicle.blast.applyHint")}</p>` +
         `<p>${localize("vehicle.blast.dodge", { total: attackTotal })}</p>` +
         `<p><strong>${localize("vehicle.blast.inZone")}</strong></p>` +
         roster +
@@ -185,6 +186,9 @@ export async function placeBlast(item, attackTotal, gunner = null) {
             weapon: item.uuid,
             gunner: gunner?.uuid ?? item.actor?.uuid ?? null,
             attack: attackTotal,
+            // Все, кто в зоне: урон применяется ко всем сразу, значит и в
+            // карточку урона должны попасть все, а не одна выбранная цель.
+            caught: caught.map((t) => t.uuid).filter(Boolean),
           },
         },
       },
@@ -215,9 +219,10 @@ export async function placeBlast(item, attackTotal, gunner = null) {
  * @param {CPRItem} item - чем бросают
  * @param {CPRRoll} roll - заготовка броска
  * @param {String|null} tokenId - фигура на столе, если она есть
+ * @param {Array} targets - по кому раздавать урон; в карточку идут сами фигуры
  * @returns {Promise<CPRRoll|null>} - брошенный бросок или null, если отменили
  */
-async function finishRoll(event, actor, item, roll, tokenId = null) {
+async function finishRoll(event, actor, item, roll, tokenId = null, targets = []) {
   let cprRoll = roll;
   const keepRolling = await cprRoll.handleRollDialog(event, actor, item);
   if (!keepRolling) return null;
@@ -230,7 +235,10 @@ async function finishRoll(event, actor, item, roll, tokenId = null) {
   cprRoll.entityData = {
     actor: actor.id,
     token: tokenId,
-    tokens: [],
+    // Шаблон карточки урона берёт отсюда `name`, `actor.id` и `id`, поэтому
+    // кладём документы фигур целиком. Идентификаторов ему мало: от них внизу
+    // карточки остаются пустые строчки с кнопкой, которая никуда не применяет.
+    tokens: targets,
     item: item.id,
   };
 
@@ -282,7 +290,17 @@ async function rollBlastDamage(event, blast) {
     );
     return;
   }
-  await finishRoll(event, gunner, item, roll);
+
+  // Все, кто был в зоне на момент выстрела. Каждый получит в карточке урона
+  // свою строчку с кнопкой — урон один на всех, но применяется поимённо.
+  // Пропавшие со сцены фигуры просто выпадают из списка.
+  const targets = [];
+  for (const uuid of blast.caught ?? []) {
+    const token = await fromUuid(uuid); // eslint-disable-line no-await-in-loop
+    if (token) targets.push(token);
+  }
+
+  await finishRoll(event, gunner, item, roll, null, targets);
 }
 
 /**

@@ -1436,3 +1436,9 @@ button.cpr-addenda-blast-dodge {
 .cpr-addenda-blast-actions button {
   font-weight: bold;
 }
+
+.cpr-addenda-blast-hint {
+  font-size: 0.8rem;
+  opacity: 0.75;
+  margin: 0.2rem 0 0.5rem;
+}

@@ -196,6 +196,7 @@
   "CPRADDENDA.vehicle.blast.cannotDodge": "cannot dodge (REF 8 or higher required)",
   "CPRADDENDA.vehicle.blast.ref": "REF",
   "CPRADDENDA.vehicle.blast.damageButton": "Roll blast damage ({damage})",
+  "CPRADDENDA.vehicle.blast.applyHint": "In the damage card each target has its own ⚡ button — apply the damage one by one. Skip anyone who dodged. The button at the top of the card hits the tokens <em>currently selected on the canvas</em>, not the targets.",
   "CPRADDENDA.vehicle.blast.dodgeButton": "Dodge",
   "CPRADDENDA.vehicle.blast.dodgeSuccess": "<strong>{name}</strong> dodges: {result} against {total}. Moved clear of the area, no damage.",
   "CPRADDENDA.vehicle.blast.dodgeFail": "<strong>{name}</strong> fails to dodge: {result} against {total}. Stays in the area and takes the blast damage.",

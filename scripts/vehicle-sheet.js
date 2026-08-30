@@ -1066,10 +1066,15 @@ export class VehicleSheet extends ActorSheet {
         if (tokens.length > 0) vehicleTokenId = tokens[0].id;
       }
 
+      // В `tokens` идут сами фигуры, а не их идентификаторы. Из этого списка
+      // карточка урона строит нижний перечень целей, и каждой берёт `name`,
+      // `actor.id` и `id`. От строк там оставались пустые строчки с нерабочей
+      // кнопкой, и урон приходилось раздавать верхней кнопкой — а она бьёт по
+      // выделенным на столе фигурам, то есть чаще всего по самому стрелку.
       cprRoll.entityData = {
         actor: this.actor.id,
         token: vehicleTokenId,
-        tokens: Array.from(game.user.targets).map((t) => t.id),
+        tokens: Array.from(game.user.targets),
         item: item.id,
       };
 
@@ -1215,10 +1220,12 @@ export class VehicleSheet extends ActorSheet {
       });
     }
 
+    // Фигуры целиком, а не их идентификаторы: карточка читает у каждой цели
+    // `name`, `actor.id` и `id`.
     cprRoll.entityData = {
       actor: occupant.id,
       token: this.token?._id ?? null,
-      tokens: Array.from(game.user.targets).map((t) => t.id),
+      tokens: Array.from(game.user.targets),
       item: skill.id,
     };
 

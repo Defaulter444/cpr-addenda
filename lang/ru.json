@@ -196,6 +196,7 @@
   "CPRADDENDA.vehicle.blast.cannotDodge": "уклониться не может (нужен РЕФ 8 или выше)",
   "CPRADDENDA.vehicle.blast.ref": "РЕФ",
   "CPRADDENDA.vehicle.blast.damageButton": "Бросить урон по зоне ({damage})",
+  "CPRADDENDA.vehicle.blast.applyHint": "В карточке урона у каждой цели своя кнопка ⚡ — ей урон и раздаётся, поимённо. Кто уклонился, того пропустите. Верхняя кнопка карточки бьёт по <em>выделенным на столе</em> фигурам, а не по целям.",
   "CPRADDENDA.vehicle.blast.dodgeButton": "Уклониться",
   "CPRADDENDA.vehicle.blast.dodgeSuccess": "<strong>{name}</strong> уклоняется: {result} против {total}. Успел выйти за пределы зоны, урона нет.",
   "CPRADDENDA.vehicle.blast.dodgeFail": "<strong>{name}</strong> не уклонился: {result} против {total}. Остаётся в зоне и получает урон взрыва.",

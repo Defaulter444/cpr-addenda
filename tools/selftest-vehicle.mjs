@@ -25,6 +25,15 @@ const MODULE_ROOT = path.resolve(HERE, "..");
 const SCRIPTS = path.join(MODULE_ROOT, "scripts");
 const LANG = path.join(MODULE_ROOT, "lang");
 const TEMPLATE = path.join(MODULE_ROOT, "templates", "vehicle-sheet.hbs");
+// Система лежит рядом с модулями, в соседней ветке Data. Нужна для сверки
+// формата данных, который её шаблоны ждут от нас.
+const SYSTEM_PATH = path.resolve(
+  MODULE_ROOT,
+  "..",
+  "..",
+  "systems",
+  "cyberpunk-red-core"
+);
 
 let checks = 0;
 let failures = 0;
@@ -1050,6 +1059,47 @@ console.log("Несостоявшийся бросок объясняет себ
   }
 }
 
+console.log("Цели в карточке урона — документы, а не идентификаторы");
+{
+  // Шаблон системы `cpr-damage-rollcard.hbs` строит нижний перечень целей из
+  // `entityData.tokens`, и берёт у каждой `name`, `actor.id` и `id`. Если
+  // положить туда строки-идентификаторы, перечень отрисуется пустыми строчками
+  // с нерабочей кнопкой. Раздавать урон останется верхней кнопкой карточки, а
+  // она бьёт по выделенным на столе фигурам — то есть по самому стрелку.
+  // Ошибка тихая и на глаз неотличима от «модуль не работает», так что держим
+  // на неё отдельную проверку.
+  for (const name of ["vehicle-sheet", "vehicle-explosives"]) {
+    const body = fs.readFileSync(path.join(SCRIPTS, `${name}.js`), "utf8");
+    for (const match of body.matchAll(/tokens:\s*(.*)/g)) {
+      expect(
+        !/\.map\(/.test(match[1]),
+        `${name}.js: в tokens кладут результат map — ` +
+          `карточке урона нужны сами документы фигур: ${match[1].trim()}`
+      );
+    }
+  }
+
+  // И проверим, что шаблон системы действительно спрашивает то, что мы думаем:
+  // если он однажды начнёт принимать идентификаторы, проверка выше устареет.
+  const card = path.join(
+    SYSTEM_PATH,
+    "templates",
+    "chat",
+    "cpr-damage-rollcard.hbs"
+  );
+  if (fs.existsSync(card)) {
+    const template = fs.readFileSync(card, "utf8");
+    for (const field of ["token.name", "token.actor.id", "token.id"]) {
+      expect(
+        template.includes(field),
+        `шаблон карточки урона больше не читает ${field} — проверьте формат целей`
+      );
+    }
+  } else {
+    console.log("  (шаблон системы не найден, сверка формата пропущена)");
+  }
+}
+
 console.log("Зона поражения взрывающегося оружия");
 {
   const explosives = await load("vehicle-explosives");
@@ -1219,6 +1269,25 @@ console.log("Зона поражения взрывающегося оружия
     expect(blast?.weapon === weapon.uuid, `во флаге не то оружие: ${blast?.weapon}`);
     expect(blast?.gunner === gunner.uuid, `во флаге не тот стрелок: ${blast?.gunner}`);
     expect(blast?.attack === 17, `во флаге не тот бросок атаки: ${blast?.attack}`);
+
+    // Урон применяется ко всем в зоне, поэтому во флаге лежат все трое —
+    // иначе карточка урона предложит раздать его одной цели из трёх.
+    expect(
+      Array.isArray(blast?.caught) && blast.caught.length === 3,
+      `в зоне запомнено ${blast?.caught?.length} целей, а внутри квадрата трое`
+    );
+    for (const who of ["Вцентре", "Украявнутри", "Ровнонауглу"]) {
+      expect(
+        blast.caught.includes(`Scene.s1.Token.${who}`),
+        `"${who}" не попал в список для раздачи урона`
+      );
+    }
+    for (const who of ["СнаружипоX", "СнаружипоY"]) {
+      expect(
+        !blast.caught.includes(`Scene.s1.Token.${who}`),
+        `"${who}" попал в список для раздачи урона, хотя вне зоны`
+      );
+    }
     expect(
       card.includes("cannotDodge"),
       "не отмечен тот, кому РЕФ не позволяет уклоняться"
