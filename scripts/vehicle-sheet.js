@@ -1025,7 +1025,15 @@ export class VehicleSheet extends ActorSheet {
     }
 
     try {
-      let cprRoll = item.createRoll(rollType, gunner);
+      // Режим огня передаём и в бросок урона: под очередью система считает урон
+      // иначе (2d6 × множитель), и без этого выстрел очередью наносил бы
+      // обычный урон. Системный лист персонажа делает ровно так же.
+      let cprRoll =
+        rollType === "damage"
+          ? item.createRoll(rollType, gunner, {
+              damageType: this._getFireCheckbox(itemId),
+            })
+          : item.createRoll(rollType, gunner);
       if (!cprRoll) {
         ui.notifications.warn(
           localize("vehicle.notify.rollUnsupported", {
