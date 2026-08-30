@@ -1,0 +1,43 @@
+{
+  "_id": "cprAddPa00120000",
+  "name": "Оболочка: Лёгкий Metalgear®",
+  "type": "gear",
+  "img": "modules/cpr-addenda/assets/icons/gear.svg",
+  "folder": null,
+  "sort": 0,
+  "effects": [],
+  "flags": {},
+  "system": {
+    "amount": 1,
+    "brand": "",
+    "concealable": {
+      "concealable": false,
+      "isConcealed": false
+    },
+    "description": {
+      "value": "<p>Компонент силовой брони: бронеплиты  в которые заключён экзоскелет.</p><p><strong>16 ОС • +3 ПЗ • без модификаторов</strong><br>Цена: 2 000eb (Роскошь)</p><p>Находясь внутри силовой брони, пилот плотно заключён в оболочку, полностью изолированную от внешних атак.</p>"
+    },
+    "equipped": "owned",
+    "favorite": false,
+    "installedItems": {
+      "allowed": false,
+      "allowedTypes": [
+        "itemUpgrade"
+      ],
+      "list": [],
+      "slots": 0,
+      "usedSlots": 0
+    },
+    "isElectronic": false,
+    "price": {
+      "market": 2000
+    },
+    "providesHardening": false,
+    "revealed": true,
+    "source": {
+      "book": "DataPool",
+      "page": 0
+    },
+    "usage": "toggled"
+  }
+}

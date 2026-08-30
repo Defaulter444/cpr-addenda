@@ -1,0 +1,43 @@
+{
+  "_id": "cprAddPa00020000",
+  "name": "Экзоскелет: Сигма",
+  "type": "gear",
+  "img": "modules/cpr-addenda/assets/icons/gear.svg",
+  "folder": null,
+  "sort": 0,
+  "effects": [],
+  "flags": {},
+  "system": {
+    "amount": 1,
+    "brand": "",
+    "concealable": {
+      "concealable": false,
+      "isConcealed": false
+    },
+    "description": {
+      "value": "<p>Компонент силовой брони: ядро  вокруг которого она строится.</p><p><strong>ТЕЛО 12 • 22 ПЗ • +1 СКО</strong><br>Цена: 2 000eb (Роскошь)</p><p>Увеличение ТЕЛО не влияет на ПЗ и не изменяет спасброски от смерти. Если у пользователя установлен более мощный экзоскелет, чем тот, что используется в силовой броне, его ТЕЛО остаётся на более высоком значении. Руки силовой брони считаются киберруками при нанесении урона укрытиям, а ноги силовой брони считаются киберногами при падении.</p><p><em>Это компонент для сборки силовой брони, а не личная линейная рама: у одноимённой персональной рамы своя цена и свои правила.</em></p>"
+    },
+    "equipped": "owned",
+    "favorite": false,
+    "installedItems": {
+      "allowed": false,
+      "allowedTypes": [
+        "itemUpgrade"
+      ],
+      "list": [],
+      "slots": 0,
+      "usedSlots": 0
+    },
+    "isElectronic": false,
+    "price": {
+      "market": 2000
+    },
+    "providesHardening": false,
+    "revealed": true,
+    "source": {
+      "book": "DataPool",
+      "page": 0
+    },
+    "usage": "toggled"
+  }
+}

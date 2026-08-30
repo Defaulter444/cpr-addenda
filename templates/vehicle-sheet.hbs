@@ -1,0 +1,458 @@
+{{!--
+  Лист транспорта. Перенесён из MMuton's CPR Vehicle Actor Sheet с разрешения
+  автора; весь видимый текст выведен в ключи локализации, флаги переехали в
+  пространство cpr-addenda.
+
+  Имена классов оставлены от оригинала — на них держится styles/vehicle-sheet.css.
+--}}
+<form class="{{cssClass}}" autocomplete="off">
+
+  <header class="sheet-header">
+    <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}"/>
+
+    <div class="header-fields">
+      <h1 class="charname">
+        <input name="name" type="text" value="{{actor.name}}" placeholder="{{localize 'CPRADDENDA.vehicle.header.namePlaceholder'}}"/>
+      </h1>
+
+      <div class="stats-row">
+        <div class="stat stat-sdp" title="{{localize 'CPRADDENDA.vehicle.header.sdpTitle'}}">
+          <label>{{localize 'CPRADDENDA.vehicle.header.sdp'}}</label>
+          <div class="sdp-values">
+            <input type="number" name="system.derivedStats.hp.value" value="{{actor.system.derivedStats.hp.value}}" placeholder="-"/>
+            <span class="sdp-separator">/</span>
+            <input type="number" name="system.derivedStats.hp.max" value="{{actor.system.derivedStats.hp.max}}" placeholder="-"/>
+          </div>
+        </div>
+        <div class="stat stat-sp" title="{{localize 'CPRADDENDA.vehicle.header.spTitle'}}">
+          <label>{{localize 'CPRADDENDA.vehicle.header.sp'}}</label>
+          <div class="sp-values">
+            <input type="number" name="system.externalData.currentArmorBody.value" value="{{actor.system.externalData.currentArmorBody.value}}" placeholder="-"/>
+            <span class="sp-separator">/</span>
+            <input type="number" name="system.externalData.currentArmorBody.max" value="{{actor.system.externalData.currentArmorBody.max}}" placeholder="-"/>
+          </div>
+        </div>
+        <div class="stat stat-hsp" title="{{localize 'CPRADDENDA.vehicle.header.hspTitle'}}">
+          <label>{{localize 'CPRADDENDA.vehicle.header.hsp'}}</label>
+          <div class="hsp-values">
+            <input type="number" name="system.externalData.currentArmorHead.value" value="{{actor.system.externalData.currentArmorHead.value}}" placeholder="-"/>
+            <span class="hsp-separator">/</span>
+            <input type="number" name="system.externalData.currentArmorHead.max" value="{{actor.system.externalData.currentArmorHead.max}}" placeholder="-"/>
+          </div>
+        </div>
+        <div class="stat" title="{{localize 'CPRADDENDA.vehicle.header.moveTitle'}}">
+          <label>{{localize 'CPRADDENDA.vehicle.header.move'}}</label>
+          <input type="number" name="system.stats.move.value" value="{{actor.system.stats.move.value}}" placeholder="-"/>
+        </div>
+        <div class="stat" title="{{localize 'CPRADDENDA.vehicle.header.speedTitle'}}">
+          <label>{{localize 'CPRADDENDA.vehicle.header.speed'}}</label>
+          <input type="text" name="flags.cpr-addenda.vehicleSpeed" value="{{lookup (lookup actor.flags 'cpr-addenda') 'vehicleSpeed'}}" placeholder="-"/>
+        </div>
+      </div>
+  </header>
+
+  <nav class="tabs" data-group="primary">
+    <a class="item" data-tab="info">{{localize 'CPRADDENDA.vehicle.tab.info'}}</a>
+    <a class="item" data-tab="main">{{localize 'CPRADDENDA.vehicle.tab.operations'}}</a>
+    <a class="item" data-tab="weapons">{{localize 'CPRADDENDA.vehicle.tab.weapons'}}</a>
+    <a class="item" data-tab="cargo">{{localize 'CPRADDENDA.vehicle.tab.cargo'}}</a>
+    <a class="item" data-tab="upgrades">{{localize 'CPRADDENDA.vehicle.tab.upgrades'}}</a>
+    <a class="item" data-tab="damage">{{localize 'CPRADDENDA.vehicle.tab.damage'}}</a>
+  </nav>
+
+  <section class="sheet-body">
+
+    <div class="tab" data-group="primary" data-tab="main">
+
+      <div class="positions-grid">
+        {{#each positions}}
+        <div class="position-card {{#if this.isFull}}position-full{{/if}}" data-position-id="{{this.id}}">
+
+          <div class="position-header">
+            <div class="position-title-group">
+              <h3 class="position-name">{{this.name}}</h3>
+              {{#if this.bulletproofGlass}}
+              <a class="glass-hp {{#if (eq this.glassHp 0)}}glass-broken{{/if}}" data-position-id="{{this.id}}" title="{{localize 'CPRADDENDA.vehicle.position.glassHpTitle'}}">
+                {{#if (eq this.glassHp 0)}}
+                <i class="fa-solid fa-heart-crack"></i>
+                {{else}}
+                <i class="fa-solid fa-heart"></i>
+                {{/if}}
+                {{this.glassHp}}/{{this.glassHpMax}}
+              </a>
+              {{/if}}
+            </div>
+            <div class="position-controls">
+              <a class="control-icon position-edit" data-position-id="{{this.id}}" title="{{localize 'CPRADDENDA.vehicle.position.edit'}}">
+                <i class="fas fa-cog"></i>
+              </a>
+              <a class="control-icon position-delete" data-position-id="{{this.id}}" title="{{localize 'CPRADDENDA.vehicle.position.delete'}}">
+                <i class="fas fa-trash"></i>
+              </a>
+            </div>
+          </div>
+
+          <div class="drop-zone" data-position-id="{{this.id}}">
+            {{#if this.hasOccupants}}
+              {{#if this.isCrammed}}
+              <div class="crammed-warning">
+                <i class="fas fa-exclamation-triangle"></i> {{localize 'CPRADDENDA.vehicle.crew.crammed'}}
+              </div>
+              {{/if}}
+              {{#each this.occupants}}
+              <div class="occupant-item draggable" draggable="true" data-occupant-uuid="{{this.uuid}}" data-position-id="{{../this.id}}">
+                <img src="{{this.img}}" alt="{{this.name}}" class="occupant-avatar"/>
+                <div class="occupant-info">
+                  <h4 class="occupant-name">{{this.name}}</h4>
+                  <div class="occupant-hp">{{localize 'CPRADDENDA.vehicle.crew.hp'}} {{this.hp}}/{{this.hpMax}}</div>
+                </div>
+                <div class="occupant-actions">
+                  <a class="occupant-view" data-occupant-uuid="{{this.uuid}}" title="{{localize 'CPRADDENDA.vehicle.crew.viewSheet'}}">
+                    <i class="fas fa-eye"></i>
+                  </a>
+                  {{#if ../../editable}}
+                  <a class="occupant-remove" data-position-id="{{../this.id}}" data-occupant-uuid="{{this.uuid}}" title="{{localize 'CPRADDENDA.vehicle.crew.remove'}}">
+                    <i class="fas fa-times"></i>
+                  </a>
+                  {{/if}}
+                </div>
+              </div>
+              {{/each}}
+            {{else}}
+              <div class="drop-hint">
+                <i class="fas fa-user-plus"></i>
+                <p>{{localize 'CPRADDENDA.vehicle.crew.dropHint'}}</p>
+                {{#if ../editable}}
+                <button type="button" class="select-token" data-position-id="{{this.id}}">
+                  <i class="fas fa-user-check"></i> {{localize 'CPRADDENDA.vehicle.crew.assignToken'}}
+                </button>
+                {{/if}}
+              </div>
+            {{/if}}
+          </div>
+
+          {{#if this.skillsList}}
+          <div class="position-skills">
+            <label>{{localize 'CPRADDENDA.vehicle.position.skillsLabel'}}</label>
+            <div class="skill-tags">
+              {{#each this.skillsList}}
+              <a class="skill-tag rollable" data-roll-type="skill" data-roll-title="{{this}}" data-position-id="{{../this.id}}" title="{{localize 'CPRADDENDA.vehicle.roll.skill' skill=this}}">
+                <i class="fas fa-dice-d20"></i> {{this}}
+              </a>
+              {{/each}}
+            </div>
+          </div>
+          {{/if}}
+
+          {{#if this.hasWeapons}}
+          <div class="position-weapons-compact">
+            <div class="weapons-header">
+              <i class="fas fa-crosshairs"></i> {{localize 'CPRADDENDA.vehicle.weapon.mountedHeader'}}
+            </div>
+            {{#each this.weapons}}
+            <div class="weapon-row" data-item-id="{{this.id}}">
+              <img src="{{this.img}}" class="weapon-icon" alt="{{this.name}}"/>
+              <a class="weapon-name item-edit" data-item-id="{{this.id}}">{{this.name}}</a>
+              <span class="weapon-ammo">{{#if this.system.isRanged}}{{#if this.system.hasAmmoLoaded}}{{this.system.magazine.value}}/{{this.system.magazine.max}}{{else}}{{localize 'CPRADDENDA.vehicle.weapon.unloaded'}}{{/if}}{{else}}{{localize 'CPRADDENDA.vehicle.weapon.melee'}}{{/if}}</span>
+              <span class="weapon-stat">{{localize 'CPRADDENDA.vehicle.weapon.rof'}} {{this.system.rof}}</span>
+              <span class="weapon-stat">{{localize 'CPRADDENDA.vehicle.weapon.dmg'}} {{this.system.damage}}</span>
+              <div class="weapon-fire-modes">
+                <a class="fire-checkbox" data-fire-mode="aimed" data-item-id="{{this.id}}" title="{{localize 'CPRADDENDA.vehicle.weapon.aimed'}}">{{#if (cprAddendaFireMode ../../actor "aimed" this.id)}}<i class="far fa-circle-dot"></i>{{else}}<i class="far fa-circle"></i>{{/if}}</a>
+                {{#if (gt this.system.fireModes.autoFire 0)}}<a class="fire-checkbox" data-fire-mode="autofire" data-item-id="{{this.id}}" title="{{localize 'CPRADDENDA.vehicle.weapon.autofire' rate=this.system.fireModes.autoFire}}">{{#if (cprAddendaFireMode ../../actor "autofire" this.id)}}<i class="far fa-circle-dot"></i>{{else}}<i class="far fa-circle"></i>{{/if}}</a>{{/if}}
+                {{#if this.system.fireModes.suppressiveFire}}<a class="fire-checkbox" data-fire-mode="suppressive" data-item-id="{{this.id}}" title="{{localize 'CPRADDENDA.vehicle.weapon.suppressive'}}">{{#if (cprAddendaFireMode ../../actor "suppressive" this.id)}}<i class="far fa-circle-dot"></i>{{else}}<i class="far fa-circle"></i>{{/if}}</a>{{/if}}
+              </div>
+              <div class="weapon-actions-row">
+                {{#if this.system.isRanged}}<a class="weapon-action-icon" data-action="changeAmmo" data-item-id="{{this.id}}" title="{{localize 'CPRADDENDA.vehicle.weapon.changeAmmo'}}"><i class="fas fa-arrow-right-arrow-left"></i></a><a class="weapon-action-icon" data-action="reload" data-item-id="{{this.id}}" title="{{localize 'CPRADDENDA.vehicle.weapon.reload'}}"><i class="fas fa-rotate-right"></i></a>{{/if}}
+                <a class="rollable weapon-action-icon" data-roll-type="attack" data-item-id="{{this.id}}" title="{{localize 'CPRADDENDA.vehicle.weapon.attack'}}"><i class="fas fa-hand-fist"></i></a>
+                <a class="rollable weapon-action-icon" data-roll-type="damage" data-item-id="{{this.id}}" title="{{localize 'CPRADDENDA.vehicle.weapon.damageRoll'}}"><i class="fas fa-droplet"></i></a>
+              </div>
+            </div>
+            {{/each}}
+          </div>
+          {{/if}}
+
+        </div>
+        {{/each}}
+
+        {{#if editable}}
+        <div class="position-card position-add-card">
+          <button type="button" class="position-add">
+            <i class="fas fa-plus"></i>
+            <span>{{localize 'CPRADDENDA.vehicle.position.create'}}</span>
+          </button>
+        </div>
+        {{/if}}
+      </div>
+    </div>
+
+    <div class="tab" data-group="primary" data-tab="weapons">
+
+      <div class="items-header">
+        <h3>{{localize 'CPRADDENDA.vehicle.items.weapons'}}</h3>
+      </div>
+
+      <ol class="items-list">
+        {{#each weapons}}
+        <li class="item flexrow draggable" data-item-id="{{this.id}}" draggable="true">
+          <div class="item-image">
+            <img src="{{this.img}}" alt="{{this.name}}"/>
+          </div>
+          <div class="item-details">
+            <h4 class="item-name">{{this.name}}</h4>
+            {{#if this.system.damage}}
+            <div class="item-properties">
+              <span class="property">{{localize 'CPRADDENDA.vehicle.weapon.dmg'}} {{this.system.damage}}</span>
+              {{#if this.system.rof}}
+              <span class="property">{{localize 'CPRADDENDA.vehicle.weapon.rof'}} {{this.system.rof}}</span>
+              {{/if}}
+            </div>
+            {{/if}}
+          </div>
+          <div class="item-controls">
+            <a class="item-edit" title="{{localize 'CPRADDENDA.vehicle.item.edit'}}"><i class="fas fa-edit"></i></a>
+            {{#if ../editable}}
+              {{#if (lookup (lookup this.flags 'cpr-addenda') 'vehicleMountedPosition')}}
+              <a class="weapon-unmount" data-item-id="{{this.id}}" title="{{localize 'CPRADDENDA.vehicle.weapon.unmount'}}"><i class="fas fa-link-slash"></i></a>
+              {{else}}
+              <a class="weapon-mount" data-item-id="{{this.id}}" title="{{localize 'CPRADDENDA.vehicle.weapon.mount'}}"><i class="fas fa-link"></i></a>
+              {{/if}}
+            <a class="item-delete" title="{{localize 'CPRADDENDA.vehicle.item.delete'}}"><i class="fas fa-trash"></i></a>
+            {{/if}}
+            {{#if (lookup (lookup this.flags 'cpr-addenda') 'vehicleMountedPosition')}}
+            <span class="mounted-badge"><i class="fas fa-link"></i></span>
+            {{/if}}
+          </div>
+        </li>
+        {{else}}
+        <li class="empty-state">
+          <p>{{localize 'CPRADDENDA.vehicle.empty.noWeapons'}}</p>
+          {{#if editable}}
+          <p>{{localize 'CPRADDENDA.vehicle.empty.dragWeapons'}}</p>
+          {{/if}}
+        </li>
+        {{/each}}
+      </ol>
+
+      <div class="items-header" style="margin-top: 30px;">
+        <h3>{{localize 'CPRADDENDA.vehicle.items.armor'}}</h3>
+      </div>
+
+      <ol class="items-list">
+        {{#each armor}}
+        <li class="item flexrow draggable" data-item-id="{{this.id}}" draggable="true">
+          <div class="item-image">
+            <img src="{{this.img}}" alt="{{this.name}}"/>
+          </div>
+          <div class="item-details">
+            <h4 class="item-name">{{this.name}}</h4>
+            {{#if this.system.bodyLocation}}
+            <div class="item-properties">
+              <span class="property">{{localize 'CPRADDENDA.vehicle.armor.bodySp'}} {{this.system.bodyLocation.sp}}</span>
+            </div>
+            {{/if}}
+            {{#if this.system.headLocation}}
+            <div class="item-properties">
+              <span class="property">{{localize 'CPRADDENDA.vehicle.armor.headSp'}} {{this.system.headLocation.sp}}</span>
+            </div>
+            {{/if}}
+          </div>
+          <div class="item-controls">
+            {{#if ../editable}}
+            <a class="armor-equip" data-item-id="{{this.id}}" title="{{localize 'CPRADDENDA.vehicle.armor.equipState'}}">
+              {{#if (eq this.system.equipped "equipped")}}
+              <i class="fas fa-shield-alt" style="color: #4CAF50;"></i>
+              {{else if (eq this.system.equipped "owned")}}
+              <i class="far fa-circle-notch" style="color: #888;"></i>
+              {{else}}
+              <i class="fas fa-suitcase" style="color: #666;"></i>
+              {{/if}}
+            </a>
+            {{/if}}
+            <a class="item-edit" title="{{localize 'CPRADDENDA.vehicle.item.edit'}}"><i class="fas fa-edit"></i></a>
+            {{#if ../editable}}
+            <a class="item-delete" title="{{localize 'CPRADDENDA.vehicle.item.delete'}}"><i class="fas fa-trash"></i></a>
+            {{/if}}
+          </div>
+        </li>
+        {{else}}
+        <li class="empty-state">
+          <p>{{localize 'CPRADDENDA.vehicle.empty.noArmor'}}</p>
+        </li>
+        {{/each}}
+      </ol>
+    </div>
+
+    <div class="tab" data-group="primary" data-tab="upgrades">
+
+      <div class="items-header">
+        <h3>{{localize 'CPRADDENDA.vehicle.upgrades.title'}}</h3>
+      </div>
+
+      {{#if mountedUpgrades}}
+      <div class="upgrades-display">
+        <div class="upgrades-list">
+          {{#each mountedUpgrades}}
+          <div class="upgrade-item" data-item-id="{{this.id}}">
+            <div class="upgrade-header">
+              <div class="upgrade-title">
+                <img src="{{this.img}}" class="upgrade-icon" alt="{{this.name}}"/>
+                <h4>{{this.name}}</h4>
+              </div>
+              <div class="upgrade-controls">
+                <a class="upgrade-view" data-item-id="{{this.id}}" title="{{localize 'CPRADDENDA.vehicle.upgrade.view'}}"><i class="fas fa-eye"></i></a>
+                {{#if ../editable}}
+                  {{#if (eq this.type "cyberware")}}
+                  <a class="cyberware-uninstall" data-item-id="{{this.id}}" title="{{localize 'CPRADDENDA.vehicle.cyberware.uninstall'}}"><i class="fas fa-link-slash"></i></a>
+                  {{else}}
+                  <a class="upgrade-unmount" data-item-id="{{this.id}}" title="{{localize 'CPRADDENDA.vehicle.upgrade.unmount'}}"><i class="fas fa-link-slash"></i></a>
+                  {{/if}}
+                {{/if}}
+              </div>
+            </div>
+            {{#if this.description}}
+            <div class="upgrade-description">
+              {{{this.description}}}
+            </div>
+            {{/if}}
+          </div>
+          {{/each}}
+        </div>
+      </div>
+      {{else}}
+      <div class="empty-state">
+        <p>{{localize 'CPRADDENDA.vehicle.empty.noUpgrades'}}</p>
+        <p>{{localize 'CPRADDENDA.vehicle.empty.dragUpgrades'}}</p>
+      </div>
+      {{/if}}
+    </div>
+
+    <div class="tab" data-group="primary" data-tab="cargo">
+
+      <div class="items-header">
+        <h3>{{localize 'CPRADDENDA.vehicle.cargo.title'}}</h3>
+      </div>
+
+      {{#if cargoByCategory}}
+      <div class="cargo-categorized">
+        {{#each cargoByCategory}}
+        <div class="cargo-category">
+          <div class="category-divider">
+            <h4>{{this.categoryName}}</h4>
+          </div>
+          <ol class="items-list">
+            {{#each this.items}}
+            <li class="item flexrow draggable" data-item-id="{{this.id}}" draggable="true">
+              <div class="item-image">
+                <img src="{{this.img}}" alt="{{this.name}}"/>
+              </div>
+              <div class="item-details">
+                <h4 class="item-name">{{this.name}}</h4>
+                <div class="item-properties">
+                  {{#if this.system.amount}}
+                  <span class="property">{{localize 'CPRADDENDA.vehicle.cargo.qty'}} {{this.system.amount}}</span>
+                  {{/if}}
+                </div>
+              </div>
+              <div class="item-controls">
+                {{#if this.system.amount}}
+                  {{#if (gt this.system.amount 1)}}
+                  <a class="item-split" data-item-id="{{this.id}}" title="{{localize 'CPRADDENDA.vehicle.item.splitStack'}}"><i class="fas fa-scissors"></i></a>
+                  {{/if}}
+                {{/if}}
+                {{#if (eq this.type "cyberware")}}
+                  {{#if (lookup (lookup this.flags 'cpr-addenda') 'vehicleInstalled')}}
+                  <span class="mounted-badge"><i class="fas fa-microchip"></i></span>
+                  <a class="cyberware-uninstall" data-item-id="{{this.id}}" title="{{localize 'CPRADDENDA.vehicle.cyberware.uninstall'}}"><i class="fas fa-link-slash"></i></a>
+                  {{else}}
+                  <a class="cyberware-install" data-item-id="{{this.id}}" title="{{localize 'CPRADDENDA.vehicle.cyberware.install'}}"><i class="fas fa-microchip"></i></a>
+                  {{/if}}
+                {{/if}}
+                {{#if (eq this.type "itemUpgrade")}}
+                  {{#if (lookup (lookup this.flags 'cpr-addenda') 'vehicleMounted')}}
+                  <span class="mounted-badge"><i class="fas fa-link"></i></span>
+                  <a class="upgrade-unmount" data-item-id="{{this.id}}" title="{{localize 'CPRADDENDA.vehicle.upgrade.unmount'}}"><i class="fas fa-link-slash"></i></a>
+                  {{else}}
+                  <a class="upgrade-mount" data-item-id="{{this.id}}" title="{{localize 'CPRADDENDA.vehicle.upgrade.mount'}}"><i class="fas fa-link"></i></a>
+                  {{/if}}
+                {{/if}}
+                <a class="item-edit" title="{{localize 'CPRADDENDA.vehicle.item.edit'}}"><i class="fas fa-edit"></i></a>
+                {{#if ../../editable}}
+                <a class="item-delete" title="{{localize 'CPRADDENDA.vehicle.item.delete'}}"><i class="fas fa-trash"></i></a>
+                {{/if}}
+              </div>
+            </li>
+            {{/each}}
+          </ol>
+        </div>
+        {{/each}}
+      </div>
+      {{else}}
+      <div class="empty-state">
+        <p>{{localize 'CPRADDENDA.vehicle.empty.noCargo'}}</p>
+        {{#if editable}}
+        <p>{{localize 'CPRADDENDA.vehicle.empty.dragItems'}}</p>
+        {{/if}}
+      </div>
+      {{/if}}
+    </div>
+
+    <div class="tab" data-group="primary" data-tab="damage">
+
+      <div class="items-header">
+        <h3>{{localize 'CPRADDENDA.vehicle.damage.title'}}</h3>
+      </div>
+
+      {{#if criticalInjuries.length}}
+      <ol class="items-list">
+        {{#each criticalInjuries}}
+        <li class="item flexrow" data-item-id="{{this.id}}">
+          <div class="item-image">
+            <img src="{{this.img}}" alt="{{this.name}}"/>
+          </div>
+          <div class="item-details">
+            <h4 class="item-name">{{this.name}}</h4>
+            <div class="item-properties">
+              {{#if this.system.location}}
+              <span class="property">{{localize 'CPRADDENDA.vehicle.injury.location'}} {{this.system.location}}</span>
+              {{/if}}
+              {{#if this.system.effect}}
+              <span class="property effect-text">{{this.system.effect}}</span>
+              {{/if}}
+            </div>
+          </div>
+          <div class="item-controls">
+            <a class="item-edit" data-item-id="{{this.id}}" title="{{localize 'CPRADDENDA.vehicle.injury.view'}}"><i class="fas fa-eye"></i></a>
+            {{#if ../editable}}
+            <a class="item-delete" data-item-id="{{this.id}}" title="{{localize 'CPRADDENDA.vehicle.item.delete'}}"><i class="fas fa-trash"></i></a>
+            {{/if}}
+          </div>
+        </li>
+        {{/each}}
+      </ol>
+      {{else}}
+      <div class="empty-state">
+        <p>{{localize 'CPRADDENDA.vehicle.empty.noInjuries'}}</p>
+        {{#if editable}}
+        <p>{{localize 'CPRADDENDA.vehicle.empty.dragInjuries'}}</p>
+        {{/if}}
+      </div>
+      {{/if}}
+    </div>
+
+    <div class="tab" data-group="primary" data-tab="info">
+      <div class="form-group">
+        <label>{{localize 'CPRADDENDA.vehicle.info.model'}}</label>
+        <input type="text" name="system.information.alias" value="{{information.alias}}"/>
+      </div>
+      <div class="form-group">
+        <label>{{localize 'CPRADDENDA.vehicle.info.description'}}</label>
+        {{editor enrichedDescription target="system.information.description" button=true engine="prosemirror" editable=editable}}
+      </div>
+      <div class="form-group">
+        <label>{{localize 'CPRADDENDA.vehicle.info.notes'}}</label>
+        {{editor enrichedNotes target="system.information.notes" button=true engine="prosemirror" editable=editable}}
+      </div>
+    </div>
+
+  </section>
+</form>

@@ -1,0 +1,71 @@
+{
+  "_id": "cprAddWp00010000",
+  "effects": [],
+  "flags": {},
+  "img": "systems/cyberpunk-red-core/icons/compendium/weapons/heavySMG.svg",
+  "name": "ПП Arasaka Takanami",
+  "system": {
+    "ammoVariety": [
+      "heavyPistol"
+    ],
+    "attackmod": 0,
+    "brand": "",
+    "canIgnoreArmor": false,
+    "concealable": {
+      "concealable": false,
+      "isConcealed": false
+    },
+    "critFailEffect": "jammed",
+    "damage": "3d6",
+    "description": {
+      "value": "<p>Пистолет-пулемёт с увеличенным магазином  созданный как более крупнокалиберная версия популярного Minami 10 для редких подразделений службы безопасности  где скрытность и маскировка не имеют значения. Внутри корпорации Takanami мгновенно стал хитом  однако за её пределами продажи так и остались слабыми.</p><p><strong>Классификация:</strong> тяжёлый ПП отличного качества<br><strong>Навык одиночного выстрела:</strong> Короткоствольное оружие<br><strong>Таблица дальности:</strong> субкомпактный ПП<br><strong>Особые режимы огня:</strong> автоогонь (ПП 4)  подавляющий огонь<br><strong>Приспособления:</strong> увеличенный магазин</p><p><strong>Особые свойства:</strong> нет</p><p><strong>Цена:</strong> 600eb (Дорого)</p>"
+    },
+    "dvTable": "Субкомпактный ПП",
+    "equipped": "owned",
+    "favorite": false,
+    "fireModes": {
+      "autoFire": 4,
+      "suppressiveFire": true
+    },
+    "handsReq": 1,
+    "ignoreArmorPercent": 0,
+    "ignoreBelowSP": 0,
+    "installedItems": {
+      "allowed": true,
+      "allowedTypes": [
+        "itemUpgrade",
+        "ammo"
+      ],
+      "list": [],
+      "slots": 2,
+      "usedSlots": 0
+    },
+    "isRanged": true,
+    "magazine": {
+      "ammoData": null,
+      "max": 50,
+      "value": 50
+    },
+    "price": {
+      "market": 600
+    },
+    "quality": "excellent",
+    "revealed": true,
+    "rof": 1,
+    "source": {
+      "book": "DataPool",
+      "page": 0
+    },
+    "unarmedAutomaticCalculation": true,
+    "usage": "equipped",
+    "usesType": "magazine",
+    "weaponSkill": "Handgun",
+    "weaponType": "heavySmg"
+  },
+  "type": "weapon",
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  }
+}

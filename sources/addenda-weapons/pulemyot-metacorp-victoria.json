@@ -1,0 +1,71 @@
+{
+  "_id": "cprAddWp00050000",
+  "effects": [],
+  "flags": {},
+  "img": "systems/cyberpunk-red-core/icons/compendium/weapons/AssaultRifle.svg",
+  "name": "Пулемёт MetaCorp «Victoria»",
+  "system": {
+    "ammoVariety": [
+      "rifle"
+    ],
+    "attackmod": 0,
+    "brand": "",
+    "canIgnoreArmor": false,
+    "concealable": {
+      "concealable": false,
+      "isConcealed": false
+    },
+    "critFailEffect": "jammed",
+    "damage": "",
+    "description": {
+      "value": "<p>Одноствольный пулемёт с водяным охлаждением  приводимый в действие цепным механизмом с высокой частотой вращения. Боеприпасы подаются в оружие из рюкзака по герметичной водонепроницаемой трубке. Вся эта огневая мощь имеет свою цену — внушительный вес и крайне неэкономичный расход боеприпасов  хотя MetaCorp и не рассчитывала  что потенциального владельца подобные мелочи хоть сколько-нибудь смутят.</p><p><strong>Классификация:</strong> пулемёт отличного качества<br><strong>Навык одиночного выстрела:</strong> —<br><strong>Таблица дальности:</strong> пулемет (автоогонь)<br><strong>Особые режимы огня:</strong> автоогонь (Пулемет 5)  подавляющий огонь<br><strong>Приспособления:</strong> нет</p><p><strong>Особые свойства:</strong> Перезарядка этого оружия требует двух действий перезарядки. Для стрельбы из этого оружия требуется ТЕЛО 12 или выше  если только оно не установлено на крепление. Оружие может вести огонь только в режимах автоогонь и подавляющий огонь  при этом каждый такой выстрел расходует 20 боеприпасов вместо 10. Кочевник может выбрать это оружие при первой установке крепления для тяжёлого оружия на транспорт.</p><p><strong>Цена:</strong> 4 000eb (Роскошь)</p>"
+    },
+    "dvTable": "Пулемёт (Autofire)",
+    "equipped": "owned",
+    "favorite": false,
+    "fireModes": {
+      "autoFire": 5,
+      "suppressiveFire": true
+    },
+    "handsReq": 2,
+    "ignoreArmorPercent": 0,
+    "ignoreBelowSP": 0,
+    "installedItems": {
+      "allowed": true,
+      "allowedTypes": [
+        "itemUpgrade",
+        "ammo"
+      ],
+      "list": [],
+      "slots": 3,
+      "usedSlots": 0
+    },
+    "isRanged": true,
+    "magazine": {
+      "ammoData": null,
+      "max": 100,
+      "value": 100
+    },
+    "price": {
+      "market": 4000
+    },
+    "quality": "excellent",
+    "revealed": true,
+    "rof": 1,
+    "source": {
+      "book": "DataPool",
+      "page": 0
+    },
+    "unarmedAutomaticCalculation": true,
+    "usage": "equipped",
+    "usesType": "magazine",
+    "weaponSkill": "Heavy Weapons",
+    "weaponType": "assaultRifle"
+  },
+  "type": "weapon",
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  }
+}

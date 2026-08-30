@@ -1,0 +1,402 @@
+{
+  "_id": "cprAddAc00080000",
+  "name": "Tsunami Arms Magus",
+  "type": "character",
+  "img": "modules/cpr-addenda/assets/icons/gear.svg",
+  "folder": null,
+  "sort": 0,
+  "items": [
+    {
+      "_id": "cprAddPi08010000",
+      "effects": [],
+      "flags": {
+        "cpr-addenda": {
+          "vehicleMountedPosition": "cprAddPos0000008"
+        }
+      },
+      "img": "systems/cyberpunk-red-core/icons/compendium/weapons/SniperRifle.svg",
+      "name": "Рельсотрон Tsunami Arms «Deathwind»",
+      "system": {
+        "ammoVariety": [
+          "rifle"
+        ],
+        "attackmod": 0,
+        "brand": "",
+        "canIgnoreArmor": true,
+        "concealable": {
+          "concealable": false,
+          "isConcealed": false
+        },
+        "critFailEffect": "jammed",
+        "damage": "6d6",
+        "description": {
+          "value": "<p>Самая мощная из существующих на сегодняшний день теоретически переносимых человеком кинетических винтовок. Deathwind дебютировал во второй половине Четвёртой корпоративной войны как основное оружие силовой брони Tsunami Magus  где быстро зарекомендовал себя как эффективный «убийца силовой брони».</p><p><strong>Классификация:</strong> снайперская винтовка отличного качества<br><strong>Навык одиночного выстрела:</strong> Тяжёлое оружие<br><strong>Таблица дальности:</strong> скаутская винтовка<br><strong>Особые режимы огня:</strong> нет<br><strong>Приспособления:</strong> коннектор смартлинка  перекалибровка снайперской винтовки  ствол скаутской винтовки</p><p><strong>Особые свойства:</strong> это оружие не способно выполнять прицельные выстрелы. После каждого третьего выстрела  сделанного этим оружием в течение 30 секунд (10 раундов)  его качество снижается до плохого  пока пользователь не выпустит избыточное тепло  потратив на это действие. Урон этого оружия полностью игнорирует броню цели  если её ОС ниже 12. Броня с более высокой ОС взаимодействует с уроном как обычно. Перезарядка этого оружия требует двух действий перезарядки. Для стрельбы из этого оружия требуется ТЕЛО 14  либо ТЕЛО 12  если стрелок находится в положении лёжа. Несовместимо со всеми приспособлениями  изменяющими вместимость. Коннектор смартлинка этого оружия нельзя демонтировать  для работы требуется  чтобы пользователь был физически подключён к оружию двумя Интерфейсными разъёмами/Подкожными хватами.</p><p><strong>Цена:</strong> 12 000eb (Супер роскошь)</p>"
+        },
+        "dvTable": "Скаутская винтовка",
+        "equipped": "equipped",
+        "favorite": false,
+        "fireModes": {
+          "autoFire": 0,
+          "suppressiveFire": false
+        },
+        "handsReq": 2,
+        "ignoreArmorPercent": 0,
+        "ignoreBelowSP": 12,
+        "installedItems": {
+          "allowed": true,
+          "allowedTypes": [
+            "itemUpgrade",
+            "ammo"
+          ],
+          "list": [],
+          "slots": 1,
+          "usedSlots": 0
+        },
+        "isRanged": true,
+        "magazine": {
+          "ammoData": null,
+          "max": 30,
+          "value": 30
+        },
+        "price": {
+          "market": 12000
+        },
+        "quality": "excellent",
+        "revealed": true,
+        "rof": 1,
+        "source": {
+          "book": "DataPool",
+          "page": 0
+        },
+        "unarmedAutomaticCalculation": true,
+        "usage": "equipped",
+        "usesType": "magazine",
+        "weaponSkill": "Heavy Weapons",
+        "weaponType": "sniperRifle"
+      },
+      "type": "weapon",
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "cprAddPi08020000",
+      "effects": [],
+      "flags": {
+        "cyberpunk-red-core": {
+          "_migration": {
+            "current": 33,
+            "previous": "24"
+          }
+        },
+        "cpr-addenda": {
+          "vehicleInstalled": true
+        }
+      },
+      "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/grip_foot.svg",
+      "name": "Grip Foot",
+      "system": {
+        "ammoVariety": [],
+        "attackmod": 0,
+        "brand": "",
+        "canIgnoreArmor": true,
+        "concealable": {
+          "concealable": false,
+          "isConcealed": false
+        },
+        "core": false,
+        "damage": "1d6",
+        "description": {
+          "value": "<p>Provides traction for climbing vertically. Must be paired.</p>\n"
+        },
+        "dvTable": "",
+        "favorite": false,
+        "fireModes": {
+          "autoFire": 0,
+          "suppressiveFire": false
+        },
+        "humanityLoss": {
+          "roll": "1d6",
+          "static": 3
+        },
+        "ignoreArmorPercent": 50,
+        "installLocation": "clinic",
+        "installedItems": {
+          "allowed": false,
+          "allowedTypes": [
+            "itemUpgrade"
+          ],
+          "list": [],
+          "slots": 3,
+          "usedSlots": 0
+        },
+        "isElectronic": false,
+        "isFoundational": false,
+        "isRanged": false,
+        "isWeapon": false,
+        "magazine": {
+          "ammoData": null,
+          "max": 0,
+          "value": 0
+        },
+        "price": {
+          "market": 500
+        },
+        "providesHardening": false,
+        "revealed": true,
+        "rof": 1,
+        "size": 1,
+        "source": {
+          "book": "Core",
+          "page": 366
+        },
+        "type": "cyberLeg",
+        "unarmedAutomaticCalculation": true,
+        "usage": "toggled",
+        "usesType": "magazine",
+        "weaponSkill": "Archery",
+        "weaponType": "assaultRifle"
+      },
+      "type": "cyberware",
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "cprAddPi08030000",
+      "effects": [
+        "pZWEbI2ZttpRsUPj"
+      ],
+      "flags": {
+        "cyberpunk-red-core": {
+          "_migration": {
+            "current": 33,
+            "previous": "24"
+          }
+        },
+        "cpr-addenda": {
+          "vehicleInstalled": true
+        }
+      },
+      "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/targeting_scope.svg",
+      "name": "Targeting Scope",
+      "system": {
+        "ammoVariety": [],
+        "attackmod": 0,
+        "brand": "",
+        "canIgnoreArmor": true,
+        "concealable": {
+          "concealable": false,
+          "isConcealed": false
+        },
+        "core": false,
+        "damage": "1d6",
+        "description": {
+          "value": "<p>Provides a +1 to aimed shots.</p>\n"
+        },
+        "dvTable": "",
+        "favorite": false,
+        "fireModes": {
+          "autoFire": 0,
+          "suppressiveFire": false
+        },
+        "humanityLoss": {
+          "roll": "1d6",
+          "static": 3
+        },
+        "ignoreArmorPercent": 50,
+        "installLocation": "clinic",
+        "installedItems": {
+          "allowed": false,
+          "allowedTypes": [
+            "itemUpgrade"
+          ],
+          "list": [],
+          "slots": 3,
+          "usedSlots": 0
+        },
+        "isElectronic": true,
+        "isFoundational": false,
+        "isRanged": false,
+        "isWeapon": false,
+        "magazine": {
+          "ammoData": null,
+          "max": 0,
+          "value": 0
+        },
+        "price": {
+          "market": 500
+        },
+        "providesHardening": false,
+        "revealed": true,
+        "rof": 1,
+        "size": 1,
+        "source": {
+          "book": "Core",
+          "page": 361
+        },
+        "type": "cyberEye",
+        "unarmedAutomaticCalculation": true,
+        "usage": "installed",
+        "usesType": "magazine",
+        "weaponSkill": "Archery",
+        "weaponType": "assaultRifle"
+      },
+      "type": "cyberware",
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "cprAddPi08040000",
+      "effects": [
+        "CMDlHoVTmNq5MRwZ"
+      ],
+      "flags": {
+        "cyberpunk-red-core": {
+          "_migration": {
+            "current": 33,
+            "previous": "24"
+          }
+        },
+        "cpr-addenda": {
+          "vehicleInstalled": true
+        }
+      },
+      "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/teleoptics.svg",
+      "name": "TeleOptics",
+      "system": {
+        "ammoVariety": [],
+        "attackmod": 0,
+        "brand": "",
+        "canIgnoreArmor": true,
+        "concealable": {
+          "concealable": false,
+          "isConcealed": false
+        },
+        "core": false,
+        "damage": "1d6",
+        "description": {
+          "value": "<p>\n  Telescope in your eye up to 800m/yds. +1 to single shot/aimed shot if greater\n  than 50m away.\n</p>\n"
+        },
+        "dvTable": "",
+        "favorite": false,
+        "fireModes": {
+          "autoFire": 0,
+          "suppressiveFire": false
+        },
+        "humanityLoss": {
+          "roll": "1d6",
+          "static": 3
+        },
+        "ignoreArmorPercent": 50,
+        "installLocation": "clinic",
+        "installedItems": {
+          "allowed": false,
+          "allowedTypes": [
+            "itemUpgrade"
+          ],
+          "list": [],
+          "slots": 3,
+          "usedSlots": 0
+        },
+        "isElectronic": true,
+        "isFoundational": false,
+        "isRanged": false,
+        "isWeapon": false,
+        "magazine": {
+          "ammoData": null,
+          "max": 0,
+          "value": 0
+        },
+        "price": {
+          "market": 500
+        },
+        "providesHardening": false,
+        "revealed": true,
+        "rof": 1,
+        "size": 1,
+        "source": {
+          "book": "Core",
+          "page": 361
+        },
+        "type": "cyberEye",
+        "unarmedAutomaticCalculation": true,
+        "usage": "toggled",
+        "usesType": "magazine",
+        "weaponSkill": "Archery",
+        "weaponType": "assaultRifle"
+      },
+      "type": "cyberware",
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      }
+    }
+  ],
+  "effects": [],
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "core": {
+      "sheetClass": "cpr-addenda.VehicleSheet"
+    },
+    "cpr-addenda": {
+      "vehiclePositions": [
+        {
+          "id": "cprAddPos0000008",
+          "name": "Пилот",
+          "order": 1,
+          "occupants": [],
+          "skills": "",
+          "statMods": "MOVE:-1",
+          "maxOccupants": 1,
+          "canControlWeapons": true,
+          "grantsTokenControl": true,
+          "matchVehicleMove": false,
+          "matchOccupantMove": false,
+          "bulletproofGlass": false,
+          "glassHp": 0,
+          "glassHpMax": 0
+        }
+      ]
+    }
+  },
+  "system": {
+    "derivedStats": {
+      "hp": {
+        "value": 25,
+        "max": 25
+      }
+    },
+    "externalData": {
+      "currentArmorBody": {
+        "value": 17,
+        "max": 17
+      }
+    },
+    "stats": {
+      "body": {
+        "value": 12
+      }
+    },
+    "information": {
+      "alias": "Сигма / Гибридный Metalgear®",
+      "description": "<p><strong>26 624eb (Супер роскошь)</strong></p><p>Изначально Magus задумывался как предельная командно-разведывательная платформа для сбора информации, однако благодаря впечатляющей боевой репутации рельсотрона «Deathwind» в последние дни Четвёртой корпоративной войны он быстро занял нишу марксмана. Эта современная версия, разработанная без участия первоначального партнёра Raven MicroCybernetics, представляет собой чистую демонстрацию прагматичной эффективности: фокус на снайперской роли позволил существенно сократить стоимость производства.</p><p><strong>25 ПЗ • 17 ОС • ТЕЛО 12 • −1 СКО</strong></p><p>Экзоскелет: Сигма<br>Оболочка: Гибридный Metalgear®</p><p><strong>Бортовое оружие</strong></p><ul><li>рельсотрон Tsunami Arms «Deathwind»</li></ul><p><strong>Бортовые киберимпланты</strong></p><ul><li>Цепкая стопа</li><li>прицельный модуль</li><li>теле-оптика</li></ul><p><em>ТЕЛО экзоскелета не поднимается эффектом поста: по правилам пилот берёт большее из своего ТЕЛО и ТЕЛО брони, а такое сравнение модификатором не выражается. Значение стоит на самом костюме.</em></p>",
+      "notes": ""
+    }
+  },
+  "prototypeToken": {
+    "name": "Tsunami Arms Magus",
+    "actorLink": true,
+    "disposition": 0
+  }
+}

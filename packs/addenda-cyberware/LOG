@@ -1,5 +1,3 @@
-2026/08/23-21:53:11.350 2bd0 Recovering log #86
-2026/08/23-21:53:11.351 2bd0 Level-0 table #88: started
-2026/08/23-21:53:11.353 2bd0 Level-0 table #88: 82002 bytes OK
-2026/08/23-21:53:11.357 2bd0 Delete type=0 #86
-2026/08/23-21:53:11.357 2bd0 Delete type=3 #85
+2026/08/30-15:57:19.184 4a4c Recovering log #128
+2026/08/30-15:57:19.187 4a4c Delete type=0 #128
+2026/08/30-15:57:19.187 4a4c Delete type=3 #126

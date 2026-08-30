@@ -1,0 +1,43 @@
+{
+  "_id": "cprAddPa00110000",
+  "name": "Оболочка: Мародёрская",
+  "type": "gear",
+  "img": "modules/cpr-addenda/assets/icons/gear.svg",
+  "folder": null,
+  "sort": 0,
+  "effects": [],
+  "flags": {},
+  "system": {
+    "amount": 1,
+    "brand": "",
+    "concealable": {
+      "concealable": false,
+      "isConcealed": false
+    },
+    "description": {
+      "value": "<p>Компонент силовой брони: бронеплиты  в которые заключён экзоскелет.</p><p><strong>14 ОС • +2 ПЗ • −1 СКО</strong><br>Цена: 1 000eb (Очень дорогое)</p><p>Находясь внутри силовой брони, пилот плотно заключён в оболочку, полностью изолированную от внешних атак.</p>"
+    },
+    "equipped": "owned",
+    "favorite": false,
+    "installedItems": {
+      "allowed": false,
+      "allowedTypes": [
+        "itemUpgrade"
+      ],
+      "list": [],
+      "slots": 0,
+      "usedSlots": 0
+    },
+    "isElectronic": false,
+    "price": {
+      "market": 1000
+    },
+    "providesHardening": false,
+    "revealed": true,
+    "source": {
+      "book": "DataPool",
+      "page": 0
+    },
+    "usage": "toggled"
+  }
+}

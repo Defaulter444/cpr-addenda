@@ -1,0 +1,304 @@
+{
+  "_id": "cprAddAc00040000",
+  "name": "BlueRaven «Sewer Rat»",
+  "type": "character",
+  "img": "modules/cpr-addenda/assets/icons/gear.svg",
+  "folder": null,
+  "sort": 0,
+  "items": [
+    {
+      "_id": "cprAddPi04010000",
+      "effects": [],
+      "flags": {
+        "cpr-addenda": {
+          "vehicleMountedPosition": "cprAddPos0000004"
+        }
+      },
+      "img": "systems/cyberpunk-red-core/icons/compendium/weapons/AssaultRifle.svg",
+      "name": "Scatter Ratter",
+      "system": {
+        "ammoVariety": [
+          "rifle"
+        ],
+        "attackmod": 0,
+        "brand": "",
+        "canIgnoreArmor": false,
+        "concealable": {
+          "concealable": false,
+          "isConcealed": false
+        },
+        "critFailEffect": "jammed",
+        "damage": "4d6",
+        "description": {
+          "value": "<p>Это массивное напечатанное оружие. Поразительно эргономичный металлический череп крысы с парой стволов  вырывающихся из глазниц — работа дизайнера BlueRaven  ранее известной под сетевым псевдонимом JayeZK. Scatter Ratter — амбициозный первый проект автора под новым именем и брендом. Мы в Midnight Arms с удовольствием поддержали следующий шаг этого восходящего дизайнера и с интересом ждём её новых работ.</p><p><strong>Классификация:</strong> пулемёт плохого качества<br><strong>Навык одиночного выстрела:</strong> Тяжёлое оружие<br><strong>Таблица дальности:</strong> пистолет-пулемёт<br><strong>Особые режимы огня:</strong> автоогонь (пистолет-пулемёт 5)  подавляющий огонь<br><strong>Приспособления:</strong> нет</p><p><strong>Особые свойства:</strong> это оружие нельзя использовать для одиночного выстрела  если в предыдущем ходу оно стреляло автоогонём. Если в предыдущем ходу оружие стреляло одиночным  в этом ходу считай его оружием отличного качества. Для стрельбы из этого оружия требуется ТЕЛО 8 или выше  если только оно не установлено на крепление. Кочевник может выбрать это оружие при первичной установке крепления для тяжёлого оружия на транспорт.</p><p><strong>Цена:</strong> 2 552eb (Очень дорого)</p>"
+        },
+        "dvTable": "Пистолет-пулемёт",
+        "equipped": "equipped",
+        "favorite": false,
+        "fireModes": {
+          "autoFire": 5,
+          "suppressiveFire": true
+        },
+        "handsReq": 2,
+        "ignoreArmorPercent": 0,
+        "ignoreBelowSP": 0,
+        "installedItems": {
+          "allowed": true,
+          "allowedTypes": [
+            "itemUpgrade",
+            "ammo"
+          ],
+          "list": [],
+          "slots": 3,
+          "usedSlots": 0
+        },
+        "isRanged": true,
+        "magazine": {
+          "ammoData": null,
+          "max": 56,
+          "value": 56
+        },
+        "price": {
+          "market": 2552
+        },
+        "quality": "poor",
+        "revealed": true,
+        "rof": 2,
+        "source": {
+          "book": "DataPool",
+          "page": 0
+        },
+        "unarmedAutomaticCalculation": true,
+        "usage": "equipped",
+        "usesType": "magazine",
+        "weaponSkill": "Heavy Weapons",
+        "weaponType": "assaultRifle"
+      },
+      "type": "weapon",
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "cprAddPi04020000",
+      "effects": [],
+      "flags": {
+        "cpr-addenda": {
+          "vehicleMountedPosition": "cprAddPos0000004"
+        }
+      },
+      "img": "systems/cyberpunk-red-core/icons/compendium/weapons/AssaultRifle.svg",
+      "name": "Scatter Ratter",
+      "system": {
+        "ammoVariety": [
+          "rifle"
+        ],
+        "attackmod": 0,
+        "brand": "",
+        "canIgnoreArmor": false,
+        "concealable": {
+          "concealable": false,
+          "isConcealed": false
+        },
+        "critFailEffect": "jammed",
+        "damage": "4d6",
+        "description": {
+          "value": "<p>Это массивное напечатанное оружие. Поразительно эргономичный металлический череп крысы с парой стволов  вырывающихся из глазниц — работа дизайнера BlueRaven  ранее известной под сетевым псевдонимом JayeZK. Scatter Ratter — амбициозный первый проект автора под новым именем и брендом. Мы в Midnight Arms с удовольствием поддержали следующий шаг этого восходящего дизайнера и с интересом ждём её новых работ.</p><p><strong>Классификация:</strong> пулемёт плохого качества<br><strong>Навык одиночного выстрела:</strong> Тяжёлое оружие<br><strong>Таблица дальности:</strong> пистолет-пулемёт<br><strong>Особые режимы огня:</strong> автоогонь (пистолет-пулемёт 5)  подавляющий огонь<br><strong>Приспособления:</strong> нет</p><p><strong>Особые свойства:</strong> это оружие нельзя использовать для одиночного выстрела  если в предыдущем ходу оно стреляло автоогонём. Если в предыдущем ходу оружие стреляло одиночным  в этом ходу считай его оружием отличного качества. Для стрельбы из этого оружия требуется ТЕЛО 8 или выше  если только оно не установлено на крепление. Кочевник может выбрать это оружие при первичной установке крепления для тяжёлого оружия на транспорт.</p><p><strong>Цена:</strong> 2 552eb (Очень дорого)</p>"
+        },
+        "dvTable": "Пистолет-пулемёт",
+        "equipped": "equipped",
+        "favorite": false,
+        "fireModes": {
+          "autoFire": 5,
+          "suppressiveFire": true
+        },
+        "handsReq": 2,
+        "ignoreArmorPercent": 0,
+        "ignoreBelowSP": 0,
+        "installedItems": {
+          "allowed": true,
+          "allowedTypes": [
+            "itemUpgrade",
+            "ammo"
+          ],
+          "list": [],
+          "slots": 3,
+          "usedSlots": 0
+        },
+        "isRanged": true,
+        "magazine": {
+          "ammoData": null,
+          "max": 56,
+          "value": 56
+        },
+        "price": {
+          "market": 2552
+        },
+        "quality": "poor",
+        "revealed": true,
+        "rof": 2,
+        "source": {
+          "book": "DataPool",
+          "page": 0
+        },
+        "unarmedAutomaticCalculation": true,
+        "usage": "equipped",
+        "usesType": "magazine",
+        "weaponSkill": "Heavy Weapons",
+        "weaponType": "assaultRifle"
+      },
+      "type": "weapon",
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "cprAddPi04030000",
+      "effects": [],
+      "flags": {
+        "cyberpunk-red-core": {
+          "_migration": {
+            "current": 33,
+            "previous": "24"
+          }
+        },
+        "cpr-addenda": {
+          "vehicleInstalled": true
+        }
+      },
+      "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/popup_shield.svg",
+      "name": "Popup Shield",
+      "system": {
+        "ammoVariety": [],
+        "attackmod": 0,
+        "brand": "",
+        "canIgnoreArmor": true,
+        "concealable": {
+          "concealable": true,
+          "isConcealed": false
+        },
+        "core": false,
+        "damage": "1d6",
+        "description": {
+          "value": "<p>\n  A foldable bulletproof shield that can be drawn or concealed easily. Can't\n  hold anything with this hand while activated.\n</p>\n<blockquote>\n  <p>\n    Add\n    @UUID[Compendium.cyberpunk-red-core.core_armor.Item.Bg1YEeF25HhfrzOG]{Bullet\n    Proof Shield} to inventory to manage shield HP.\n  </p>\n</blockquote>\n"
+        },
+        "dvTable": "",
+        "favorite": false,
+        "fireModes": {
+          "autoFire": 0,
+          "suppressiveFire": false
+        },
+        "humanityLoss": {
+          "roll": "2d6",
+          "static": 7
+        },
+        "ignoreArmorPercent": 50,
+        "ignoreBelowSP": 0,
+        "installLocation": "clinic",
+        "installedItems": {
+          "allowed": false,
+          "allowedTypes": [
+            "itemUpgrade"
+          ],
+          "list": [],
+          "slots": 0,
+          "usedSlots": 0
+        },
+        "isElectronic": true,
+        "isFoundational": false,
+        "isRanged": false,
+        "isWeapon": false,
+        "magazine": {
+          "ammoData": null,
+          "max": 0,
+          "value": 0
+        },
+        "price": {
+          "market": 500
+        },
+        "providesHardening": false,
+        "revealed": true,
+        "rof": 1,
+        "size": 3,
+        "source": {
+          "book": "Core",
+          "page": 365
+        },
+        "type": "cyberArm",
+        "unarmedAutomaticCalculation": true,
+        "usage": "toggled",
+        "usesType": "magazine",
+        "weaponSkill": "Archery",
+        "weaponType": "assaultRifle"
+      },
+      "type": "cyberware",
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      }
+    }
+  ],
+  "effects": [],
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "core": {
+      "sheetClass": "cpr-addenda.VehicleSheet"
+    },
+    "cpr-addenda": {
+      "vehiclePositions": [
+        {
+          "id": "cprAddPos0000004",
+          "name": "Пилот",
+          "order": 1,
+          "occupants": [],
+          "skills": "",
+          "statMods": "MOVE:-2, REF:-1, DEX:-1",
+          "maxOccupants": 1,
+          "canControlWeapons": true,
+          "grantsTokenControl": true,
+          "matchVehicleMove": false,
+          "matchOccupantMove": false,
+          "bulletproofGlass": false,
+          "glassHp": 0,
+          "glassHpMax": 0
+        }
+      ]
+    }
+  },
+  "system": {
+    "derivedStats": {
+      "hp": {
+        "value": 23,
+        "max": 23
+      }
+    },
+    "externalData": {
+      "currentArmorBody": {
+        "value": 14,
+        "max": 14
+      }
+    },
+    "stats": {
+      "body": {
+        "value": 10
+      }
+    },
+    "information": {
+      "alias": "Мародёрский / Мародёрская",
+      "description": "<p><strong>14 104eb (Очень дорогое)</strong></p><p>Самодельная концепция силовой брони, созданной оружейным виртуозом Найт-Сити BlueRaven. Sewer Rat спроектирован так, чтобы «пролезать в узкие места и укладываться в ограниченный бюджет», а также доказать жизнеспособность локально добытых деталей и решений. Хоть это и не самая дешёвая силовая броня, его теоретически можно собрать при ограниченном доступе к корпоративным ресурсам, и именно этот факт пугает сильных мира сего не меньше, чем панкнауты.</p><p><strong>23 ПЗ • 14 ОС • ТЕЛО 10 • −2 СКО, −1 РЕФ, −1 ЛВК</strong></p><p>Экзоскелет: Мародёрский<br>Оболочка: Мародёрская</p><p><strong>Бортовое оружие</strong></p><ul><li>Scatter Ratter (×2)</li></ul><p><strong>Бортовые киберимпланты</strong></p><ul><li>выдвижной щит (x2)</li></ul><p><em>ТЕЛО экзоскелета не поднимается эффектом поста: по правилам пилот берёт большее из своего ТЕЛО и ТЕЛО брони, а такое сравнение модификатором не выражается. Значение стоит на самом костюме.</em></p>",
+      "notes": ""
+    }
+  },
+  "prototypeToken": {
+    "name": "BlueRaven «Sewer Rat»",
+    "actorLink": true,
+    "disposition": 0
+  }
+}

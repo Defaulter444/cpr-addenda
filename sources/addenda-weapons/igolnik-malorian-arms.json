@@ -1,0 +1,71 @@
+{
+  "_id": "cprAddWp00100000",
+  "effects": [],
+  "flags": {},
+  "img": "systems/cyberpunk-red-core/icons/compendium/weapons/heavySMG.svg",
+  "name": "Игольник Малориан Армс",
+  "system": {
+    "ammoVariety": [
+      "heavyPistol"
+    ],
+    "attackmod": 0,
+    "brand": "",
+    "canIgnoreArmor": false,
+    "concealable": {
+      "concealable": false,
+      "isConcealed": false
+    },
+    "critFailEffect": "jammed",
+    "damage": "3d6",
+    "description": {
+      "value": "<p>Экзотический тяжелый ПП отличного качества с 25 патронами в магазине  Коннектором Смартлинка и автоматической стрельбой (4). Источник: 12 Дней Кибероружества.</p><p><strong>Классификация:</strong> экзотический тяжёлый ПП отличного качества<br><strong>Навык одиночного выстрела:</strong> Пистолет<br><strong>Таблица дальности:</strong> —<br><strong>Особые режимы огня:</strong> автоматическая стрельба (4)<br><strong>Приспособления:</strong> коннектор смартлинка</p><p><strong>Особые свойства:</strong> Оружие способно стрелять только своими уникальными бронебойными боеприпасами  которые разрушают ОС брони на 4 вместо 1  когда вы наносите урон цели. Эти боеприпасы стоят столько же  сколько обычные бронебойные боеприпасы  но стрелять ими можно только из ПП Игольник от Малориан Армс.</p><p><strong>Цена:</strong> 5 000eb (Роскошь)</p>"
+    },
+    "dvTable": "DV SMG",
+    "equipped": "owned",
+    "favorite": false,
+    "fireModes": {
+      "autoFire": 4,
+      "suppressiveFire": false
+    },
+    "handsReq": 1,
+    "ignoreArmorPercent": 0,
+    "ignoreBelowSP": 0,
+    "installedItems": {
+      "allowed": true,
+      "allowedTypes": [
+        "itemUpgrade",
+        "ammo"
+      ],
+      "list": [],
+      "slots": 3,
+      "usedSlots": 0
+    },
+    "isRanged": true,
+    "magazine": {
+      "ammoData": null,
+      "max": 25,
+      "value": 25
+    },
+    "price": {
+      "market": 5000
+    },
+    "quality": "excellent",
+    "revealed": true,
+    "rof": 1,
+    "source": {
+      "book": "DataPool",
+      "page": 0
+    },
+    "unarmedAutomaticCalculation": true,
+    "usage": "equipped",
+    "usesType": "magazine",
+    "weaponSkill": "Handgun",
+    "weaponType": "heavySmg"
+  },
+  "type": "weapon",
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  }
+}

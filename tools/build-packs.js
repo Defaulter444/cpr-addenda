@@ -86,7 +86,9 @@ function validate(doc, file, packType = "Item") {
   if (!doc.name) problems.push("нет поля name");
   // Поле `type` есть у предметов (оружие, броня, модификация), а у таблиц
   // бросков его нет вовсе: там тип задан самим документом.
-  if (packType === "Item" && !doc.type) problems.push("нет поля type");
+  if ((packType === "Item" || packType === "Actor") && !doc.type) {
+    problems.push("нет поля type");
+  }
   if (packType === "RollTable" && !Array.isArray(doc.results))
     problems.push("у таблицы нет строк (results)");
   if (packType === "JournalEntry" && !Array.isArray(doc.pages))
@@ -138,6 +140,28 @@ function toEntries(doc, type) {
     ];
   }
 
+  if (type === "Actor") {
+    // Предметы и эффекты актёра хранятся отдельными записями, а в самом
+    // актёре остаются только их идентификаторы — так же, как страницы у
+    // журнала и строки у таблицы бросков.
+    //
+    // Это не косметика: положенный внутрь записи актёра массив предметов
+    // Foundry молча игнорирует. Актёр импортируется, а всё его снаряжение
+    // пропадает без единого сообщения об ошибке.
+    const items = doc.items ?? [];
+    const effects = doc.effects ?? [];
+    const actor = {
+      ...doc,
+      items: items.map((i) => i._id),
+      effects: effects.map((e) => e._id),
+    };
+    return [
+      [`!actors!${doc._id}`, actor],
+      ...items.map((i) => [`!actors.items!${doc._id}.${i._id}`, i]),
+      ...effects.map((e) => [`!actors.effects!${doc._id}.${e._id}`, e]),
+    ];
+  }
+
   return [[`!items!${doc._id}`, doc]];
 }
 
@@ -146,7 +170,7 @@ function toEntries(doc, type) {
  *
  * @async
  * @param {String} packName - имя пака, оно же имя папки в sources/
- * @param {String} packType - тип пака из манифеста: Item или RollTable
+ * @param {String} packType - тип пака: Item, Actor, RollTable или JournalEntry
  */
 async function buildPack(packName, packType = "Item") {
   const srcDir = path.join(SOURCES_DIR, packName);

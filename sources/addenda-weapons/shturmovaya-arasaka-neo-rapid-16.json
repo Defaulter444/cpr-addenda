@@ -1,0 +1,72 @@
+{
+  "_id": "cprAddWp00020000",
+  "effects": [],
+  "flags": {},
+  "img": "systems/cyberpunk-red-core/icons/compendium/weapons/Shotgun.svg",
+  "name": "Штурмовая Arasaka Neo Rapid 16",
+  "system": {
+    "ammoVariety": [
+      "shotgunShell",
+      "shotgunSlug"
+    ],
+    "attackmod": 0,
+    "brand": "",
+    "canIgnoreArmor": false,
+    "concealable": {
+      "concealable": false,
+      "isConcealed": false
+    },
+    "critFailEffect": "jammed",
+    "damage": "5d6",
+    "description": {
+      "value": "<p>Спустя годы после шквала негатива от своей верной аудитории за полуавтоматическое неуважение к любимому Rapid Assault 12  Arasaka начинает с чистого листа  с Neo Rapid Assault 16. Высокая цена по-прежнему не по карману стареющим фанатам Rapid Assault 12 и  возможно  ставит крест на будущем модели как по-настоящему массового дробовика.</p><p><strong>Классификация:</strong> Дробовик отличного качества<br><strong>Навык одиночного выстрела:</strong> Длинноствольное оружие<br><strong>Таблица дальности:</strong> дробовик<br><strong>Особые режимы огня:</strong> автоогонь (автопистолет 4)  дробь<br><strong>Приспособления:</strong> Барабанный магазин  узел автоматического управления огнём</p><p><strong>Особые свойства:</strong> Нет</p><p><strong>Цена:</strong> 1 600eb (Очень дорого)</p>"
+    },
+    "dvTable": "Дробовик (стандартный)",
+    "equipped": "owned",
+    "favorite": false,
+    "fireModes": {
+      "autoFire": 4,
+      "suppressiveFire": false
+    },
+    "handsReq": 2,
+    "ignoreArmorPercent": 0,
+    "ignoreBelowSP": 0,
+    "installedItems": {
+      "allowed": true,
+      "allowedTypes": [
+        "itemUpgrade",
+        "ammo"
+      ],
+      "list": [],
+      "slots": 1,
+      "usedSlots": 0
+    },
+    "isRanged": true,
+    "magazine": {
+      "ammoData": null,
+      "max": 16,
+      "value": 16
+    },
+    "price": {
+      "market": 1600
+    },
+    "quality": "excellent",
+    "revealed": true,
+    "rof": 1,
+    "source": {
+      "book": "DataPool",
+      "page": 0
+    },
+    "unarmedAutomaticCalculation": true,
+    "usage": "equipped",
+    "usesType": "magazine",
+    "weaponSkill": "Shoulder Arms",
+    "weaponType": "shotgun"
+  },
+  "type": "weapon",
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  }
+}

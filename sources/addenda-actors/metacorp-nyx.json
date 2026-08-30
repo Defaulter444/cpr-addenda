@@ -1,0 +1,394 @@
+{
+  "_id": "cprAddAc00050000",
+  "name": "MetaCorp Nyx",
+  "type": "character",
+  "img": "modules/cpr-addenda/assets/icons/gear.svg",
+  "folder": null,
+  "sort": 0,
+  "items": [
+    {
+      "_id": "cprAddPi05010000",
+      "effects": [],
+      "flags": {
+        "cyberpunk-red-core": {
+          "_migration": {
+            "current": 33,
+            "previous": "24"
+          }
+        },
+        "cpr-addenda": {
+          "vehicleMountedPosition": "cprAddPos0000005"
+        }
+      },
+      "img": "systems/cyberpunk-red-core/icons/compendium/weapons/SniperRifle.svg",
+      "name": "Sniper Rifle",
+      "system": {
+        "ammoVariety": [
+          "rifle"
+        ],
+        "attackmod": 0,
+        "brand": "",
+        "canIgnoreArmor": false,
+        "concealable": {
+          "concealable": false,
+          "isConcealed": false
+        },
+        "critFailEffect": "jammed",
+        "damage": "5d6",
+        "description": {
+          "value": "<p>A long-distance sniper rifle. Holds 4 bullets in a magazine.</p>\n"
+        },
+        "dvTable": "DV Sniper Rifle",
+        "equipped": "equipped",
+        "favorite": false,
+        "fireModes": {
+          "autoFire": 0,
+          "suppressiveFire": false
+        },
+        "handsReq": 2,
+        "ignoreArmorPercent": 0,
+        "ignoreBelowSP": 0,
+        "installedItems": {
+          "allowed": true,
+          "allowedTypes": [
+            "itemUpgrade",
+            "ammo"
+          ],
+          "list": [],
+          "slots": 3,
+          "usedSlots": 0
+        },
+        "isRanged": true,
+        "magazine": {
+          "ammoData": null,
+          "max": 4,
+          "value": 4
+        },
+        "price": {
+          "market": 500
+        },
+        "quality": "standard",
+        "revealed": true,
+        "rof": 1,
+        "source": {
+          "book": "Core",
+          "page": 341
+        },
+        "unarmedAutomaticCalculation": true,
+        "usage": "equipped",
+        "usesType": "magazine",
+        "weaponSkill": "Shoulder Arms",
+        "weaponType": "sniperRifle"
+      },
+      "type": "weapon",
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "cprAddPi05020000",
+      "effects": [],
+      "flags": {
+        "cpr-addenda": {
+          "vehicleMountedPosition": "cprAddPos0000005"
+        }
+      },
+      "img": "systems/cyberpunk-red-core/icons/compendium/weapons/AssaultRifle.svg",
+      "name": "Пулемёт MetaCorp «Victoria»",
+      "system": {
+        "ammoVariety": [
+          "rifle"
+        ],
+        "attackmod": 0,
+        "brand": "",
+        "canIgnoreArmor": false,
+        "concealable": {
+          "concealable": false,
+          "isConcealed": false
+        },
+        "critFailEffect": "jammed",
+        "damage": "",
+        "description": {
+          "value": "<p>Одноствольный пулемёт с водяным охлаждением  приводимый в действие цепным механизмом с высокой частотой вращения. Боеприпасы подаются в оружие из рюкзака по герметичной водонепроницаемой трубке. Вся эта огневая мощь имеет свою цену — внушительный вес и крайне неэкономичный расход боеприпасов  хотя MetaCorp и не рассчитывала  что потенциального владельца подобные мелочи хоть сколько-нибудь смутят.</p><p><strong>Классификация:</strong> пулемёт отличного качества<br><strong>Навык одиночного выстрела:</strong> —<br><strong>Таблица дальности:</strong> пулемет (автоогонь)<br><strong>Особые режимы огня:</strong> автоогонь (Пулемет 5)  подавляющий огонь<br><strong>Приспособления:</strong> нет</p><p><strong>Особые свойства:</strong> Перезарядка этого оружия требует двух действий перезарядки. Для стрельбы из этого оружия требуется ТЕЛО 12 или выше  если только оно не установлено на крепление. Оружие может вести огонь только в режимах автоогонь и подавляющий огонь  при этом каждый такой выстрел расходует 20 боеприпасов вместо 10. Кочевник может выбрать это оружие при первой установке крепления для тяжёлого оружия на транспорт.</p><p><strong>Цена:</strong> 4 000eb (Роскошь)</p>"
+        },
+        "dvTable": "Пулемёт (Autofire)",
+        "equipped": "equipped",
+        "favorite": false,
+        "fireModes": {
+          "autoFire": 5,
+          "suppressiveFire": true
+        },
+        "handsReq": 2,
+        "ignoreArmorPercent": 0,
+        "ignoreBelowSP": 0,
+        "installedItems": {
+          "allowed": true,
+          "allowedTypes": [
+            "itemUpgrade",
+            "ammo"
+          ],
+          "list": [],
+          "slots": 3,
+          "usedSlots": 0
+        },
+        "isRanged": true,
+        "magazine": {
+          "ammoData": null,
+          "max": 100,
+          "value": 100
+        },
+        "price": {
+          "market": 4000
+        },
+        "quality": "excellent",
+        "revealed": true,
+        "rof": 1,
+        "source": {
+          "book": "DataPool",
+          "page": 0
+        },
+        "unarmedAutomaticCalculation": true,
+        "usage": "equipped",
+        "usesType": "magazine",
+        "weaponSkill": "Heavy Weapons",
+        "weaponType": "assaultRifle"
+      },
+      "type": "weapon",
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "cprAddPi05030000",
+      "effects": [],
+      "flags": {
+        "cyberpunk-red-core": {
+          "_migration": {
+            "current": 33,
+            "previous": "24"
+          }
+        },
+        "cpr-addenda": {
+          "vehicleInstalled": true
+        }
+      },
+      "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/lowlight_ir_uv.svg",
+      "name": "Low Light/IR/UV",
+      "system": {
+        "ammoVariety": [],
+        "attackmod": 0,
+        "brand": "",
+        "canIgnoreArmor": true,
+        "concealable": {
+          "concealable": false,
+          "isConcealed": false
+        },
+        "core": false,
+        "damage": "1d6",
+        "description": {
+          "value": "<p>Must be paired. Ignore any vision penalties due to lighting or fog/smoke.</p>\n"
+        },
+        "dvTable": "",
+        "favorite": false,
+        "fireModes": {
+          "autoFire": 0,
+          "suppressiveFire": false
+        },
+        "humanityLoss": {
+          "roll": "1d6",
+          "static": 3
+        },
+        "ignoreArmorPercent": 50,
+        "installLocation": "mall",
+        "installedItems": {
+          "allowed": false,
+          "allowedTypes": [
+            "itemUpgrade"
+          ],
+          "list": [],
+          "slots": 3,
+          "usedSlots": 0
+        },
+        "isElectronic": true,
+        "isFoundational": false,
+        "isRanged": false,
+        "isWeapon": false,
+        "magazine": {
+          "ammoData": null,
+          "max": 0,
+          "value": 0
+        },
+        "price": {
+          "market": 500
+        },
+        "providesHardening": false,
+        "revealed": true,
+        "rof": 1,
+        "size": 2,
+        "source": {
+          "book": "Core",
+          "page": 360
+        },
+        "type": "cyberEye",
+        "unarmedAutomaticCalculation": true,
+        "usage": "toggled",
+        "usesType": "magazine",
+        "weaponSkill": "Archery",
+        "weaponType": "assaultRifle"
+      },
+      "type": "cyberware",
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "cprAddPi05040000",
+      "effects": [],
+      "flags": {
+        "cyberpunk-red-core": {
+          "_migration": {
+            "current": 33,
+            "previous": "24"
+          }
+        },
+        "cpr-addenda": {
+          "vehicleInstalled": true
+        }
+      },
+      "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/radio_communicator.svg",
+      "name": "Radio Communicator",
+      "system": {
+        "ammoVariety": [],
+        "attackmod": 0,
+        "brand": "",
+        "canIgnoreArmor": true,
+        "concealable": {
+          "concealable": false,
+          "isConcealed": false
+        },
+        "core": false,
+        "damage": "1d6",
+        "description": {
+          "value": "<p>Built in walkie-talkie. 1 mile range.</p>\n"
+        },
+        "dvTable": "",
+        "favorite": false,
+        "fireModes": {
+          "autoFire": 0,
+          "suppressiveFire": false
+        },
+        "humanityLoss": {
+          "roll": "1d3",
+          "static": 2
+        },
+        "ignoreArmorPercent": 50,
+        "installLocation": "mall",
+        "installedItems": {
+          "allowed": false,
+          "allowedTypes": [
+            "itemUpgrade"
+          ],
+          "list": [],
+          "slots": 3,
+          "usedSlots": 0
+        },
+        "isElectronic": true,
+        "isFoundational": false,
+        "isRanged": false,
+        "isWeapon": false,
+        "magazine": {
+          "ammoData": null,
+          "max": 0,
+          "value": 0
+        },
+        "price": {
+          "market": 100
+        },
+        "providesHardening": false,
+        "revealed": true,
+        "rof": 1,
+        "size": 1,
+        "source": {
+          "book": "Core",
+          "page": 362
+        },
+        "type": "cyberAudioSuite",
+        "unarmedAutomaticCalculation": true,
+        "usage": "toggled",
+        "usesType": "magazine",
+        "weaponSkill": "Archery",
+        "weaponType": "assaultRifle"
+      },
+      "type": "cyberware",
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      }
+    }
+  ],
+  "effects": [],
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "core": {
+      "sheetClass": "cpr-addenda.VehicleSheet"
+    },
+    "cpr-addenda": {
+      "vehiclePositions": [
+        {
+          "id": "cprAddPos0000005",
+          "name": "Пилот",
+          "order": 1,
+          "occupants": [],
+          "skills": "",
+          "statMods": "MOVE:+3, DEX:-1",
+          "maxOccupants": 1,
+          "canControlWeapons": true,
+          "grantsTokenControl": true,
+          "matchVehicleMove": false,
+          "matchOccupantMove": false,
+          "bulletproofGlass": false,
+          "glassHp": 0,
+          "glassHpMax": 0
+        }
+      ]
+    }
+  },
+  "system": {
+    "derivedStats": {
+      "hp": {
+        "value": 28,
+        "max": 28
+      }
+    },
+    "externalData": {
+      "currentArmorBody": {
+        "value": 16,
+        "max": 16
+      }
+    },
+    "stats": {
+      "body": {
+        "value": 16
+      }
+    },
+    "information": {
+      "alias": "Омега / Лёгкий Metalgear®",
+      "description": "<p><strong>35 400eb (Супер роскошь)</strong></p><p>Стратегический захват MetaCorp бывшего завода Mexican Metals позволил корпорации возродить давно снятый с производства штурмовой Nemesis в современном виде. Инженеры MetaCorp выбрали броню Nemesis изнутри, освободив место для масштабных улучшений экзоскелета. Итог — силовая броня с огромным запасом мощности. Идеальный инструмент для защиты плавучих городов Нью-Галвестона и MetaKey от пиратов.</p><p><strong>28 ПЗ • 16 ОС • ТЕЛО 16 • +3 СКО, −1 ЛВК</strong></p><p>Экзоскелет: Омега<br>Оболочка: Лёгкий Metalgear®</p><p><strong>Бортовое оружие</strong></p><ul><li>ОК снайперская винтовка с барабанным магазином и перекалибровкой снайперской винтовки</li><li>пулемёт MetaCorp «Victoria»</li></ul><p><strong>Бортовые киберимпланты</strong></p><ul><li>низкая освещённость/ИК/УФ</li><li>рация</li><li>ласты</li></ul><p><em>Предметом не вложено: ласты. Такой позиции нет ни в компендиумах системы, ни отдельным предметом в Data Pool — она встречается только внутри готовых комплектов. Держите в уме как свойство костюма.</em></p><p><em>ТЕЛО экзоскелета не поднимается эффектом поста: по правилам пилот берёт большее из своего ТЕЛО и ТЕЛО брони, а такое сравнение модификатором не выражается. Значение стоит на самом костюме.</em></p>",
+      "notes": ""
+    }
+  },
+  "prototypeToken": {
+    "name": "MetaCorp Nyx",
+    "actorLink": true,
+    "disposition": 0
+  }
+}

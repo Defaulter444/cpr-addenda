@@ -80,3 +80,43 @@ export function weaponTypeLabel(key) {
   const dict = getWeaponTypes();
   return game.i18n.localize(dict[key] ?? key);
 }
+
+/**
+ * Запасной справочник типов предметов: ключ типа -> ключ локализации.
+ * Совпадает с `CPR.objectTypes` системы; нужен на случай, если импорт конфига
+ * не удался.
+ */
+const FALLBACK_OBJECT_TYPES = {
+  ammo: "CPR.global.itemTypes.ammo",
+  armor: "CPR.global.itemTypes.armor",
+  clothing: "CPR.global.itemTypes.clothing",
+  criticalInjury: "CPR.global.itemTypes.criticalInjury",
+  cyberdeck: "CPR.global.itemTypes.cyberdeck",
+  cyberware: "CPR.global.itemTypes.cyberware",
+  drug: "CPR.global.itemTypes.drug",
+  gear: "CPR.global.itemTypes.gear",
+  itemUpgrade: "CPR.global.itemTypes.itemUpgrade",
+  netarch: "CPR.global.itemTypes.netArchitecture",
+  program: "CPR.global.itemTypes.program",
+  role: "CPR.global.itemTypes.role",
+  skill: "CPR.global.itemTypes.skill",
+  vehicle: "CPR.global.itemTypes.vehicle",
+  weapon: "CPR.global.itemTypes.weapon",
+};
+
+/**
+ * Читаемое название типа предмета на языке интерфейса.
+ *
+ * Нужно там, где предметы группируются по типу: у типа есть только внутренний
+ * ключ (`itemUpgrade`), а игроку надо показать «Улучшения». Неизвестный тип
+ * возвращаем как есть — лучше английское слово, чем пустая графа.
+ *
+ * @param {String} type - тип предмета, например "cyberware"
+ * @returns {String}
+ */
+export function objectTypeLabel(type) {
+  if (!type) return "—";
+  const dict = systemConfig?.objectTypes ?? FALLBACK_OBJECT_TYPES;
+  const key = dict[type];
+  return key ? game.i18n.localize(key) : type;
+}

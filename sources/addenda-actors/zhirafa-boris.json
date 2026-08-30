@@ -1,0 +1,560 @@
+{
+  "_id": "cprAddAc00100000",
+  "name": "Zhirafa Борис",
+  "type": "character",
+  "img": "modules/cpr-addenda/assets/icons/gear.svg",
+  "folder": null,
+  "sort": 0,
+  "items": [
+    {
+      "_id": "cprAddPi10010000",
+      "effects": [],
+      "flags": {
+        "cyberpunk-red-core": {
+          "_migration": {
+            "current": 33,
+            "previous": "24"
+          }
+        },
+        "cpr-addenda": {
+          "vehicleMountedPosition": "cprAddPos0000010"
+        }
+      },
+      "img": "systems/cyberpunk-red-core/icons/compendium/weapons/RocketLauncher.svg",
+      "name": "Rocket Launcher",
+      "system": {
+        "ammoVariety": [
+          "rocket"
+        ],
+        "attackmod": 0,
+        "brand": "",
+        "canIgnoreArmor": false,
+        "concealable": {
+          "concealable": false,
+          "isConcealed": false
+        },
+        "critFailEffect": "jammed",
+        "damage": "8d6",
+        "description": {
+          "value": "<p>Bring out the big guns. This rocket launcher will do some damage.</p>\n"
+        },
+        "dvTable": "DV Rocket Launcher",
+        "equipped": "equipped",
+        "favorite": false,
+        "fireModes": {
+          "autoFire": 0,
+          "suppressiveFire": false
+        },
+        "handsReq": 2,
+        "ignoreArmorPercent": 0,
+        "ignoreBelowSP": 0,
+        "installedItems": {
+          "allowed": true,
+          "allowedTypes": [
+            "itemUpgrade",
+            "ammo"
+          ],
+          "list": [],
+          "slots": 3,
+          "usedSlots": 0
+        },
+        "isRanged": true,
+        "magazine": {
+          "ammoData": null,
+          "max": 1,
+          "value": 1
+        },
+        "price": {
+          "market": 500
+        },
+        "quality": "standard",
+        "revealed": true,
+        "rof": 1,
+        "source": {
+          "book": "Core",
+          "page": 341
+        },
+        "unarmedAutomaticCalculation": true,
+        "usage": "equipped",
+        "usesType": "magazine",
+        "weaponSkill": "Heavy Weapons",
+        "weaponType": "rocketLauncher"
+      },
+      "type": "weapon",
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "cprAddPi10020000",
+      "effects": [],
+      "flags": {
+        "cyberpunk-red-core": {
+          "_migration": {
+            "current": 33,
+            "previous": "24"
+          }
+        },
+        "cpr-addenda": {
+          "vehicleMountedPosition": "cprAddPos0000010"
+        }
+      },
+      "img": "systems/cyberpunk-red-core/icons/compendium/weapons/RocketLauncher.svg",
+      "name": "Rocket Launcher",
+      "system": {
+        "ammoVariety": [
+          "rocket"
+        ],
+        "attackmod": 0,
+        "brand": "",
+        "canIgnoreArmor": false,
+        "concealable": {
+          "concealable": false,
+          "isConcealed": false
+        },
+        "critFailEffect": "jammed",
+        "damage": "8d6",
+        "description": {
+          "value": "<p>Bring out the big guns. This rocket launcher will do some damage.</p>\n"
+        },
+        "dvTable": "DV Rocket Launcher",
+        "equipped": "equipped",
+        "favorite": false,
+        "fireModes": {
+          "autoFire": 0,
+          "suppressiveFire": false
+        },
+        "handsReq": 2,
+        "ignoreArmorPercent": 0,
+        "ignoreBelowSP": 0,
+        "installedItems": {
+          "allowed": true,
+          "allowedTypes": [
+            "itemUpgrade",
+            "ammo"
+          ],
+          "list": [],
+          "slots": 3,
+          "usedSlots": 0
+        },
+        "isRanged": true,
+        "magazine": {
+          "ammoData": null,
+          "max": 1,
+          "value": 1
+        },
+        "price": {
+          "market": 500
+        },
+        "quality": "standard",
+        "revealed": true,
+        "rof": 1,
+        "source": {
+          "book": "Core",
+          "page": 341
+        },
+        "unarmedAutomaticCalculation": true,
+        "usage": "equipped",
+        "usesType": "magazine",
+        "weaponSkill": "Heavy Weapons",
+        "weaponType": "rocketLauncher"
+      },
+      "type": "weapon",
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "cprAddPi10030000",
+      "effects": [],
+      "flags": {
+        "cyberpunk-red-core": {
+          "_migration": {
+            "current": 33,
+            "previous": "24"
+          }
+        },
+        "cpr-addenda": {
+          "vehicleMountedPosition": "cprAddPos0000010"
+        }
+      },
+      "img": "systems/cyberpunk-red-core/icons/compendium/weapons/RocketLauncher.svg",
+      "name": "Rocket Launcher",
+      "system": {
+        "ammoVariety": [
+          "rocket"
+        ],
+        "attackmod": 0,
+        "brand": "",
+        "canIgnoreArmor": false,
+        "concealable": {
+          "concealable": false,
+          "isConcealed": false
+        },
+        "critFailEffect": "jammed",
+        "damage": "8d6",
+        "description": {
+          "value": "<p>Bring out the big guns. This rocket launcher will do some damage.</p>\n"
+        },
+        "dvTable": "DV Rocket Launcher",
+        "equipped": "equipped",
+        "favorite": false,
+        "fireModes": {
+          "autoFire": 0,
+          "suppressiveFire": false
+        },
+        "handsReq": 2,
+        "ignoreArmorPercent": 0,
+        "ignoreBelowSP": 0,
+        "installedItems": {
+          "allowed": true,
+          "allowedTypes": [
+            "itemUpgrade",
+            "ammo"
+          ],
+          "list": [],
+          "slots": 3,
+          "usedSlots": 0
+        },
+        "isRanged": true,
+        "magazine": {
+          "ammoData": null,
+          "max": 1,
+          "value": 1
+        },
+        "price": {
+          "market": 500
+        },
+        "quality": "standard",
+        "revealed": true,
+        "rof": 1,
+        "source": {
+          "book": "Core",
+          "page": 341
+        },
+        "unarmedAutomaticCalculation": true,
+        "usage": "equipped",
+        "usesType": "magazine",
+        "weaponSkill": "Heavy Weapons",
+        "weaponType": "rocketLauncher"
+      },
+      "type": "weapon",
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "cprAddPi10040000",
+      "effects": [],
+      "flags": {
+        "cyberpunk-red-core": {
+          "_migration": {
+            "current": 33,
+            "previous": "24"
+          }
+        },
+        "cpr-addenda": {
+          "vehicleMountedPosition": "cprAddPos0000010"
+        }
+      },
+      "img": "systems/cyberpunk-red-core/icons/compendium/weapons/RocketLauncher.svg",
+      "name": "Rocket Launcher",
+      "system": {
+        "ammoVariety": [
+          "rocket"
+        ],
+        "attackmod": 0,
+        "brand": "",
+        "canIgnoreArmor": false,
+        "concealable": {
+          "concealable": false,
+          "isConcealed": false
+        },
+        "critFailEffect": "jammed",
+        "damage": "8d6",
+        "description": {
+          "value": "<p>Bring out the big guns. This rocket launcher will do some damage.</p>\n"
+        },
+        "dvTable": "DV Rocket Launcher",
+        "equipped": "equipped",
+        "favorite": false,
+        "fireModes": {
+          "autoFire": 0,
+          "suppressiveFire": false
+        },
+        "handsReq": 2,
+        "ignoreArmorPercent": 0,
+        "ignoreBelowSP": 0,
+        "installedItems": {
+          "allowed": true,
+          "allowedTypes": [
+            "itemUpgrade",
+            "ammo"
+          ],
+          "list": [],
+          "slots": 3,
+          "usedSlots": 0
+        },
+        "isRanged": true,
+        "magazine": {
+          "ammoData": null,
+          "max": 1,
+          "value": 1
+        },
+        "price": {
+          "market": 500
+        },
+        "quality": "standard",
+        "revealed": true,
+        "rof": 1,
+        "source": {
+          "book": "Core",
+          "page": 341
+        },
+        "unarmedAutomaticCalculation": true,
+        "usage": "equipped",
+        "usesType": "magazine",
+        "weaponSkill": "Heavy Weapons",
+        "weaponType": "rocketLauncher"
+      },
+      "type": "weapon",
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "cprAddPi10050000",
+      "effects": [],
+      "flags": {
+        "cyberpunk-red-core": {
+          "_migration": {
+            "current": 33,
+            "previous": "24"
+          }
+        },
+        "cpr-addenda": {
+          "vehicleMountedPosition": "cprAddPos0000010"
+        }
+      },
+      "img": "systems/cyberpunk-red-core/icons/compendium/weapons/AssaultRifle.svg",
+      "name": "Techtronika Russia BMG-500",
+      "system": {
+        "ammoVariety": [
+          "rifle"
+        ],
+        "attackmod": 0,
+        "brand": "Techtronika Russia",
+        "canIgnoreArmor": false,
+        "concealable": {
+          "concealable": false,
+          "isConcealed": false
+        },
+        "critFailEffect": "jammed",
+        "damage": "5d6",
+        "description": {
+          "value": "<p>\n  The Techtronika Russia BMG-500 is an Exotic Assault Rifle with a magazine of\n  500 rounds and a bipod. Requires BODY 11 or higher (unless mounted).\n</p>\n"
+        },
+        "dvTable": "DV Assault Rifle",
+        "equipped": "equipped",
+        "favorite": false,
+        "fireModes": {
+          "autoFire": 4,
+          "suppressiveFire": true
+        },
+        "handsReq": 2,
+        "ignoreArmorPercent": 0,
+        "ignoreBelowSP": 0,
+        "installedItems": {
+          "allowed": true,
+          "allowedTypes": [
+            "itemUpgrade",
+            "ammo"
+          ],
+          "list": [],
+          "slots": 0,
+          "usedSlots": 0
+        },
+        "isRanged": true,
+        "magazine": {
+          "ammoData": null,
+          "max": 500,
+          "value": 500
+        },
+        "price": {
+          "market": 1000
+        },
+        "quality": "standard",
+        "revealed": true,
+        "rof": 1,
+        "source": {
+          "book": "BC",
+          "page": 122
+        },
+        "unarmedAutomaticCalculation": true,
+        "usage": "toggled",
+        "usesType": "magazine",
+        "weaponSkill": "Heavy Weapons",
+        "weaponType": "assaultRifle"
+      },
+      "type": "weapon",
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "cprAddPi10060000",
+      "effects": [
+        "pZWEbI2ZttpRsUPj"
+      ],
+      "flags": {
+        "cyberpunk-red-core": {
+          "_migration": {
+            "current": 33,
+            "previous": "24"
+          }
+        },
+        "cpr-addenda": {
+          "vehicleInstalled": true
+        }
+      },
+      "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/targeting_scope.svg",
+      "name": "Targeting Scope",
+      "system": {
+        "ammoVariety": [],
+        "attackmod": 0,
+        "brand": "",
+        "canIgnoreArmor": true,
+        "concealable": {
+          "concealable": false,
+          "isConcealed": false
+        },
+        "core": false,
+        "damage": "1d6",
+        "description": {
+          "value": "<p>Provides a +1 to aimed shots.</p>\n"
+        },
+        "dvTable": "",
+        "favorite": false,
+        "fireModes": {
+          "autoFire": 0,
+          "suppressiveFire": false
+        },
+        "humanityLoss": {
+          "roll": "1d6",
+          "static": 3
+        },
+        "ignoreArmorPercent": 50,
+        "installLocation": "clinic",
+        "installedItems": {
+          "allowed": false,
+          "allowedTypes": [
+            "itemUpgrade"
+          ],
+          "list": [],
+          "slots": 3,
+          "usedSlots": 0
+        },
+        "isElectronic": true,
+        "isFoundational": false,
+        "isRanged": false,
+        "isWeapon": false,
+        "magazine": {
+          "ammoData": null,
+          "max": 0,
+          "value": 0
+        },
+        "price": {
+          "market": 500
+        },
+        "providesHardening": false,
+        "revealed": true,
+        "rof": 1,
+        "size": 1,
+        "source": {
+          "book": "Core",
+          "page": 361
+        },
+        "type": "cyberEye",
+        "unarmedAutomaticCalculation": true,
+        "usage": "installed",
+        "usesType": "magazine",
+        "weaponSkill": "Archery",
+        "weaponType": "assaultRifle"
+      },
+      "type": "cyberware",
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      }
+    }
+  ],
+  "effects": [],
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "core": {
+      "sheetClass": "cpr-addenda.VehicleSheet"
+    },
+    "cpr-addenda": {
+      "vehiclePositions": [
+        {
+          "id": "cprAddPos0000010",
+          "name": "Пилот",
+          "order": 1,
+          "occupants": [],
+          "skills": "",
+          "statMods": "REF:-1, DEX:-1, MOVE:-2",
+          "maxOccupants": 1,
+          "canControlWeapons": true,
+          "grantsTokenControl": true,
+          "matchVehicleMove": false,
+          "matchOccupantMove": false,
+          "bulletproofGlass": false,
+          "glassHp": 0,
+          "glassHpMax": 0
+        }
+      ]
+    }
+  },
+  "system": {
+    "derivedStats": {
+      "hp": {
+        "value": 60,
+        "max": 60
+      }
+    },
+    "externalData": {
+      "currentArmorBody": {
+        "value": 19,
+        "max": 19
+      }
+    },
+    "stats": {
+      "body": {
+        "value": 16
+      }
+    },
+    "information": {
+      "alias": "Омега / Тяжёлый Metalgear®",
+      "description": "<p><strong>46 900eb (Супер роскошь)</strong></p><p>Zhirafa Борис — обновлённая версия 2020-х годов, изначально разработанного Russian Arms. Компания Zhirafa сочла нужным переработать конструкцию, оснастив большей огневой мощью и новой, тяжёлой бронёй. В реалиях современных конфликтов эта силовая броня чаще всего используются как точка сбора и символ силы неосоветских формирований в пограничных противостояниях. В последнее время Борис были замечены в Танзании, на стороне народа, а также на политически раздробленном севере Корейского полуострова на стороне различных военных лидеров.</p><p><strong>60 ПЗ • 19 ОС • ТЕЛО 16 • −1 РЕФ, −1 ЛВК, −2 СКО</strong></p><p>Экзоскелет: Омега<br>Оболочка: Тяжёлый Metalgear®</p><p><strong>Бортовое оружие</strong></p><ul><li>ОК ракетница с расширенным магазином и коннектором смартлинка (×4)</li><li>Техтроника Россия BMG-500 (Silver Edition)</li></ul><p><strong>Бортовые киберимпланты</strong></p><ul><li>прицельный модуль</li></ul><p><em>ТЕЛО экзоскелета не поднимается эффектом поста: по правилам пилот берёт большее из своего ТЕЛО и ТЕЛО брони, а такое сравнение модификатором не выражается. Значение стоит на самом костюме.</em></p>",
+      "notes": ""
+    }
+  },
+  "prototypeToken": {
+    "name": "Zhirafa Борис",
+    "actorLink": true,
+    "disposition": 0
+  }
+}

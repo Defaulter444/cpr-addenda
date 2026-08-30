@@ -1,0 +1,398 @@
+{
+  "_id": "cprAddAc00020000",
+  "name": "Arasaka Neo Standard",
+  "type": "character",
+  "img": "modules/cpr-addenda/assets/icons/gear.svg",
+  "folder": null,
+  "sort": 0,
+  "items": [
+    {
+      "_id": "cprAddPi02010000",
+      "effects": [],
+      "flags": {
+        "cpr-addenda": {
+          "vehicleMountedPosition": "cprAddPos0000002"
+        }
+      },
+      "img": "systems/cyberpunk-red-core/icons/compendium/weapons/heavySMG.svg",
+      "name": "Игольник Малориан Армс",
+      "system": {
+        "ammoVariety": [
+          "heavyPistol"
+        ],
+        "attackmod": 0,
+        "brand": "",
+        "canIgnoreArmor": false,
+        "concealable": {
+          "concealable": false,
+          "isConcealed": false
+        },
+        "critFailEffect": "jammed",
+        "damage": "3d6",
+        "description": {
+          "value": "<p>Экзотический тяжелый ПП отличного качества с 25 патронами в магазине  Коннектором Смартлинка и автоматической стрельбой (4). Источник: 12 Дней Кибероружества.</p><p><strong>Классификация:</strong> экзотический тяжёлый ПП отличного качества<br><strong>Навык одиночного выстрела:</strong> Пистолет<br><strong>Таблица дальности:</strong> —<br><strong>Особые режимы огня:</strong> автоматическая стрельба (4)<br><strong>Приспособления:</strong> коннектор смартлинка</p><p><strong>Особые свойства:</strong> Оружие способно стрелять только своими уникальными бронебойными боеприпасами  которые разрушают ОС брони на 4 вместо 1  когда вы наносите урон цели. Эти боеприпасы стоят столько же  сколько обычные бронебойные боеприпасы  но стрелять ими можно только из ПП Игольник от Малориан Армс.</p><p><strong>Цена:</strong> 5 000eb (Роскошь)</p>"
+        },
+        "dvTable": "DV SMG",
+        "equipped": "equipped",
+        "favorite": false,
+        "fireModes": {
+          "autoFire": 4,
+          "suppressiveFire": false
+        },
+        "handsReq": 1,
+        "ignoreArmorPercent": 0,
+        "ignoreBelowSP": 0,
+        "installedItems": {
+          "allowed": true,
+          "allowedTypes": [
+            "itemUpgrade",
+            "ammo"
+          ],
+          "list": [],
+          "slots": 3,
+          "usedSlots": 0
+        },
+        "isRanged": true,
+        "magazine": {
+          "ammoData": null,
+          "max": 25,
+          "value": 25
+        },
+        "price": {
+          "market": 5000
+        },
+        "quality": "excellent",
+        "revealed": true,
+        "rof": 1,
+        "source": {
+          "book": "DataPool",
+          "page": 0
+        },
+        "unarmedAutomaticCalculation": true,
+        "usage": "equipped",
+        "usesType": "magazine",
+        "weaponSkill": "Handgun",
+        "weaponType": "heavySmg"
+      },
+      "type": "weapon",
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "cprAddPi02020000",
+      "effects": [],
+      "flags": {
+        "cyberpunk-red-core": {
+          "_migration": {
+            "current": 33,
+            "previous": "24"
+          }
+        },
+        "cpr-addenda": {
+          "vehicleMountedPosition": "cprAddPos0000002"
+        }
+      },
+      "img": "systems/cyberpunk-red-core/icons/compendium/weapons/GrenadeLauncher_excellent.svg",
+      "name": "Tsunami Arms Type-18",
+      "system": {
+        "ammoVariety": [
+          "grenade"
+        ],
+        "attackmod": 1,
+        "brand": "Tsunami Arms",
+        "canIgnoreArmor": false,
+        "concealable": {
+          "concealable": false,
+          "isConcealed": false
+        },
+        "critFailEffect": "jammed",
+        "damage": "6d6",
+        "description": {
+          "value": "<p>\n  A high-impact grenade launcher. You can use a variety of grenades with this.\n  +1 to Attack.\n</p>\n"
+        },
+        "dvTable": "DV Grenade Launcher",
+        "equipped": "equipped",
+        "favorite": false,
+        "fireModes": {
+          "autoFire": 0,
+          "suppressiveFire": false
+        },
+        "handsReq": 2,
+        "ignoreArmorPercent": 0,
+        "ignoreBelowSP": 0,
+        "installedItems": {
+          "allowed": true,
+          "allowedTypes": [
+            "itemUpgrade",
+            "ammo"
+          ],
+          "list": [],
+          "slots": 3,
+          "usedSlots": 0
+        },
+        "isRanged": true,
+        "magazine": {
+          "ammoData": null,
+          "max": 2,
+          "value": 2
+        },
+        "price": {
+          "market": 1000
+        },
+        "quality": "excellent",
+        "revealed": true,
+        "rof": 1,
+        "source": {
+          "book": "Core",
+          "page": 341
+        },
+        "unarmedAutomaticCalculation": true,
+        "usage": "equipped",
+        "usesType": "magazine",
+        "weaponSkill": "Heavy Weapons",
+        "weaponType": "grenadeLauncher"
+      },
+      "type": "weapon",
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "cprAddPi02030000",
+      "effects": [
+        "B7AClIITge5cYBso"
+      ],
+      "flags": {
+        "cyberpunk-red-core": {
+          "_migration": {
+            "current": 33,
+            "previous": "24"
+          }
+        },
+        "cpr-addenda": {
+          "vehicleInstalled": true
+        }
+      },
+      "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/internal_agent.svg",
+      "name": "Internal Agent",
+      "system": {
+        "ammoVariety": [],
+        "attackmod": 0,
+        "brand": "",
+        "canIgnoreArmor": true,
+        "concealable": {
+          "concealable": false,
+          "isConcealed": false
+        },
+        "core": false,
+        "damage": "1d6",
+        "description": {
+          "value": "<p>Built in agent. Audio only but can be linked with other cybergear.</p>\n"
+        },
+        "dvTable": "",
+        "favorite": false,
+        "fireModes": {
+          "autoFire": 0,
+          "suppressiveFire": false
+        },
+        "humanityLoss": {
+          "roll": "1d6",
+          "static": 3
+        },
+        "ignoreArmorPercent": 50,
+        "installLocation": "mall",
+        "installedItems": {
+          "allowed": false,
+          "allowedTypes": [
+            "itemUpgrade"
+          ],
+          "list": [],
+          "slots": 3,
+          "usedSlots": 0
+        },
+        "isElectronic": true,
+        "isFoundational": false,
+        "isRanged": false,
+        "isWeapon": false,
+        "magazine": {
+          "ammoData": null,
+          "max": 0,
+          "value": 0
+        },
+        "price": {
+          "market": 100
+        },
+        "providesHardening": false,
+        "revealed": true,
+        "rof": 1,
+        "size": 1,
+        "source": {
+          "book": "Core",
+          "page": 362
+        },
+        "type": "cyberAudioSuite",
+        "unarmedAutomaticCalculation": true,
+        "usage": "installed",
+        "usesType": "magazine",
+        "weaponSkill": "Archery",
+        "weaponType": "assaultRifle"
+      },
+      "type": "cyberware",
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "cprAddPi02040000",
+      "effects": [
+        "pZWEbI2ZttpRsUPj"
+      ],
+      "flags": {
+        "cyberpunk-red-core": {
+          "_migration": {
+            "current": 33,
+            "previous": "24"
+          }
+        },
+        "cpr-addenda": {
+          "vehicleInstalled": true
+        }
+      },
+      "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/targeting_scope.svg",
+      "name": "Targeting Scope",
+      "system": {
+        "ammoVariety": [],
+        "attackmod": 0,
+        "brand": "",
+        "canIgnoreArmor": true,
+        "concealable": {
+          "concealable": false,
+          "isConcealed": false
+        },
+        "core": false,
+        "damage": "1d6",
+        "description": {
+          "value": "<p>Provides a +1 to aimed shots.</p>\n"
+        },
+        "dvTable": "",
+        "favorite": false,
+        "fireModes": {
+          "autoFire": 0,
+          "suppressiveFire": false
+        },
+        "humanityLoss": {
+          "roll": "1d6",
+          "static": 3
+        },
+        "ignoreArmorPercent": 50,
+        "installLocation": "clinic",
+        "installedItems": {
+          "allowed": false,
+          "allowedTypes": [
+            "itemUpgrade"
+          ],
+          "list": [],
+          "slots": 3,
+          "usedSlots": 0
+        },
+        "isElectronic": true,
+        "isFoundational": false,
+        "isRanged": false,
+        "isWeapon": false,
+        "magazine": {
+          "ammoData": null,
+          "max": 0,
+          "value": 0
+        },
+        "price": {
+          "market": 500
+        },
+        "providesHardening": false,
+        "revealed": true,
+        "rof": 1,
+        "size": 1,
+        "source": {
+          "book": "Core",
+          "page": 361
+        },
+        "type": "cyberEye",
+        "unarmedAutomaticCalculation": true,
+        "usage": "installed",
+        "usesType": "magazine",
+        "weaponSkill": "Archery",
+        "weaponType": "assaultRifle"
+      },
+      "type": "cyberware",
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      }
+    }
+  ],
+  "effects": [],
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "core": {
+      "sheetClass": "cpr-addenda.VehicleSheet"
+    },
+    "cpr-addenda": {
+      "vehiclePositions": [
+        {
+          "id": "cprAddPos0000002",
+          "name": "Пилот",
+          "order": 1,
+          "occupants": [],
+          "skills": "",
+          "statMods": "MOVE:+1, REF:-1, DEX:-1",
+          "maxOccupants": 1,
+          "canControlWeapons": true,
+          "grantsTokenControl": true,
+          "matchVehicleMove": false,
+          "matchOccupantMove": false,
+          "bulletproofGlass": false,
+          "glassHp": 0,
+          "glassHpMax": 0
+        }
+      ]
+    }
+  },
+  "system": {
+    "derivedStats": {
+      "hp": {
+        "value": 37,
+        "max": 37
+      }
+    },
+    "externalData": {
+      "currentArmorBody": {
+        "value": 16,
+        "max": 16
+      }
+    },
+    "stats": {
+      "body": {
+        "value": 14
+      }
+    },
+    "information": {
+      "alias": "Бета / Лёгкий Metalgear®",
+      "description": "<p><strong>25 100eb (Супер роскошь)</strong></p><p>Линейку силовой брони Arasaka пришлось переосмыслить после Четвёртой корпоративной войны, однако Neo Standard по-прежнему несёт в себе многие черты своего предшественника. Он спроектирован с прицелом на гражданские цели и обладает достаточным уровнем брони, чтобы выдерживать продолжительный огонь из стрелкового оружия. Его применение против протестующих и потенциального сопротивления задокументировано.</p><p><strong>37 ПЗ • 16 ОС • ТЕЛО 14 • +1 СКО, −1 РЕФ, −1 ЛВК</strong></p><p>Экзоскелет: Бета<br>Оболочка: Лёгкий Metalgear®</p><p><strong>Бортовое оружие</strong></p><ul><li>игольник Malorian Arms</li><li>Tsunami Arms Type-18-S</li></ul><p><strong>Бортовые киберимпланты</strong></p><ul><li>внутренний агент</li><li>прицельный модуль</li></ul><p><em>ТЕЛО экзоскелета не поднимается эффектом поста: по правилам пилот берёт большее из своего ТЕЛО и ТЕЛО брони, а такое сравнение модификатором не выражается. Значение стоит на самом костюме.</em></p>",
+      "notes": ""
+    }
+  },
+  "prototypeToken": {
+    "name": "Arasaka Neo Standard",
+    "actorLink": true,
+    "disposition": 0
+  }
+}

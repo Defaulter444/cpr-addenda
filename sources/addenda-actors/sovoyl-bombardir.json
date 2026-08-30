@@ -1,0 +1,392 @@
+{
+  "_id": "cprAddAc00070000",
+  "name": "СовОйл Бомбардир",
+  "type": "character",
+  "img": "modules/cpr-addenda/assets/icons/gear.svg",
+  "folder": null,
+  "sort": 0,
+  "items": [
+    {
+      "_id": "cprAddPi07010000",
+      "effects": [],
+      "flags": {
+        "cyberpunk-red-core": {
+          "_migration": {
+            "current": 33,
+            "previous": "24"
+          }
+        },
+        "cpr-addenda": {
+          "vehicleMountedPosition": "cprAddPos0000007"
+        }
+      },
+      "img": "systems/cyberpunk-red-core/icons/compendium/weapons/RocketLauncher.svg",
+      "name": "Rocket Launcher",
+      "system": {
+        "ammoVariety": [
+          "rocket"
+        ],
+        "attackmod": 0,
+        "brand": "",
+        "canIgnoreArmor": false,
+        "concealable": {
+          "concealable": false,
+          "isConcealed": false
+        },
+        "critFailEffect": "jammed",
+        "damage": "8d6",
+        "description": {
+          "value": "<p>Bring out the big guns. This rocket launcher will do some damage.</p>\n"
+        },
+        "dvTable": "DV Rocket Launcher",
+        "equipped": "equipped",
+        "favorite": false,
+        "fireModes": {
+          "autoFire": 0,
+          "suppressiveFire": false
+        },
+        "handsReq": 2,
+        "ignoreArmorPercent": 0,
+        "ignoreBelowSP": 0,
+        "installedItems": {
+          "allowed": true,
+          "allowedTypes": [
+            "itemUpgrade",
+            "ammo"
+          ],
+          "list": [],
+          "slots": 3,
+          "usedSlots": 0
+        },
+        "isRanged": true,
+        "magazine": {
+          "ammoData": null,
+          "max": 1,
+          "value": 1
+        },
+        "price": {
+          "market": 500
+        },
+        "quality": "standard",
+        "revealed": true,
+        "rof": 1,
+        "source": {
+          "book": "Core",
+          "page": 341
+        },
+        "unarmedAutomaticCalculation": true,
+        "usage": "equipped",
+        "usesType": "magazine",
+        "weaponSkill": "Heavy Weapons",
+        "weaponType": "rocketLauncher"
+      },
+      "type": "weapon",
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "cprAddPi07020000",
+      "effects": [],
+      "flags": {
+        "cyberpunk-red-core": {
+          "_migration": {
+            "current": 33,
+            "previous": "24"
+          }
+        },
+        "cpr-addenda": {
+          "vehicleMountedPosition": "cprAddPos0000007"
+        }
+      },
+      "img": "systems/cyberpunk-red-core/icons/compendium/weapons/RocketLauncher.svg",
+      "name": "Rocket Launcher",
+      "system": {
+        "ammoVariety": [
+          "rocket"
+        ],
+        "attackmod": 0,
+        "brand": "",
+        "canIgnoreArmor": false,
+        "concealable": {
+          "concealable": false,
+          "isConcealed": false
+        },
+        "critFailEffect": "jammed",
+        "damage": "8d6",
+        "description": {
+          "value": "<p>Bring out the big guns. This rocket launcher will do some damage.</p>\n"
+        },
+        "dvTable": "DV Rocket Launcher",
+        "equipped": "equipped",
+        "favorite": false,
+        "fireModes": {
+          "autoFire": 0,
+          "suppressiveFire": false
+        },
+        "handsReq": 2,
+        "ignoreArmorPercent": 0,
+        "ignoreBelowSP": 0,
+        "installedItems": {
+          "allowed": true,
+          "allowedTypes": [
+            "itemUpgrade",
+            "ammo"
+          ],
+          "list": [],
+          "slots": 3,
+          "usedSlots": 0
+        },
+        "isRanged": true,
+        "magazine": {
+          "ammoData": null,
+          "max": 1,
+          "value": 1
+        },
+        "price": {
+          "market": 500
+        },
+        "quality": "standard",
+        "revealed": true,
+        "rof": 1,
+        "source": {
+          "book": "Core",
+          "page": 341
+        },
+        "unarmedAutomaticCalculation": true,
+        "usage": "equipped",
+        "usesType": "magazine",
+        "weaponSkill": "Heavy Weapons",
+        "weaponType": "rocketLauncher"
+      },
+      "type": "weapon",
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "cprAddPi07030000",
+      "effects": [],
+      "flags": {
+        "cyberpunk-red-core": {
+          "_migration": {
+            "current": 33,
+            "previous": "24"
+          }
+        },
+        "cpr-addenda": {
+          "vehicleMountedPosition": "cprAddPos0000007"
+        }
+      },
+      "img": "systems/cyberpunk-red-core/icons/compendium/weapons/RocketLauncher.svg",
+      "name": "Rocket Launcher",
+      "system": {
+        "ammoVariety": [
+          "rocket"
+        ],
+        "attackmod": 0,
+        "brand": "",
+        "canIgnoreArmor": false,
+        "concealable": {
+          "concealable": false,
+          "isConcealed": false
+        },
+        "critFailEffect": "jammed",
+        "damage": "8d6",
+        "description": {
+          "value": "<p>Bring out the big guns. This rocket launcher will do some damage.</p>\n"
+        },
+        "dvTable": "DV Rocket Launcher",
+        "equipped": "equipped",
+        "favorite": false,
+        "fireModes": {
+          "autoFire": 0,
+          "suppressiveFire": false
+        },
+        "handsReq": 2,
+        "ignoreArmorPercent": 0,
+        "ignoreBelowSP": 0,
+        "installedItems": {
+          "allowed": true,
+          "allowedTypes": [
+            "itemUpgrade",
+            "ammo"
+          ],
+          "list": [],
+          "slots": 3,
+          "usedSlots": 0
+        },
+        "isRanged": true,
+        "magazine": {
+          "ammoData": null,
+          "max": 1,
+          "value": 1
+        },
+        "price": {
+          "market": 500
+        },
+        "quality": "standard",
+        "revealed": true,
+        "rof": 1,
+        "source": {
+          "book": "Core",
+          "page": 341
+        },
+        "unarmedAutomaticCalculation": true,
+        "usage": "equipped",
+        "usesType": "magazine",
+        "weaponSkill": "Heavy Weapons",
+        "weaponType": "rocketLauncher"
+      },
+      "type": "weapon",
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "cprAddPi07040000",
+      "effects": [],
+      "flags": {
+        "cyberpunk-red-core": {
+          "_migration": {
+            "current": 33,
+            "previous": "24"
+          }
+        },
+        "cpr-addenda": {
+          "vehicleMountedPosition": "cprAddPos0000007"
+        }
+      },
+      "img": "systems/cyberpunk-red-core/icons/compendium/weapons/RocketLauncher.svg",
+      "name": "Rocket Launcher",
+      "system": {
+        "ammoVariety": [
+          "rocket"
+        ],
+        "attackmod": 0,
+        "brand": "",
+        "canIgnoreArmor": false,
+        "concealable": {
+          "concealable": false,
+          "isConcealed": false
+        },
+        "critFailEffect": "jammed",
+        "damage": "8d6",
+        "description": {
+          "value": "<p>Bring out the big guns. This rocket launcher will do some damage.</p>\n"
+        },
+        "dvTable": "DV Rocket Launcher",
+        "equipped": "equipped",
+        "favorite": false,
+        "fireModes": {
+          "autoFire": 0,
+          "suppressiveFire": false
+        },
+        "handsReq": 2,
+        "ignoreArmorPercent": 0,
+        "ignoreBelowSP": 0,
+        "installedItems": {
+          "allowed": true,
+          "allowedTypes": [
+            "itemUpgrade",
+            "ammo"
+          ],
+          "list": [],
+          "slots": 3,
+          "usedSlots": 0
+        },
+        "isRanged": true,
+        "magazine": {
+          "ammoData": null,
+          "max": 1,
+          "value": 1
+        },
+        "price": {
+          "market": 500
+        },
+        "quality": "standard",
+        "revealed": true,
+        "rof": 1,
+        "source": {
+          "book": "Core",
+          "page": 341
+        },
+        "unarmedAutomaticCalculation": true,
+        "usage": "equipped",
+        "usesType": "magazine",
+        "weaponSkill": "Heavy Weapons",
+        "weaponType": "rocketLauncher"
+      },
+      "type": "weapon",
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      }
+    }
+  ],
+  "effects": [],
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "core": {
+      "sheetClass": "cpr-addenda.VehicleSheet"
+    },
+    "cpr-addenda": {
+      "vehiclePositions": [
+        {
+          "id": "cprAddPos0000007",
+          "name": "Пилот",
+          "order": 1,
+          "occupants": [],
+          "skills": "",
+          "statMods": "MOVE:-2, REF:-1, DEX:-1",
+          "maxOccupants": 1,
+          "canControlWeapons": true,
+          "grantsTokenControl": true,
+          "matchVehicleMove": false,
+          "matchOccupantMove": false,
+          "bulletproofGlass": false,
+          "glassHp": 0,
+          "glassHpMax": 0
+        }
+      ]
+    }
+  },
+  "system": {
+    "derivedStats": {
+      "hp": {
+        "value": 51,
+        "max": 51
+      }
+    },
+    "externalData": {
+      "currentArmorBody": {
+        "value": 18,
+        "max": 18
+      }
+    },
+    "stats": {
+      "body": {
+        "value": 14
+      }
+    },
+    "information": {
+      "alias": "Бета / Metalgear®",
+      "description": "<p><strong>32 400eb (Супер роскошь)</strong></p><p>Тяжёлая силовая броня, созданная для роли артиллерийской поддержки. Бомбардир начал жизнь как разработка Russian Arms, прежде чем в современную эпоху его не выкупил самый активный пользователь — SovOil. В этом смысле его и Zhirafa Борис вполне можно считать братьями. После масштабной переработки с целью снизить производственные издержки современный бомбардир обеспечивает сопоставимый уровень разрушений, что и Борис, но в пакете примерно на 30% дешевле.</p><p><strong>51 ПЗ • 18 ОС • ТЕЛО 14 • −2 СКО, −1 РЕФ, −1 ЛВК</strong></p><p>Экзоскелет: Бета<br>Оболочка: Metalgear®</p><p><strong>Бортовое оружие</strong></p><ul><li>ОК ракетница с барабанным магазином и длинной трубой (×4)</li></ul><p><strong>Бортовые киберимпланты</strong></p><ul><li>нет</li></ul><p><em>ТЕЛО экзоскелета не поднимается эффектом поста: по правилам пилот берёт большее из своего ТЕЛО и ТЕЛО брони, а такое сравнение модификатором не выражается. Значение стоит на самом костюме.</em></p>",
+      "notes": ""
+    }
+  },
+  "prototypeToken": {
+    "name": "СовОйл Бомбардир",
+    "actorLink": true,
+    "disposition": 0
+  }
+}

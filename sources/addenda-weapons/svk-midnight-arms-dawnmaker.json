@@ -1,0 +1,71 @@
+{
+  "_id": "cprAddWp00030000",
+  "effects": [],
+  "flags": {},
+  "img": "systems/cyberpunk-red-core/icons/compendium/weapons/SniperRifle.svg",
+  "name": "СВК Midnight Arms Dawnmaker",
+  "system": {
+    "ammoVariety": [
+      "rifle"
+    ],
+    "attackmod": 0,
+    "brand": "",
+    "canIgnoreArmor": false,
+    "concealable": {
+      "concealable": false,
+      "isConcealed": false
+    },
+    "critFailEffect": "jammed",
+    "damage": "6d6",
+    "description": {
+      "value": "<p>В конце каждой долгой ночи приходит пронзительная  неоспоримая уверенность рассвета. Возьми эту силу в свои руки — и сохрани то  что тебе дорого  до самого утра.</p><p><strong>Классификация:</strong> снайперская винтовка отличного качества<br><strong>Навык одиночного выстрела:</strong> Тяжёлое оружие<br><strong>Таблица дальности:</strong> крупнокалиберная снайперская винтовка<br><strong>Особые режимы огня:</strong> нет<br><strong>Приспособления:</strong> Инфракрасный прицел ночного видения  коннектор смартлинка  перекалибровка снайперской винтовки</p><p><strong>Особые свойства:</strong> нет</p><p><strong>Цена:</strong> 2 300eb (Очень дорого)</p>"
+    },
+    "dvTable": "Крупнокалиберная снайперская винтовка",
+    "equipped": "owned",
+    "favorite": false,
+    "fireModes": {
+      "autoFire": 0,
+      "suppressiveFire": false
+    },
+    "handsReq": 2,
+    "ignoreArmorPercent": 0,
+    "ignoreBelowSP": 0,
+    "installedItems": {
+      "allowed": true,
+      "allowedTypes": [
+        "itemUpgrade",
+        "ammo"
+      ],
+      "list": [],
+      "slots": 0,
+      "usedSlots": 0
+    },
+    "isRanged": true,
+    "magazine": {
+      "ammoData": null,
+      "max": 4,
+      "value": 4
+    },
+    "price": {
+      "market": 2300
+    },
+    "quality": "excellent",
+    "revealed": true,
+    "rof": 1,
+    "source": {
+      "book": "DataPool",
+      "page": 0
+    },
+    "unarmedAutomaticCalculation": true,
+    "usage": "equipped",
+    "usesType": "magazine",
+    "weaponSkill": "Heavy Weapons",
+    "weaponType": "sniperRifle"
+  },
+  "type": "weapon",
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  }
+}

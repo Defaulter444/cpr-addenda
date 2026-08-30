@@ -89,6 +89,121 @@ function readConfigKeys(source, name) {
  * @async
  * @returns {Promise<Object>} - карта «тип предмета -> набор полей system»
  */
+
+/**
+ * Проверяет актёра.
+ *
+ * Актёры в модуле — готовые комплекты силовой брони, и открываться они должны
+ * листом транспорта. Поэтому кроме служебных полей проверяем то, от чего
+ * зависит их работа: выбран ли лист, есть ли пост экипажа и разбираются ли
+ * модификаторы характеристик тем же способом, каким их читает сам лист.
+ *
+ * @param {Object} doc - документ актёра
+ * @param {String} label - «пак/файл» для сообщений
+ * @param {Map} seenIds - уже занятые идентификаторы
+ */
+function validateActor(doc, label, seenIds) {
+  if (!/^[a-zA-Z0-9]{16}$/.test(doc._id ?? "")) {
+    fail(label, `_id должен быть 16 буквенно-цифровых символов, получено "${doc._id}"`);
+  } else if (seenIds.has(doc._id)) {
+    fail(label, `_id "${doc._id}" уже занят файлом ${seenIds.get(doc._id)}`);
+  } else {
+    seenIds.set(doc._id, label);
+  }
+
+  if (!doc.name) fail(label, "нет имени");
+  if (!doc.type) fail(label, "нет типа");
+
+  // Лист транспорта вешается на character и mook — на других типах его нет.
+  if (!["character", "mook"].includes(doc.type)) {
+    fail(label, `тип "${doc.type}" не поддерживает лист транспорта`);
+  }
+
+  const sheet = doc.flags?.core?.sheetClass;
+  if (sheet !== "cpr-addenda.VehicleSheet") {
+    fail(label, `лист не выбран заранее: flags.core.sheetClass = "${sheet}"`);
+  }
+
+  const positions = doc.flags?.["cpr-addenda"]?.vehiclePositions;
+  if (!Array.isArray(positions) || positions.length === 0) {
+    fail(label, "нет ни одного поста экипажа");
+  } else {
+    for (const pos of positions) {
+      if (!/^[a-zA-Z0-9]{16}$/.test(pos.id ?? "")) {
+        fail(label, `пост "${pos.name}": id должен быть 16 символов, получено "${pos.id}"`);
+      }
+      if (!pos.name) fail(label, "у поста нет названия");
+      if (!Number.isInteger(pos.maxOccupants) || pos.maxOccupants < 1) {
+        fail(label, `пост "${pos.name}": мест на посту должно быть целым числом от 1`);
+      }
+      if (!Array.isArray(pos.occupants) || pos.occupants.length) {
+        fail(label, `пост "${pos.name}": в компендиуме пост должен быть пуст`);
+      }
+      // Тот же разбор, что и в scripts/vehicle-effects.js: пары
+      // «характеристика:число» через запятую. Опечатка здесь означала бы
+      // молча не применившийся модификатор.
+      for (const entry of String(pos.statMods ?? "").split(",")) {
+        const text = entry.trim();
+        if (!text) continue;
+        if (!/^\p{L}+\s*:\s*[+-]?\d+$/u.test(text)) {
+          fail(label, `пост "${pos.name}": модификатор "${text}" не разберётся листом`);
+        }
+      }
+    }
+  }
+
+  const hp = doc.system?.derivedStats?.hp;
+  if (!hp || !Number.isInteger(hp.value) || !Number.isInteger(hp.max)) {
+    fail(label, "не проставлены ПЗ (system.derivedStats.hp)");
+  } else if (hp.value !== hp.max) {
+    fail(label, `ПЗ ${hp.value}/${hp.max}: в компендиуме костюм должен быть целым`);
+  }
+
+  const sp = doc.system?.externalData?.currentArmorBody;
+  if (!sp || !Number.isInteger(sp.value) || !Number.isInteger(sp.max)) {
+    fail(label, "не проставлены ОС (system.externalData.currentArmorBody)");
+  }
+
+  // Вложенные предметы: бортовое оружие и импланты костюма.
+  const positionIds = new Set((positions ?? []).map((p) => p.id));
+  const itemIds = new Set();
+  for (const item of doc.items ?? []) {
+    if (!/^[a-zA-Z0-9]{16}$/.test(item._id ?? "")) {
+      fail(label, `предмет "${item.name}": _id должен быть 16 символов, получено "${item._id}"`);
+    } else if (itemIds.has(item._id)) {
+      fail(label, `предмет "${item.name}": _id "${item._id}" повторяется внутри актёра`);
+    } else {
+      itemIds.add(item._id);
+    }
+    if (!item.name) fail(label, "у вложенного предмета нет имени");
+
+    const flags = item.flags?.["cpr-addenda"] ?? {};
+    const mount = flags.vehicleMountedPosition;
+    if (mount !== undefined && !positionIds.has(mount)) {
+      fail(label, `предмет "${item.name}" закреплён за постом "${mount}", которого нет`);
+    }
+    // Оружие должно быть закреплено, иначе с него нельзя стрелять с поста.
+    if (item.type === "weapon" && mount === undefined) {
+      fail(label, `оружие "${item.name}" не закреплено ни за одним постом`);
+    }
+    // Кибернетика должна быть помечена установленной, иначе уедет в груз.
+    if (item.type === "cyberware" && flags.vehicleInstalled !== true) {
+      fail(label, `имплант "${item.name}" не помечен установленным`);
+    }
+  }
+
+  const description = doc.system?.information?.description ?? "";
+  if (!description || description === "<p></p>") {
+    fail(label, "пустое описание");
+  }
+  const openTags = (description.match(/<p>/g) ?? []).length;
+  const closeTags = (description.match(/<\/p>/g) ?? []).length;
+  if (openTags !== closeTags) {
+    fail(label, "незакрытая разметка в описании");
+  }
+}
+
+
 async function loadReferences() {
   const manifest = JSON.parse(
     fs.readFileSync(path.join(SYSTEM_ROOT, "system.json"), "utf-8")
@@ -402,6 +517,7 @@ const seenIds = new Map();
   let count = 0;
   let tableCount = 0;
   let journalCount = 0;
+  let actorCount = 0;
 
   for (const pack of fs.readdirSync(SOURCES)) {
     const dir = path.join(SOURCES, pack);
@@ -432,6 +548,13 @@ const seenIds = new Map();
         count -= 1;
         journalCount += 1;
         validateJournal(doc, label, seenIds);
+        continue;
+      }
+
+      if (packType === "Actor") {
+        count -= 1;
+        actorCount += 1;
+        validateActor(doc, label, seenIds);
         continue;
       }
 
@@ -676,7 +799,7 @@ const seenIds = new Map();
   }
 
   console.log(
-    `Проверено предметов: ${count}, таблиц: ${tableCount}, журналов: ${journalCount}`
+    `Проверено предметов: ${count}, таблиц: ${tableCount}, журналов: ${journalCount}, актёров: ${actorCount}`
   );
   if (notes.length) {
     console.log(`\nЗамечания (${notes.length}):`);

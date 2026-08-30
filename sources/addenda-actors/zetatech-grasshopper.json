@@ -1,0 +1,313 @@
+{
+  "_id": "cprAddAc00090000",
+  "name": "Zetatech Grasshopper",
+  "type": "character",
+  "img": "modules/cpr-addenda/assets/icons/gear.svg",
+  "folder": null,
+  "sort": 0,
+  "items": [
+    {
+      "_id": "cprAddPi09010000",
+      "effects": [],
+      "flags": {
+        "cpr-addenda": {
+          "vehicleMountedPosition": "cprAddPos0000009"
+        }
+      },
+      "img": "systems/cyberpunk-red-core/icons/compendium/weapons/veryHeavyPistol.svg",
+      "name": "Militech Big Boomer",
+      "system": {
+        "ammoVariety": [
+          "vHeavyPistol"
+        ],
+        "attackmod": 0,
+        "brand": "",
+        "canIgnoreArmor": false,
+        "concealable": {
+          "concealable": false,
+          "isConcealed": false
+        },
+        "critFailEffect": "jammed",
+        "damage": "4d6",
+        "description": {
+          "value": "<p>Верный друг для тех  у кого есть горящие проблемы  требующие решения на близкой дистанции. Big Boomer — это переосмысление штатного оружия времён Четвёртой корпоративной войны с новым укороченным стволом. В основу дизайна легли результаты опроса клиентов  разосланного всем  кто легально приобрёл Boomer Buster в 2044 году — аудитории  мягко говоря  не вполне отражающей реальную массовую базу покупателей.</p><p><strong>Классификация:</strong> очень тяжёлый пистолет отличного качества<br><strong>Навык одиночного выстрела:</strong> Короткоствольное оружие<br><strong>Таблица дальности:</strong> укороченный пистолет<br><strong>Особые режимы огня:</strong> автоогонь (автоматический пистолет 4)<br><strong>Приспособления:</strong> барабанный магазин  автоспуск пистолета</p><p><strong>Особые свойства:</strong> нет</p><p><strong>Цена:</strong> 1 100eb (Дорого)</p>"
+        },
+        "dvTable": "Укороченный пистолет",
+        "equipped": "equipped",
+        "favorite": false,
+        "fireModes": {
+          "autoFire": 4,
+          "suppressiveFire": false
+        },
+        "handsReq": 1,
+        "ignoreArmorPercent": 0,
+        "ignoreBelowSP": 0,
+        "installedItems": {
+          "allowed": true,
+          "allowedTypes": [
+            "itemUpgrade",
+            "ammo"
+          ],
+          "list": [],
+          "slots": 1,
+          "usedSlots": 0
+        },
+        "isRanged": true,
+        "magazine": {
+          "ammoData": null,
+          "max": 28,
+          "value": 28
+        },
+        "price": {
+          "market": 1100
+        },
+        "quality": "excellent",
+        "revealed": true,
+        "rof": 1,
+        "source": {
+          "book": "DataPool",
+          "page": 0
+        },
+        "unarmedAutomaticCalculation": true,
+        "usage": "equipped",
+        "usesType": "magazine",
+        "weaponSkill": "Handgun",
+        "weaponType": "vHeavyPistol"
+      },
+      "type": "weapon",
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "cprAddPi09020000",
+      "effects": [],
+      "flags": {
+        "cyberpunk-red-core": {
+          "_migration": {
+            "current": 33,
+            "previous": "24"
+          }
+        },
+        "cpr-addenda": {
+          "vehicleInstalled": true
+        }
+      },
+      "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/interface_plugs.svg",
+      "name": "Interface Plugs",
+      "system": {
+        "ammoVariety": [],
+        "attackmod": 0,
+        "brand": "",
+        "canIgnoreArmor": true,
+        "concealable": {
+          "concealable": false,
+          "isConcealed": false
+        },
+        "core": false,
+        "damage": "1d6",
+        "description": {
+          "value": "<p>\n  Plugs in the wrist or head to allow you to connect to machines/systems\n  hands-free.\n</p>\n"
+        },
+        "dvTable": "",
+        "favorite": false,
+        "fireModes": {
+          "autoFire": 0,
+          "suppressiveFire": false
+        },
+        "humanityLoss": {
+          "roll": "2d6",
+          "static": 7
+        },
+        "ignoreArmorPercent": 50,
+        "installLocation": "clinic",
+        "installedItems": {
+          "allowed": false,
+          "allowedTypes": [
+            "itemUpgrade"
+          ],
+          "list": [],
+          "slots": 3,
+          "usedSlots": 0
+        },
+        "isElectronic": true,
+        "isFoundational": false,
+        "isRanged": false,
+        "isWeapon": false,
+        "magazine": {
+          "ammoData": null,
+          "max": 0,
+          "value": 0
+        },
+        "price": {
+          "market": 500
+        },
+        "providesHardening": false,
+        "revealed": true,
+        "rof": 1,
+        "size": 1,
+        "source": {
+          "book": "Core",
+          "page": 359
+        },
+        "type": "neuralWare",
+        "unarmedAutomaticCalculation": true,
+        "usage": "toggled",
+        "usesType": "magazine",
+        "weaponSkill": "Archery",
+        "weaponType": "assaultRifle"
+      },
+      "type": "cyberware",
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "cprAddPi09030000",
+      "effects": [],
+      "flags": {
+        "cyberpunk-red-core": {
+          "_migration": {
+            "current": 33,
+            "previous": "24"
+          }
+        },
+        "cpr-addenda": {
+          "vehicleInstalled": true
+        }
+      },
+      "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/skate_foot.svg",
+      "name": "Skate Foot",
+      "system": {
+        "ammoVariety": [],
+        "attackmod": 0,
+        "brand": "",
+        "canIgnoreArmor": true,
+        "concealable": {
+          "concealable": false,
+          "isConcealed": false
+        },
+        "core": false,
+        "damage": "1d6",
+        "description": {
+          "value": "<p>While running your movement is increased by 6m/yds. Must be paired.</p>\n"
+        },
+        "dvTable": "",
+        "favorite": false,
+        "fireModes": {
+          "autoFire": 0,
+          "suppressiveFire": false
+        },
+        "humanityLoss": {
+          "roll": "1d6",
+          "static": 3
+        },
+        "ignoreArmorPercent": 50,
+        "installLocation": "clinic",
+        "installedItems": {
+          "allowed": false,
+          "allowedTypes": [
+            "itemUpgrade"
+          ],
+          "list": [],
+          "slots": 3,
+          "usedSlots": 0
+        },
+        "isElectronic": true,
+        "isFoundational": false,
+        "isRanged": false,
+        "isWeapon": false,
+        "magazine": {
+          "ammoData": null,
+          "max": 0,
+          "value": 0
+        },
+        "price": {
+          "market": 500
+        },
+        "providesHardening": false,
+        "revealed": true,
+        "rof": 1,
+        "size": 1,
+        "source": {
+          "book": "Core",
+          "page": 366
+        },
+        "type": "cyberLeg",
+        "unarmedAutomaticCalculation": true,
+        "usage": "toggled",
+        "usesType": "magazine",
+        "weaponSkill": "Archery",
+        "weaponType": "assaultRifle"
+      },
+      "type": "cyberware",
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      }
+    }
+  ],
+  "effects": [],
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "core": {
+      "sheetClass": "cpr-addenda.VehicleSheet"
+    },
+    "cpr-addenda": {
+      "vehiclePositions": [
+        {
+          "id": "cprAddPos0000009",
+          "name": "Пилот",
+          "order": 1,
+          "occupants": [],
+          "skills": "",
+          "statMods": "MOVE:+1",
+          "maxOccupants": 1,
+          "canControlWeapons": true,
+          "grantsTokenControl": true,
+          "matchVehicleMove": false,
+          "matchOccupantMove": false,
+          "bulletproofGlass": false,
+          "glassHp": 0,
+          "glassHpMax": 0
+        }
+      ]
+    }
+  },
+  "system": {
+    "derivedStats": {
+      "hp": {
+        "value": 18,
+        "max": 18
+      }
+    },
+    "externalData": {
+      "currentArmorBody": {
+        "value": 15,
+        "max": 15
+      }
+    },
+    "stats": {
+      "body": {
+        "value": 12
+      }
+    },
+    "information": {
+      "alias": "Сигма / Лёгкий Metalgear®",
+      "description": "<p><strong>11 600eb (Роскошь)</strong></p><p>Самая лёгкая силовая броня на рынке, Grasshopper от Zetatech всегда занимал промежуточное положение между персональной бронёй Metalgear® и его более крупными собратьями. И тем не менее, первая серийно выпущенная силовая броня остаётся актуальной даже сегодня. Современные городские конфликты благоволят подвижности и живучести Grasshopper’а. У неё есть особое преимущество: это единственная силовая броня на рынке, способная поместиться на пассажирском сиденье немодифицированного транспорта. Отряды пилотов Grasshopper’ов, передвигающихся на мотоциклах совсем не редкость в боевой зоне.</p><p><strong>18 ПЗ • 15 ОС • ТЕЛО 12 • +1 СКО</strong></p><p>Экзоскелет: Сигма<br>Оболочка: Лёгкий Metalgear®</p><p><strong>Бортовое оружие</strong></p><ul><li>Militech «Big Boomer»</li></ul><p><strong>Бортовые киберимпланты</strong></p><ul><li>интерфейсный разъём</li><li>роликовые стопы</li></ul><p><em>ТЕЛО экзоскелета не поднимается эффектом поста: по правилам пилот берёт большее из своего ТЕЛО и ТЕЛО брони, а такое сравнение модификатором не выражается. Значение стоит на самом костюме.</em></p>",
+      "notes": ""
+    }
+  },
+  "prototypeToken": {
+    "name": "Zetatech Grasshopper",
+    "actorLink": true,
+    "disposition": 0
+  }
+}

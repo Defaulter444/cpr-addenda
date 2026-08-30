@@ -1,0 +1,71 @@
+{
+  "_id": "cprAddWp00080000",
+  "effects": [],
+  "flags": {},
+  "img": "systems/cyberpunk-red-core/icons/compendium/weapons/SniperRifle.svg",
+  "name": "Рельсотрон Tsunami Arms «Deathwind»",
+  "system": {
+    "ammoVariety": [
+      "rifle"
+    ],
+    "attackmod": 0,
+    "brand": "",
+    "canIgnoreArmor": true,
+    "concealable": {
+      "concealable": false,
+      "isConcealed": false
+    },
+    "critFailEffect": "jammed",
+    "damage": "6d6",
+    "description": {
+      "value": "<p>Самая мощная из существующих на сегодняшний день теоретически переносимых человеком кинетических винтовок. Deathwind дебютировал во второй половине Четвёртой корпоративной войны как основное оружие силовой брони Tsunami Magus  где быстро зарекомендовал себя как эффективный «убийца силовой брони».</p><p><strong>Классификация:</strong> снайперская винтовка отличного качества<br><strong>Навык одиночного выстрела:</strong> Тяжёлое оружие<br><strong>Таблица дальности:</strong> скаутская винтовка<br><strong>Особые режимы огня:</strong> нет<br><strong>Приспособления:</strong> коннектор смартлинка  перекалибровка снайперской винтовки  ствол скаутской винтовки</p><p><strong>Особые свойства:</strong> это оружие не способно выполнять прицельные выстрелы. После каждого третьего выстрела  сделанного этим оружием в течение 30 секунд (10 раундов)  его качество снижается до плохого  пока пользователь не выпустит избыточное тепло  потратив на это действие. Урон этого оружия полностью игнорирует броню цели  если её ОС ниже 12. Броня с более высокой ОС взаимодействует с уроном как обычно. Перезарядка этого оружия требует двух действий перезарядки. Для стрельбы из этого оружия требуется ТЕЛО 14  либо ТЕЛО 12  если стрелок находится в положении лёжа. Несовместимо со всеми приспособлениями  изменяющими вместимость. Коннектор смартлинка этого оружия нельзя демонтировать  для работы требуется  чтобы пользователь был физически подключён к оружию двумя Интерфейсными разъёмами/Подкожными хватами.</p><p><strong>Цена:</strong> 12 000eb (Супер роскошь)</p>"
+    },
+    "dvTable": "Скаутская винтовка",
+    "equipped": "owned",
+    "favorite": false,
+    "fireModes": {
+      "autoFire": 0,
+      "suppressiveFire": false
+    },
+    "handsReq": 2,
+    "ignoreArmorPercent": 0,
+    "ignoreBelowSP": 12,
+    "installedItems": {
+      "allowed": true,
+      "allowedTypes": [
+        "itemUpgrade",
+        "ammo"
+      ],
+      "list": [],
+      "slots": 1,
+      "usedSlots": 0
+    },
+    "isRanged": true,
+    "magazine": {
+      "ammoData": null,
+      "max": 30,
+      "value": 30
+    },
+    "price": {
+      "market": 12000
+    },
+    "quality": "excellent",
+    "revealed": true,
+    "rof": 1,
+    "source": {
+      "book": "DataPool",
+      "page": 0
+    },
+    "unarmedAutomaticCalculation": true,
+    "usage": "equipped",
+    "usesType": "magazine",
+    "weaponSkill": "Heavy Weapons",
+    "weaponType": "sniperRifle"
+  },
+  "type": "weapon",
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  }
+}

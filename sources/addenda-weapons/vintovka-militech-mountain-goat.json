@@ -1,0 +1,71 @@
+{
+  "_id": "cprAddWp00070000",
+  "effects": [],
+  "flags": {},
+  "img": "systems/cyberpunk-red-core/icons/compendium/weapons/AssaultRifle.svg",
+  "name": "Винтовка Militech Mountain Goat",
+  "system": {
+    "ammoVariety": [
+      "rifle"
+    ],
+    "attackmod": 0,
+    "brand": "",
+    "canIgnoreArmor": false,
+    "concealable": {
+      "concealable": false,
+      "isConcealed": false
+    },
+    "critFailEffect": "jammed",
+    "damage": "5d6",
+    "description": {
+      "value": "<p>Боевая винтовка  прицельно и агрессивно продвигаемая среди работающих соло. Согласно утёкшим внутренним документам  после продиктованной данными гиперреакции маркетингового отдела Militech не поскупилась на производство Mountain Goat  стремясь защитить свою нишу от атак со стороны новых конкурентов в ценовом диапазоне около 2 000eb.</p><p><strong>Классификация:</strong> штурмовая винтовка отличного качества<br><strong>Навык одиночного выстрела:</strong> Длинноствольное оружие<br><strong>Таблица дальности:</strong> боевая винтовка<br><strong>Особые режимы огня:</strong> автоогонь (штурмовая винтовка 4)  подавляющий огонь<br><strong>Приспособления:</strong> коннектор смартлинка  снайперский прицел</p><p><strong>Особые свойства:</strong> нет</p><p><strong>Цена:</strong> 1 550eb (Очень дорого)</p>"
+    },
+    "dvTable": "Боевая винтовка",
+    "equipped": "owned",
+    "favorite": false,
+    "fireModes": {
+      "autoFire": 4,
+      "suppressiveFire": true
+    },
+    "handsReq": 2,
+    "ignoreArmorPercent": 0,
+    "ignoreBelowSP": 0,
+    "installedItems": {
+      "allowed": true,
+      "allowedTypes": [
+        "itemUpgrade",
+        "ammo"
+      ],
+      "list": [],
+      "slots": 0,
+      "usedSlots": 0
+    },
+    "isRanged": true,
+    "magazine": {
+      "ammoData": null,
+      "max": 25,
+      "value": 25
+    },
+    "price": {
+      "market": 1550
+    },
+    "quality": "excellent",
+    "revealed": true,
+    "rof": 1,
+    "source": {
+      "book": "DataPool",
+      "page": 0
+    },
+    "unarmedAutomaticCalculation": true,
+    "usage": "equipped",
+    "usesType": "magazine",
+    "weaponSkill": "Shoulder Arms",
+    "weaponType": "assaultRifle"
+  },
+  "type": "weapon",
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  }
+}

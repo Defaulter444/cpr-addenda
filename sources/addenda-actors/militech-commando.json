@@ -1,0 +1,473 @@
+{
+  "_id": "cprAddAc00060000",
+  "name": "Militech Commando",
+  "type": "character",
+  "img": "modules/cpr-addenda/assets/icons/gear.svg",
+  "folder": null,
+  "sort": 0,
+  "items": [
+    {
+      "_id": "cprAddPi06010000",
+      "effects": [],
+      "flags": {
+        "cpr-addenda": {
+          "vehicleMountedPosition": "cprAddPos0000006"
+        }
+      },
+      "img": "systems/cyberpunk-red-core/icons/compendium/weapons/AssaultRifle.svg",
+      "name": "Лёгкий пулемёт Militech MK.27",
+      "system": {
+        "ammoVariety": [
+          "rifle"
+        ],
+        "attackmod": 0,
+        "brand": "",
+        "canIgnoreArmor": false,
+        "concealable": {
+          "concealable": false,
+          "isConcealed": false
+        },
+        "critFailEffect": "jammed",
+        "damage": "4d6",
+        "description": {
+          "value": "<p>Лёгкий пулемёт Militech  созданный для массового производства и принятия на вооружение современными армиями по всему миру в роли мобильного автоматического оружия отделения. Для многих армий он пришёл на смену устаревшим автоматическим лёгким пулемётам  которые непрерывно служили ещё со времён Четвёртой корпоративной войны.</p><p><strong>Классификация:</strong> пулемёт<br><strong>Навык одиночного выстрела:</strong> Тяжёлое оружие<br><strong>Таблица дальности:</strong> штурмовая винтовка<br><strong>Особые режимы огня:</strong> автоогонь (пулемёт 4)  подавляющий огонь<br><strong>Приспособления:</strong> нет</p><p><strong>Особые свойства:</strong> перезарядка этого оружия требует двух действий перезарядки. Для стрельбы из этого оружия требуется ТЕЛО 11 или выше  если только оно не установлено на крепление или стрелок не находится в положении лёжа. Кочевник может выбрать это оружие при первичной установке крепления для тяжёлого оружия на транспорт.</p><p><strong>Цена:</strong> 1 400eb (Очень дорого)</p>"
+        },
+        "dvTable": "Штурмовая винтовка",
+        "equipped": "equipped",
+        "favorite": false,
+        "fireModes": {
+          "autoFire": 4,
+          "suppressiveFire": true
+        },
+        "handsReq": 2,
+        "ignoreArmorPercent": 0,
+        "ignoreBelowSP": 0,
+        "installedItems": {
+          "allowed": true,
+          "allowedTypes": [
+            "itemUpgrade",
+            "ammo"
+          ],
+          "list": [],
+          "slots": 3,
+          "usedSlots": 0
+        },
+        "isRanged": true,
+        "magazine": {
+          "ammoData": null,
+          "max": 80,
+          "value": 80
+        },
+        "price": {
+          "market": 1400
+        },
+        "quality": "standard",
+        "revealed": true,
+        "rof": 1,
+        "source": {
+          "book": "DataPool",
+          "page": 0
+        },
+        "unarmedAutomaticCalculation": true,
+        "usage": "equipped",
+        "usesType": "magazine",
+        "weaponSkill": "Heavy Weapons",
+        "weaponType": "assaultRifle"
+      },
+      "type": "weapon",
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "cprAddPi06020000",
+      "effects": [],
+      "flags": {
+        "cpr-addenda": {
+          "vehicleMountedPosition": "cprAddPos0000006"
+        }
+      },
+      "img": "systems/cyberpunk-red-core/icons/compendium/weapons/AssaultRifle.svg",
+      "name": "Винтовка Militech Mountain Goat",
+      "system": {
+        "ammoVariety": [
+          "rifle"
+        ],
+        "attackmod": 0,
+        "brand": "",
+        "canIgnoreArmor": false,
+        "concealable": {
+          "concealable": false,
+          "isConcealed": false
+        },
+        "critFailEffect": "jammed",
+        "damage": "5d6",
+        "description": {
+          "value": "<p>Боевая винтовка  прицельно и агрессивно продвигаемая среди работающих соло. Согласно утёкшим внутренним документам  после продиктованной данными гиперреакции маркетингового отдела Militech не поскупилась на производство Mountain Goat  стремясь защитить свою нишу от атак со стороны новых конкурентов в ценовом диапазоне около 2 000eb.</p><p><strong>Классификация:</strong> штурмовая винтовка отличного качества<br><strong>Навык одиночного выстрела:</strong> Длинноствольное оружие<br><strong>Таблица дальности:</strong> боевая винтовка<br><strong>Особые режимы огня:</strong> автоогонь (штурмовая винтовка 4)  подавляющий огонь<br><strong>Приспособления:</strong> коннектор смартлинка  снайперский прицел</p><p><strong>Особые свойства:</strong> нет</p><p><strong>Цена:</strong> 1 550eb (Очень дорого)</p>"
+        },
+        "dvTable": "Боевая винтовка",
+        "equipped": "equipped",
+        "favorite": false,
+        "fireModes": {
+          "autoFire": 4,
+          "suppressiveFire": true
+        },
+        "handsReq": 2,
+        "ignoreArmorPercent": 0,
+        "ignoreBelowSP": 0,
+        "installedItems": {
+          "allowed": true,
+          "allowedTypes": [
+            "itemUpgrade",
+            "ammo"
+          ],
+          "list": [],
+          "slots": 0,
+          "usedSlots": 0
+        },
+        "isRanged": true,
+        "magazine": {
+          "ammoData": null,
+          "max": 25,
+          "value": 25
+        },
+        "price": {
+          "market": 1550
+        },
+        "quality": "excellent",
+        "revealed": true,
+        "rof": 1,
+        "source": {
+          "book": "DataPool",
+          "page": 0
+        },
+        "unarmedAutomaticCalculation": true,
+        "usage": "equipped",
+        "usesType": "magazine",
+        "weaponSkill": "Shoulder Arms",
+        "weaponType": "assaultRifle"
+      },
+      "type": "weapon",
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "cprAddPi06030000",
+      "effects": [],
+      "flags": {
+        "cyberpunk-red-core": {
+          "_migration": {
+            "current": 33,
+            "previous": "24"
+          }
+        },
+        "cpr-addenda": {
+          "vehicleInstalled": true
+        }
+      },
+      "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/lowlight_ir_uv.svg",
+      "name": "Low Light/IR/UV",
+      "system": {
+        "ammoVariety": [],
+        "attackmod": 0,
+        "brand": "",
+        "canIgnoreArmor": true,
+        "concealable": {
+          "concealable": false,
+          "isConcealed": false
+        },
+        "core": false,
+        "damage": "1d6",
+        "description": {
+          "value": "<p>Must be paired. Ignore any vision penalties due to lighting or fog/smoke.</p>\n"
+        },
+        "dvTable": "",
+        "favorite": false,
+        "fireModes": {
+          "autoFire": 0,
+          "suppressiveFire": false
+        },
+        "humanityLoss": {
+          "roll": "1d6",
+          "static": 3
+        },
+        "ignoreArmorPercent": 50,
+        "installLocation": "mall",
+        "installedItems": {
+          "allowed": false,
+          "allowedTypes": [
+            "itemUpgrade"
+          ],
+          "list": [],
+          "slots": 3,
+          "usedSlots": 0
+        },
+        "isElectronic": true,
+        "isFoundational": false,
+        "isRanged": false,
+        "isWeapon": false,
+        "magazine": {
+          "ammoData": null,
+          "max": 0,
+          "value": 0
+        },
+        "price": {
+          "market": 500
+        },
+        "providesHardening": false,
+        "revealed": true,
+        "rof": 1,
+        "size": 2,
+        "source": {
+          "book": "Core",
+          "page": 360
+        },
+        "type": "cyberEye",
+        "unarmedAutomaticCalculation": true,
+        "usage": "toggled",
+        "usesType": "magazine",
+        "weaponSkill": "Archery",
+        "weaponType": "assaultRifle"
+      },
+      "type": "cyberware",
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "cprAddPi06040000",
+      "effects": [],
+      "flags": {
+        "cyberpunk-red-core": {
+          "_migration": {
+            "current": 33,
+            "previous": "24"
+          }
+        },
+        "cpr-addenda": {
+          "vehicleInstalled": true
+        }
+      },
+      "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/radio_communicator.svg",
+      "name": "Radio Communicator",
+      "system": {
+        "ammoVariety": [],
+        "attackmod": 0,
+        "brand": "",
+        "canIgnoreArmor": true,
+        "concealable": {
+          "concealable": false,
+          "isConcealed": false
+        },
+        "core": false,
+        "damage": "1d6",
+        "description": {
+          "value": "<p>Built in walkie-talkie. 1 mile range.</p>\n"
+        },
+        "dvTable": "",
+        "favorite": false,
+        "fireModes": {
+          "autoFire": 0,
+          "suppressiveFire": false
+        },
+        "humanityLoss": {
+          "roll": "1d3",
+          "static": 2
+        },
+        "ignoreArmorPercent": 50,
+        "installLocation": "mall",
+        "installedItems": {
+          "allowed": false,
+          "allowedTypes": [
+            "itemUpgrade"
+          ],
+          "list": [],
+          "slots": 3,
+          "usedSlots": 0
+        },
+        "isElectronic": true,
+        "isFoundational": false,
+        "isRanged": false,
+        "isWeapon": false,
+        "magazine": {
+          "ammoData": null,
+          "max": 0,
+          "value": 0
+        },
+        "price": {
+          "market": 100
+        },
+        "providesHardening": false,
+        "revealed": true,
+        "rof": 1,
+        "size": 1,
+        "source": {
+          "book": "Core",
+          "page": 362
+        },
+        "type": "cyberAudioSuite",
+        "unarmedAutomaticCalculation": true,
+        "usage": "toggled",
+        "usesType": "magazine",
+        "weaponSkill": "Archery",
+        "weaponType": "assaultRifle"
+      },
+      "type": "cyberware",
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      }
+    },
+    {
+      "_id": "cprAddPi06050000",
+      "effects": [],
+      "flags": {
+        "cyberpunk-red-core": {
+          "_migration": {
+            "current": 33,
+            "previous": "24"
+          }
+        },
+        "cpr-addenda": {
+          "vehicleInstalled": true
+        }
+      },
+      "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/scrambler_descrambler.svg",
+      "name": "Scrambler/Descrambler",
+      "system": {
+        "ammoVariety": [],
+        "attackmod": 0,
+        "brand": "",
+        "canIgnoreArmor": true,
+        "concealable": {
+          "concealable": false,
+          "isConcealed": false
+        },
+        "core": false,
+        "damage": "1d6",
+        "description": {
+          "value": "<p>Encodes and decodes transmissions.</p>\n"
+        },
+        "dvTable": "",
+        "favorite": false,
+        "fireModes": {
+          "autoFire": 0,
+          "suppressiveFire": false
+        },
+        "humanityLoss": {
+          "roll": "1d3",
+          "static": 2
+        },
+        "ignoreArmorPercent": 50,
+        "installLocation": "mall",
+        "installedItems": {
+          "allowed": false,
+          "allowedTypes": [
+            "itemUpgrade"
+          ],
+          "list": [],
+          "slots": 3,
+          "usedSlots": 0
+        },
+        "isElectronic": true,
+        "isFoundational": false,
+        "isRanged": false,
+        "isWeapon": false,
+        "magazine": {
+          "ammoData": null,
+          "max": 0,
+          "value": 0
+        },
+        "price": {
+          "market": 100
+        },
+        "providesHardening": false,
+        "revealed": true,
+        "rof": 1,
+        "size": 1,
+        "source": {
+          "book": "Core",
+          "page": 362
+        },
+        "type": "cyberAudioSuite",
+        "unarmedAutomaticCalculation": true,
+        "usage": "toggled",
+        "usesType": "magazine",
+        "weaponSkill": "Archery",
+        "weaponType": "assaultRifle"
+      },
+      "type": "cyberware",
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      }
+    }
+  ],
+  "effects": [],
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "core": {
+      "sheetClass": "cpr-addenda.VehicleSheet"
+    },
+    "cpr-addenda": {
+      "vehiclePositions": [
+        {
+          "id": "cprAddPos0000006",
+          "name": "Пилот",
+          "order": 1,
+          "occupants": [],
+          "skills": "",
+          "statMods": "",
+          "maxOccupants": 1,
+          "canControlWeapons": true,
+          "grantsTokenControl": true,
+          "matchVehicleMove": false,
+          "matchOccupantMove": false,
+          "bulletproofGlass": false,
+          "glassHp": 0,
+          "glassHpMax": 0
+        }
+      ]
+    }
+  },
+  "system": {
+    "derivedStats": {
+      "hp": {
+        "value": 30,
+        "max": 30
+      }
+    },
+    "externalData": {
+      "currentArmorBody": {
+        "value": 17,
+        "max": 17
+      }
+    },
+    "stats": {
+      "body": {
+        "value": 14
+      }
+    },
+    "information": {
+      "alias": "Бета / Гибридный Metalgear®",
+      "description": "<p><strong>25 274eb (Супер роскошь)</strong></p><p>Commando — рабочая лошадка на поле боя, идеально вписывающаяся в стандартную тактику отделений Militech. На передовой его применяют небольшими ударными группами, поддерживаемыми артиллерией, для атаки заранее разведанных позиций. В зависимости от обстановки такие группы несут внешнее вооружение, дополняя бортовой арсенал — особенно часто это одноразовые ракетные установки, предпочтительные при штурме укреплённых целей.</p><p><strong>30 ПЗ • 17 ОС • ТЕЛО 14</strong></p><p>Экзоскелет: Бета<br>Оболочка: Гибридный Metalgear®</p><p><strong>Бортовое оружие</strong></p><ul><li>лёгкий пулемёт Militech MK.27</li><li>винтовка Militech Mountain Goat</li></ul><p><strong>Бортовые киберимпланты</strong></p><ul><li>низкая освещённость/ИК/УФ</li><li>рация</li><li>шифратор/дешифратор</li></ul><p><em>ТЕЛО экзоскелета не поднимается эффектом поста: по правилам пилот берёт большее из своего ТЕЛО и ТЕЛО брони, а такое сравнение модификатором не выражается. Значение стоит на самом костюме.</em></p>",
+      "notes": ""
+    }
+  },
+  "prototypeToken": {
+    "name": "Militech Commando",
+    "actorLink": true,
+    "disposition": 0
+  }
+}

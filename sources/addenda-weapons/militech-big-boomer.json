@@ -1,0 +1,71 @@
+{
+  "_id": "cprAddWp00090000",
+  "effects": [],
+  "flags": {},
+  "img": "systems/cyberpunk-red-core/icons/compendium/weapons/veryHeavyPistol.svg",
+  "name": "Militech Big Boomer",
+  "system": {
+    "ammoVariety": [
+      "vHeavyPistol"
+    ],
+    "attackmod": 0,
+    "brand": "",
+    "canIgnoreArmor": false,
+    "concealable": {
+      "concealable": false,
+      "isConcealed": false
+    },
+    "critFailEffect": "jammed",
+    "damage": "4d6",
+    "description": {
+      "value": "<p>Верный друг для тех  у кого есть горящие проблемы  требующие решения на близкой дистанции. Big Boomer — это переосмысление штатного оружия времён Четвёртой корпоративной войны с новым укороченным стволом. В основу дизайна легли результаты опроса клиентов  разосланного всем  кто легально приобрёл Boomer Buster в 2044 году — аудитории  мягко говоря  не вполне отражающей реальную массовую базу покупателей.</p><p><strong>Классификация:</strong> очень тяжёлый пистолет отличного качества<br><strong>Навык одиночного выстрела:</strong> Короткоствольное оружие<br><strong>Таблица дальности:</strong> укороченный пистолет<br><strong>Особые режимы огня:</strong> автоогонь (автоматический пистолет 4)<br><strong>Приспособления:</strong> барабанный магазин  автоспуск пистолета</p><p><strong>Особые свойства:</strong> нет</p><p><strong>Цена:</strong> 1 100eb (Дорого)</p>"
+    },
+    "dvTable": "Укороченный пистолет",
+    "equipped": "owned",
+    "favorite": false,
+    "fireModes": {
+      "autoFire": 4,
+      "suppressiveFire": false
+    },
+    "handsReq": 1,
+    "ignoreArmorPercent": 0,
+    "ignoreBelowSP": 0,
+    "installedItems": {
+      "allowed": true,
+      "allowedTypes": [
+        "itemUpgrade",
+        "ammo"
+      ],
+      "list": [],
+      "slots": 1,
+      "usedSlots": 0
+    },
+    "isRanged": true,
+    "magazine": {
+      "ammoData": null,
+      "max": 28,
+      "value": 28
+    },
+    "price": {
+      "market": 1100
+    },
+    "quality": "excellent",
+    "revealed": true,
+    "rof": 1,
+    "source": {
+      "book": "DataPool",
+      "page": 0
+    },
+    "unarmedAutomaticCalculation": true,
+    "usage": "equipped",
+    "usesType": "magazine",
+    "weaponSkill": "Handgun",
+    "weaponType": "vHeavyPistol"
+  },
+  "type": "weapon",
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  }
+}

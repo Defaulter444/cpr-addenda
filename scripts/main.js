@@ -31,6 +31,17 @@ import {
 import { checkUpgradeFit } from "./install-restrictions.js";
 import { buildPackIndex, findMatches } from "./audit.js";
 import { setWeaponTypes, diagnose } from "./api.js";
+import {
+  registerVehicleSettings,
+  registerVehicleHelpers,
+  registerVehicleHooks,
+  reconcileVehiclesOnReady,
+} from "./vehicle-registry.js";
+import {
+  migrateVehicleData,
+  warnAboutVasModule,
+} from "./vehicle-migration.js";
+import { checkCorebook, importCorebook, findCorebookPage } from "./corebook.js";
 
 /**
  * Настройки модуля. Все три — переключатели, потому что мастер должен иметь
@@ -42,6 +53,7 @@ import { setWeaponTypes, diagnose } from "./api.js";
  */
 function registerSettings() {
   registerDvSettings();
+  registerVehicleSettings();
   game.settings.register(MODULE_ID, SETTINGS.enforceWeaponTypes, {
     name: "CPRADDENDA.settings.enforceWeaponTypes.name",
     hint: "CPRADDENDA.settings.enforceWeaponTypes.hint",
@@ -70,6 +82,15 @@ function registerSettings() {
     type: Boolean,
     default: true,
     requiresReload: true,
+  });
+
+  game.settings.register(MODULE_ID, SETTINGS.importCorebook, {
+    name: "CPRADDENDA.settings.importCorebook.name",
+    hint: "CPRADDENDA.settings.importCorebook.hint",
+    scope: "world",
+    config: true,
+    type: Boolean,
+    default: true,
   });
 
   game.settings.register(MODULE_ID, SETTINGS.showSheetControls, {
@@ -103,6 +124,11 @@ Hooks.once("init", () => {
   registerCarrierHooks();
   registerDvHooks();
   registerPktHooks();
+
+  // Лист транспорта. Живёт отдельно от механики модификаций и не зависит от
+  // libWrapper: он ничего не переписывает, а добавляет актёру ещё один вид.
+  registerVehicleHelpers();
+  registerVehicleHooks();
 });
 
 /**
@@ -122,6 +148,16 @@ Hooks.once("ready", async () => {
   await registerPktHumanityPatches();
   await checkDvTableSetting();
 
+  // Перенос данных транспорта — до сверки эффектов: сверка читает уже новые
+  // флаги и без переноса не нашла бы ни одной машины.
+  await migrateVehicleData();
+  warnAboutVasModule();
+  await reconcileVehiclesOnReady();
+
+  // Ссылки на страницы книги ищут её только среди журналов мира, поэтому
+  // книгу надо туда положить — иначе в новом мире ссылки просто мертвы.
+  await checkCorebook();
+
   const api = {
     /** Проверка «встанет ли эта модификация в этот предмет». */
     checkUpgradeFit,
@@ -137,6 +173,10 @@ Hooks.once("ready", async () => {
     restoreSystemTables,
     /** Показать, что мешает установке модификаций и работе таблиц. */
     diagnose,
+    /** Положить книгу правил в мир, чтобы заработали ссылки на её страницы. */
+    importCorebook,
+    /** Найти страницу книги, которую откроют ссылки, или null. */
+    findCorebookPage,
   };
 
   const module = game.modules.get(MODULE_ID);

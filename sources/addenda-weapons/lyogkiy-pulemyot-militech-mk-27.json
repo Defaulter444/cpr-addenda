@@ -1,0 +1,71 @@
+{
+  "_id": "cprAddWp00060000",
+  "effects": [],
+  "flags": {},
+  "img": "systems/cyberpunk-red-core/icons/compendium/weapons/AssaultRifle.svg",
+  "name": "Лёгкий пулемёт Militech MK.27",
+  "system": {
+    "ammoVariety": [
+      "rifle"
+    ],
+    "attackmod": 0,
+    "brand": "",
+    "canIgnoreArmor": false,
+    "concealable": {
+      "concealable": false,
+      "isConcealed": false
+    },
+    "critFailEffect": "jammed",
+    "damage": "4d6",
+    "description": {
+      "value": "<p>Лёгкий пулемёт Militech  созданный для массового производства и принятия на вооружение современными армиями по всему миру в роли мобильного автоматического оружия отделения. Для многих армий он пришёл на смену устаревшим автоматическим лёгким пулемётам  которые непрерывно служили ещё со времён Четвёртой корпоративной войны.</p><p><strong>Классификация:</strong> пулемёт<br><strong>Навык одиночного выстрела:</strong> Тяжёлое оружие<br><strong>Таблица дальности:</strong> штурмовая винтовка<br><strong>Особые режимы огня:</strong> автоогонь (пулемёт 4)  подавляющий огонь<br><strong>Приспособления:</strong> нет</p><p><strong>Особые свойства:</strong> перезарядка этого оружия требует двух действий перезарядки. Для стрельбы из этого оружия требуется ТЕЛО 11 или выше  если только оно не установлено на крепление или стрелок не находится в положении лёжа. Кочевник может выбрать это оружие при первичной установке крепления для тяжёлого оружия на транспорт.</p><p><strong>Цена:</strong> 1 400eb (Очень дорого)</p>"
+    },
+    "dvTable": "Штурмовая винтовка",
+    "equipped": "owned",
+    "favorite": false,
+    "fireModes": {
+      "autoFire": 4,
+      "suppressiveFire": true
+    },
+    "handsReq": 2,
+    "ignoreArmorPercent": 0,
+    "ignoreBelowSP": 0,
+    "installedItems": {
+      "allowed": true,
+      "allowedTypes": [
+        "itemUpgrade",
+        "ammo"
+      ],
+      "list": [],
+      "slots": 3,
+      "usedSlots": 0
+    },
+    "isRanged": true,
+    "magazine": {
+      "ammoData": null,
+      "max": 80,
+      "value": 80
+    },
+    "price": {
+      "market": 1400
+    },
+    "quality": "standard",
+    "revealed": true,
+    "rof": 1,
+    "source": {
+      "book": "DataPool",
+      "page": 0
+    },
+    "unarmedAutomaticCalculation": true,
+    "usage": "equipped",
+    "usesType": "magazine",
+    "weaponSkill": "Heavy Weapons",
+    "weaponType": "assaultRifle"
+  },
+  "type": "weapon",
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  }
+}
