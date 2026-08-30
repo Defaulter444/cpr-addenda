@@ -53,17 +53,44 @@ WHITE_TOLERANCE = 20
 #: На сколько пикселей расширить маску фона, срезая светлую кайму.
 FEATHER = 2
 
-#: Кириллические буквы, неотличимые от латинских: в именах файлов они попадаются.
+#: Кириллические буквы, неотличимые от латинских: в именах файлов они попадаются
+#: вперемешку с настоящей латиницей — «АRASAKA» начинается с русской А.
 LOOKALIKES = str.maketrans({
     "А": "A", "В": "B", "Е": "E", "К": "K", "М": "M", "Н": "H",
     "О": "O", "Р": "P", "С": "C", "Т": "T", "Х": "X",
 })
 
+#: Полная транслитерация — для имён, написанных по-русски целиком
+#: («СОВОЙЛ БОМБАРДИР», «ZHIRAFA БОРИС»). Совпадает с таблицей в
+#: import_power_armor.py, которой собираются имена файлов исходников.
+TRANSLIT = {
+    "а": "a", "б": "b", "в": "v", "г": "g", "д": "d", "е": "e", "ё": "yo",
+    "ж": "zh", "з": "z", "и": "i", "й": "y", "к": "k", "л": "l", "м": "m",
+    "н": "n", "о": "o", "п": "p", "р": "r", "с": "s", "т": "t", "у": "u",
+    "ф": "f", "х": "h", "ц": "c", "ч": "ch", "ш": "sh", "щ": "sch", "ъ": "",
+    "ы": "y", "ь": "", "э": "e", "ю": "yu", "я": "ya",
+}
 
-def normalize(name):
-    """Имя файла к виду имени костюма: латиница, нижний регистр, дефисы."""
-    name = os.path.splitext(name)[0].translate(LOOKALIKES).lower()
-    return "-".join(part for part in name.replace("_", " ").split() if part)
+
+def dashed(text):
+    """Слова через дефис, без лишних пробелов и подчёркиваний."""
+    return "-".join(part for part in text.replace("_", " ").split() if part)
+
+
+def candidates(name):
+    """Как имя файла может выглядеть в виде имени костюма.
+
+    Двумя способами сразу: заменой кириллических двойников латиницы и полной
+    транслитерацией. Первый нужен для «АRASAKA NEO GUARDIAN» — там русская
+    только первая буква; второй для «СОВОЙЛ БОМБАРДИР», где русское всё.
+
+    @param {str} name - имя файла с расширением
+    @returns {set} - варианты имени костюма
+    """
+    stem = os.path.splitext(name)[0]
+    lookalike = dashed(stem.translate(LOOKALIKES).lower())
+    translit = dashed("".join(TRANSLIT.get(ch, ch) for ch in stem.lower()))
+    return {lookalike, translit}
 
 
 def known_suits():
@@ -135,11 +162,14 @@ def main():
         extension = os.path.splitext(path)[1].lower()
         if extension not in (".jpg", ".jpeg", ".png", ".webp", ".bmp"):
             continue
-        name = normalize(os.path.basename(path))
-        if name in suits:
-            matched.append((name, path))
+        options = candidates(os.path.basename(path))
+        hits = sorted(options & suits)
+        if len(hits) == 1:
+            matched.append((hits[0], path))
+        elif len(hits) > 1:
+            skipped.append((os.path.basename(path), " / ".join(hits) + " — неоднозначно"))
         else:
-            skipped.append((os.path.basename(path), name))
+            skipped.append((os.path.basename(path), " / ".join(sorted(options))))
 
     if skipped:
         print("Не опознаны — имя файла должно совпадать с именем костюма:")
