@@ -1,0 +1,75 @@
+{
+ "_id": "cprAddBw00000020",
+ "name": "Броня Драгуна",
+ "type": "cyberware",
+ "img": "modules/cpr-addenda/assets/icons/borgware.svg",
+ "folder": null,
+ "sort": 0,
+ "effects": [],
+ "flags": {},
+ "system": {
+  "ammoVariety": [],
+  "attackmod": 0,
+  "brand": "",
+  "canIgnoreArmor": false,
+  "concealable": {
+   "concealable": false,
+   "isConcealed": false
+  },
+  "core": false,
+  "critFailEffect": "jammed",
+  "damage": "1d6",
+  "description": {
+   "value": "<p>Бронепластины с магнитным креплением. Устанавливаются на магнитные точки, вставленные непосредственно в тело. Панели можно быстро менять, чтобы поддерживать бой до тех пор, пока враг не будет нейтрализован.</p><p>Является Боргированием. Внешний киберимплант. Для установки требуется ТЕЛ 16 или выше, если только на пользователе нет корпуса ПКТ. Дает 15 ОС для тела и головы, пользователь получает штраф от брони −2 к РЕА, ЛВК и СКО.</p><p>В качестве действия пользователь может сбросить Броню Драгуна, лишившись ОС и штрафов от брони. Если на пользователе нет комплекта бронепластин, он может активировать магнитную систему в качестве действия и вызвать комплект неприкрепленных пластин в радиусе 6 м от себя. Выбранная бронепластина летит по воздуху и прикрепляется к пользователю.</p><p>Броня Драгуна содержит наноботов, которые восстанавливают ее на 1 очко потерянных ОС в конце каждого дня, если она не теряла ОС в этот день. Дополнительные комплекты пластин можно приобрести за 1 000eb (очень дорогое). Заказ индивидуального дизайна и цвета добавляет 100eb к стоимости.</p><p><em>Киберброня в системе сама по себе бронёй не работает. Чтобы ОС считался, добавьте на лист парный предмет «Броня Драгуна (броня)» — он приходит вместе с имплантом и уже надет.</em></p>"
+  },
+  "dvTable": "",
+  "favorite": false,
+  "fireModes": {
+   "autoFire": 0,
+   "suppressiveFire": false
+  },
+  "humanityLoss": {
+   "roll": "4d6",
+   "static": 14
+  },
+  "ignoreArmorPercent": 0,
+  "ignoreBelowSP": 0,
+  "installLocation": "hospital",
+  "installedItems": {
+   "allowed": false,
+   "allowedTypes": [
+    "itemUpgrade",
+    "cyberware"
+   ],
+   "list": [],
+   "slots": 0,
+   "usedSlots": 0
+  },
+  "isElectronic": true,
+  "isFoundational": false,
+  "isRanged": false,
+  "isWeapon": false,
+  "magazine": {
+   "ammoData": null,
+   "max": 0,
+   "value": 0
+  },
+  "price": {
+   "market": 5000
+  },
+  "providesHardening": false,
+  "revealed": true,
+  "rof": 1,
+  "size": 1,
+  "source": {
+   "book": "DataPool",
+   "page": 0
+  },
+  "type": "cyberwareExternal",
+  "unarmedAutomaticCalculation": true,
+  "usage": "installed",
+  "usesType": "magazine",
+  "weaponSkill": "",
+  "weaponType": ""
+ }
+}

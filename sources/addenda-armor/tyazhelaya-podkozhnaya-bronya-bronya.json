@@ -1,0 +1,58 @@
+{
+ "_id": "cprAddBw00000032",
+ "name": "Тяжелая Подкожная Броня (броня)",
+ "type": "armor",
+ "img": "modules/cpr-addenda/assets/icons/armor.svg",
+ "folder": null,
+ "sort": 0,
+ "effects": [],
+ "flags": {},
+ "system": {
+  "bodyLocation": {
+   "ablation": 0,
+   "sp": 13
+  },
+  "brand": "",
+  "concealable": {
+   "concealable": false,
+   "isConcealed": false
+  },
+  "description": {
+   "value": "<p>Предмет брони для киберимпланта «Тяжелая Подкожная Броня»: ОС 13 на тело и голову, штраф брони −2 к РЕА, ЛВК и СКО.</p><p>Наноботы восстанавливают 1 ОС в конце дня, если за этот день броня ОС не теряла.</p>"
+  },
+  "equipped": "equipped",
+  "favorite": false,
+  "headLocation": {
+   "ablation": 0,
+   "sp": 13
+  },
+  "installedItems": {
+   "allowed": false,
+   "allowedTypes": [
+    "itemUpgrade"
+   ],
+   "list": [],
+   "slots": 0,
+   "usedSlots": 0
+  },
+  "isBodyLocation": true,
+  "isElectronic": false,
+  "isHeadLocation": true,
+  "isShield": false,
+  "penalty": -2,
+  "price": {
+   "market": 0
+  },
+  "providesHardening": false,
+  "revealed": true,
+  "shieldHitPoints": {
+   "max": 0,
+   "value": 0
+  },
+  "source": {
+   "book": "DataPool",
+   "page": 0
+  },
+  "usage": "equipped"
+ }
+}

@@ -77,6 +77,8 @@ export const SETTINGS = {
   importCorebook: "importCorebook",
   /** Ставить ли зону поражения при выстреле из взрывающегося оружия. */
   explosiveTemplates: "explosiveTemplates",
+  /** Править ли на лету расхождения в данных самой системы. */
+  systemFixes: "systemFixes",
 };
 
 /**

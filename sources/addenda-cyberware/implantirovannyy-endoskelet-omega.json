@@ -1,75 +1,99 @@
 {
-  "_id": "cprAddOwn0003000",
-  "name": "Имплантированный Эндоскелет Омега",
-  "type": "cyberware",
-  "img": "modules/cpr-addenda/assets/icons/borgware.svg",
-  "folder": null,
-  "sort": 0,
-  "effects": [],
-  "flags": {},
-  "system": {
-    "ammoVariety": [],
-    "attackmod": 0,
-    "brand": "",
-    "canIgnoreArmor": false,
-    "concealable": {
-      "concealable": false,
-      "isConcealed": false
-    },
-    "core": false,
-    "critFailEffect": "jammed",
-    "damage": "1d6",
-    "description": {
-      "value": "<p>Внутренний каркас класса «Омега» — тяжелее и прочнее «Сигмы». Входит в комплект корпуса ПКТ.</p>"
-    },
-    "dvTable": "",
-    "favorite": false,
-    "fireModes": {
-      "autoFire": 0,
-      "suppressiveFire": false
-    },
-    "humanityLoss": {
-      "roll": "1d6",
-      "static": 0
-    },
-    "ignoreArmorPercent": 0,
-    "ignoreBelowSP": 0,
-    "installLocation": "hospital",
-    "installedItems": {
-      "allowed": true,
-      "allowedTypes": [
-        "itemUpgrade",
-        "cyberware"
-      ],
-      "list": [],
-      "slots": 3,
-      "usedSlots": 0
-    },
-    "isElectronic": true,
-    "isFoundational": true,
-    "isRanged": false,
-    "isWeapon": false,
-    "magazine": {
-      "ammoData": null,
-      "max": 0,
-      "value": 0
-    },
-    "price": {
-      "market": 0
-    },
-    "providesHardening": false,
-    "revealed": true,
-    "rof": 1,
-    "size": 1,
-    "source": {
-      "book": "DataPool",
-      "page": 0
-    },
-    "type": "borgware",
-    "unarmedAutomaticCalculation": true,
-    "usage": "installed",
-    "usesType": "magazine",
-    "weaponSkill": "",
-    "weaponType": ""
+ "_id": "cprAddOwn0003000",
+ "name": "Имплантированный Эндоскелет Омега",
+ "type": "cyberware",
+ "img": "modules/cpr-addenda/assets/icons/borgware.svg",
+ "folder": null,
+ "sort": 0,
+ "effects": [
+  {
+   "_id": "cprAddBw00000001",
+   "name": "Эндоскелет Ω (ОМЕГА)",
+   "img": "modules/cpr-addenda/assets/icons/borgware.svg",
+   "changes": [
+    {
+     "key": "system.stats.body.value",
+     "mode": 5,
+     "value": "16",
+     "priority": null
+    }
+   ],
+   "disabled": false,
+   "duration": {
+    "startTime": null
+   },
+   "description": "",
+   "origin": null,
+   "tint": "#ffffff",
+   "transfer": true,
+   "statuses": [],
+   "flags": {}
   }
+ ],
+ "flags": {},
+ "system": {
+  "ammoVariety": [],
+  "attackmod": 0,
+  "brand": "",
+  "canIgnoreArmor": false,
+  "concealable": {
+   "concealable": false,
+   "isConcealed": false
+  },
+  "core": false,
+  "critFailEffect": "jammed",
+  "damage": "1d6",
+  "description": {
+   "value": "<p>Совершенный эндоскелет, дополненный гидравлическими и миомарными мышцами.</p><ul><li>Пользователь увеличивает свой ТЕЛ до 16.</li><li>Не может увеличить свой ТЕЛ до 17 или выше.</li><li>Это увеличение ТЕЛ влияет на увеличение ПЗ и спасброска.</li><li>Для установки требуется ТЕЛ 10 и 3 «Искусственные мышцы и усиленные кости».</li><li>Одна установка считается за 2 отдельные установки боргирования при определении максимальной восстанавливаемой человечности (см. CP:R стр. 229).</li></ul><p>Входит в комплект корпуса ПКТ — там он идёт бесплатно и без потери человечности.</p>"
+  },
+  "dvTable": "",
+  "favorite": false,
+  "fireModes": {
+   "autoFire": 0,
+   "suppressiveFire": false
+  },
+  "humanityLoss": {
+   "roll": "8d6",
+   "static": 28
+  },
+  "ignoreArmorPercent": 0,
+  "ignoreBelowSP": 0,
+  "installLocation": "hospital",
+  "installedItems": {
+   "allowed": true,
+   "allowedTypes": [
+    "itemUpgrade",
+    "cyberware"
+   ],
+   "list": [],
+   "slots": 3,
+   "usedSlots": 0
+  },
+  "isElectronic": true,
+  "isFoundational": true,
+  "isRanged": false,
+  "isWeapon": false,
+  "magazine": {
+   "ammoData": null,
+   "max": 0,
+   "value": 0
+  },
+  "price": {
+   "market": 10000
+  },
+  "providesHardening": false,
+  "revealed": true,
+  "rof": 1,
+  "size": 1,
+  "source": {
+   "book": "DataPool",
+   "page": 0
+  },
+  "type": "borgware",
+  "unarmedAutomaticCalculation": true,
+  "usage": "installed",
+  "usesType": "magazine",
+  "weaponSkill": "",
+  "weaponType": ""
+ }
 }

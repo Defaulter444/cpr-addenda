@@ -1,0 +1,75 @@
+{
+ "_id": "cprAddBw00000022",
+ "name": "Тяжелая Подкожная Броня",
+ "type": "cyberware",
+ "img": "modules/cpr-addenda/assets/icons/borgware.svg",
+ "folder": null,
+ "sort": 0,
+ "effects": [],
+ "flags": {},
+ "system": {
+  "ammoVariety": [],
+  "attackmod": 0,
+  "brand": "",
+  "canIgnoreArmor": false,
+  "concealable": {
+   "concealable": false,
+   "isConcealed": false
+  },
+  "core": false,
+  "critFailEffect": "jammed",
+  "damage": "1d6",
+  "description": {
+   "value": "<p>Стандартная подкожная броня больше не подходит, а Тканекожа считай что мусор! Чтобы не отставать от огневой мощи, которой обладают люди в наши дни, вам нужны крепкие бронепластины под кожей. Большие, тяжелые, останавливающие все пули.</p><p>Является Боргированием. Внешний киберимплант. Подкожная броня. Для установки требуется ТЕЛ 10, если только на пользователе нет корпуса ПКТ. Дает 13 ОС для тела и головы. Пользователь получает штраф к броне −2 к РЕА, ЛВК и СКО, если он не имеет ТЕЛ 14 или выше или если на пользователе нет корпуса ПКТ.</p><p>Тяжелая Подкожная Броня содержит наноботов, которые восстанавливают ее на 1 очко потерянных ОС в конце каждого дня, если она не теряла ОС в этот день.</p><p><em>Примечание: при установке на корпус ПКТ Тяжелая Подкожная Броня обычно не является подкожной, а действует как кожа пользователя, обладая осязанием.</em></p><p><em>Штраф здесь безусловный: система не умеет включать его по ТЕЛ носителя. Если у него ТЕЛ 14 или выше либо на нём корпус ПКТ, обнулите поле «Штраф» в предмете брони.</em></p><p><em>Киберброня в системе сама по себе бронёй не работает. Чтобы ОС считался, добавьте на лист парный предмет «Тяжелая Подкожная Броня (броня)» — он приходит вместе с имплантом и уже надет.</em></p>"
+  },
+  "dvTable": "",
+  "favorite": false,
+  "fireModes": {
+   "autoFire": 0,
+   "suppressiveFire": false
+  },
+  "humanityLoss": {
+   "roll": "4d6",
+   "static": 14
+  },
+  "ignoreArmorPercent": 0,
+  "ignoreBelowSP": 0,
+  "installLocation": "hospital",
+  "installedItems": {
+   "allowed": false,
+   "allowedTypes": [
+    "itemUpgrade",
+    "cyberware"
+   ],
+   "list": [],
+   "slots": 0,
+   "usedSlots": 0
+  },
+  "isElectronic": true,
+  "isFoundational": false,
+  "isRanged": false,
+  "isWeapon": false,
+  "magazine": {
+   "ammoData": null,
+   "max": 0,
+   "value": 0
+  },
+  "price": {
+   "market": 5000
+  },
+  "providesHardening": false,
+  "revealed": true,
+  "rof": 1,
+  "size": 1,
+  "source": {
+   "book": "DataPool",
+   "page": 0
+  },
+  "type": "cyberwareExternal",
+  "unarmedAutomaticCalculation": true,
+  "usage": "installed",
+  "usesType": "magazine",
+  "weaponSkill": "",
+  "weaponType": ""
+ }
+}

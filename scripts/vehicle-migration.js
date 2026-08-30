@@ -23,12 +23,13 @@ import {
   VEHICLE_FLAGS,
   localize,
 } from "./constants.js";
+import { fixActorItems } from "./system-fixes.js";
 
 /**
  * Версия переноса. Растёт, если однажды придётся переносить что-то ещё, —
  * тогда миры, прошедшие прошлый перенос, пройдут и новый.
  */
-const MIGRATION_VERSION = 2;
+const MIGRATION_VERSION = 3;
 
 /** Как звались флаги в оригинале → как зовутся теперь. */
 const FLAG_MAP = {
@@ -167,12 +168,13 @@ export async function migrateVehicleData() {
   const done = game.settings.get(MODULE_ID, SETTINGS.vehicleMigration);
   if (done >= MIGRATION_VERSION) return;
 
-  const stats = { actors: 0, items: 0, effects: 0, armor: 0 };
+  const stats = { actors: 0, items: 0, effects: 0, armor: 0, fixes: 0 };
 
   try {
     for (const actor of game.actors) {
       await migrateActor(actor, stats);
       await migrateArmorPlates(actor, stats);
+      await fixActorItems(actor, stats);
     }
 
     for (const scene of game.scenes) {
@@ -181,6 +183,7 @@ export async function migrateVehicleData() {
         if (token.isLinked || !token.actor) continue;
         await migrateActor(token.actor, stats);
         await migrateArmorPlates(token.actor, stats);
+        await fixActorItems(token.actor, stats);
       }
     }
 
@@ -190,12 +193,13 @@ export async function migrateVehicleData() {
       MIGRATION_VERSION
     );
 
-    const total = stats.actors + stats.items + stats.effects + stats.armor;
+    const total =
+      stats.actors + stats.items + stats.effects + stats.armor + stats.fixes;
     if (total > 0) {
       ui.notifications.info(localize("vehicle.migration.done", stats));
     }
     console.log(
-      `${MODULE_ID} | перенос данных транспорта: актёров ${stats.actors}, предметов ${stats.items}, эффектов ${stats.effects}, бронеплит ${stats.armor}`
+      `${MODULE_ID} | перенос данных транспорта: актёров ${stats.actors}, предметов ${stats.items}, эффектов ${stats.effects}, бронеплит ${stats.armor}, правок данных системы ${stats.fixes}`
     );
   } catch (error) {
     // Отметку не ставим: следующая загрузка попробует снова, а уже

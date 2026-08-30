@@ -164,7 +164,7 @@
   "CPRADDENDA.vehicle.notify.oldModuleActive": "Модуль «MMuton's CPR Vehicle Actor Sheet» всё ещё включён. Лист транспорта перенесён в Cyberpunk RED: Addenda — выключите старый модуль, иначе эффекты постов будут выдаваться дважды.",
   "CPRADDENDA.vehicle.effect.position": "Транспорт: {position}",
   "CPRADDENDA.vehicle.effect.pilotMove": "Транспорт: {position} (СКО пилота)",
-  "CPRADDENDA.vehicle.migration.done": "Данные транспорта перенесены: актёров {actors}, предметов {items}, эффектов {effects}, бронеплит {armor}.",
+  "CPRADDENDA.vehicle.migration.done": "Данные транспорта перенесены: актёров {actors}, предметов {items}, эффектов {effects}, бронеплит {armor}, правок данных системы {fixes}.",
   "CPRADDENDA.vehicle.migration.failed": "Перенос данных транспорта не завершён — подробности в консоли (F12). Попытка повторится при следующей загрузке мира.",
   "CPRADDENDA.vehicle.sheetLabel": "Лист транспорта (Addenda)",
   "CPRADDENDA.vehicle.settings.keepGmPermissions.name": "Беречь права доступа, выставленные вручную",
@@ -207,5 +207,11 @@
   "CPRADDENDA.vehicle.blast.tokenGone": "Этой фигуры больше нет на сцене — уклоняться некому.",
   "CPRADDENDA.vehicle.blast.empty": "В зоне никого нет.",
   "CPRADDENDA.vehicle.migration.armorName": "Бронеплиты костюма",
-  "CPRADDENDA.vehicle.migration.armorText": "<p>Бронеплиты силовой брони: ОС {sp}.</p><p>Выданы при обновлении модуля: раньше ОС стоял только в шапке листа и при расчёте урона не вычитался.</p>"
+  "CPRADDENDA.vehicle.migration.armorText": "<p>Бронеплиты силовой брони: ОС {sp}.</p><p>Выданы при обновлении модуля: раньше ОС стоял только в шапке листа и при расчёте урона не вычитался.</p>",
+  "CPRADDENDA.settings.systemFixes.name": "Править расхождения в данных системы",
+  "CPRADDENDA.settings.systemFixes.hint": "У нескольких предметов компендиума числа не сходятся с их же описанием и с книгой: у «Фасеточного крепления» и «Сенсорного массива» три слота вместо пяти, у остова «Фума Котаро» нет прибавки к Скрытности. Правка применяется в момент, когда предмет кладут на лист.",
+  "CPRADDENDA.fixes.multiOptic.applied": "«{name}»: слотов стало 5 — столько обещает описание и Data Pool, в компендиуме стояло 3.",
+  "CPRADDENDA.fixes.sensorArray.applied": "«{name}»: слотов стало 5 — столько обещает описание и Data Pool, в компендиуме стояло 3.",
+  "CPRADDENDA.fixes.fumaStealth.applied": "«{name}»: добавлена прибавка +2 к Скрытности — по правилам остова, в компендиуме её не было.",
+  "CPRADDENDA.fixes.fumaStealth.effect": "Скрытность +2 (остов «Фума Котаро»)"
 }

@@ -534,6 +534,13 @@ function validateJournal(doc, label, seenIds) {
   const effectKeys = new Set(
     [...configSource.matchAll(/"(bonuses\.[A-Za-z0-9_]+)"/g)].map((m) => m[1])
   );
+  // Кроме бонусов, эффекты двигают и сами характеристики: так система в своих
+  // же компендиумах ставит ТЕЛ эндоскелетам («Implanted Linear Frame ∑» и
+  // прочим) — ключом `system.stats.body.value`. Список характеристик берём из
+  // её справочника, а не пишем руками, чтобы он не разошёлся с системой.
+  for (const stat of readConfigKeys(configSource, "statList")) {
+    effectKeys.add(`system.stats.${stat}.value`);
+  }
 
   console.log(
     `Справочники системы: типов оружия ${weaponTypes.length},` +
@@ -789,13 +796,17 @@ const seenIds = new Map();
       // Броня: щит без запаса прочности бесполезен, а обычная броня без ОС —
       // это броня, которая ничего не защищает.
       if (doc.type === "armor") {
-        const locations = [
-          system.isBodyLocation,
-          system.isHeadLocation,
-          system.isShield,
-        ].filter(Boolean);
-        if (locations.length !== 1) {
-          fail(label, "у брони должно быть ровно одно место ношения (тело, голова или щит)");
+        // Обычная носимая броня разносится на «(тело)» и «(голова)»: они
+        // изнашиваются порознь. А вот киберброня покрывает сразу и то, и
+        // другое одним предметом — так в системе сделаны «Подкожная броня» и
+        // «Вплетение в плоть», и документ даёт для них одно значение ОС на обе
+        // зоны. Запрещаем только бессмыслицу: щит вместе с зонами тела и
+        // предмет вообще без места ношения.
+        if (system.isShield && (system.isBodyLocation || system.isHeadLocation)) {
+          fail(label, "щит не может одновременно быть бронёй на тело или голову");
+        }
+        if (!system.isShield && !system.isBodyLocation && !system.isHeadLocation) {
+          fail(label, "у брони не указано ни одно место ношения");
         }
         if (system.isShield && !(system.shieldHitPoints?.max > 0)) {
           fail(label, "у щита нулевой запас прочности");

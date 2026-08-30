@@ -29,6 +29,7 @@ import {
   restoreSystemTables,
 } from "./dv-tables.js";
 import { checkUpgradeFit } from "./install-restrictions.js";
+import { fixOnCreate } from "./system-fixes.js";
 import { buildPackIndex, findMatches } from "./audit.js";
 import { setWeaponTypes, diagnose } from "./api.js";
 import {
@@ -102,6 +103,15 @@ function registerSettings() {
     default: true,
   });
 
+  game.settings.register(MODULE_ID, SETTINGS.systemFixes, {
+    name: "CPRADDENDA.settings.systemFixes.name",
+    hint: "CPRADDENDA.settings.systemFixes.hint",
+    scope: "world",
+    config: true,
+    type: Boolean,
+    default: true,
+  });
+
   game.settings.register(MODULE_ID, SETTINGS.showSheetControls, {
     name: "CPRADDENDA.settings.showSheetControls.name",
     hint: "CPRADDENDA.settings.showSheetControls.hint",
@@ -145,6 +155,17 @@ Hooks.once("init", () => {
  * модулей — штатный сценарий Babele, так что это не конфликтует с русификацией
  * системы: она переводит свои компендиумы, мы — свои.
  */
+// Правка расхождений в данных системы — в тот момент, когда предмет кладут на
+// лист. До записи в базу это бесплатно; после потребовало бы второго обращения
+// к серверу и мигания на листе.
+Hooks.on("preCreateItem", (item) => {
+  try {
+    fixOnCreate(item);
+  } catch (error) {
+    console.error(`${MODULE_ID} | правка данных системы не применена:`, error);
+  }
+});
+
 Hooks.once("babele.init", (babele) => {
   babele.register({ module: MODULE_ID, lang: "ru", dir: "babele/ru" });
 });

@@ -1,0 +1,58 @@
+{
+ "_id": "cprAddBw00000031",
+ "name": "Броня Драгуна (МЕТАЛГИР) (броня)",
+ "type": "armor",
+ "img": "modules/cpr-addenda/assets/icons/armor.svg",
+ "folder": null,
+ "sort": 0,
+ "effects": [],
+ "flags": {},
+ "system": {
+  "bodyLocation": {
+   "ablation": 0,
+   "sp": 18
+  },
+  "brand": "",
+  "concealable": {
+   "concealable": false,
+   "isConcealed": false
+  },
+  "description": {
+   "value": "<p>Предмет брони для киберимпланта «Броня Драгуна (МЕТАЛГИР)»: ОС 18 на тело и голову, штраф брони −3 к РЕА, ЛВК и СКО.</p><p>Наноботы восстанавливают 1 ОС в конце дня, если за этот день броня ОС не теряла.</p>"
+  },
+  "equipped": "equipped",
+  "favorite": false,
+  "headLocation": {
+   "ablation": 0,
+   "sp": 18
+  },
+  "installedItems": {
+   "allowed": false,
+   "allowedTypes": [
+    "itemUpgrade"
+   ],
+   "list": [],
+   "slots": 0,
+   "usedSlots": 0
+  },
+  "isBodyLocation": true,
+  "isElectronic": false,
+  "isHeadLocation": true,
+  "isShield": false,
+  "penalty": -3,
+  "price": {
+   "market": 0
+  },
+  "providesHardening": false,
+  "revealed": true,
+  "shieldHitPoints": {
+   "max": 0,
+   "value": 0
+  },
+  "source": {
+   "book": "DataPool",
+   "page": 0
+  },
+  "usage": "equipped"
+ }
+}
