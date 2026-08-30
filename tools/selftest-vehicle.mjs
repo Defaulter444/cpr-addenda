@@ -1073,7 +1073,25 @@ console.log("Зона поражения взрывающегося оружия
   const GRID = { distance: 2, size: 100, units: "m" };
   const CENTER = { x: 1000, y: 700 };
 
+  /** Фигура на столе: центр и РЕФ владельца. */
+  const placeable = (name, x, y, ref) => ({
+    name,
+    center: { x, y },
+    actor: { system: { stats: { ref: { value: ref } } } },
+  });
+
+  // Квадрат 5 клеток по 100 px вокруг (1000,700) — это от 750 до 1250 по X
+  // и от 450 до 950 по Y. Расставляем фигуры внутри, снаружи и ровно на краю.
+  const placeables = [
+    placeable("В центре", 1000, 700, 9),
+    placeable("У края внутри", 760, 460, 5),
+    placeable("Ровно на углу", 750, 450, 8),
+    placeable("Снаружи по X", 1260, 700, 9),
+    placeable("Снаружи по Y", 1000, 960, 9),
+  ];
+
   globalThis.canvas = {
+    tokens: { placeables },
     scene: {
       grid: GRID,
       createEmbeddedDocuments: async (type, [data]) => {
@@ -1149,9 +1167,24 @@ console.log("Зона поражения взрывающегося оружия
 
     // Напоминание правила уходит в чат и называет число для уклонения.
     expect(chat.length === 1, `сообщений в чат ${chat.length}`);
+    const card = chat[0]?.content ?? "";
+    expect(card.includes("17"), "в напоминании нет числа, которое надо превзойти");
+
+    // Перечень попавших в зону: внутри и на краю — да, снаружи — нет.
+    for (const who of ["В центре", "У края внутри", "Ровно на углу"]) {
+      expect(card.includes(who), `"${who}" не попал в перечень, хотя в зоне`);
+    }
+    for (const who of ["Снаружи по X", "Снаружи по Y"]) {
+      expect(!card.includes(who), `"${who}" попал в перечень, хотя вне зоны`);
+    }
+    // РЕФ решает, кому предлагать уклонение.
     expect(
-      chat[0]?.content?.includes("17"),
-      "в напоминании нет числа, которое надо превзойти"
+      card.includes("mayDodge"),
+      "никому не предложено уклониться, хотя есть РЕФ 8+"
+    );
+    expect(
+      card.includes("cannotDodge"),
+      "не отмечен тот, кому РЕФ не позволяет уклоняться"
     );
   }
 

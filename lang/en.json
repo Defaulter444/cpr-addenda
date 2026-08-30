@@ -191,5 +191,9 @@
   "CPRADDENDA.vehicle.blast.dodge": "Anyone in the area with <strong>REF 8 or higher</strong> may try to dodge: their roll must beat <strong>{total}</strong>. On a success they move out of the area.",
   "CPRADDENDA.vehicle.blast.miss": "If the roll fell short of the DV to hit the target, the GM decides where inside this square the blast actually went off and moves the area there.",
   "CPRADDENDA.vehicle.blast.noTarget": "No target selected, so there is nowhere to place the blast area for “{name}”. Target a token (press T over it) and fire again.",
-  "CPRADDENDA.vehicle.blast.failed": "The blast area was not placed: {message}"
+  "CPRADDENDA.vehicle.blast.failed": "The blast area was not placed: {message}",
+  "CPRADDENDA.vehicle.blast.inZone": "Caught in the blast:",
+  "CPRADDENDA.vehicle.blast.mayDodge": "may dodge",
+  "CPRADDENDA.vehicle.blast.cannotDodge": "cannot dodge (REF 8 or higher required)",
+  "CPRADDENDA.vehicle.blast.empty": "Nobody is in the area."
 }

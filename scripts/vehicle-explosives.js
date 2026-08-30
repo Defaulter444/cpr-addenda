@@ -91,6 +91,38 @@ export async function placeBlast(item, attackTotal) {
       [template]
     );
 
+    // Кто оказался в зоне. Считаем по центру фигуры: книга говорит про цели
+    // «в зоне», а не про то, задело ли краем.
+    const caught = [];
+    for (const token of canvas.tokens?.placeables ?? []) {
+      const { x, y } = token.center;
+      if (
+        x < template.x ||
+        x > template.x + halfPixels * 2 ||
+        y < template.y ||
+        y > template.y + halfPixels * 2
+      ) {
+        continue;
+      }
+      const ref = token.actor?.system?.stats?.ref?.value ?? 0;
+      caught.push({ name: token.name, ref, canDodge: ref >= 8 });
+    }
+
+    const roster = caught.length
+      ? "<ul>" +
+        caught
+          .map(
+            (t) =>
+              `<li>${t.name} — РЕФ ${t.ref}: ` +
+              (t.canDodge
+                ? `<strong>${localize("vehicle.blast.mayDodge")}</strong>`
+                : localize("vehicle.blast.cannotDodge")) +
+              "</li>"
+          )
+          .join("") +
+        "</ul>"
+      : `<p><em>${localize("vehicle.blast.empty")}</em></p>`;
+
     await ChatMessage.create({
       speaker: ChatMessage.getSpeaker({ actor: item.actor }),
       content:
@@ -101,6 +133,8 @@ export async function placeBlast(item, attackTotal) {
         })}</p>` +
         `<p>${localize("vehicle.blast.damageOnce")}</p>` +
         `<p>${localize("vehicle.blast.dodge", { total: attackTotal })}</p>` +
+        `<p><strong>${localize("vehicle.blast.inZone")}</strong></p>` +
+        roster +
         `<p><em>${localize("vehicle.blast.miss")}</em></p>`,
     });
 

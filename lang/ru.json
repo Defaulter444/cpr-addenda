@@ -191,5 +191,9 @@
   "CPRADDENDA.vehicle.blast.dodge": "Любой в зоне с <strong>РЕФ 8 или выше</strong> может попытаться уклониться: бросок должен превзойти <strong>{total}</strong>. При успехе он выходит за пределы зоны.",
   "CPRADDENDA.vehicle.blast.miss": "Если бросок не дотянул до СЛ попадания по цели, мастер сам решает, в какой точке этого квадрата взрыв сработал на самом деле, и переносит зону туда.",
   "CPRADDENDA.vehicle.blast.noTarget": "Цель не выбрана, ставить зону поражения «{name}» некуда. Наведитесь на цель (клавиша T по токену) и выстрелите снова.",
-  "CPRADDENDA.vehicle.blast.failed": "Зона поражения не поставлена: {message}"
+  "CPRADDENDA.vehicle.blast.failed": "Зона поражения не поставлена: {message}",
+  "CPRADDENDA.vehicle.blast.inZone": "В зоне поражения:",
+  "CPRADDENDA.vehicle.blast.mayDodge": "может уклониться",
+  "CPRADDENDA.vehicle.blast.cannotDodge": "уклониться не может (нужен РЕФ 8 или выше)",
+  "CPRADDENDA.vehicle.blast.empty": "В зоне никого нет."
 }
