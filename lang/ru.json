@@ -164,7 +164,7 @@
   "CPRADDENDA.vehicle.notify.oldModuleActive": "Модуль «MMuton's CPR Vehicle Actor Sheet» всё ещё включён. Лист транспорта перенесён в Cyberpunk RED: Addenda — выключите старый модуль, иначе эффекты постов будут выдаваться дважды.",
   "CPRADDENDA.vehicle.effect.position": "Транспорт: {position}",
   "CPRADDENDA.vehicle.effect.pilotMove": "Транспорт: {position} (СКО пилота)",
-  "CPRADDENDA.vehicle.migration.done": "Данные транспорта перенесены: актёров {actors}, предметов {items}, эффектов {effects}.",
+  "CPRADDENDA.vehicle.migration.done": "Данные транспорта перенесены: актёров {actors}, предметов {items}, эффектов {effects}, бронеплит {armor}.",
   "CPRADDENDA.vehicle.migration.failed": "Перенос данных транспорта не завершён — подробности в консоли (F12). Попытка повторится при следующей загрузке мира.",
   "CPRADDENDA.vehicle.sheetLabel": "Лист транспорта (Addenda)",
   "CPRADDENDA.vehicle.settings.keepGmPermissions.name": "Беречь права доступа, выставленные вручную",
@@ -205,5 +205,7 @@
   "CPRADDENDA.vehicle.blast.damageNotYours": "Урон по зоне бросает тот, кто стрелял, или мастер.",
   "CPRADDENDA.vehicle.blast.weaponGone": "Оружие этого выстрела больше не найти: его удалили или сменили мир. Выстрелите заново.",
   "CPRADDENDA.vehicle.blast.tokenGone": "Этой фигуры больше нет на сцене — уклоняться некому.",
-  "CPRADDENDA.vehicle.blast.empty": "В зоне никого нет."
+  "CPRADDENDA.vehicle.blast.empty": "В зоне никого нет.",
+  "CPRADDENDA.vehicle.migration.armorName": "Бронеплиты костюма",
+  "CPRADDENDA.vehicle.migration.armorText": "<p>Бронеплиты силовой брони: ОС {sp}.</p><p>Выданы при обновлении модуля: раньше ОС стоял только в шапке листа и при расчёте урона не вычитался.</p>"
 }

@@ -28,7 +28,7 @@ import {
  * Версия переноса. Растёт, если однажды придётся переносить что-то ещё, —
  * тогда миры, прошедшие прошлый перенос, пройдут и новый.
  */
-const MIGRATION_VERSION = 1;
+const MIGRATION_VERSION = 2;
 
 /** Как звались флаги в оригинале → как зовутся теперь. */
 const FLAG_MAP = {
@@ -112,17 +112,67 @@ async function migrateActor(actor, stats) {
  *
  * @returns {Promise<void>}
  */
+/**
+ * Выдаёт костюму бронеплиты, если их у него нет.
+ *
+ * ОС в шапке листа — только показания приборов. Урон система считает по
+ * надетым предметам брони: `_applyDamage` спрашивает `getEquippedArmors` и
+ * берёт ОС оттуда. Костюмы первых сборок приезжали без такого предмета, и при
+ * попадании у них не вычиталось ничего — заполненная шапка при этом выглядела
+ * убедительно, так что заметить это можно было только по числам урона.
+ *
+ * Трогаем только тех, у кого предмета брони нет вовсе: свою броню, если мастер
+ * её завёл руками, перезаписывать нельзя. ОС берём из шапки самого костюма —
+ * так переживут и переименование, и правку значения.
+ *
+ * @param {CPRActor} actor - проверяемый актёр
+ * @param {Object} stats - счётчики переноса
+ * @returns {Promise<void>}
+ */
+async function migrateArmorPlates(actor, stats) {
+  if (actor.type !== "character") return;
+  // Костюм узнаём по посадочным постам: они есть только у наших актёров и у
+  // транспорта, заведённого через этот лист.
+  const positions = actor.flags?.[MODULE_ID]?.[VEHICLE_FLAGS.positions];
+  if (!Array.isArray(positions) || positions.length === 0) return;
+  if (actor.items.some((i) => i.type === "armor")) return;
+
+  const sp = Number(actor.system?.externalData?.currentArmorBody?.value);
+  if (!Number.isInteger(sp) || sp <= 0) return;
+
+  await actor.createEmbeddedDocuments("Item", [
+    {
+      name: localize("vehicle.migration.armorName"),
+      type: "armor",
+      img: `modules/${MODULE_ID}/assets/icons/armor.svg`,
+      system: {
+        description: { value: localize("vehicle.migration.armorText", { sp }) },
+        equipped: "equipped",
+        isBodyLocation: true,
+        isHeadLocation: true,
+        isShield: false,
+        bodyLocation: { sp, ablation: 0 },
+        headLocation: { sp, ablation: 0 },
+        penalty: 0,
+      },
+      flags: { [MODULE_ID]: { [VEHICLE_FLAGS.installed]: true } },
+    },
+  ]);
+  stats.armor += 1;
+}
+
 export async function migrateVehicleData() {
   if (!game.user.isGM) return;
 
   const done = game.settings.get(MODULE_ID, SETTINGS.vehicleMigration);
   if (done >= MIGRATION_VERSION) return;
 
-  const stats = { actors: 0, items: 0, effects: 0 };
+  const stats = { actors: 0, items: 0, effects: 0, armor: 0 };
 
   try {
     for (const actor of game.actors) {
       await migrateActor(actor, stats);
+      await migrateArmorPlates(actor, stats);
     }
 
     for (const scene of game.scenes) {
@@ -130,6 +180,7 @@ export async function migrateVehicleData() {
         // Связанный токен смотрит в мирового актёра — он уже обработан выше.
         if (token.isLinked || !token.actor) continue;
         await migrateActor(token.actor, stats);
+        await migrateArmorPlates(token.actor, stats);
       }
     }
 
@@ -139,12 +190,12 @@ export async function migrateVehicleData() {
       MIGRATION_VERSION
     );
 
-    const total = stats.actors + stats.items + stats.effects;
+    const total = stats.actors + stats.items + stats.effects + stats.armor;
     if (total > 0) {
       ui.notifications.info(localize("vehicle.migration.done", stats));
     }
     console.log(
-      `${MODULE_ID} | перенос данных транспорта: актёров ${stats.actors}, предметов ${stats.items}, эффектов ${stats.effects}`
+      `${MODULE_ID} | перенос данных транспорта: актёров ${stats.actors}, предметов ${stats.items}, эффектов ${stats.effects}, бронеплит ${stats.armor}`
     );
   } catch (error) {
     // Отметку не ставим: следующая загрузка попробует снова, а уже
@@ -170,4 +221,9 @@ export function warnAboutVasModule() {
 }
 
 /** Внутренности, открытые только для tools/selftest-vehicle.mjs. */
-export const __test = { pendingFlags, FLAG_MAP, MIGRATION_VERSION };
+export const __test = {
+  pendingFlags,
+  migrateArmorPlates,
+  FLAG_MAP,
+  MIGRATION_VERSION,
+};

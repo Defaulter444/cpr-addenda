@@ -165,7 +165,7 @@
   "CPRADDENDA.vehicle.notify.oldModuleActive": "The module “MMuton's CPR Vehicle Actor Sheet” is still enabled. The vehicle sheet now lives in Cyberpunk RED: Addenda — disable the old module, or position effects will be applied twice.",
   "CPRADDENDA.vehicle.effect.position": "Vehicle: {position}",
   "CPRADDENDA.vehicle.effect.pilotMove": "Vehicle: {position} (Pilot MOVE)",
-  "CPRADDENDA.vehicle.migration.done": "Vehicle data migrated: {actors} actors, {items} items, {effects} effects.",
+  "CPRADDENDA.vehicle.migration.done": "Vehicle data migrated: {actors} actors, {items} items, {effects} effects, {armor} armor plates.",
   "CPRADDENDA.vehicle.migration.failed": "Vehicle data migration did not finish — see the console (F12). It will be retried on the next world load.",
   "CPRADDENDA.vehicle.sheetLabel": "Vehicle Sheet (Addenda)",
   "CPRADDENDA.vehicle.settings.keepGmPermissions.name": "Preserve manually set permissions",
@@ -205,5 +205,7 @@
   "CPRADDENDA.vehicle.blast.damageNotYours": "Blast damage is rolled by whoever fired, or by the GM.",
   "CPRADDENDA.vehicle.blast.weaponGone": "The weapon from this shot can no longer be found — it was deleted or the world changed. Fire again.",
   "CPRADDENDA.vehicle.blast.tokenGone": "That token is no longer on the scene, so there is nobody to dodge.",
-  "CPRADDENDA.vehicle.blast.empty": "Nobody is in the area."
+  "CPRADDENDA.vehicle.blast.empty": "Nobody is in the area.",
+  "CPRADDENDA.vehicle.migration.armorName": "Suit armor plating",
+  "CPRADDENDA.vehicle.migration.armorText": "<p>Power armor plating: SP {sp}.</p><p>Added during a module update: the SP used to live only in the sheet header and was never subtracted when damage was applied.</p>"
 }

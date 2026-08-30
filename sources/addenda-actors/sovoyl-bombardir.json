@@ -7,6 +7,47 @@
   "sort": 0,
   "items": [
     {
+      "_id": "cprAddPi07000000",
+      "name": "Бронеплиты: Metalgear®",
+      "type": "armor",
+      "img": "modules/cpr-addenda/assets/icons/armor.svg",
+      "folder": null,
+      "sort": 0,
+      "effects": [],
+      "flags": {
+        "cpr-addenda": {
+          "vehicleInstalled": true
+        }
+      },
+      "system": {
+        "description": {
+          "value": "<p>Бронеплиты оболочки «Metalgear®»: ОС 18.</p><p>Когда физическая атака извне должна была бы нанести урон пилоту, урон получает силовая броня, снижая свои ПЗ и ОС вместо показателей человека внутри. Надетая на пилота броня при этом ОС не теряет.</p><p>Боевые искусства и специальные приёмы не уменьшают ОС силовой брони вдвое. При успешном ремонте костюма ОС восстанавливается до максимума.</p>"
+        },
+        "equipped": "equipped",
+        "favorite": false,
+        "isBodyLocation": true,
+        "isHeadLocation": true,
+        "isShield": false,
+        "bodyLocation": {
+          "sp": 18,
+          "ablation": 0
+        },
+        "headLocation": {
+          "sp": 18,
+          "ablation": 0
+        },
+        "penalty": 0,
+        "price": {
+          "market": 0
+        },
+        "revealed": true,
+        "source": {
+          "book": "DataPool",
+          "page": 0
+        }
+      }
+    },
+    {
       "_id": "cprAddPi07010000",
       "effects": [],
       "flags": {

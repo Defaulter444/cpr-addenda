@@ -577,6 +577,87 @@ console.log("Перенос данных из старого модуля");
   );
 }
 
+console.log("Бронеплиты костюмам, стоящим в мире");
+{
+  const migration = await load("vehicle-migration");
+  const { migrateArmorPlates } = migration.__test;
+
+  /** Костюм в том виде, в каком его видит миграция. */
+  const suit = (over = {}) => ({
+    type: "character",
+    flags: { "cpr-addenda": { vehiclePositions: [{ id: "cprAddPos0000001" }] } },
+    system: { externalData: { currentArmorBody: { value: 18 } } },
+    items: [],
+    created: [],
+    async createEmbeddedDocuments(type, docs) {
+      this.created.push([type, docs]);
+      return docs;
+    },
+    ...over,
+  });
+
+  // Костюм без брони её получает, и ОС берётся из шапки.
+  {
+    const stats = { armor: 0 };
+    const a = suit();
+    await migrateArmorPlates(a, stats);
+    expect(stats.armor === 1, `выдано бронеплит ${stats.armor}, а нужна одна`);
+    const [type, [plate]] = a.created[0] ?? [];
+    expect(type === "Item", `создан документ типа ${type}`);
+    expect(plate?.type === "armor", `создан предмет типа ${plate?.type}`);
+    expect(plate?.system?.equipped === "equipped", "броня создана не надетой");
+    expect(plate?.system?.bodyLocation?.sp === 18, `ОС тела ${plate?.system?.bodyLocation?.sp}, а в шапке 18`);
+    expect(plate?.system?.headLocation?.sp === 18, `ОС головы ${plate?.system?.headLocation?.sp}, а в шапке 18`);
+    expect(plate?.system?.isBodyLocation === true, "броня не покрывает тело");
+    expect(plate?.system?.isHeadLocation === true, "броня не покрывает голову");
+  }
+
+  // Своя броня мастера неприкосновенна: второй раз не выдаём.
+  {
+    const stats = { armor: 0 };
+    const a = suit({ items: [{ type: "armor" }] });
+    await migrateArmorPlates(a, stats);
+    expect(stats.armor === 0, "поверх своей брони мастера выдана ещё одна");
+    expect(a.created.length === 0, "создан лишний предмет");
+  }
+
+  // Обычный персонаж — не костюм: постов у него нет, трогать нельзя.
+  {
+    const stats = { armor: 0 };
+    const a = suit({ flags: {} });
+    await migrateArmorPlates(a, stats);
+    expect(stats.armor === 0, "броня выдана обычному персонажу");
+  }
+
+  // Без ОС в шапке выдавать нечего — и выдумывать значение мы не станем.
+  for (const value of [0, -3, undefined, null, "", "много"]) {
+    const stats = { armor: 0 };
+    const a = suit({ system: { externalData: { currentArmorBody: { value } } } });
+    await migrateArmorPlates(a, stats);
+    expect(stats.armor === 0, `при ОС "${value}" броня всё-таки выдана`);
+  }
+
+  // А вот число, записанное строкой, принимаем: в чужих мирах поля правят
+  // руками и скриптами, и терять из-за этого броню костюму незачем.
+  {
+    const stats = { armor: 0 };
+    const a = suit({ system: { externalData: { currentArmorBody: { value: "18" } } } });
+    await migrateArmorPlates(a, stats);
+    expect(stats.armor === 1, "ОС, записанный строкой, не признан числом");
+    expect(
+      a.created[0]?.[1]?.[0]?.system?.bodyLocation?.sp === 18,
+      "строковый ОС не приведён к числу"
+    );
+  }
+
+  // Перенос повторяется, пока не отмечен как выполненный, поэтому его версия
+  // обязана вырасти — иначе миры, прошедшие прошлый, останутся без брони.
+  expect(
+    migration.__test.MIGRATION_VERSION >= 2,
+    `версия переноса ${migration.__test.MIGRATION_VERSION}: старые миры брони не получат`
+  );
+}
+
 console.log("Отрисовка шаблона на настоящем Handlebars");
 {
   // Handlebars берём из поставки Foundry: своей зависимости у модуля нет, а

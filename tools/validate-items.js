@@ -164,6 +164,36 @@ function validateActor(doc, label, seenIds) {
     fail(label, "не проставлены ОС (system.externalData.currentArmorBody)");
   }
 
+  // ОС в шапке — только показания приборов. Урон система считает по надетым
+  // предметам брони: `_applyDamage` спрашивает `getEquippedArmors` и берёт ОС
+  // оттуда. Без предмета костюм получал полный урон при заполненной шапке —
+  // ошибка, которую на листе не видно, поэтому держим её на проверке.
+  const plates = (doc.items ?? []).filter((i) => i.type === "armor");
+  if (plates.length !== 1) {
+    fail(label, `предметов брони ${plates.length}, а нужен ровно один`);
+  }
+  for (const plate of plates) {
+    const armor = plate.system ?? {};
+    if (armor.equipped !== "equipped") {
+      fail(label, `броня «${plate.name}» не надета (${armor.equipped}) — ОС не засчитается`);
+    }
+    if (!armor.isBodyLocation) {
+      fail(label, `броня «${plate.name}» не покрывает тело, а обычный выстрел бьёт туда`);
+    }
+    if (!armor.isHeadLocation) {
+      fail(label, `броня «${plate.name}» не покрывает голову: пилот заключён в оболочку целиком`);
+    }
+    for (const loc of ["bodyLocation", "headLocation"]) {
+      const value = armor[loc]?.sp;
+      if (value !== sp?.value) {
+        fail(label, `броня «${plate.name}»: ${loc}.sp = ${value}, а в шапке ОС ${sp?.value}`);
+      }
+      if (armor[loc]?.ablation !== 0) {
+        fail(label, `броня «${plate.name}»: ${loc}.ablation = ${armor[loc]?.ablation}, а костюм новый`);
+      }
+    }
+  }
+
   // Вложенные предметы: бортовое оружие и импланты костюма.
   const positionIds = new Set((positions ?? []).map((p) => p.id));
   const itemIds = new Set();
