@@ -2,7 +2,7 @@
   "_id": "cprAddAc00020000",
   "name": "Arasaka Neo Standard",
   "type": "character",
-  "img": "modules/cpr-addenda/assets/icons/gear.svg",
+  "img": "modules/cpr-addenda/assets/power-armor/arasaka-neo-standard.webp",
   "folder": null,
   "sort": 0,
   "items": [
@@ -393,7 +393,7 @@
   "prototypeToken": {
     "name": "Arasaka Neo Standard",
     "texture": {
-      "src": "modules/cpr-addenda/assets/icons/gear.svg"
+      "src": "modules/cpr-addenda/assets/power-armor/arasaka-neo-standard-token.webp"
     },
     "actorLink": true,
     "disposition": 0

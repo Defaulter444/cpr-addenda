@@ -2,7 +2,7 @@
   "_id": "cprAddAc00050000",
   "name": "MetaCorp Nyx",
   "type": "character",
-  "img": "modules/cpr-addenda/assets/icons/gear.svg",
+  "img": "modules/cpr-addenda/assets/power-armor/metacorp-nyx.webp",
   "folder": null,
   "sort": 0,
   "items": [
@@ -389,7 +389,7 @@
   "prototypeToken": {
     "name": "MetaCorp Nyx",
     "texture": {
-      "src": "modules/cpr-addenda/assets/icons/gear.svg"
+      "src": "modules/cpr-addenda/assets/power-armor/metacorp-nyx-token.webp"
     },
     "actorLink": true,
     "disposition": 0

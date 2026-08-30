@@ -1,3 +1,5 @@
-2026/08/30-16:56:39.476 4b0c Recovering log #82
-2026/08/30-16:56:39.480 4b0c Delete type=0 #82
-2026/08/30-16:56:39.480 4b0c Delete type=3 #81
+2026/08/30-17:14:55.389 4ecc Recovering log #91
+2026/08/30-17:14:55.389 4ecc Level-0 table #93: started
+2026/08/30-17:14:55.397 4ecc Level-0 table #93: 54009 bytes OK
+2026/08/30-17:14:55.399 4ecc Delete type=0 #91
+2026/08/30-17:14:55.399 4ecc Delete type=3 #90

@@ -2,7 +2,7 @@
   "_id": "cprAddAc00080000",
   "name": "Tsunami Arms Magus",
   "type": "character",
-  "img": "modules/cpr-addenda/assets/icons/gear.svg",
+  "img": "modules/cpr-addenda/assets/power-armor/tsunami-arms-magus.webp",
   "folder": null,
   "sort": 0,
   "items": [
@@ -397,7 +397,7 @@
   "prototypeToken": {
     "name": "Tsunami Arms Magus",
     "texture": {
-      "src": "modules/cpr-addenda/assets/icons/gear.svg"
+      "src": "modules/cpr-addenda/assets/power-armor/tsunami-arms-magus-token.webp"
     },
     "actorLink": true,
     "disposition": 0

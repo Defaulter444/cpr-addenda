@@ -2,7 +2,7 @@
   "_id": "cprAddAc00040000",
   "name": "BlueRaven «Sewer Rat»",
   "type": "character",
-  "img": "modules/cpr-addenda/assets/icons/gear.svg",
+  "img": "modules/cpr-addenda/assets/power-armor/blueraven-sewer-rat.webp",
   "folder": null,
   "sort": 0,
   "items": [
@@ -299,7 +299,7 @@
   "prototypeToken": {
     "name": "BlueRaven «Sewer Rat»",
     "texture": {
-      "src": "modules/cpr-addenda/assets/icons/gear.svg"
+      "src": "modules/cpr-addenda/assets/power-armor/blueraven-sewer-rat-token.webp"
     },
     "actorLink": true,
     "disposition": 0
