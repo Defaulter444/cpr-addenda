@@ -192,6 +192,22 @@ function validateActor(doc, label, seenIds) {
     }
   }
 
+  // Картинки: портрет костюма и картинка его токена. Мастер кладёт их в
+  // assets/power-armor, и опечатка в имени файла иначе всплыла бы только
+  // пустым квадратом на столе.
+  for (const [what, src] of [
+    ["портрет", doc.img],
+    ["картинка токена", doc.prototypeToken?.texture?.src],
+  ]) {
+    if (!src) {
+      fail(label, `не задан ${what}`);
+      continue;
+    }
+    if (!fs.existsSync(path.join(DATA_ROOT, src))) {
+      fail(label, `${what} не найден: ${src}`);
+    }
+  }
+
   const description = doc.system?.information?.description ?? "";
   if (!description || description === "<p></p>") {
     fail(label, "пустое описание");

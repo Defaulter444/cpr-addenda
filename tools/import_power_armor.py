@@ -31,6 +31,15 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SOURCES = os.path.join(ROOT, "sources")
 SOURCE_REF = {"book": "DataPool", "page": 0}
 GEAR_ICON = "modules/cpr-addenda/assets/icons/gear.svg"
+
+# Картинки костюмов. Мастер кладёт сюда файл с именем, совпадающим с именем
+# исходника костюма (zhirafa-boris.webp), и следующая сборка подхватит его
+# сама. Отдельная картинка для токена — с приставкой «-token».
+#
+# Так, а не правкой актёра в игре: правка живёт до первой пересборки пака,
+# а файл в assets переживает и пересборку, и обновление модуля.
+ART_DIR_NAME = "power-armor"
+ART_EXTENSIONS = ("webp", "png", "jpg", "jpeg", "avif", "gif", "svg")
 MODULE_ID = "cpr-addenda"
 # Те же имена, что в scripts/constants.js — VEHICLE_FLAGS.
 VEHICLE_MOUNT = "vehicleMountedPosition"
@@ -203,6 +212,24 @@ def stat_mods_field(mods):
     бою не заметить. Английская запись работает при любом языке.
     """
     return ", ".join(f"{STAT_KEY[k]}:{v:+d}" for k, v in mods.items())
+
+
+def artwork(name_slug, suffix=""):
+    """Путь к картинке костюма, если она положена в assets/power-armor.
+
+    Расширения перебираются в порядке предпочтения: webp легче всех и Foundry
+    его любит, svg идёт последним — он хорош для значков, но не для портрета.
+
+    @param {str} name_slug - имя костюма латиницей, как у файла исходника
+    @param {str} suffix - «-token» для отдельной картинки токена
+    @returns {str|None} - путь для Foundry или None, если файла нет
+    """
+    directory = os.path.join(ROOT, "assets", ART_DIR_NAME)
+    for extension in ART_EXTENSIONS:
+        filename = f"{name_slug}{suffix}.{extension}"
+        if os.path.exists(os.path.join(directory, filename)):
+            return f"modules/{MODULE_ID}/assets/{ART_DIR_NAME}/{filename}"
+    return None
 
 
 def write(folder, filename, doc):
@@ -607,8 +634,16 @@ def make_actors():
     """Десять готовых комплектов как актёры, открывающиеся листом транспорта."""
     written = []
     embedded_total = 0
+    with_art = 0
     for index, suit in enumerate(SUITS):
         number = index + 1
+        name_slug = slug(suit["name"])
+        portrait = artwork(name_slug)
+        if portrait:
+            with_art += 1
+        # Токен по умолчанию тот же, что портрет: у костюма это одна и та же
+        # железка, и заводить две картинки ради одинакового вида ни к чему.
+        token_art = artwork(name_slug, "-token") or portrait or GEAR_ICON
         position_id = f"cprAddPos{number:07d}"
         items, unmatched = onboard_items(suit, number, position_id)
         embedded_total += len(items)
@@ -636,7 +671,7 @@ def make_actors():
             "_id": f"cprAddAc{number:04d}0000",
             "name": suit["name"],
             "type": "character",
-            "img": GEAR_ICON,
+            "img": portrait or GEAR_ICON,
             "folder": None,
             "sort": 0,
             "items": items,
@@ -664,14 +699,16 @@ def make_actors():
             },
             "prototypeToken": {
                 "name": suit["name"],
+                "texture": {"src": token_art},
                 # Костюм — вещь именная: у каждого свои ПЗ, и общий счётчик на
                 # два токена был бы неверен.
                 "actorLink": True,
                 "disposition": 0,
             },
         }
-        written.append(write("addenda-actors", f"{slug(suit['name'])}.json", doc))
+        written.append(write("addenda-actors", f"{name_slug}.json", doc))
     print(f"Вложено бортовых предметов: {embedded_total}")
+    print(f"Костюмов со своей картинкой: {with_art} из {len(SUITS)}")
     return written
 
 

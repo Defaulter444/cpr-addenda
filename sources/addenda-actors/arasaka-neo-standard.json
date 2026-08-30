@@ -392,6 +392,9 @@
   },
   "prototypeToken": {
     "name": "Arasaka Neo Standard",
+    "texture": {
+      "src": "modules/cpr-addenda/assets/icons/gear.svg"
+    },
     "actorLink": true,
     "disposition": 0
   }

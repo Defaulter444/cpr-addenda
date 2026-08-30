@@ -298,6 +298,9 @@
   },
   "prototypeToken": {
     "name": "BlueRaven «Sewer Rat»",
+    "texture": {
+      "src": "modules/cpr-addenda/assets/icons/gear.svg"
+    },
     "actorLink": true,
     "disposition": 0
   }

@@ -396,6 +396,9 @@
   },
   "prototypeToken": {
     "name": "Tsunami Arms Magus",
+    "texture": {
+      "src": "modules/cpr-addenda/assets/icons/gear.svg"
+    },
     "actorLink": true,
     "disposition": 0
   }
