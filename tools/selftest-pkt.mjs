@@ -571,5 +571,64 @@ console.log("Мастер применяет человечность тольк
   expect(source.includes("mookNote"), "нет пояснения про НИП на шаге с человечностью");
 }
 
+console.log("Опции конечностей расходятся по рукам и ногам");
+{
+  // Документ пишет «Обновленная Усиленная Киберконечность х4», не различая
+  // руку и ногу. В системе для них два разных предмета, и пока имя вело на
+  // один — на руку, — все четыре уходили в две руки, а ноги оставались
+  // пустыми. У «Драгуна» конечностей ровно четыре: по одной опции на каждую.
+  let frames = 0;
+  for (const file of fs.readdirSync(SOURCES)) {
+    const doc = JSON.parse(fs.readFileSync(path.join(SOURCES, file), "utf-8"));
+    const kit = doc.flags?.[MODULE_ID]?.pktKit;
+    if (!kit) continue;
+
+    const limbs = kit.foundations.filter((f) =>
+      ["cyberArm", "cyberLeg"].includes(f.item.system.type)
+    );
+    // Опция усиления узнаётся по типу своего носителя: имя переведено, и
+    // сравнивать по строке значило бы сломаться при смене языка компендиума.
+    const upgrades = limbs.flatMap((f) =>
+      f.options.filter((o) => /силен|Reinforced/i.test(o.name))
+    );
+    if (!upgrades.length) continue;
+    frames += 1;
+
+    // Опция руки не должна оказаться в ноге и наоборот: система ставит
+    // вложенный имплант только в фундамент своего типа.
+    for (const limb of limbs) {
+      for (const option of limb.options) {
+        if (!/силен|Reinforced/i.test(option.name)) continue;
+        expect(
+          option.system.type === limb.item.system.type,
+          `«${doc.name}»: «${option.name}» (${option.system.type}) стоит в ` +
+            `«${limb.item.name}» (${limb.item.system.type})`
+        );
+      }
+    }
+
+    // И расходятся по конечностям, а не копятся в одной.
+    const perLimb = limbs.map(
+      (f) => f.options.filter((o) => /силен|Reinforced/i.test(o.name)).length
+    );
+    const spread = Math.max(...perLimb) - Math.min(...perLimb);
+    expect(
+      spread <= 1,
+      `«${doc.name}»: усиления разложены как ${perLimb.join("/")} — ` +
+        "по правилу они идут по одному на конечность"
+    );
+
+    // У «Драгуна» это ровно по одному на каждую из четырёх.
+    if (doc.name.includes("ДРАГУН")) {
+      expect(
+        perLimb.length === 4 && perLimb.every((n) => n === 1),
+        `«${doc.name}»: конечностей ${perLimb.length}, усилений ${perLimb.join("/")}`
+      );
+    }
+  }
+  expect(frames > 0, "не нашлось ни одного корпуса с усилениями конечностей");
+  console.log(`  корпусов с усилениями конечностей: ${frames}`);
+}
+
 console.log(`\nПроверок выполнено: ${checks}, провалов: ${failures}`);
 process.exit(failures ? 1 : 0);

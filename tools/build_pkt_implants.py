@@ -397,6 +397,45 @@ def free_slots(host):
     return host["system"]["installedItems"]["slots"] - used
 
 
+#: Опции, которые документ называет «киберконечностью», не различая руку и ногу.
+#: В системе для них два предмета — свой на руку и свой на ногу, — и выбирать
+#: между ними надо по тому, какие конечности у корпуса есть.
+#:
+#: «Обновленная Усиленная Киберконечность х4» у «Драгуна» — это по одной на
+#: каждую из четырёх конечностей: две руки и две ноги. Пока имя вело на один
+#: предмет-руку, все четыре уходили в две руки, а ноги оставались пустыми.
+LIMB_OPTIONS = {
+    "Обновленная Усиленная Киберконечность": {
+        "cyberArm": "Reinforced Cyberarm Upgrade",
+        "cyberLeg": "Reinforced Cyberleg Upgrade",
+    },
+}
+
+
+def split_by_limbs(tree, count):
+    """Распределяет N одинаковых опций по конечностям, какие есть у корпуса.
+
+    Идём по конечностям кругом: первая рука, вторая рука, первая нога, вторая
+    нога, снова первая рука. Так четыре опции при двух руках и двух ногах дают
+    ровно по одной на конечность, а если конечностей меньше — лишние честно
+    ложатся вторым слоем, а не пропадают.
+
+    @param {list} tree - уже разобранные импланты комплекта
+    @param {int} count - сколько опций просит документ
+    @returns {list} - типы конечностей по одной записи на опцию
+    """
+    limbs = []
+    for kind in ("cyberArm", "cyberLeg"):
+        limbs.extend(
+            kind
+            for item in tree
+            if item["system"].get("isFoundational")
+            and item["system"].get("type") == kind
+        )
+    if not limbs:
+        return []
+    return [limbs[index % len(limbs)] for index in range(count)]
+
 def build_kit(tree, frame_type):
     """
     Раскладывает комплект на три части: фундаменты, их опции и то, что несёт
@@ -530,6 +569,21 @@ def main():
         for field, group in (("implantsFree", "free"), ("implantsCost", "cost")):
             for raw in split_entry(entry.get(field)):
                 for name, count in normalize(raw):
+                    # Опция конечности: документ не различает руку и ногу, а
+                    # система различает. Раскладываем по тем конечностям,
+                    # которые у корпуса есть.
+                    if name in LIMB_OPTIONS:
+                        for kind in split_by_limbs(tree, count):
+                            source = system.get(LIMB_OPTIONS[name][kind])
+                            if not source:
+                                unknown.add(f"{name} -> {LIMB_OPTIONS[name][kind]}")
+                                continue
+                            tree.append(tag_group(
+                                instance_from_system(source, next_id(), translations),
+                                group,
+                            ))
+                        continue
+
                     target = name_map.get(name, "__unmapped__")
                     if target == "__unmapped__":
                         unknown.add(name)

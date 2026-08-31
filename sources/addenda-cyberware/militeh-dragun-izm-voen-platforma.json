@@ -183,92 +183,6 @@
                 "ownership": {
                   "default": 0
                 }
-              },
-              {
-                "_id": "cprAddImp0008000",
-                "effects": [],
-                "flags": {
-                  "cyberpunk-red-core": {
-                    "_migration": {
-                      "current": 33,
-                      "previous": "24"
-                    }
-                  },
-                  "cpr-addenda": {
-                    "pktGroup": "cost"
-                  }
-                },
-                "img": "systems/cyberpunk-red-core/icons/compendium/black-chrome/reinforced-cyberarm.svg",
-                "name": "Усиление киберруки",
-                "system": {
-                  "ammoVariety": [],
-                  "attackmod": 0,
-                  "brand": "",
-                  "canIgnoreArmor": true,
-                  "concealable": {
-                    "concealable": false,
-                    "isConcealed": false
-                  },
-                  "core": false,
-                  "damage": "1d6",
-                  "description": {
-                    "value": "Требует киберруку. Киберруку, в которую установлено это улучшение, невозможно сломать."
-                  },
-                  "dvTable": "",
-                  "favorite": false,
-                  "fireModes": {
-                    "autoFire": 0,
-                    "suppressiveFire": false
-                  },
-                  "humanityLoss": {
-                    "roll": "0",
-                    "static": 0
-                  },
-                  "ignoreArmorPercent": 50,
-                  "installLocation": "clinic",
-                  "installedItems": {
-                    "allowed": false,
-                    "allowedTypes": [
-                      "itemUpgrade",
-                      "ammo"
-                    ],
-                    "list": [],
-                    "slots": 3,
-                    "usedSlots": 0
-                  },
-                  "isElectronic": true,
-                  "isFoundational": false,
-                  "isRanged": false,
-                  "isWeapon": false,
-                  "magazine": {
-                    "ammoData": null,
-                    "max": 0,
-                    "value": 0
-                  },
-                  "price": {
-                    "market": 1000
-                  },
-                  "providesHardening": false,
-                  "revealed": true,
-                  "rof": 1,
-                  "size": 1,
-                  "source": {
-                    "book": "BC",
-                    "page": 21
-                  },
-                  "type": "cyberArm",
-                  "unarmedAutomaticCalculation": true,
-                  "usage": "toggled",
-                  "usesType": "magazine",
-                  "weaponSkill": "Archery",
-                  "weaponType": "assaultRifle"
-                },
-                "type": "cyberware",
-                "folder": null,
-                "sort": 0,
-                "ownership": {
-                  "default": 0
-                }
               }
             ]
           },
@@ -362,92 +276,6 @@
             "options": [
               {
                 "_id": "cprAddImp0007900",
-                "effects": [],
-                "flags": {
-                  "cyberpunk-red-core": {
-                    "_migration": {
-                      "current": 33,
-                      "previous": "24"
-                    }
-                  },
-                  "cpr-addenda": {
-                    "pktGroup": "cost"
-                  }
-                },
-                "img": "systems/cyberpunk-red-core/icons/compendium/black-chrome/reinforced-cyberarm.svg",
-                "name": "Усиление киберруки",
-                "system": {
-                  "ammoVariety": [],
-                  "attackmod": 0,
-                  "brand": "",
-                  "canIgnoreArmor": true,
-                  "concealable": {
-                    "concealable": false,
-                    "isConcealed": false
-                  },
-                  "core": false,
-                  "damage": "1d6",
-                  "description": {
-                    "value": "Требует киберруку. Киберруку, в которую установлено это улучшение, невозможно сломать."
-                  },
-                  "dvTable": "",
-                  "favorite": false,
-                  "fireModes": {
-                    "autoFire": 0,
-                    "suppressiveFire": false
-                  },
-                  "humanityLoss": {
-                    "roll": "0",
-                    "static": 0
-                  },
-                  "ignoreArmorPercent": 50,
-                  "installLocation": "clinic",
-                  "installedItems": {
-                    "allowed": false,
-                    "allowedTypes": [
-                      "itemUpgrade",
-                      "ammo"
-                    ],
-                    "list": [],
-                    "slots": 3,
-                    "usedSlots": 0
-                  },
-                  "isElectronic": true,
-                  "isFoundational": false,
-                  "isRanged": false,
-                  "isWeapon": false,
-                  "magazine": {
-                    "ammoData": null,
-                    "max": 0,
-                    "value": 0
-                  },
-                  "price": {
-                    "market": 1000
-                  },
-                  "providesHardening": false,
-                  "revealed": true,
-                  "rof": 1,
-                  "size": 1,
-                  "source": {
-                    "book": "BC",
-                    "page": 21
-                  },
-                  "type": "cyberArm",
-                  "unarmedAutomaticCalculation": true,
-                  "usage": "toggled",
-                  "usesType": "magazine",
-                  "weaponSkill": "Archery",
-                  "weaponType": "assaultRifle"
-                },
-                "type": "cyberware",
-                "folder": null,
-                "sort": 0,
-                "ownership": {
-                  "default": 0
-                }
-              },
-              {
-                "_id": "cprAddImp0008100",
                 "effects": [],
                 "flags": {
                   "cyberpunk-red-core": {
@@ -1448,7 +1276,94 @@
                 "default": 0
               }
             },
-            "options": []
+            "options": [
+              {
+                "_id": "cprAddImp0008000",
+                "effects": [],
+                "flags": {
+                  "cyberpunk-red-core": {
+                    "_migration": {
+                      "current": 33,
+                      "previous": "24"
+                    }
+                  },
+                  "cpr-addenda": {
+                    "pktGroup": "cost"
+                  }
+                },
+                "img": "systems/cyberpunk-red-core/icons/compendium/black-chrome/reinforced-cyberleg.svg",
+                "name": "Усиление киберноги",
+                "system": {
+                  "ammoVariety": [],
+                  "attackmod": 0,
+                  "brand": "",
+                  "canIgnoreArmor": true,
+                  "concealable": {
+                    "concealable": false,
+                    "isConcealed": false
+                  },
+                  "core": false,
+                  "damage": "1d6",
+                  "description": {
+                    "value": "Требует киберногу. Киберногу, в которую установлено это улучшение, невозможно сломать."
+                  },
+                  "dvTable": "",
+                  "favorite": false,
+                  "fireModes": {
+                    "autoFire": 0,
+                    "suppressiveFire": false
+                  },
+                  "humanityLoss": {
+                    "roll": "0",
+                    "static": 0
+                  },
+                  "ignoreArmorPercent": 50,
+                  "installLocation": "clinic",
+                  "installedItems": {
+                    "allowed": false,
+                    "allowedTypes": [
+                      "itemUpgrade",
+                      "ammo"
+                    ],
+                    "list": [],
+                    "slots": 3,
+                    "usedSlots": 0
+                  },
+                  "isElectronic": true,
+                  "isFoundational": false,
+                  "isRanged": false,
+                  "isWeapon": false,
+                  "magazine": {
+                    "ammoData": null,
+                    "max": 0,
+                    "value": 0
+                  },
+                  "price": {
+                    "market": 1000
+                  },
+                  "providesHardening": false,
+                  "revealed": true,
+                  "rof": 1,
+                  "size": 1,
+                  "source": {
+                    "book": "BC",
+                    "page": 21
+                  },
+                  "type": "cyberLeg",
+                  "unarmedAutomaticCalculation": true,
+                  "usage": "toggled",
+                  "usesType": "magazine",
+                  "weaponSkill": "Archery",
+                  "weaponType": "assaultRifle"
+                },
+                "type": "cyberware",
+                "folder": null,
+                "sort": 0,
+                "ownership": {
+                  "default": 0
+                }
+              }
+            ]
           },
           {
             "item": {
@@ -1537,7 +1452,94 @@
                 "default": 0
               }
             },
-            "options": []
+            "options": [
+              {
+                "_id": "cprAddImp0008100",
+                "effects": [],
+                "flags": {
+                  "cyberpunk-red-core": {
+                    "_migration": {
+                      "current": 33,
+                      "previous": "24"
+                    }
+                  },
+                  "cpr-addenda": {
+                    "pktGroup": "cost"
+                  }
+                },
+                "img": "systems/cyberpunk-red-core/icons/compendium/black-chrome/reinforced-cyberleg.svg",
+                "name": "Усиление киберноги",
+                "system": {
+                  "ammoVariety": [],
+                  "attackmod": 0,
+                  "brand": "",
+                  "canIgnoreArmor": true,
+                  "concealable": {
+                    "concealable": false,
+                    "isConcealed": false
+                  },
+                  "core": false,
+                  "damage": "1d6",
+                  "description": {
+                    "value": "Требует киберногу. Киберногу, в которую установлено это улучшение, невозможно сломать."
+                  },
+                  "dvTable": "",
+                  "favorite": false,
+                  "fireModes": {
+                    "autoFire": 0,
+                    "suppressiveFire": false
+                  },
+                  "humanityLoss": {
+                    "roll": "0",
+                    "static": 0
+                  },
+                  "ignoreArmorPercent": 50,
+                  "installLocation": "clinic",
+                  "installedItems": {
+                    "allowed": false,
+                    "allowedTypes": [
+                      "itemUpgrade",
+                      "ammo"
+                    ],
+                    "list": [],
+                    "slots": 3,
+                    "usedSlots": 0
+                  },
+                  "isElectronic": true,
+                  "isFoundational": false,
+                  "isRanged": false,
+                  "isWeapon": false,
+                  "magazine": {
+                    "ammoData": null,
+                    "max": 0,
+                    "value": 0
+                  },
+                  "price": {
+                    "market": 1000
+                  },
+                  "providesHardening": false,
+                  "revealed": true,
+                  "rof": 1,
+                  "size": 1,
+                  "source": {
+                    "book": "BC",
+                    "page": 21
+                  },
+                  "type": "cyberLeg",
+                  "unarmedAutomaticCalculation": true,
+                  "usage": "toggled",
+                  "usesType": "magazine",
+                  "weaponSkill": "Archery",
+                  "weaponType": "assaultRifle"
+                },
+                "type": "cyberware",
+                "folder": null,
+                "sort": 0,
+                "ownership": {
+                  "default": 0
+                }
+              }
+            ]
           },
           {
             "item": {
