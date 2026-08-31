@@ -20,6 +20,9 @@
                     "current": 33,
                     "previous": "24"
                   }
+                },
+                "cpr-addenda": {
+                  "pktGroup": "free"
                 }
               },
               "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/cyberarm.svg",
@@ -104,93 +107,9 @@
                       "current": 33,
                       "previous": "24"
                     }
-                  }
-                },
-                "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/popup_grenade_launcher.svg",
-                "name": "Выкидной гранатомёт",
-                "system": {
-                  "ammoVariety": [
-                    "grenade"
-                  ],
-                  "attackmod": 0,
-                  "brand": "",
-                  "canIgnoreArmor": false,
-                  "concealable": {
-                    "concealable": true,
-                    "isConcealed": false
                   },
-                  "core": false,
-                  "critFailEffect": "jammed",
-                  "damage": "6d6",
-                  "description": {
-                    "value": "Скрытый однозарядный гранатомёт. Во время использования кисть не может ничего держать."
-                  },
-                  "dvTable": "DV Grenade Launcher",
-                  "favorite": false,
-                  "fireModes": {
-                    "autoFire": 0,
-                    "suppressiveFire": false
-                  },
-                  "humanityLoss": {
-                    "roll": "0",
-                    "static": 0
-                  },
-                  "ignoreArmorPercent": 0,
-                  "ignoreBelowSP": 0,
-                  "installLocation": "clinic",
-                  "installedItems": {
-                    "allowed": true,
-                    "allowedTypes": [
-                      "itemUpgrade",
-                      "ammo"
-                    ],
-                    "list": [],
-                    "slots": 2,
-                    "usedSlots": 0
-                  },
-                  "isElectronic": true,
-                  "isFoundational": false,
-                  "isRanged": true,
-                  "isWeapon": true,
-                  "magazine": {
-                    "ammoData": null,
-                    "max": 1,
-                    "value": 0
-                  },
-                  "price": {
-                    "market": 500
-                  },
-                  "providesHardening": false,
-                  "revealed": true,
-                  "rof": 1,
-                  "size": 2,
-                  "source": {
-                    "book": "Core",
-                    "page": 365
-                  },
-                  "type": "cyberArm",
-                  "unarmedAutomaticCalculation": true,
-                  "usage": "toggled",
-                  "usesType": "magazine",
-                  "weaponSkill": "Heavy Weapons",
-                  "weaponType": "grenadeLauncher"
-                },
-                "type": "cyberware",
-                "folder": null,
-                "sort": 0,
-                "ownership": {
-                  "default": 0
-                }
-              },
-              {
-                "_id": "cprAddImp0003500",
-                "effects": [],
-                "flags": {
-                  "cyberpunk-red-core": {
-                    "_migration": {
-                      "current": 33,
-                      "previous": "24"
-                    }
+                  "cpr-addenda": {
+                    "pktGroup": "cost"
                   }
                 },
                 "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/popup_grenade_launcher.svg",
@@ -281,6 +200,9 @@
                     "current": 33,
                     "previous": "24"
                   }
+                },
+                "cpr-addenda": {
+                  "pktGroup": "free"
                 }
               },
               "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/cyberarm.svg",
@@ -355,7 +277,98 @@
                 "default": 0
               }
             },
-            "options": []
+            "options": [
+              {
+                "_id": "cprAddImp0003500",
+                "effects": [],
+                "flags": {
+                  "cyberpunk-red-core": {
+                    "_migration": {
+                      "current": 33,
+                      "previous": "24"
+                    }
+                  },
+                  "cpr-addenda": {
+                    "pktGroup": "cost"
+                  }
+                },
+                "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/popup_grenade_launcher.svg",
+                "name": "Выкидной гранатомёт",
+                "system": {
+                  "ammoVariety": [
+                    "grenade"
+                  ],
+                  "attackmod": 0,
+                  "brand": "",
+                  "canIgnoreArmor": false,
+                  "concealable": {
+                    "concealable": true,
+                    "isConcealed": false
+                  },
+                  "core": false,
+                  "critFailEffect": "jammed",
+                  "damage": "6d6",
+                  "description": {
+                    "value": "Скрытый однозарядный гранатомёт. Во время использования кисть не может ничего держать."
+                  },
+                  "dvTable": "DV Grenade Launcher",
+                  "favorite": false,
+                  "fireModes": {
+                    "autoFire": 0,
+                    "suppressiveFire": false
+                  },
+                  "humanityLoss": {
+                    "roll": "0",
+                    "static": 0
+                  },
+                  "ignoreArmorPercent": 0,
+                  "ignoreBelowSP": 0,
+                  "installLocation": "clinic",
+                  "installedItems": {
+                    "allowed": true,
+                    "allowedTypes": [
+                      "itemUpgrade",
+                      "ammo"
+                    ],
+                    "list": [],
+                    "slots": 2,
+                    "usedSlots": 0
+                  },
+                  "isElectronic": true,
+                  "isFoundational": false,
+                  "isRanged": true,
+                  "isWeapon": true,
+                  "magazine": {
+                    "ammoData": null,
+                    "max": 1,
+                    "value": 0
+                  },
+                  "price": {
+                    "market": 500
+                  },
+                  "providesHardening": false,
+                  "revealed": true,
+                  "rof": 1,
+                  "size": 2,
+                  "source": {
+                    "book": "Core",
+                    "page": 365
+                  },
+                  "type": "cyberArm",
+                  "unarmedAutomaticCalculation": true,
+                  "usage": "toggled",
+                  "usesType": "magazine",
+                  "weaponSkill": "Heavy Weapons",
+                  "weaponType": "grenadeLauncher"
+                },
+                "type": "cyberware",
+                "folder": null,
+                "sort": 0,
+                "ownership": {
+                  "default": 0
+                }
+              }
+            ]
           },
           {
             "item": {
@@ -367,6 +380,9 @@
                     "current": 33,
                     "previous": "24"
                   }
+                },
+                "cpr-addenda": {
+                  "pktGroup": "free"
                 }
               },
               "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/cyberaudio_suite.svg",
@@ -453,6 +469,9 @@
                       "current": 33,
                       "previous": "24"
                     }
+                  },
+                  "cpr-addenda": {
+                    "pktGroup": "cost"
                   }
                 },
                 "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/amplified_hearing.svg",
@@ -535,6 +554,9 @@
                       "current": 33,
                       "previous": "24"
                     }
+                  },
+                  "cpr-addenda": {
+                    "pktGroup": "cost"
                   }
                 },
                 "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/radio_communicator.svg",
@@ -620,6 +642,9 @@
                     "current": 33,
                     "previous": "24"
                   }
+                },
+                "cpr-addenda": {
+                  "pktGroup": "free"
                 }
               },
               "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/cybereye.svg",
@@ -704,6 +729,9 @@
                       "current": 33,
                       "previous": "24"
                     }
+                  },
+                  "cpr-addenda": {
+                    "pktGroup": "cost"
                   }
                 },
                 "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/lowlight_ir_uv.svg",
@@ -789,6 +817,9 @@
                     "current": 33,
                     "previous": "24"
                   }
+                },
+                "cpr-addenda": {
+                  "pktGroup": "free"
                 }
               },
               "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/cybereye.svg",
@@ -875,6 +906,9 @@
                     "current": 33,
                     "previous": "24"
                   }
+                },
+                "cpr-addenda": {
+                  "pktGroup": "free"
                 }
               },
               "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/cyberleg.svg",
@@ -961,6 +995,9 @@
                     "current": 33,
                     "previous": "24"
                   }
+                },
+                "cpr-addenda": {
+                  "pktGroup": "free"
                 }
               },
               "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/cyberleg.svg",
@@ -1049,6 +1086,9 @@
                     "current": 33,
                     "previous": "24"
                   }
+                },
+                "cpr-addenda": {
+                  "pktGroup": "free"
                 }
               },
               "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/implanted_linearframe_sigma.svg",
@@ -1135,6 +1175,9 @@
                     "current": 33,
                     "previous": "24"
                   }
+                },
+                "cpr-addenda": {
+                  "pktGroup": "free"
                 }
               },
               "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/neural_link.svg",
@@ -1221,7 +1264,11 @@
             "folder": null,
             "sort": 0,
             "effects": [],
-            "flags": {},
+            "flags": {
+              "cpr-addenda": {
+                "pktGroup": "free"
+              }
+            },
             "system": {
               "ammoVariety": [],
               "attackmod": 0,
@@ -1296,7 +1343,11 @@
             "folder": null,
             "sort": 0,
             "effects": [],
-            "flags": {},
+            "flags": {
+              "cpr-addenda": {
+                "pktGroup": "cost"
+              }
+            },
             "system": {
               "ammoVariety": [],
               "attackmod": 0,
@@ -1372,6 +1423,9 @@
                   "current": 33,
                   "previous": "24"
                 }
+              },
+              "cpr-addenda": {
+                "pktGroup": "cost"
               }
             },
             "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/subdermal_armor.svg",
@@ -1454,6 +1508,9 @@
                   "current": 33,
                   "previous": "24"
                 }
+              },
+              "cpr-addenda": {
+                "pktGroup": "cost"
               }
             },
             "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/radar_sonar_implant.svg",
@@ -1535,7 +1592,11 @@
             "folder": null,
             "sort": 0,
             "effects": [],
-            "flags": {},
+            "flags": {
+              "cpr-addenda": {
+                "pktGroup": "cost"
+              }
+            },
             "system": {
               "ammoVariety": [],
               "attackmod": 0,

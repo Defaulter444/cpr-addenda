@@ -190,5 +190,243 @@ function expect(ok, message) {
   console.log(`Корпусов: ${frames}, имплантов в комплектах: ${implants}`);
 }
 
+/* ------------------------------------------------------------------ */
+
+console.log("Мастер установки: разбор комплекта");
+{
+  // Окно только рисует то, что посчитали эти функции, поэтому проверяем их, а
+  // не разметку. Заглушки Foundry нужны лишь для экранирования имён.
+  globalThis.Handlebars = { escapeExpression: (t) => String(t) };
+  globalThis.game = {
+    i18n: {
+      localize: (key) => key,
+      format: (key, data) => `${key}(${JSON.stringify(data)})`,
+    },
+  };
+
+  const wizard = await import(
+    pathToFileURL(path.join(prepare(), "pkt-wizard.mjs")).href
+  );
+
+  const tagged = (name, group, over = {}) => ({
+    name,
+    flags: { [MODULE_ID]: { pktGroup: group } },
+    system: { size: 1, ...over },
+  });
+
+  // --- группа импланта ---
+  expect(wizard.groupOf(tagged("х", "cost")) === "cost", "метка «с ПЧ» не прочиталась");
+  expect(wizard.groupOf(tagged("х", "free")) === "free", "метка «без ПЧ» не прочиталась");
+  // Непомеченный имплант считаем бесплатным: столбец «без ПЧ» в документе
+  // больше, и ошибка в эту сторону не завышает списанную человечность.
+  expect(wizard.groupOf({ name: "х" }) === "free", "имплант без метки признан платным");
+  expect(wizard.groupOf(undefined) === "free", "undefined уронил разбор группы");
+
+  // --- склейка одинаковых ---
+  const counted = wizard.countByName([
+    tagged("Киберрука", "free"),
+    tagged("Киберрука", "free"),
+    tagged("Нейролинк", "free"),
+  ]);
+  expect(counted.length === 2, `строк вышло ${counted.length}, а имён два`);
+  expect(counted[0].name === "Киберрука" && counted[0].count === 2,
+    "две киберруки не сложились в «×2»");
+  expect(counted[1].count === 1, "нейролинк размножился");
+  expect(wizard.countByName([]).length === 0, "пустой список дал строки");
+  expect(wizard.countByName(undefined).length === 0, "undefined уронил склейку");
+
+  // --- разбор целого комплекта ---
+  const kit = {
+    foundations: [
+      {
+        item: tagged("Киберрука", "free", { installedItems: { slots: 4 } }),
+        options: [tagged("Выкидное оружие", "cost")],
+      },
+      {
+        item: tagged("Киберрука", "free", { installedItems: { slots: 4 } }),
+        options: [],
+      },
+      {
+        item: tagged("Кибернога", "free", { installedItems: { slots: 3 } }),
+        options: [tagged("Цепкая стопа", "cost")],
+      },
+    ],
+    carried: [tagged("Подкожная броня", "cost"), tagged("Киберчереп", "free")],
+  };
+  const view = wizard.summariseKit(kit);
+
+  expect(view.total === 7, `имплантов насчитано ${view.total}, а в комплекте 7`);
+  const freeCount = view.free.reduce((s, e) => s + e.count, 0);
+  const costCount = view.cost.reduce((s, e) => s + e.count, 0);
+  expect(freeCount === 4, `без ПЧ ${freeCount}, а должно 4 (2 руки, нога, череп)`);
+  expect(costCount === 3, `с ПЧ ${costCount}, а должно 3`);
+  expect(freeCount + costCount === view.total, "часть имплантов не попала ни в один список");
+
+  // Слоты видно до установки, а не после: занятое место в фундаменте — это то,
+  // куда игрок уже не поставит своё.
+  expect(view.places.length === 3, `фундаментов ${view.places.length}, а в комплекте 3`);
+  expect(view.places[0].used === 1 && view.places[0].slots === 4,
+    `первая рука: занято ${view.places[0].used} из ${view.places[0].slots}`);
+  expect(view.places[1].used === 0, "вторая рука показана занятой");
+  expect(view.frame.used === 2, `в корпусе занято ${view.frame.used}, а лежит два импланта`);
+
+  // --- разметка шагов ---
+  const frame = {
+    name: "МИЛИТЕХ «ЗАТМЕНИЕ»",
+    system: { humanityLoss: { roll: "19d6 + ceil(2d6/2)", static: 67 } },
+  };
+
+  const confirm = wizard.stepConfirm(frame, view);
+  expect(confirm.includes("19d6"), "на первом шаге не показана формула потери");
+  expect(confirm.includes("67"), "на первом шаге не показано среднее значение");
+
+  const free = wizard.stepFree(view);
+  expect(free.includes("Киберрука"), "в списке без ПЧ нет киберруки");
+  expect(!free.includes("Выкидное оружие"), "в список без ПЧ попал платный имплант");
+
+  // На третьем шаге видно, куда встанет каждый платный имплант: ради этого
+  // шаг и заведён — плоский список ничего не объясняет.
+  const cost = wizard.stepCost(frame, view, null);
+  expect(cost.includes("Выкидное оружие"), "в раскладке нет выкидного оружия");
+  expect(cost.includes("Киберрука"), "не показано, в какой фундамент оно встаёт");
+  expect(!cost.includes("pkt.wizard.rolled"), "результат броска показан до броска");
+  expect(
+    !cost.includes("<strong>Кибернога</strong> <span class=\"slots\">pkt.wizard.slots") ||
+      cost.indexOf("Цепкая стопа") > cost.indexOf("Кибернога"),
+    "опция показана не под своим фундаментом"
+  );
+
+  const rolled = wizard.stepCost(frame, view, { type: "roll", value: 71 });
+  expect(rolled.includes("71"), "результат броска не показан");
+  expect(rolled.includes("pkt.wizard.rolled"), "бросок выдан за среднее значение");
+  const averaged = wizard.stepCost(frame, view, { type: "static", value: 67 });
+  expect(averaged.includes("pkt.wizard.tookAverage"), "среднее выдано за бросок");
+
+  const summary = wizard.stepSummary(frame, view, { type: "roll", value: 71 });
+  for (const who of ["Киберрука", "Выкидное оружие", "Подкожная броня"]) {
+    expect(summary.includes(who), `в итоге нет «${who}»`);
+  }
+  expect(summary.includes("71"), "в итоге не показана списанная человечность");
+  expect(
+    wizard.stepSummary(frame, view, { type: "none", value: 0 })
+      .includes("pkt.wizard.summary.noHumanity"),
+    "отказ от списания человечности не отражён в итоге"
+  );
+
+  // Пустой комплект не должен ронять разбор: корпус без опций бывает.
+  const bare = wizard.summariseKit({ foundations: [], carried: [] });
+  expect(bare.total === 0 && bare.free.length === 0, "пустой комплект разобран неверно");
+  expect(wizard.summariseKit(undefined).total === 0, "undefined уронил разбор комплекта");
+}
+
+console.log("Мастер установки: строки переведены");
+{
+  const ru = JSON.parse(
+    fs.readFileSync(path.join(HERE, "..", "lang", "ru.json"), "utf-8")
+  );
+  const en = JSON.parse(
+    fs.readFileSync(path.join(HERE, "..", "lang", "en.json"), "utf-8")
+  );
+  const source = fs.readFileSync(path.join(SCRIPTS, "pkt-wizard.js"), "utf-8");
+  const used = new Set(
+    [...source.matchAll(/localize\(\s*"(pkt\.[a-zA-Z.]+)"/g)].map((m) => m[1])
+  );
+  expect(used.size > 20, `ключей найдено подозрительно мало: ${used.size}`);
+  for (const key of used) {
+    expect(`CPRADDENDA.${key}` in ru, `нет русской строки CPRADDENDA.${key}`);
+    expect(`CPRADDENDA.${key}` in en, `нет английской строки CPRADDENDA.${key}`);
+  }
+  // Отмена убирает корпус с листа, и об этом надо сказать вслух.
+  for (const key of ["CPRADDENDA.pkt.cancelled"]) {
+    expect(key in ru && key in en, `нет строки ${key}`);
+  }
+}
+
+console.log("Парные опции расходятся по парным фундаментам");
+{
+  // Документ пишет «Цепкая Подошва х2» на две киберноги, имея в виду по одной
+  // на каждую. Раньше обе валились в первую ногу, пока в ней хватало слотов.
+  //
+  // Сравниваем одноимённые опции: разные по имени раскладываются по-разному и
+  // законно. У «Мудреца», скажем, обе киберруки получают по две кибердеки, но
+  // все четыре улучшения к ним уходят в одну руку — во второй после дек уже
+  // нет свободных слотов. Это не перекос, а вместимость, поэтому неравенство
+  // прощается ровно тогда, когда менее загруженному фундаменту некуда ставить.
+  let checked = 0;
+  for (const file of fs.readdirSync(SOURCES)) {
+    const doc = JSON.parse(fs.readFileSync(path.join(SOURCES, file), "utf-8"));
+    const kit = doc.flags?.[MODULE_ID]?.pktKit;
+    if (!kit) continue;
+
+    const byType = new Map();
+    for (const entry of kit.foundations) {
+      const type = entry.item.system.type;
+      if (!byType.has(type)) byType.set(type, []);
+      byType.get(type).push(entry);
+    }
+
+    for (const [type, group] of byType) {
+      if (group.length < 2) continue;
+
+      const room = group.map(
+        (e) =>
+          e.item.system.installedItems.slots -
+          e.options.reduce((sum, o) => sum + (o.system.size ?? 1), 0)
+      );
+
+      const names = new Set(group.flatMap((e) => e.options.map((o) => o.name)));
+      for (const name of names) {
+        const counts = group.map(
+          (e) => e.options.filter((o) => o.name === name).length
+        );
+        const spread = Math.max(...counts) - Math.min(...counts);
+        if (spread <= 1) {
+          checked += 1;
+          continue;
+        }
+        // Перекос допустим, только если недогруженным ставить было некуда.
+        const size = group
+          .flatMap((e) => e.options)
+          .find((o) => o.name === name).system.size ?? 1;
+        const lightest = counts.indexOf(Math.min(...counts));
+        expect(
+          room[lightest] < size,
+          `«${doc.name}», ${type}, «${name}»: разложено как ${counts.join("/")}, ` +
+            `а в наименее занятом фундаменте оставалось ${room[lightest]} слотов`
+        );
+        checked += 1;
+      }
+    }
+  }
+  expect(checked > 0, "не нашлось ни одного корпуса с парными фундаментами");
+  console.log(`  проверено наборов одноимённых опций: ${checked}`);
+}
+
+console.log("У каждого импланта комплекта есть группа человечности");
+{
+  let tagged = 0;
+  let untagged = [];
+  for (const file of fs.readdirSync(SOURCES)) {
+    const doc = JSON.parse(fs.readFileSync(path.join(SOURCES, file), "utf-8"));
+    const kit = doc.flags?.[MODULE_ID]?.pktKit;
+    if (!kit) continue;
+    const all = [
+      ...kit.foundations.flatMap((f) => [f.item, ...f.options]),
+      ...kit.carried,
+    ];
+    for (const item of all) {
+      const group = item.flags?.[MODULE_ID]?.pktGroup;
+      if (group === "free" || group === "cost") tagged += 1;
+      else untagged.push(`${doc.name}: ${item.name}`);
+    }
+  }
+  expect(
+    untagged.length === 0,
+    `без группы человечности: ${untagged.slice(0, 5).join("; ")}`
+  );
+  expect(tagged > 200, `помеченных имплантов ${tagged} — подозрительно мало`);
+  console.log(`  помечено имплантов: ${tagged}`);
+}
+
 console.log(`\nПроверок выполнено: ${checks}, провалов: ${failures}`);
 process.exit(failures ? 1 : 0);

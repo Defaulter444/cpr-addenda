@@ -81,3 +81,67 @@
   width: 100%;
   margin: 0.5rem 0;
 }
+
+/* Мастер установки корпуса ПКТ.
+   Окно показывает два десятка имплантов с вложенностью, поэтому списки здесь
+   плотнее обычного, а служебные пометки — слоты, «без ПЧ» — приглушены, чтобы
+   не спорить с названиями. */
+.cpr-addenda-pkt-wizard h3 {
+  margin: 0.7rem 0 0.2rem;
+  font-size: 1rem;
+  border-bottom: 1px solid var(--color-border-light-tertiary, #bbb);
+}
+
+.cpr-addenda-pkt-list,
+.cpr-addenda-pkt-tree {
+  margin: 0.2rem 0 0.4rem;
+  padding-left: 1.1rem;
+  line-height: 1.35;
+}
+
+.cpr-addenda-pkt-tree ul {
+  margin: 0.1rem 0 0.3rem;
+  padding-left: 1.1rem;
+}
+
+.cpr-addenda-pkt-wizard .count,
+.cpr-addenda-pkt-wizard .slots,
+.cpr-addenda-pkt-wizard .free {
+  opacity: 0.7;
+  font-size: 0.85em;
+}
+
+.cpr-addenda-pkt-facts {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.15rem 0.6rem;
+  margin: 0.5rem 0;
+}
+
+.cpr-addenda-pkt-facts dt {
+  font-weight: bold;
+}
+
+.cpr-addenda-pkt-facts dd {
+  margin: 0;
+}
+
+.cpr-addenda-pkt-warn,
+.cpr-addenda-pkt-note {
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+.cpr-addenda-pkt-done {
+  margin-top: 0.4rem;
+  padding: 0.25rem 0.4rem;
+  border-left: 3px solid var(--color-border-highlight, #ff6400);
+}
+
+/* Кнопок на шаге бывает четыре — без этого подписи вроде «Бросить 19d6 +
+   ceil(2d6/2)» режутся на середине. */
+.cpr-addenda-pkt-dialog .dialog-buttons button {
+  flex: 1 1 auto;
+  white-space: nowrap;
+  padding: 0 0.4rem;
+}

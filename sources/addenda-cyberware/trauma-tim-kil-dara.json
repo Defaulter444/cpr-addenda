@@ -20,6 +20,9 @@
                     "current": 33,
                     "previous": "24"
                   }
+                },
+                "cpr-addenda": {
+                  "pktGroup": "free"
                 }
               },
               "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/cyberarm.svg",
@@ -106,6 +109,9 @@
                       "current": 33,
                       "previous": "24"
                     }
+                  },
+                  "cpr-addenda": {
+                    "pktGroup": "cost"
                   }
                 },
                 "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/medscanner.svg",
@@ -180,90 +186,6 @@
                 }
               },
               {
-                "_id": "cprAddImp0025900",
-                "effects": [
-                  "BqEOeo2lOAM4tOGG"
-                ],
-                "flags": {
-                  "cyberpunk-red-core": {
-                    "_migration": {
-                      "current": 33,
-                      "previous": "24"
-                    }
-                  }
-                },
-                "img": "systems/cyberpunk-red-core/icons/compendium/the_12_days_of_cybermas/raven_microcybernetics_microwaldo.svg",
-                "name": "МикроУолдо",
-                "system": {
-                  "ammoVariety": [],
-                  "attackmod": 0,
-                  "brand": "Raven Microcybernetics",
-                  "canIgnoreArmor": true,
-                  "concealable": {
-                    "concealable": false,
-                    "isConcealed": false
-                  },
-                  "core": false,
-                  "damage": "1d6",
-                  "description": {
-                    "value": "Установленный в запястье набор инструментов и датчиков, упрощающий проведение операций. +1 к проверкам хирургии медтеха. Занимает один слот расширения киберруки и один слот расширений нейролинка."
-                  },
-                  "dvTable": "",
-                  "favorite": false,
-                  "fireModes": {
-                    "autoFire": 0,
-                    "suppressiveFire": false
-                  },
-                  "humanityLoss": {
-                    "roll": "0",
-                    "static": 0
-                  },
-                  "ignoreArmorPercent": 50,
-                  "installLocation": "clinic",
-                  "installedItems": {
-                    "allowed": false,
-                    "allowedTypes": [
-                      "itemUpgrade"
-                    ],
-                    "list": [],
-                    "slots": 0,
-                    "usedSlots": 0
-                  },
-                  "isElectronic": true,
-                  "isFoundational": false,
-                  "isRanged": false,
-                  "isWeapon": false,
-                  "magazine": {
-                    "ammoData": null,
-                    "max": 0,
-                    "value": 0
-                  },
-                  "price": {
-                    "market": 1000
-                  },
-                  "providesHardening": false,
-                  "revealed": true,
-                  "rof": 1,
-                  "size": 1,
-                  "source": {
-                    "book": "12DoC",
-                    "page": 5
-                  },
-                  "type": "cyberArm",
-                  "unarmedAutomaticCalculation": true,
-                  "usage": "installed",
-                  "usesType": "magazine",
-                  "weaponSkill": "",
-                  "weaponType": ""
-                },
-                "type": "cyberware",
-                "folder": null,
-                "sort": 0,
-                "ownership": {
-                  "default": 0
-                }
-              },
-              {
                 "_id": "cprAddImp0026100",
                 "effects": [],
                 "flags": {
@@ -272,6 +194,9 @@
                       "current": 33,
                       "previous": "24"
                     }
+                  },
+                  "cpr-addenda": {
+                    "pktGroup": "cost"
                   }
                 },
                 "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/tool_hand.svg",
@@ -357,6 +282,9 @@
                     "current": 33,
                     "previous": "24"
                   }
+                },
+                "cpr-addenda": {
+                  "pktGroup": "free"
                 }
               },
               "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/cyberarm.svg",
@@ -433,6 +361,93 @@
             },
             "options": [
               {
+                "_id": "cprAddImp0025900",
+                "effects": [
+                  "BqEOeo2lOAM4tOGG"
+                ],
+                "flags": {
+                  "cyberpunk-red-core": {
+                    "_migration": {
+                      "current": 33,
+                      "previous": "24"
+                    }
+                  },
+                  "cpr-addenda": {
+                    "pktGroup": "cost"
+                  }
+                },
+                "img": "systems/cyberpunk-red-core/icons/compendium/the_12_days_of_cybermas/raven_microcybernetics_microwaldo.svg",
+                "name": "МикроУолдо",
+                "system": {
+                  "ammoVariety": [],
+                  "attackmod": 0,
+                  "brand": "Raven Microcybernetics",
+                  "canIgnoreArmor": true,
+                  "concealable": {
+                    "concealable": false,
+                    "isConcealed": false
+                  },
+                  "core": false,
+                  "damage": "1d6",
+                  "description": {
+                    "value": "Установленный в запястье набор инструментов и датчиков, упрощающий проведение операций. +1 к проверкам хирургии медтеха. Занимает один слот расширения киберруки и один слот расширений нейролинка."
+                  },
+                  "dvTable": "",
+                  "favorite": false,
+                  "fireModes": {
+                    "autoFire": 0,
+                    "suppressiveFire": false
+                  },
+                  "humanityLoss": {
+                    "roll": "0",
+                    "static": 0
+                  },
+                  "ignoreArmorPercent": 50,
+                  "installLocation": "clinic",
+                  "installedItems": {
+                    "allowed": false,
+                    "allowedTypes": [
+                      "itemUpgrade"
+                    ],
+                    "list": [],
+                    "slots": 0,
+                    "usedSlots": 0
+                  },
+                  "isElectronic": true,
+                  "isFoundational": false,
+                  "isRanged": false,
+                  "isWeapon": false,
+                  "magazine": {
+                    "ammoData": null,
+                    "max": 0,
+                    "value": 0
+                  },
+                  "price": {
+                    "market": 1000
+                  },
+                  "providesHardening": false,
+                  "revealed": true,
+                  "rof": 1,
+                  "size": 1,
+                  "source": {
+                    "book": "12DoC",
+                    "page": 5
+                  },
+                  "type": "cyberArm",
+                  "unarmedAutomaticCalculation": true,
+                  "usage": "installed",
+                  "usesType": "magazine",
+                  "weaponSkill": "",
+                  "weaponType": ""
+                },
+                "type": "cyberware",
+                "folder": null,
+                "sort": 0,
+                "ownership": {
+                  "default": 0
+                }
+              },
+              {
                 "_id": "cprAddImp0026200",
                 "effects": [
                   "tVc7bM54Ej63Yv2E"
@@ -443,6 +458,9 @@
                       "current": 33,
                       "previous": "24"
                     }
+                  },
+                  "cpr-addenda": {
+                    "pktGroup": "cost"
                   }
                 },
                 "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/techscanner.svg",
@@ -528,6 +546,9 @@
                     "current": 33,
                     "previous": "24"
                   }
+                },
+                "cpr-addenda": {
+                  "pktGroup": "free"
                 }
               },
               "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/cyberaudio_suite.svg",
@@ -614,6 +635,9 @@
                       "current": 33,
                       "previous": "24"
                     }
+                  },
+                  "cpr-addenda": {
+                    "pktGroup": "cost"
                   }
                 },
                 "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/amplified_hearing.svg",
@@ -696,6 +720,9 @@
                       "current": 33,
                       "previous": "24"
                     }
+                  },
+                  "cpr-addenda": {
+                    "pktGroup": "cost"
                   }
                 },
                 "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/radio_communicator.svg",
@@ -781,6 +808,9 @@
                     "current": 33,
                     "previous": "24"
                   }
+                },
+                "cpr-addenda": {
+                  "pktGroup": "free"
                 }
               },
               "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/cyberleg.svg",
@@ -867,6 +897,9 @@
                     "current": 33,
                     "previous": "24"
                   }
+                },
+                "cpr-addenda": {
+                  "pktGroup": "free"
                 }
               },
               "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/cyberleg.svg",
@@ -955,6 +988,9 @@
                     "current": 33,
                     "previous": "24"
                   }
+                },
+                "cpr-addenda": {
+                  "pktGroup": "free"
                 }
               },
               "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/implanted_linearframe_sigma.svg",
@@ -1041,6 +1077,9 @@
                     "current": 33,
                     "previous": "24"
                   }
+                },
+                "cpr-addenda": {
+                  "pktGroup": "free"
                 }
               },
               "img": "systems/cyberpunk-red-core/icons/compendium/the_12_days_of_cybermas/kiroshi_monovision.svg",
@@ -1125,6 +1164,9 @@
                       "current": 33,
                       "previous": "24"
                     }
+                  },
+                  "cpr-addenda": {
+                    "pktGroup": "cost"
                   }
                 },
                 "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/chyron.svg",
@@ -1209,6 +1251,9 @@
                       "current": 33,
                       "previous": "24"
                     }
+                  },
+                  "cpr-addenda": {
+                    "pktGroup": "cost"
                   }
                 },
                 "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/image_enhance.svg",
@@ -1291,6 +1336,9 @@
                       "current": 33,
                       "previous": "24"
                     }
+                  },
+                  "cpr-addenda": {
+                    "pktGroup": "cost"
                   }
                 },
                 "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/lowlight_ir_uv.svg",
@@ -1373,6 +1421,9 @@
                       "current": 33,
                       "previous": "24"
                     }
+                  },
+                  "cpr-addenda": {
+                    "pktGroup": "cost"
                   }
                 },
                 "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/microoptics.svg",
@@ -1458,6 +1509,9 @@
                     "current": 33,
                     "previous": "24"
                   }
+                },
+                "cpr-addenda": {
+                  "pktGroup": "free"
                 }
               },
               "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/neural_link.svg",
@@ -1544,7 +1598,11 @@
             "folder": null,
             "sort": 0,
             "effects": [],
-            "flags": {},
+            "flags": {
+              "cpr-addenda": {
+                "pktGroup": "free"
+              }
+            },
             "system": {
               "ammoVariety": [],
               "attackmod": 0,
@@ -1619,7 +1677,11 @@
             "folder": null,
             "sort": 0,
             "effects": [],
-            "flags": {},
+            "flags": {
+              "cpr-addenda": {
+                "pktGroup": "cost"
+              }
+            },
             "system": {
               "ammoVariety": [],
               "attackmod": 0,

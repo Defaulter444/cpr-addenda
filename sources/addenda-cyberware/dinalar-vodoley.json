@@ -20,6 +20,9 @@
                     "current": 33,
                     "previous": "24"
                   }
+                },
+                "cpr-addenda": {
+                  "pktGroup": "free"
                 }
               },
               "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/cyberarm.svg",
@@ -106,6 +109,9 @@
                     "current": 33,
                     "previous": "24"
                   }
+                },
+                "cpr-addenda": {
+                  "pktGroup": "free"
                 }
               },
               "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/cyberarm.svg",
@@ -192,6 +198,9 @@
                     "current": 33,
                     "previous": "24"
                   }
+                },
+                "cpr-addenda": {
+                  "pktGroup": "free"
                 }
               },
               "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/cyberaudio_suite.svg",
@@ -276,6 +285,9 @@
                       "current": 33,
                       "previous": "24"
                     }
+                  },
+                  "cpr-addenda": {
+                    "pktGroup": "cost"
                   }
                 },
                 "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/radio_communicator.svg",
@@ -361,6 +373,9 @@
                     "current": 33,
                     "previous": "24"
                   }
+                },
+                "cpr-addenda": {
+                  "pktGroup": "free"
                 }
               },
               "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/cybereye.svg",
@@ -445,6 +460,9 @@
                       "current": 33,
                       "previous": "24"
                     }
+                  },
+                  "cpr-addenda": {
+                    "pktGroup": "cost"
                   }
                 },
                 "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/lowlight_ir_uv.svg",
@@ -527,6 +545,9 @@
                       "current": 33,
                       "previous": "24"
                     }
+                  },
+                  "cpr-addenda": {
+                    "pktGroup": "cost"
                   }
                 },
                 "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/radiation_detector.svg",
@@ -612,6 +633,9 @@
                     "current": 33,
                     "previous": "24"
                   }
+                },
+                "cpr-addenda": {
+                  "pktGroup": "free"
                 }
               },
               "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/cybereye.svg",
@@ -696,6 +720,9 @@
                       "current": 33,
                       "previous": "24"
                     }
+                  },
+                  "cpr-addenda": {
+                    "pktGroup": "cost"
                   }
                 },
                 "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/lowlight_ir_uv.svg",
@@ -783,6 +810,9 @@
                     "current": 33,
                     "previous": "24"
                   }
+                },
+                "cpr-addenda": {
+                  "pktGroup": "free"
                 }
               },
               "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/implanted_linearframe_sigma.svg",
@@ -869,6 +899,9 @@
                     "current": 33,
                     "previous": "24"
                   }
+                },
+                "cpr-addenda": {
+                  "pktGroup": "free"
                 }
               },
               "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/neural_link.svg",
@@ -955,7 +988,11 @@
             "folder": null,
             "sort": 0,
             "effects": [],
-            "flags": {},
+            "flags": {
+              "cpr-addenda": {
+                "pktGroup": "free"
+              }
+            },
             "system": {
               "ammoVariety": [],
               "attackmod": 0,
@@ -1031,6 +1068,9 @@
                   "current": 33,
                   "previous": "24"
                 }
+              },
+              "cpr-addenda": {
+                "pktGroup": "cost"
               }
             },
             "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/radar_sonar_implant.svg",
@@ -1113,6 +1153,9 @@
                   "current": 33,
                   "previous": "24"
                 }
+              },
+              "cpr-addenda": {
+                "pktGroup": "cost"
               }
             },
             "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/subdermal_armor.svg",
@@ -1195,6 +1238,9 @@
                   "current": 33,
                   "previous": "24"
                 }
+              },
+              "cpr-addenda": {
+                "pktGroup": "cost"
               }
             },
             "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/web_foot.svg",
@@ -1277,6 +1323,9 @@
                   "current": 33,
                   "previous": "24"
                 }
+              },
+              "cpr-addenda": {
+                "pktGroup": "cost"
               }
             },
             "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/web_foot.svg",

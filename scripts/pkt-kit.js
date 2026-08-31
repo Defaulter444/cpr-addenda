@@ -193,13 +193,29 @@ export function registerPktHooks() {
   Hooks.on("createItem", async (item, options, userId) => {
     // Создание отрабатывает у всех клиентов, а делать это должен один.
     if (game.user.id !== userId || !getKit(item)) return;
+    if (!(item.parent instanceof Actor)) return;
     try {
-      const count = await deployKit(item);
-      if (count) {
+      // Комплект больше не разворачивается молча: полная конверсия тела —
+      // необратимая операция на два десятка имплантов и три десятка очков
+      // человечности, и увидеть, на что идёшь, надо до неё, а не после.
+      const { runPktWizard } = await import("./pkt-wizard.js");
+      const installed = await runPktWizard(item);
+      if (installed) {
         ui.notifications.info(
-          localize("pkt.deployed", { frame: item.name, count })
+          localize("pkt.deployed", {
+            frame: item.name,
+            count: kitPartsOf(item.parent, item.id).length,
+          })
         );
+        return;
       }
+      // Отказ на любом шаге отменяет и саму установку: оставлять корпус
+      // лежать на листе, когда игрок сказал «нет», — значит сделать половину
+      // того, от чего он отказался.
+      if (item.parent.items.has(item.id)) {
+        await item.parent.deleteEmbeddedDocuments("Item", [item.id]);
+      }
+      ui.notifications.info(localize("pkt.cancelled", { frame: item.name }));
     } catch (err) {
       console.error(`${MODULE_ID} | Не удалось развернуть комплект корпуса`, err);
       ui.notifications.error(localize("pkt.failed", { frame: item.name }));

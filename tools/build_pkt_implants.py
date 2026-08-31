@@ -314,6 +314,26 @@ def instance_from_system(doc, doc_id, translations):
     return copy
 
 
+def tag_group(item, group):
+    """Помечает имплант группой из документа: с потерей человечности или без.
+
+    Таблица ПКТ делит комплект на два столбца — «Имплант без ПЧ» и «Имплант с
+    ПЧ». Само число потери документ даёт одно на весь комплект, поэтому у
+    имплантов оно обнулено; но какой из них в каком столбце стоял — знать надо:
+    по этому делению мастер и игрок разбирают, за что заплачено человечностью.
+
+    Метка живёт во флагах самого импланта, а не в списке у корпуса: имплант
+    уедет на лист персонажа отдельным предметом, и список пришлось бы чинить
+    после каждой перестановки.
+
+    @param {dict} item - имплант комплекта
+    @param {str} group - "free" или "cost"
+    @returns {dict} - он же
+    """
+    item.setdefault("flags", {}).setdefault(MODULE_ID, {})["pktGroup"] = group
+    return item
+
+
 def strip_humanity(item):
     """
     Убирает потерю человечности у импланта из комплекта.
@@ -371,7 +391,19 @@ def build_kit(tree, frame_type):
             continue
 
         size = data.get("size", 1)
-        host = next((h for h in hosts if free_slots(h) >= size), None)
+        # Из подходящих фундаментов берём наименее занятый. Документ пишет
+        # «Цепкая Подошва х2» на две киберноги, имея в виду по одной на каждую,
+        # а не обе в левую. Выбор первого попавшегося сваливал пару в один
+        # фундамент, пока в нём хватало слотов, и вторая нога оставалась пустой.
+        # При равной занятости берём тот, что раньше в списке, — порядок
+        # фундаментов задан документом и от запуска к запуску не меняется.
+        roomy = [h for h in hosts if free_slots(h) >= size]
+        host = None
+        if roomy:
+            host = min(
+                roomy,
+                key=lambda h: (len(h.get("_options", [])), hosts.index(h)),
+            )
         if host is None:
             # Комплект задан документом: раз производитель уместил столько
             # опций, значит фундамент у него расширенный.
@@ -453,7 +485,7 @@ def main():
         frame = json.loads(frame_file.read_text(encoding="utf-8"))
 
         tree = []
-        for field in ("implantsFree", "implantsCost"):
+        for field, group in (("implantsFree", "free"), ("implantsCost", "cost")):
             for raw in split_entry(entry.get(field)):
                 for name, count in normalize(raw):
                     target = name_map.get(name, "__unmapped__")
@@ -463,18 +495,20 @@ def main():
                     for _ in range(count):
                         doc_id = next_id()
                         if target is None:
-                            tree.append(
+                            tree.append(tag_group(
                                 json.loads(json.dumps(own_items[name]))
-                                | {"_id": doc_id}
-                            )
+                                | {"_id": doc_id},
+                                group,
+                            ))
                         else:
                             source = system.get(target)
                             if not source:
                                 unknown.add(f"{name} -> {target}")
                                 continue
-                            tree.append(
-                                instance_from_system(source, doc_id, translations)
-                            )
+                            tree.append(tag_group(
+                                instance_from_system(source, doc_id, translations),
+                                group,
+                            ))
 
         kit, widened = build_kit(tree, frame["system"]["type"])
         widened_total.extend(widened)
