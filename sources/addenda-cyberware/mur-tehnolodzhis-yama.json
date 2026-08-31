@@ -279,7 +279,52 @@
               {
                 "_id": "cprAddImp0017000",
                 "effects": [
-                  "B7AClIITge5cYBso"
+                  {
+                    "_id": "B7AClIITge5cYBso",
+                    "changes": [
+                      {
+                        "key": "bonuses.librarySearch",
+                        "mode": 2,
+                        "priority": null,
+                        "value": "2"
+                      }
+                    ],
+                    "description": "",
+                    "disabled": false,
+                    "duration": {
+                      "combat": null,
+                      "rounds": null,
+                      "seconds": null,
+                      "startRound": null,
+                      "startTime": null,
+                      "startTurn": null,
+                      "turns": null
+                    },
+                    "flags": {
+                      "cyberpunk-red-core": {
+                        "changes": {
+                          "cats": {
+                            "0": "skill"
+                          },
+                          "situational": {
+                            "0": {
+                              "isSituational": false,
+                              "onByDefault": false
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/internal_agent.svg",
+                    "name": "Internal Agent",
+                    "statuses": [],
+                    "system": {},
+                    "transfer": true,
+                    "type": "base",
+                    "origin": null,
+                    "tint": "#ffffff",
+                    "sort": 0
+                  }
                 ],
                 "flags": {
                   "cyberpunk-red-core": {
@@ -897,7 +942,52 @@
             "item": {
               "_id": "cprAddImp0016400",
               "effects": [
-                "t0JjeJeKhRUf3IUz"
+                {
+                  "_id": "t0JjeJeKhRUf3IUz",
+                  "changes": [
+                    {
+                      "key": "system.stats.body.value",
+                      "mode": 5,
+                      "priority": null,
+                      "value": "14"
+                    }
+                  ],
+                  "description": "",
+                  "disabled": false,
+                  "duration": {
+                    "combat": null,
+                    "rounds": null,
+                    "seconds": null,
+                    "startRound": null,
+                    "startTime": null,
+                    "startTurn": null,
+                    "turns": null
+                  },
+                  "flags": {
+                    "cyberpunk-red-core": {
+                      "changes": {
+                        "cats": {
+                          "0": "stat"
+                        },
+                        "situational": {
+                          "0": {
+                            "isSituational": false,
+                            "onByDefault": false
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/implanted_linearframe_beta.svg",
+                  "name": "Implanted Linear Frame Beta",
+                  "statuses": [],
+                  "system": {},
+                  "transfer": true,
+                  "type": "base",
+                  "origin": null,
+                  "tint": "#ffffff",
+                  "sort": 0
+                }
               ],
               "flags": {
                 "cyberpunk-red-core": {

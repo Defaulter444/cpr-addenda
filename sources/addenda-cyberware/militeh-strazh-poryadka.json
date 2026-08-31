@@ -628,7 +628,63 @@
               {
                 "_id": "cprAddImp0015500",
                 "effects": [
-                  "teuelimTBgI5OKAx"
+                  {
+                    "_id": "teuelimTBgI5OKAx",
+                    "changes": [
+                      {
+                        "key": "bonuses.humanPerception",
+                        "mode": 2,
+                        "priority": null,
+                        "value": "2"
+                      },
+                      {
+                        "key": "bonuses.interrogation",
+                        "mode": 2,
+                        "priority": null,
+                        "value": "2"
+                      }
+                    ],
+                    "description": "",
+                    "disabled": false,
+                    "duration": {
+                      "combat": null,
+                      "rounds": null,
+                      "seconds": null,
+                      "startRound": null,
+                      "startTime": null,
+                      "startTurn": null,
+                      "turns": null
+                    },
+                    "flags": {
+                      "cyberpunk-red-core": {
+                        "changes": {
+                          "cats": {
+                            "0": "skill",
+                            "1": "skill"
+                          },
+                          "situational": {
+                            "0": {
+                              "isSituational": false,
+                              "onByDefault": false
+                            },
+                            "1": {
+                              "isSituational": false,
+                              "onByDefault": false
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/voice_stress_analyzer.svg",
+                    "name": "Voice Stress Analyzer",
+                    "statuses": [],
+                    "system": {},
+                    "transfer": true,
+                    "type": "base",
+                    "origin": null,
+                    "tint": "#ffffff",
+                    "sort": 0
+                  }
                 ],
                 "flags": {
                   "cyberpunk-red-core": {
@@ -1153,7 +1209,52 @@
               {
                 "_id": "cprAddImp0015400",
                 "effects": [
-                  "pZWEbI2ZttpRsUPj"
+                  {
+                    "_id": "pZWEbI2ZttpRsUPj",
+                    "changes": [
+                      {
+                        "key": "bonuses.aimedShot",
+                        "mode": 2,
+                        "priority": null,
+                        "value": "1"
+                      }
+                    ],
+                    "description": "",
+                    "disabled": false,
+                    "duration": {
+                      "combat": null,
+                      "rounds": null,
+                      "seconds": null,
+                      "startRound": null,
+                      "startTime": null,
+                      "startTurn": null,
+                      "turns": null
+                    },
+                    "flags": {
+                      "cyberpunk-red-core": {
+                        "changes": {
+                          "cats": {
+                            "0": "combat"
+                          },
+                          "situational": {
+                            "0": {
+                              "isSituational": false,
+                              "onByDefault": false
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/targeting_scope.svg",
+                    "name": "Targeting Scope",
+                    "statuses": [],
+                    "system": {},
+                    "transfer": true,
+                    "type": "base",
+                    "origin": null,
+                    "tint": "#ffffff",
+                    "sort": 0
+                  }
                 ],
                 "flags": {
                   "cyberpunk-red-core": {
@@ -1243,7 +1344,52 @@
             "item": {
               "_id": "cprAddImp0014300",
               "effects": [
-                "sate0Jnbsdj9xuX7"
+                {
+                  "_id": "sate0Jnbsdj9xuX7",
+                  "changes": [
+                    {
+                      "key": "system.stats.body.value",
+                      "mode": 5,
+                      "priority": null,
+                      "value": "12"
+                    }
+                  ],
+                  "description": "",
+                  "disabled": false,
+                  "duration": {
+                    "combat": null,
+                    "rounds": null,
+                    "seconds": null,
+                    "startRound": null,
+                    "startTime": null,
+                    "startTurn": null,
+                    "turns": null
+                  },
+                  "flags": {
+                    "cyberpunk-red-core": {
+                      "changes": {
+                        "cats": {
+                          "0": "stat"
+                        },
+                        "situational": {
+                          "0": {
+                            "isSituational": false,
+                            "onByDefault": false
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/implanted_linearframe_sigma.svg",
+                  "name": "Implanted Linear Frame Sigma",
+                  "statuses": [],
+                  "system": {},
+                  "transfer": true,
+                  "type": "base",
+                  "origin": null,
+                  "tint": "#ffffff",
+                  "sort": 0
+                }
               ],
               "flags": {
                 "cyberpunk-red-core": {

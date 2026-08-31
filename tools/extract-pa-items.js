@@ -97,13 +97,27 @@ async function readPack(pack) {
   }
   const db = new ClassicLevel(dir, { valueEncoding: "json" });
   const docs = [];
+  // Эффекты в компендиуме лежат отдельными записями, а в предмете от них
+  // остаются одни идентификаторы. Скопировать предмет как есть нельзя: строка
+  // вместо документа эффекта — отказ Foundry при создании («name: may not be
+  // undefined»), и предмет на лист не встаёт. Собираем настоящие документы.
+  const effects = new Map();
   try {
     for await (const [key, value] of db.iterator()) {
-      if (key.startsWith("!items!")) docs.push(value);
+      if (key.startsWith("!items.effects!")) {
+        const owner = key.slice("!items.effects!".length).split(".")[0];
+        if (!effects.has(owner)) effects.set(owner, []);
+        const effect = { ...value, origin: null };
+        delete effect._stats;
+        effects.get(owner).push(effect);
+      } else if (key.startsWith("!items!")) {
+        docs.push(value);
+      }
     }
   } finally {
     await db.close();
   }
+  for (const doc of docs) doc.effects = effects.get(doc._id) ?? [];
   return docs;
 }
 

@@ -155,10 +155,26 @@ function toEntries(doc, type) {
       items: items.map((i) => i._id),
       effects: effects.map((e) => e._id),
     };
+    // У предметов актёра эффекты уходят на третий уровень —
+    // `!actors.items.effects!<актёр>.<предмет>.<эффект>`, а в самом предмете
+    // остаются идентификаторы. Проверено на рабочем чужом паке мобов.
+    const itemEffects = [];
+    const flatItems = items.map((item) => {
+      const own = item.effects ?? [];
+      for (const effect of own) {
+        itemEffects.push([
+          `!actors.items.effects!${doc._id}.${item._id}.${effect._id}`,
+          effect,
+        ]);
+      }
+      return { ...item, effects: own.map((e) => e._id) };
+    });
+
     return [
       [`!actors!${doc._id}`, actor],
-      ...items.map((i) => [`!actors.items!${doc._id}.${i._id}`, i]),
+      ...flatItems.map((i) => [`!actors.items!${doc._id}.${i._id}`, i]),
       ...effects.map((e) => [`!actors.effects!${doc._id}.${e._id}`, e]),
+      ...itemEffects,
     ];
   }
 

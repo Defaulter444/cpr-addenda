@@ -210,7 +210,52 @@
     {
       "_id": "cprAddPi08030000",
       "effects": [
-        "pZWEbI2ZttpRsUPj"
+        {
+          "_id": "pZWEbI2ZttpRsUPj",
+          "changes": [
+            {
+              "key": "bonuses.aimedShot",
+              "mode": 2,
+              "priority": null,
+              "value": "1"
+            }
+          ],
+          "description": "",
+          "disabled": false,
+          "duration": {
+            "combat": null,
+            "rounds": null,
+            "seconds": null,
+            "startRound": null,
+            "startTime": null,
+            "startTurn": null,
+            "turns": null
+          },
+          "flags": {
+            "cyberpunk-red-core": {
+              "changes": {
+                "cats": {
+                  "0": "combat"
+                },
+                "situational": {
+                  "0": {
+                    "isSituational": false,
+                    "onByDefault": false
+                  }
+                }
+              }
+            }
+          },
+          "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/targeting_scope.svg",
+          "name": "Targeting Scope",
+          "statuses": [],
+          "system": {},
+          "transfer": true,
+          "type": "base",
+          "origin": null,
+          "tint": "#ffffff",
+          "sort": 0
+        }
       ],
       "flags": {
         "cyberpunk-red-core": {
@@ -297,7 +342,63 @@
     {
       "_id": "cprAddPi08040000",
       "effects": [
-        "CMDlHoVTmNq5MRwZ"
+        {
+          "_id": "CMDlHoVTmNq5MRwZ",
+          "changes": [
+            {
+              "key": "bonuses.aimedShot",
+              "mode": 2,
+              "priority": null,
+              "value": "1"
+            },
+            {
+              "key": "bonuses.singleShot",
+              "mode": 2,
+              "priority": null,
+              "value": "1"
+            }
+          ],
+          "description": "",
+          "disabled": false,
+          "duration": {
+            "combat": null,
+            "rounds": null,
+            "seconds": null,
+            "startRound": null,
+            "startTime": null,
+            "startTurn": null,
+            "turns": null
+          },
+          "flags": {
+            "cyberpunk-red-core": {
+              "changes": {
+                "cats": {
+                  "0": "combat",
+                  "1": "combat"
+                },
+                "situational": {
+                  "0": {
+                    "isSituational": false,
+                    "onByDefault": false
+                  },
+                  "1": {
+                    "isSituational": false,
+                    "onByDefault": false
+                  }
+                }
+              }
+            }
+          },
+          "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/teleoptics.svg",
+          "name": "TeleOptics",
+          "statuses": [],
+          "system": {},
+          "transfer": true,
+          "type": "base",
+          "origin": null,
+          "tint": "#ffffff",
+          "sort": 0
+        }
       ],
       "flags": {
         "cyberpunk-red-core": {

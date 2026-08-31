@@ -194,6 +194,19 @@ function validateActor(doc, label, seenIds) {
     }
   }
 
+  // Эффекты вложенных предметов. Их копируют из паков системы, где эффекты
+  // лежат отдельными записями, и в предмет попадают одни идентификаторы —
+  // Foundry такой предмет создать отказывается, а костюм приезжает без него.
+  for (const item of doc.items ?? []) {
+    for (const effect of item.effects ?? []) {
+      if (typeof effect !== "object" || effect === null) {
+        fail(label, `«${item.name}»: эффект записан как ${JSON.stringify(effect)}`);
+      } else if (!effect.name) {
+        fail(label, `«${item.name}»: у эффекта нет имени`);
+      }
+    }
+  }
+
   // Вложенные предметы: бортовое оружие и импланты костюма.
   const positionIds = new Set((positions ?? []).map((p) => p.id));
   const itemIds = new Set();
@@ -838,6 +851,18 @@ const seenIds = new Map();
 
       // 6. Активные эффекты.
       for (const effect of doc.effects ?? []) {
+        // Строка вместо документа — след копирования предмета из пака системы:
+        // там эффекты лежат отдельными записями, а в самом предмете остаются
+        // одни идентификаторы. Foundry такой предмет создать отказывается
+        // («name: may not be undefined»), и весь комплект ПКТ не разворачивался
+        // — при этом ни валидатор, ни сборка ничего не замечали.
+        if (typeof effect !== "object" || effect === null) {
+          fail(label, `эффект записан как ${JSON.stringify(effect)} вместо документа`);
+          continue;
+        }
+        if (!effect.name) {
+          fail(label, "у эффекта нет имени — Foundry откажется создавать предмет");
+        }
         if (!/^[a-zA-Z0-9]{16}$/.test(effect._id ?? "")) {
           fail(label, `эффект "${effect.name}": _id должен быть 16 символов`);
         }

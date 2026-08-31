@@ -801,7 +801,52 @@
               {
                 "_id": "cprAddImp0012000",
                 "effects": [
-                  "Ff2OQuhgLa7Fy7dj"
+                  {
+                    "_id": "Ff2OQuhgLa7Fy7dj",
+                    "changes": [
+                      {
+                        "key": "bonuses.perceptionHearing",
+                        "mode": 2,
+                        "priority": null,
+                        "value": "2"
+                      }
+                    ],
+                    "description": "",
+                    "disabled": false,
+                    "duration": {
+                      "combat": null,
+                      "rounds": null,
+                      "seconds": null,
+                      "startRound": null,
+                      "startTime": null,
+                      "startTurn": null,
+                      "turns": null
+                    },
+                    "flags": {
+                      "cyberpunk-red-core": {
+                        "changes": {
+                          "cats": {
+                            "0": "skill"
+                          },
+                          "situational": {
+                            "0": {
+                              "isSituational": true,
+                              "onByDefault": false
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/amplified_hearing.svg",
+                    "name": "Amplified Hearing",
+                    "statuses": [],
+                    "system": {},
+                    "transfer": true,
+                    "type": "base",
+                    "origin": null,
+                    "tint": "#ffffff",
+                    "sort": 0
+                  }
                 ],
                 "flags": {
                   "cyberpunk-red-core": {
@@ -888,7 +933,52 @@
               {
                 "_id": "cprAddImp0013100",
                 "effects": [
-                  "B7AClIITge5cYBso"
+                  {
+                    "_id": "B7AClIITge5cYBso",
+                    "changes": [
+                      {
+                        "key": "bonuses.librarySearch",
+                        "mode": 2,
+                        "priority": null,
+                        "value": "2"
+                      }
+                    ],
+                    "description": "",
+                    "disabled": false,
+                    "duration": {
+                      "combat": null,
+                      "rounds": null,
+                      "seconds": null,
+                      "startRound": null,
+                      "startTime": null,
+                      "startTurn": null,
+                      "turns": null
+                    },
+                    "flags": {
+                      "cyberpunk-red-core": {
+                        "changes": {
+                          "cats": {
+                            "0": "skill"
+                          },
+                          "situational": {
+                            "0": {
+                              "isSituational": false,
+                              "onByDefault": false
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/internal_agent.svg",
+                    "name": "Internal Agent",
+                    "statuses": [],
+                    "system": {},
+                    "transfer": true,
+                    "type": "base",
+                    "origin": null,
+                    "tint": "#ffffff",
+                    "sort": 0
+                  }
                 ],
                 "flags": {
                   "cyberpunk-red-core": {
@@ -1415,7 +1505,74 @@
               {
                 "_id": "cprAddImp0013000",
                 "effects": [
-                  "tWHTQ0n84oq6mENt"
+                  {
+                    "_id": "tWHTQ0n84oq6mENt",
+                    "changes": [
+                      {
+                        "key": "bonuses.lipReading",
+                        "mode": 2,
+                        "priority": null,
+                        "value": "2"
+                      },
+                      {
+                        "key": "bonuses.concealOrRevealObject",
+                        "mode": 2,
+                        "priority": null,
+                        "value": "2"
+                      },
+                      {
+                        "key": "bonuses.perceptionSight",
+                        "mode": 2,
+                        "priority": null,
+                        "value": "2"
+                      }
+                    ],
+                    "description": "",
+                    "disabled": false,
+                    "duration": {
+                      "combat": null,
+                      "rounds": null,
+                      "seconds": null,
+                      "startRound": null,
+                      "startTime": null,
+                      "startTurn": null,
+                      "turns": null
+                    },
+                    "flags": {
+                      "cyberpunk-red-core": {
+                        "changes": {
+                          "cats": {
+                            "0": "skill",
+                            "1": "skill",
+                            "2": "skill"
+                          },
+                          "situational": {
+                            "0": {
+                              "isSituational": true,
+                              "onByDefault": false
+                            },
+                            "1": {
+                              "isSituational": true,
+                              "onByDefault": false
+                            },
+                            "2": {
+                              "isSituational": true,
+                              "onByDefault": false
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/image_enhance.svg",
+                    "name": "Image Enhance",
+                    "statuses": [],
+                    "system": {},
+                    "transfer": true,
+                    "type": "base",
+                    "origin": null,
+                    "tint": "#ffffff",
+                    "sort": 0
+                  }
                 ],
                 "flags": {
                   "cyberpunk-red-core": {
@@ -1672,7 +1829,63 @@
               {
                 "_id": "cprAddImp0013500",
                 "effects": [
-                  "CMDlHoVTmNq5MRwZ"
+                  {
+                    "_id": "CMDlHoVTmNq5MRwZ",
+                    "changes": [
+                      {
+                        "key": "bonuses.aimedShot",
+                        "mode": 2,
+                        "priority": null,
+                        "value": "1"
+                      },
+                      {
+                        "key": "bonuses.singleShot",
+                        "mode": 2,
+                        "priority": null,
+                        "value": "1"
+                      }
+                    ],
+                    "description": "",
+                    "disabled": false,
+                    "duration": {
+                      "combat": null,
+                      "rounds": null,
+                      "seconds": null,
+                      "startRound": null,
+                      "startTime": null,
+                      "startTurn": null,
+                      "turns": null
+                    },
+                    "flags": {
+                      "cyberpunk-red-core": {
+                        "changes": {
+                          "cats": {
+                            "0": "combat",
+                            "1": "combat"
+                          },
+                          "situational": {
+                            "0": {
+                              "isSituational": false,
+                              "onByDefault": false
+                            },
+                            "1": {
+                              "isSituational": false,
+                              "onByDefault": false
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/teleoptics.svg",
+                    "name": "TeleOptics",
+                    "statuses": [],
+                    "system": {},
+                    "transfer": true,
+                    "type": "base",
+                    "origin": null,
+                    "tint": "#ffffff",
+                    "sort": 0
+                  }
                 ],
                 "flags": {
                   "cyberpunk-red-core": {
@@ -1762,7 +1975,52 @@
             "item": {
               "_id": "cprAddImp0011800",
               "effects": [
-                "t0JjeJeKhRUf3IUz"
+                {
+                  "_id": "t0JjeJeKhRUf3IUz",
+                  "changes": [
+                    {
+                      "key": "system.stats.body.value",
+                      "mode": 5,
+                      "priority": null,
+                      "value": "14"
+                    }
+                  ],
+                  "description": "",
+                  "disabled": false,
+                  "duration": {
+                    "combat": null,
+                    "rounds": null,
+                    "seconds": null,
+                    "startRound": null,
+                    "startTime": null,
+                    "startTurn": null,
+                    "turns": null
+                  },
+                  "flags": {
+                    "cyberpunk-red-core": {
+                      "changes": {
+                        "cats": {
+                          "0": "stat"
+                        },
+                        "situational": {
+                          "0": {
+                            "isSituational": false,
+                            "onByDefault": false
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/implanted_linearframe_beta.svg",
+                  "name": "Implanted Linear Frame Beta",
+                  "statuses": [],
+                  "system": {},
+                  "transfer": true,
+                  "type": "base",
+                  "origin": null,
+                  "tint": "#ffffff",
+                  "sort": 0
+                }
               ],
               "flags": {
                 "cyberpunk-red-core": {
@@ -2114,7 +2372,52 @@
             "item": {
               "_id": "cprAddImp0012100",
               "effects": [
-                "3eNNo0rk2AzidtmS"
+                {
+                  "_id": "3eNNo0rk2AzidtmS",
+                  "changes": [
+                    {
+                      "key": "bonuses.hands",
+                      "mode": 2,
+                      "priority": null,
+                      "value": "2"
+                    }
+                  ],
+                  "description": "",
+                  "disabled": false,
+                  "duration": {
+                    "combat": null,
+                    "rounds": null,
+                    "seconds": null,
+                    "startRound": null,
+                    "startTime": null,
+                    "startTurn": null,
+                    "turns": null
+                  },
+                  "flags": {
+                    "cyberpunk-red-core": {
+                      "changes": {
+                        "cats": {
+                          "0": "combat"
+                        },
+                        "situational": {
+                          "0": {
+                            "isSituational": false,
+                            "onByDefault": false
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/artificial_shoulder_mount.svg",
+                  "name": "Artificial Shoulder Mount",
+                  "statuses": [],
+                  "system": {},
+                  "transfer": true,
+                  "type": "base",
+                  "origin": null,
+                  "tint": "#ffffff",
+                  "sort": 0
+                }
               ],
               "flags": {
                 "cyberpunk-red-core": {

@@ -196,6 +196,71 @@ console.log("Сборщик архива не молчит о потерях");
   );
 }
 
+console.log("Эффекты предметов актёров вынесены отдельно");
+{
+  // У актёра эффекты его предметов лежат на третьем уровне ключа —
+  // `!actors.items.effects!`. Проверено на рабочем чужом паке мобов. Оставленные
+  // внутри записи предмета, они молча пропадают: костюм приезжает, имплант на
+  // месте, а его эффект не действует.
+  const dir = path.join(PACKS, "addenda-actors");
+  let ClassicLevel = null;
+  for (const candidate of [
+    "C:/Program Files/Foundry Virtual Tabletop/resources/app/package.json",
+    "/opt/foundryvtt/resources/app/package.json",
+  ]) {
+    if (!fs.existsSync(candidate)) continue;
+    try {
+      ({ ClassicLevel } = createRequire(pathToFileURL(candidate))("classic-level"));
+      break;
+    } catch (error) {
+      // Ищем дальше.
+    }
+  }
+
+  if (!ClassicLevel || !fs.existsSync(dir)) {
+    console.log("  пропущено: пак не собран или classic-level недоступен");
+  } else {
+    const db = new ClassicLevel(dir, { valueEncoding: "json" });
+    let opened = false;
+    const inline = [];
+    let separate = 0;
+    try {
+      await db.open();
+      opened = true;
+      for await (const [key, value] of db.iterator()) {
+        if (key.startsWith("!actors.items.effects!")) {
+          separate += 1;
+          expect(
+            typeof value?.name === "string" && value.name.length > 0,
+            `эффект ${key}: нет имени — Foundry откажется его создавать`
+          );
+        } else if (key.startsWith("!actors.items!")) {
+          for (const effect of value.effects ?? []) {
+            if (typeof effect !== "string") {
+              inline.push(`${value.name}: ${JSON.stringify(effect).slice(0, 60)}`);
+            }
+          }
+        }
+      }
+    } catch (error) {
+      // База занята — скажем ниже.
+    } finally {
+      await db.close().catch(() => {});
+    }
+
+    if (!opened) {
+      console.log("  пропущено: пак заблокирован (запущен Foundry?)");
+    } else {
+      expect(
+        inline.length === 0,
+        `эффекты остались внутри записи предмета: ${inline.join("; ")}`
+      );
+      expect(separate > 0, "в паке актёров нет ни одного эффекта предмета — их потеряли");
+      console.log(`  эффектов предметов вынесено: ${separate}`);
+    }
+  }
+}
+
 console.log("Эффекты доезжают до собранных паков");
 {
   // Проверка появилась после боевой ошибки, точь-в-точь повторившей прошлую с

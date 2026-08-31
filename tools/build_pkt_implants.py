@@ -70,7 +70,7 @@ const fs = require("fs"), path = require("path"), os = require("os");
     fs.copyFileSync(path.join(src, f), path.join(tmp, f));
   const db = new ClassicLevel(tmp, {{ valueEncoding: "json" }});
   const out = [];
-  for await (const [, v] of db.iterator()) out.push(v);
+  for await (const [k, v] of db.iterator()) out.push([k, v]);
   await db.close();
   fs.rmSync(tmp, {{ recursive: true, force: true }});
   process.stdout.write(JSON.stringify(out));
@@ -135,7 +135,17 @@ def load_translations():
 
 
 def load_system_cyberware():
-    """Собирает всю кибернетику системы по английскому имени."""
+    """Собирает всю кибернетику системы по английскому имени.
+
+    Эффекты в компендиуме лежат отдельными записями `!items.effects!`, а в самом
+    предмете от них остаются только идентификаторы. Скопировать предмет как есть
+    нельзя: строка вместо документа эффекта — это отказ Foundry при создании
+    («name: may not be undefined»), и весь комплект не разворачивается. Поэтому
+    собираем эффекты по ключам и подставляем настоящие документы.
+
+    Заодно это возвращает эффекты, которые системе и нужны: у «Эндоскелета
+    Сигма» именно там записан ТЕЛ 12.
+    """
     manifest = json.loads((SYSTEM_ROOT / "system.json").read_text(encoding="utf-8"))
     found = {}
     for pack in manifest["packs"]:
@@ -144,9 +154,21 @@ def load_system_cyberware():
         path = SYSTEM_ROOT / pack["path"]
         if not path.exists():
             continue
-        for doc in read_pack(path):
-            if doc.get("type") == "cyberware" and doc.get("name") not in found:
-                found[doc["name"]] = doc
+
+        items = []
+        effects = {}
+        for key, doc in read_pack(path):
+            if key.startswith("!items.effects!"):
+                owner = key[len("!items.effects!"):].split(".")[0]
+                effects.setdefault(owner, []).append(doc)
+            elif key.startswith("!items!"):
+                items.append(doc)
+
+        for doc in items:
+            if doc.get("type") != "cyberware" or doc.get("name") in found:
+                continue
+            doc["effects"] = effects.get(doc.get("_id"), [])
+            found[doc["name"]] = doc
     return found
 
 
@@ -326,6 +348,11 @@ def instance_from_system(doc, doc_id, translations):
     copy["system"]["installedItems"]["list"] = []
     copy["system"]["installedItems"]["usedSlots"] = 0
     copy.setdefault("flags", {}).pop("cprInstallTree", None)
+    # Служебные поля эффектов компендиума на чужом листе не значат ничего.
+    for effect in copy.get("effects") or []:
+        if isinstance(effect, dict):
+            effect.pop("_stats", None)
+            effect["origin"] = None
     return copy
 
 
