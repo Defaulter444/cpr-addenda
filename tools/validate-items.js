@@ -567,6 +567,9 @@ function validateJournal(doc, label, seenIds) {
 
 
 const seenIds = new Map();
+  // Предметы, которые числятся в таблице docs/stat-effects.json: их
+  // сверяем отдельно, после обхода всех паков.
+  const statItems = new Map();
   let count = 0;
   let tableCount = 0;
   let journalCount = 0;
@@ -588,6 +591,12 @@ const seenIds = new Map();
       } catch (err) {
         fail(label, `не разбирается как JSON — ${err.message}`);
         continue;
+      }
+
+      if (doc && doc.name) {
+        doc.__pack = pack;
+        doc.__file = file;
+        statItems.set(doc.name, doc);
       }
 
       if (packType === "RollTable") {
@@ -852,6 +861,68 @@ const seenIds = new Map();
       if (openTags !== closeTags) {
         fail(label, "незакрытая разметка в описании");
       }
+    }
+  }
+
+  // 8. Предметы, двигающие характеристики.
+  //
+  // Эффект, обещанный описанием и не дошедший до предмета, — ошибка, которую на
+  // листе не видно: игрок надевает подкладку, а ТЕЛ не растёт, и списать это
+  // можно на что угодно. Файлы этих предметов пишут разные сборщики, и правка,
+  // сделанная в одном, стиралась при следующем запуске другого — так пропал
+  // эффект у «Эндоскелета Омега». Поэтому источник один, docs/stat-effects.json,
+  // а здесь сверяется, что он доехал до собранного предмета.
+  const statTable = JSON.parse(
+    fs.readFileSync(path.join(MODULE_ROOT, "docs", "stat-effects.json"), "utf-8")
+  ).items;
+
+  for (const [name, expected] of Object.entries(statTable)) {
+    const doc = statItems.get(name);
+    if (!doc) {
+      fail("docs/stat-effects.json", `предмета «${name}» нет ни в одном паке`);
+      continue;
+    }
+    const label = `${doc.__pack}/${doc.__file}`;
+    const changes = (doc.effects ?? []).flatMap((e) => e.changes ?? []);
+    if (!changes.length) {
+      fail(label, `«${name}»: описание меняет характеристики, а эффекта нет`);
+      continue;
+    }
+    if (doc.system?.usage !== expected.usage) {
+      fail(
+        label,
+        `«${name}»: usage "${doc.system?.usage}", а нужен "${expected.usage}" — ` +
+          "иначе эффект действует и с предмета в рюкзаке"
+      );
+    }
+    for (const want of expected.changes) {
+      const got = changes.find((c) => c.key === want.key);
+      if (!got) {
+        fail(label, `«${name}»: нет изменения ключа ${want.key}`);
+        continue;
+      }
+      if (String(got.value) !== String(want.value)) {
+        fail(
+          label,
+          `«${name}»: ${want.key} = ${got.value}, а по документу ${want.value}`
+        );
+      }
+      if (got.mode !== want.mode) {
+        fail(
+          label,
+          `«${name}»: ${want.key} наложен режимом ${got.mode}, а нужен ${want.mode}`
+        );
+      }
+    }
+    const extra = changes.filter(
+      (c) => !expected.changes.some((w) => w.key === c.key)
+    );
+    if (extra.length) {
+      fail(
+        label,
+        `«${name}»: лишние изменения ${extra.map((c) => c.key).join(", ")} — ` +
+          "таблица их не задаёт"
+      );
     }
   }
 

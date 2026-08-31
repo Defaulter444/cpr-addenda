@@ -1,14 +1,14 @@
-2026/08/31-05:00:34.454 4c6c Recovering log #127
-2026/08/31-05:00:34.458 4c6c Delete type=0 #127
-2026/08/31-05:00:34.458 4c6c Delete type=3 #126
-2026/08/31-05:00:34.461 2ad0 Level-0 table #131: started
-2026/08/31-05:00:34.462 2ad0 Level-0 table #131: 22849 bytes OK
-2026/08/31-05:00:34.464 2ad0 Delete type=0 #129
-2026/08/31-05:00:34.464 2ad0 Manual compaction at level-0 from '!' @ 72057594037927935 : 1 .. '\xef\xbf\xbf' @ 0 : 0; will stop at '!journal.pages!cprAddJn00020000.cprAddJp00020006' @ 1062 : 0
-2026/08/31-05:00:34.464 2ad0 Compacting 1@0 + 1@1 files
-2026/08/31-05:00:34.465 2ad0 Generated table #132@0: 29 keys, 22724 bytes
-2026/08/31-05:00:34.465 2ad0 Compacted 1@0 + 1@1 files => 22724 bytes
-2026/08/31-05:00:34.466 2ad0 compacted to: files[ 0 1 0 0 0 0 0 ]
-2026/08/31-05:00:34.467 2ad0 Delete type=2 #125
-2026/08/31-05:00:34.467 2ad0 Delete type=2 #131
-2026/08/31-05:00:34.467 2ad0 Manual compaction at level-0 from '!journal.pages!cprAddJn00020000.cprAddJp00020006' @ 1062 : 0 .. '\xef\xbf\xbf' @ 0 : 0; will stop at (end)
+2026/08/31-06:20:03.050 3dc8 Recovering log #134
+2026/08/31-06:20:03.053 3dc8 Delete type=0 #134
+2026/08/31-06:20:03.053 3dc8 Delete type=3 #133
+2026/08/31-06:20:03.056 385c Level-0 table #138: started
+2026/08/31-06:20:03.057 385c Level-0 table #138: 22819 bytes OK
+2026/08/31-06:20:03.058 385c Delete type=0 #136
+2026/08/31-06:20:03.058 385c Manual compaction at level-0 from '!' @ 72057594037927935 : 1 .. '\xef\xbf\xbf' @ 0 : 0; will stop at '!journal.pages!cprAddJn00020000.cprAddJp00020006' @ 1120 : 0
+2026/08/31-06:20:03.058 385c Compacting 1@0 + 1@1 files
+2026/08/31-06:20:03.060 385c Generated table #139@0: 29 keys, 22713 bytes
+2026/08/31-06:20:03.060 385c Compacted 1@0 + 1@1 files => 22713 bytes
+2026/08/31-06:20:03.061 385c compacted to: files[ 0 1 0 0 0 0 0 ]
+2026/08/31-06:20:03.061 385c Delete type=2 #132
+2026/08/31-06:20:03.061 385c Delete type=2 #138
+2026/08/31-06:20:03.061 385c Manual compaction at level-0 from '!journal.pages!cprAddJn00020000.cprAddJp00020006' @ 1120 : 0 .. '\xef\xbf\xbf' @ 0 : 0; will stop at (end)

@@ -5,7 +5,31 @@
   "img": "modules/cpr-addenda/assets/icons/borgware.svg",
   "folder": null,
   "sort": 0,
-  "effects": [],
+  "effects": [
+    {
+      "_id": "cprAddFx8t58fgyp",
+      "name": "Имплантированный Эндоскелет Омега",
+      "img": "modules/cpr-addenda/assets/icons/borgware.svg",
+      "changes": [
+        {
+          "key": "system.stats.body.value",
+          "mode": 5,
+          "value": "16",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null
+      },
+      "description": "«Пользователь увеличивает свой ТЕЛ до 16.» Так же система задаёт ТЕЛ своим «Сигме» и «Бете».",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "flags": {}
+    }
+  ],
   "flags": {},
   "system": {
     "ammoVariety": [],
@@ -20,7 +44,7 @@
     "critFailEffect": "jammed",
     "damage": "1d6",
     "description": {
-      "value": "<p>Внутренний каркас класса «Омега» — тяжелее и прочнее «Сигмы». Входит в комплект корпуса ПКТ.</p>"
+      "value": "<p>Совершенный эндоскелет, дополненный гидравлическими и миомарными мышцами. Пользователь увеличивает свой ТЕЛ до 16 и не может поднять его до 17 или выше; это увеличение влияет на ПЗ и спасбросок. Для установки требуется ТЕЛ 10 и три «Искусственные мышцы и усиленные кости». Одна установка считается за две отдельные установки боргирования при определении максимальной восстанавливаемой человечности (см. CP:R стр. 229). Входит в комплект корпуса ПКТ — там он идёт бесплатно и без потери человечности.</p>"
     },
     "dvTable": "",
     "favorite": false,
@@ -29,8 +53,8 @@
       "suppressiveFire": false
     },
     "humanityLoss": {
-      "roll": "1d6",
-      "static": 0
+      "roll": "8d6",
+      "static": 28
     },
     "ignoreArmorPercent": 0,
     "ignoreBelowSP": 0,
@@ -55,7 +79,7 @@
       "value": 0
     },
     "price": {
-      "market": 0
+      "market": 10000
     },
     "providesHardening": false,
     "revealed": true,

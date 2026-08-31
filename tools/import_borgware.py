@@ -14,10 +14,9 @@
 предмет брони с ОС и штрафом. Иначе получилось бы как с силовой бронёй, где ОС
 стоял в шапке и не вычитался (см. 0.12.0).
 
-«Эндоскелет Ω» в модуле уже был — как деталь корпуса ПКТ, без цены, без ПЧ и
-без эффекта. Data Pool наконец даёт числа, которых раньше не хватало, поэтому
-здесь он дополняется, а не заводится заново: имя не меняется, и наборы ПКТ,
-ссылающиеся на него по имени, остаются целы.
+«Эндоскелет Ω» этот скрипт не трогает: его файл собирает build_pkt_implants по
+docs/implant-map.json, где и лежат числа Data Pool. Двое пишущих в один файл —
+это стёртая правка при следующей сборке, что однажды уже случилось.
 
     python tools/import_borgware.py
     node tools/build-packs.js
@@ -166,33 +165,6 @@ def armor(doc_id, name, sp, penalty, description):
     }
 
 
-def effect(effect_id, name, key, value, mode):
-    """Активный эффект предмета.
-
-    Режимы Foundry: 2 — прибавить, 5 — заменить значение.
-
-    @param {str} effect_id - идентификатор, 16 символов
-    @param {str} name - как эффект зовётся на листе
-    @param {str} key - что он меняет
-    @param {str} value - на что
-    @param {int} mode - режим наложения
-    """
-    return {
-        "_id": effect_id,
-        "name": name,
-        "img": BORG_ICON,
-        "changes": [{"key": key, "mode": mode, "value": value, "priority": None}],
-        "disabled": False,
-        "duration": {"startTime": None},
-        "description": "",
-        "origin": None,
-        "tint": "#ffffff",
-        "transfer": True,
-        "statuses": [],
-        "flags": {},
-    }
-
-
 # ---------------------------------------------------------------------------
 #  Данные Data Pool. Формулировки перенесены дословно.
 # ---------------------------------------------------------------------------
@@ -320,7 +292,9 @@ HEAVY_SUBDERMAL = (
     "поле «Штраф» в предмете брони.</em></p>"
 )
 
-OMEGA = (
+# Текст «Эндоскелета Ω» живёт в docs/implant-map.json — там же, где его
+# собирают. Здесь он лежал бы вторым источником правды.
+_OMEGA_MOVED = (
     "<p>Совершенный эндоскелет, дополненный гидравлическими и миомарными "
     "мышцами.</p>"
     "<ul>"
@@ -381,42 +355,6 @@ def write(folder, filename, doc):
     return os.path.relpath(path, ROOT)
 
 
-def upgrade_omega():
-    """Дополняет «Эндоскелет Омега» числами, которых раньше не было.
-
-    Предмет уже лежит в модуле как деталь корпуса ПКТ: без цены, без потери
-    человечности и без эффекта, потому что документ по ПКТ этих чисел не давал.
-    Страница «Экзоскелеты/Боргирование» их даёт — дописываем, не трогая имя,
-    чтобы наборы ПКТ, которые ссылаются на него по имени, не рассыпались.
-
-    @returns {str|None} - путь к файлу или None, если предмета нет
-    """
-    path = os.path.join(SOURCES, "addenda-cyberware",
-                        "implantirovannyy-endoskelet-omega.json")
-    if not os.path.exists(path):
-        return None
-    doc = json.load(io.open(path, encoding="utf-8"))
-    system = doc["system"]
-    system["description"]["value"] = OMEGA
-    system["price"] = {"market": 10000}
-    system["humanityLoss"] = {"roll": "8d6", "static": 28}
-    system["isFoundational"] = True
-    system["installLocation"] = "hospital"
-    doc["effects"] = [
-        effect(
-            "cprAddBw00000001",
-            "Эндоскелет Ω (ОМЕГА)",
-            "system.stats.body.value",
-            "16",
-            5,
-        )
-    ]
-    io.open(path, "w", encoding="utf-8", newline="\n").write(
-        json.dumps(doc, ensure_ascii=False, indent=1) + "\n"
-    )
-    return os.path.relpath(path, ROOT)
-
-
 def main():
     written = []
 
@@ -452,12 +390,10 @@ def main():
             ),
         ))
 
-    # 3. Эндоскелет Ω дополняем на месте.
-    omega = upgrade_omega()
-    if omega:
-        written.append(omega)
-    else:
-        print("! «Эндоскелет Омега» не найден — числа Data Pool не применены")
+    # «Эндоскелет Ω» здесь не трогаем. Его файл пишет build_pkt_implants по
+    # docs/implant-map.json — он же ставит эффект с ТЕЛ 16 из общей таблицы.
+    # Пока правка жила здесь, следующий запуск того сборщика её стирал, и в
+    # релиз 0.14.0 предмет уехал без эффекта, цены и потери человечности.
 
     print(f"Записано файлов: {len(written)}")
     for path in written:

@@ -5,7 +5,31 @@
   "img": "modules/cpr-addenda/assets/icons/gear.svg",
   "folder": null,
   "sort": 0,
-  "effects": [],
+  "effects": [
+    {
+      "_id": "cprAddFxtowe82wt",
+      "name": "Гидравлическая Подкладка Húsafell",
+      "img": "modules/cpr-addenda/assets/icons/gear.svg",
+      "changes": [
+        {
+          "key": "system.stats.body.value",
+          "mode": 2,
+          "value": "2",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null
+      },
+      "description": "«Когда надета, увеличивает ТЕЛО на 2.» Потолок в 10 и запрет складываться с эндоскелетами остаются текстом: условий эффекты не понимают.",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "flags": {}
+    }
+  ],
   "flags": {},
   "system": {
     "amount": 1,
@@ -38,6 +62,6 @@
       "book": "DataPool",
       "page": 8
     },
-    "usage": "toggled"
+    "usage": "equipped"
   }
 }

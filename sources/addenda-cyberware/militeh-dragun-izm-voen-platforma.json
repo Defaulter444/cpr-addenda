@@ -1502,7 +1502,31 @@
               "img": "modules/cpr-addenda/assets/icons/borgware.svg",
               "folder": null,
               "sort": 0,
-              "effects": [],
+              "effects": [
+                {
+                  "_id": "cprAddFx8t58fgyp",
+                  "name": "Имплантированный Эндоскелет Омега",
+                  "img": "modules/cpr-addenda/assets/icons/borgware.svg",
+                  "changes": [
+                    {
+                      "key": "system.stats.body.value",
+                      "mode": 5,
+                      "value": "16",
+                      "priority": null
+                    }
+                  ],
+                  "disabled": false,
+                  "duration": {
+                    "startTime": null
+                  },
+                  "description": "«Пользователь увеличивает свой ТЕЛ до 16.» Так же система задаёт ТЕЛ своим «Сигме» и «Бете».",
+                  "origin": null,
+                  "tint": "#ffffff",
+                  "transfer": true,
+                  "statuses": [],
+                  "flags": {}
+                }
+              ],
               "flags": {
                 "cpr-addenda": {
                   "pktGroup": "free"
@@ -1521,7 +1545,7 @@
                 "critFailEffect": "jammed",
                 "damage": "1d6",
                 "description": {
-                  "value": "<p>Внутренний каркас класса «Омега» — тяжелее и прочнее «Сигмы». Входит в комплект корпуса ПКТ.</p>"
+                  "value": "<p>Совершенный эндоскелет, дополненный гидравлическими и миомарными мышцами. Пользователь увеличивает свой ТЕЛ до 16 и не может поднять его до 17 или выше; это увеличение влияет на ПЗ и спасбросок. Для установки требуется ТЕЛ 10 и три «Искусственные мышцы и усиленные кости». Одна установка считается за две отдельные установки боргирования при определении максимальной восстанавливаемой человечности (см. CP:R стр. 229). Входит в комплект корпуса ПКТ — там он идёт бесплатно и без потери человечности.</p>"
                 },
                 "dvTable": "",
                 "favorite": false,
@@ -1556,7 +1580,7 @@
                   "value": 0
                 },
                 "price": {
-                  "market": 0
+                  "market": 10000
                 },
                 "providesHardening": false,
                 "revealed": true,
@@ -2170,12 +2194,48 @@
           },
           {
             "_id": "cprAddImp0008400",
-            "name": "Модернизация Внутренней Гидравлики",
+            "name": "Тюнинг вер. Модернизация Внутренней Гидравлики",
             "type": "cyberware",
             "img": "modules/cpr-addenda/assets/icons/borgware.svg",
             "folder": null,
             "sort": 0,
-            "effects": [],
+            "effects": [
+              {
+                "_id": "cprAddFxwfxybv93",
+                "name": "Тюнинг вер. Модернизация Внутренней Гидравлики",
+                "img": "modules/cpr-addenda/assets/icons/borgware.svg",
+                "changes": [
+                  {
+                    "key": "system.stats.ref.value",
+                    "mode": 4,
+                    "value": "6",
+                    "priority": null
+                  },
+                  {
+                    "key": "system.stats.dex.value",
+                    "mode": 4,
+                    "value": "6",
+                    "priority": null
+                  },
+                  {
+                    "key": "system.stats.move.value",
+                    "mode": 4,
+                    "value": "6",
+                    "priority": null
+                  }
+                ],
+                "disabled": false,
+                "duration": {
+                  "startTime": null
+                },
+                "description": "«Статы РЕА, ЛВК и СКО пользователя устанавливаются на 6, если только они не являются более высокими.»",
+                "origin": null,
+                "tint": "#ffffff",
+                "transfer": true,
+                "statuses": [],
+                "flags": {}
+              }
+            ],
             "flags": {
               "cpr-addenda": {
                 "pktGroup": "cost"
@@ -2194,7 +2254,7 @@
               "critFailEffect": "jammed",
               "damage": "1d6",
               "description": {
-                "value": "<p>Усиленная гидравлика корпуса. Входит в комплект корпуса ПКТ.</p>"
+                "value": "<p>Улучшенная гидравлика корпуса: РЕА, ЛВК и СКО пользователя устанавливаются на 6, если только они не являются более высокими. Входит в комплект корпуса ПКТ.</p>"
               },
               "dvTable": "",
               "favorite": false,

@@ -1,14 +1,14 @@
-2026/08/31-05:00:34.479 2d48 Recovering log #207
-2026/08/31-05:00:34.483 2d48 Delete type=0 #207
-2026/08/31-05:00:34.483 2d48 Delete type=3 #206
-2026/08/31-05:00:34.487 2ad0 Level-0 table #211: started
-2026/08/31-05:00:34.489 2ad0 Level-0 table #211: 61164 bytes OK
-2026/08/31-05:00:34.490 2ad0 Delete type=0 #209
-2026/08/31-05:00:34.490 2ad0 Manual compaction at level-0 from '!' @ 72057594037927935 : 1 .. '\xef\xbf\xbf' @ 0 : 0; will stop at '!actors.items!cprAddAc00100000.cprAddPi10060000' @ 1244 : 0
-2026/08/31-05:00:34.490 2ad0 Compacting 1@0 + 1@1 files
-2026/08/31-05:00:34.493 2ad0 Generated table #212@0: 68 keys, 59437 bytes
-2026/08/31-05:00:34.493 2ad0 Compacted 1@0 + 1@1 files => 59437 bytes
-2026/08/31-05:00:34.494 2ad0 compacted to: files[ 0 1 0 0 0 0 0 ]
-2026/08/31-05:00:34.494 2ad0 Delete type=2 #205
-2026/08/31-05:00:34.494 2ad0 Delete type=2 #211
-2026/08/31-05:00:34.495 2ad0 Manual compaction at level-0 from '!actors.items!cprAddAc00100000.cprAddPi10060000' @ 1244 : 0 .. '\xef\xbf\xbf' @ 0 : 0; will stop at (end)
+2026/08/31-06:20:03.066 5694 Recovering log #216
+2026/08/31-06:20:03.069 5694 Delete type=0 #216
+2026/08/31-06:20:03.070 5694 Delete type=3 #215
+2026/08/31-06:20:03.072 385c Level-0 table #220: started
+2026/08/31-06:20:03.074 385c Level-0 table #220: 61211 bytes OK
+2026/08/31-06:20:03.076 385c Delete type=0 #218
+2026/08/31-06:20:03.076 385c Manual compaction at level-0 from '!' @ 72057594037927935 : 1 .. '\xef\xbf\xbf' @ 0 : 0; will stop at '!actors.items!cprAddAc00100000.cprAddPi10060000' @ 1380 : 0
+2026/08/31-06:20:03.076 385c Compacting 1@0 + 1@1 files
+2026/08/31-06:20:03.078 385c Generated table #221@0: 68 keys, 59403 bytes
+2026/08/31-06:20:03.078 385c Compacted 1@0 + 1@1 files => 59403 bytes
+2026/08/31-06:20:03.079 385c compacted to: files[ 0 1 0 0 0 0 0 ]
+2026/08/31-06:20:03.079 385c Delete type=2 #212
+2026/08/31-06:20:03.079 385c Delete type=2 #220
+2026/08/31-06:20:03.079 385c Manual compaction at level-0 from '!actors.items!cprAddAc00100000.cprAddPi10060000' @ 1380 : 0 .. '\xef\xbf\xbf' @ 0 : 0; will stop at (end)

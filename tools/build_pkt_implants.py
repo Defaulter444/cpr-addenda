@@ -35,6 +35,12 @@ sys.stdout.reconfigure(encoding="utf-8")
 
 MODULE_ID = "cpr-addenda"
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import stat_effects  # noqa: E402  — лежит рядом, до правки sys.path не виден
+
+#: Читаем один раз: таблица нужна каждому создаваемому предмету.
+STAT_EFFECTS = stat_effects.load()
+
 MODULE_ROOT = Path(__file__).resolve().parent.parent
 DATA_ROOT = MODULE_ROOT.parent.parent
 SYSTEM_ROOT = DATA_ROOT / "systems" / "cyberpunk-red-core"
@@ -156,9 +162,10 @@ SPLIT_FIXES = {
         "ТАп (установлен Аэрогиппо)",
         "Рука-Мультитул",
     ],
-    "Тюнинг вер. Модернизация Внутренней Гидравлики": [
-        "Модернизация Внутренней Гидравлики",
-    ],
+    # Раньше тюнингованная гидравлика сводилась к базовой. Пока это было
+    # просто строчкой в описании, разницы не было; теперь она задаёт
+    # РЕА, ЛВК и СКО эффектом, и подмена занижала бы их с 6 до 4.
+
 }
 
 SPELLING = {
@@ -237,8 +244,13 @@ def next_id(prefix="Imp"):
 
 
 def own_implant(name, spec, doc_id):
-    """Имплант, которого нет в системе: заводим свой."""
-    return {
+    """Имплант, которого нет в системе: заводим свой.
+
+    Эффекты берём из общей таблицы, а не задаём здесь: файлы этих
+    предметов пишет не только этот скрипт, и дописанное в одном месте
+    стиралось при следующем запуске другого.
+    """
+    doc = {
         "_id": doc_id,
         "name": name,
         "type": "cyberware",
@@ -260,9 +272,11 @@ def own_implant(name, spec, doc_id):
             "dvTable": "",
             "favorite": False,
             "fireModes": {"autoFire": 0, "suppressiveFire": False},
-            # Ноль и в цене, и в человечности: и то и другое уже учтено
-            # в стоимости самого корпуса, о чём сказано в документе.
-            "humanityLoss": {"roll": "1d6", "static": 0},
+            # По умолчанию ноль и в цене, и в человечности: и то и другое уже
+            # учтено в стоимости самого корпуса, о чём сказано в документе.
+            # Но часть этих имплантов продаётся и отдельно — тогда числа
+            # приходят из карты, где для них есть своя строка.
+            "humanityLoss": spec.get("humanity", {"roll": "1d6", "static": 0}),
             "ignoreArmorPercent": 0,
             "ignoreBelowSP": 0,
             "installLocation": "hospital",
@@ -278,7 +292,7 @@ def own_implant(name, spec, doc_id):
             "isRanged": False,
             "isWeapon": False,
             "magazine": {"ammoData": None, "max": 0, "value": 0},
-            "price": {"market": 0},
+            "price": {"market": spec.get("price", 0)},
             "providesHardening": False,
             "revealed": True,
             "rof": 1,
@@ -292,7 +306,8 @@ def own_implant(name, spec, doc_id):
             "weaponType": "",
         },
     }
-
+    stat_effects.apply(doc, STAT_EFFECTS)
+    return doc
 
 def instance_from_system(doc, doc_id, translations):
     """Копия импланта системы под своим идентификатором, с русским названием."""

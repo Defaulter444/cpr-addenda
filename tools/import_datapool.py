@@ -25,6 +25,13 @@ MODULE_ROOT = Path(__file__).resolve().parent.parent
 DATA = MODULE_ROOT / "docs" / "datapool.json"
 SOURCES = MODULE_ROOT / "sources"
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import stat_effects  # noqa: E402  — лежит рядом, до правки sys.path не виден
+
+#: Предметы, двигающие характеристики: подкладка Húsafell, внешний
+#: экзоскелет. Эффекты у них общие с остальным модулем, из одной таблицы.
+STAT_EFFECTS = stat_effects.load()
+
 SOURCE_BOOK = "DataPool"
 
 # --- Типы оружия системы ----------------------------------------------------
@@ -248,8 +255,14 @@ def upgrade_item(doc_id, name, description, price, page, upgrade_type,
 
 
 def gear_item(doc_id, name, description, price, page):
-    """Предмет снаряжения (gear)."""
-    return {
+    """Предмет снаряжения (gear).
+
+    Часть снаряжения двигает характеристики — подкладка Húsafell поднимает ТЕЛ,
+    внешний экзоскелет задаёт его целиком. Эффекты для них лежат в общей
+    таблице: раньше их не было вовсе, и описание обещало то, чего на листе не
+    происходило.
+    """
+    doc = {
         "_id": doc_id,
         "name": name,
         "type": "gear",
@@ -280,6 +293,8 @@ def gear_item(doc_id, name, description, price, page):
             "usage": "toggled",
         },
     }
+    stat_effects.apply(doc, STAT_EFFECTS)
+    return doc
 
 
 def armor_item(doc_id, name, description, price, page, sp=0, penalty=0,

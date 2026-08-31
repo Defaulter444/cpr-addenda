@@ -5,7 +5,43 @@
   "img": "modules/cpr-addenda/assets/icons/borgware.svg",
   "folder": null,
   "sort": 0,
-  "effects": [],
+  "effects": [
+    {
+      "_id": "cprAddFx5blw2kef",
+      "name": "Модернизация Внутренней Гидравлики",
+      "img": "modules/cpr-addenda/assets/icons/borgware.svg",
+      "changes": [
+        {
+          "key": "system.stats.ref.value",
+          "mode": 4,
+          "value": "4",
+          "priority": null
+        },
+        {
+          "key": "system.stats.dex.value",
+          "mode": 4,
+          "value": "4",
+          "priority": null
+        },
+        {
+          "key": "system.stats.move.value",
+          "mode": 4,
+          "value": "4",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null
+      },
+      "description": "«Статы РЕА, ЛВК и СКО пользователя устанавливаются на 4, если только они не являются более высокими.»",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "flags": {}
+    }
+  ],
   "flags": {},
   "system": {
     "ammoVariety": [],
