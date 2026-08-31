@@ -246,5 +246,10 @@
   "CPRADDENDA.pkt.wizard.summary.slots": "Slots used",
   "CPRADDENDA.pkt.wizard.summary.humanity": "Humanity reduced by <strong>{value}</strong>.",
   "CPRADDENDA.pkt.wizard.summary.noHumanity": "No Humanity was spent.",
-  "CPRADDENDA.pkt.cancelled": "Installation of “{frame}” cancelled; the frame was removed from the sheet."
+  "CPRADDENDA.pkt.cancelled": "Installation of “{frame}” cancelled; the frame was removed from the sheet.",
+  "CPRADDENDA.pkt.wizard.noHumanity": "No Humanity loss",
+  "CPRADDENDA.pkt.wizard.tookNone": "No Humanity will be spent.",
+  "CPRADDENDA.pkt.wizard.cyberpsycho": "Humanity dropped to zero or below — by the rules that is cyberpsychosis.",
+  "CPRADDENDA.pkt.wizard.nothingDeployed": "The “{name}” frame was installed, but none of its kit implants appeared. Check the console (F12): this is a bug, not a design choice.",
+  "CPRADDENDA.pkt.wizard.mookNote": "This is an NPC. Cyberpunk RED does not track Humanity for NPCs, but the system still derives EMP from it — fifty-odd points for a frame will push the NPC into the negative. Mooks usually take “no loss”."
 }

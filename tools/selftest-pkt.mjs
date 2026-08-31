@@ -428,5 +428,148 @@ console.log("У каждого импланта комплекта есть гр
   console.log(`  помечено имплантов: ${tagged}`);
 }
 
+console.log("Человечность считается отдельно от списания");
+{
+  // Мастер прокрутил бросок, вышел из окна — корпус исчез, а тридцать с лишним
+  // очков человечности остались потерянными. Причина: списывали прямо на
+  // третьем шаге, до точки невозврата. Теперь бросок только считает, а к листу
+  // число применяется в самом конце, после «Установить».
+  const wizard = await import(
+    pathToFileURL(path.join(prepare(), "pkt-wizard.mjs")).href
+  );
+  const { measureHumanity, applyHumanity } = wizard.__test;
+
+  const frame = {
+    name: "МИЛИТЕХ «ДРАГУН»",
+    system: { humanityLoss: { roll: "18d6 + ceil(3d6/2)", static: 64 } },
+    parent: { id: "actor00000000001" },
+  };
+
+  // Среднее: число берётся из документа, ничего не бросается и не меняется.
+  const average = await measureHumanity(frame, "static");
+  expect(average.value === 64, `среднее ${average.value}, а в документе 64`);
+  expect(average.type === "static", `тип "${average.type}"`);
+
+  // Отказ от списания: ноль, и это именно отказ, а не «выпало ноль».
+  const none = await measureHumanity(frame, "none");
+  expect(none.value === 0 && none.type === "none", "отказ от списания посчитан неверно");
+
+  // Ни один из этих вызовов не должен трогать лист. Проверяем на актёре,
+  // который закричит, если его тронут.
+  {
+    const untouched = {
+      system: { derivedStats: { humanity: { value: 50, max: 80 } } },
+      update: () => {
+        throw new Error("лист тронут при подсчёте");
+      },
+      setMaxHumanity: () => {
+        throw new Error("максимум пересчитан при подсчёте");
+      },
+    };
+    let threw = false;
+    try {
+      await measureHumanity(frame, "static");
+      await measureHumanity(frame, "none");
+    } catch (error) {
+      threw = true;
+    }
+    expect(!threw, "подсчёт человечности всё-таки трогает лист");
+    expect(
+      untouched.system.derivedStats.humanity.value === 50,
+      "человечность изменилась на этапе подсчёта"
+    );
+  }
+
+  // Списание применяет ровно то число, которое показали, и пересчитывает максимум.
+  {
+    const updates = [];
+    let recalculated = 0;
+    const actor = {
+      system: { derivedStats: { humanity: { value: 80, max: 80 } } },
+      update: async (data) => updates.push(data),
+      setMaxHumanity: async () => {
+        recalculated += 1;
+      },
+    };
+    await applyHumanity(actor, { type: "roll", value: 71 });
+    expect(updates.length === 1, `обновлений листа ${updates.length}, а нужно одно`);
+    expect(
+      updates[0]["system.derivedStats.humanity.value"] === 9,
+      `человечность стала ${updates[0]["system.derivedStats.humanity.value"]}, а 80 − 71 = 9`
+    );
+    expect(recalculated === 1, "максимум человечности не пересчитан");
+  }
+
+  // Отказ и ноль ничего не списывают — и не делают лишнего обращения к листу.
+  for (const chosen of [{ type: "none", value: 0 }, null, { type: "roll", value: 0 }]) {
+    const updates = [];
+    const actor = {
+      system: { derivedStats: { humanity: { value: 80, max: 80 } } },
+      update: async (data) => updates.push(data),
+      setMaxHumanity: async () => {},
+    };
+    await applyHumanity(actor, chosen);
+    expect(updates.length === 0, `при выборе ${JSON.stringify(chosen)} лист всё-таки изменён`);
+  }
+
+  // Незаполненная человечность берётся из максимума — как это делает система.
+  {
+    const updates = [];
+    const actor = {
+      system: { derivedStats: { humanity: { value: null, max: 80 } } },
+      update: async (data) => updates.push(data),
+      setMaxHumanity: async () => {},
+    };
+    await applyHumanity(actor, { type: "static", value: 30 });
+    expect(
+      updates[0]?.["system.derivedStats.humanity.value"] === 50,
+      "при пустом текущем значении не взят максимум"
+    );
+  }
+}
+
+console.log("Лист «шестёрки» не ставит корпус наперегонки с мастером");
+{
+  // Лист НИП ставит брошенную кибернетику сам, не спрашивая: система зовёт
+  // `handleMookDraggedItem`, та открывает своё окно установки и списывает
+  // человечность, а при закрытии окна удаляет предмет со всем содержимым.
+  // Рядом при этом открыт наш мастер. Мастер игры это и увидел: человечность
+  // ушла, корпус исчез, имплантов нет.
+  const source = fs.readFileSync(path.join(SCRIPTS, "pkt-kit.js"), "utf-8");
+  expect(
+    source.includes("handleMookDraggedItem"),
+    "автоустановка на листе «шестёрки» не перехвачена — она подерётся с мастером"
+  );
+  // Пропускать надо и сам корпус, и импланты комплекта: их создаёт deployKit,
+  // а создание на листе НИП тоже считается «броском предмета», и система
+  // открыла бы окно установки на каждый из двух десятков.
+  const guard = source.slice(source.indexOf("cprAddendaMookDrop"));
+  expect(
+    guard.includes("getKit(item)"),
+    "корпус с комплектом не исключён из автоустановки"
+  );
+  expect(
+    guard.includes("FLAGS.pktPart"),
+    "импланты комплекта не исключены из автоустановки — система спросит про каждый"
+  );
+}
+
+console.log("Мастер применяет человечность только после установки");
+{
+  const source = fs.readFileSync(path.join(SCRIPTS, "pkt-wizard.js"), "utf-8");
+  const deploy = source.indexOf("await deployKit(frame)");
+  const apply = source.indexOf("await applyHumanity(actor, chosen)");
+  expect(deploy > 0 && apply > deploy,
+    "человечность списывается раньше установки — отмена снова оставит игрока без неё");
+  expect(
+    !source.includes("await actor.loseHumanityValue"),
+    "мастер снова зовёт системное списание: оно бросает заново и даст не то число, что показано"
+  );
+  // Отказ от списания нужен для НИП: формула системы выводит ЭМП из
+  // человечности, и полсотни очков за корпус уводят непися в минус.
+  expect(source.includes('key: "none"'), "нет кнопки отказа от списания человечности");
+  expect(source.includes("mookNote"), "нет пояснения про НИП на шаге с человечностью");
+}
+
 console.log(`\nПроверок выполнено: ${checks}, провалов: ${failures}`);
 process.exit(failures ? 1 : 0);

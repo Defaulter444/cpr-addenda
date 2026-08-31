@@ -283,7 +283,31 @@ export async function registerPktHumanityPatches() {
     "MIXED"
   );
 
-  // 2. Максимум человечности: возвращаем штрафы за импланты комплекта.
+  // 2. Лист «шестёрки» ставит брошенную на него кибернетику сам, не спрашивая.
+  //    Для корпуса ПКТ это гонка: система открывает своё окно установки и
+  //    списывает человечность, пока рядом открыт наш мастер, а если её окно
+  //    закрыть — она удаляет предмет вместе со всем содержимым. Мастер видел
+  //    это своими глазами: человечность ушла, корпус исчез, имплантов нет.
+  //    Корпус с комплектом система не трогает — им занимается мастер установки.
+  if (CPRActor.prototype.handleMookDraggedItem) {
+    libWrapper.register(
+      MODULE_ID,
+      "cprAddendaActorClass.prototype.handleMookDraggedItem",
+      async function cprAddendaMookDrop(wrapped, item) {
+        // Сам корпус: им занимается мастер установки.
+        if (getKit(item)) return item;
+        // Импланты комплекта: их создаёт `deployKit`, и создание на листе
+        // «шестёрки» тоже считается «броском предмета». Без этой проверки
+        // система откроет своё окно установки на каждый из двух десятков
+        // имплантов и за каждый спишет человечность отдельно.
+        if (item?.flags?.[MODULE_ID]?.[FLAGS.pktPart]) return item;
+        return wrapped(item);
+      },
+      "MIXED"
+    );
+  }
+
+  // 3. Максимум человечности: возвращаем штрафы за импланты комплекта.
   libWrapper.register(
     MODULE_ID,
     "cprAddendaActorClass.prototype._calcMaxHumanity",

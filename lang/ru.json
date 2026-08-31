@@ -246,5 +246,10 @@
   "CPRADDENDA.pkt.wizard.summary.slots": "Занятые слоты",
   "CPRADDENDA.pkt.wizard.summary.humanity": "Человечность уменьшена на <strong>{value}</strong>.",
   "CPRADDENDA.pkt.wizard.summary.noHumanity": "Человечность не списывалась.",
-  "CPRADDENDA.pkt.cancelled": "Установка корпуса «{frame}» отменена, корпус убран с листа."
+  "CPRADDENDA.pkt.cancelled": "Установка корпуса «{frame}» отменена, корпус убран с листа.",
+  "CPRADDENDA.pkt.wizard.noHumanity": "Без потери человечности",
+  "CPRADDENDA.pkt.wizard.tookNone": "Человечность решено не списывать.",
+  "CPRADDENDA.pkt.wizard.cyberpsycho": "Человечность упала до нуля или ниже — по правилам это киберпсихоз.",
+  "CPRADDENDA.pkt.wizard.nothingDeployed": "Корпус «{name}» установлен, но ни один имплант комплекта не встал. Проверьте консоль (F12): это ошибка, а не задумка.",
+  "CPRADDENDA.pkt.wizard.mookNote": "Это НИП. В Cyberpunk RED человечность у неписей не отслеживается, но формула системы всё равно пересчитывает из неё ЭМП — полсотни очков за корпус уведут непися в минус. Для «шестёрок» обычно берут «без потери»."
 }

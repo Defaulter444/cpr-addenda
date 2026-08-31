@@ -25,8 +25,8 @@
  * посчитали, и потому их можно проверить без запущенного Foundry.
  */
 
-import { MODULE_ID, localize } from "./constants.js";
-import { getKit, deployKit } from "./pkt-kit.js";
+import { MODULE_ID, SYSTEM_ID, localize } from "./constants.js";
+import { getKit, deployKit, kitPartsOf } from "./pkt-kit.js";
 
 /** Группы из таблицы документа. */
 const FREE = "free";
@@ -176,7 +176,7 @@ export function stepFree(view) {
  * @param {Object|null} chosen - выбранная потеря, если уже выбрана
  * @returns {String}
  */
-export function stepCost(frame, view, chosen) {
+export function stepCost(frame, view, chosen, isMook = false) {
   const humanity = frame.system?.humanityLoss ?? {};
 
   // Показываем только те фундаменты, куда что-то встаёт: пустая киберрука в
@@ -215,11 +215,15 @@ export function stepCost(frame, view, chosen) {
     );
   }
 
+  const decisionKey = {
+    static: "pkt.wizard.tookAverage",
+    roll: "pkt.wizard.rolled",
+    none: "pkt.wizard.tookNone",
+  };
   const decision = chosen
-    ? `<p class='cpr-addenda-pkt-done'>${localize(
-        chosen.type === "static" ? "pkt.wizard.tookAverage" : "pkt.wizard.rolled",
-        { value: chosen.value }
-      )}</p>`
+    ? `<p class='cpr-addenda-pkt-done'>${localize(decisionKey[chosen.type], {
+        value: chosen.value,
+      })}</p>`
     : `<p class='cpr-addenda-pkt-note'>${localize("pkt.wizard.cost.choose")}</p>`;
 
   return (
@@ -232,6 +236,9 @@ export function stepCost(frame, view, chosen) {
       formula: esc(humanity.roll ?? "?"),
       average: humanity.static ?? 0,
     })}</p>` +
+    (isMook
+      ? `<p class='cpr-addenda-pkt-warn'>${localize("pkt.wizard.mookNote")}</p>`
+      : "") +
     decision
   );
 }
@@ -270,6 +277,58 @@ export function stepSummary(frame, view, chosen) {
       { value: chosen?.value ?? 0 }
     )}</p>`
   );
+}
+
+/**
+ * Считает потерю человечности, ничего пока не меняя.
+ *
+ * Бросок делается здесь, чтобы игрок увидел число сразу — но к листу оно не
+ * применяется: до последнего шага мастер ещё может отказаться, и списанная
+ * человечность за отменённую установку не возвращалась бы ниоткуда. Ровно так
+ * и вышло у мастера: он прокрутил бросок, вышел из окна, корпус исчез, а
+ * тридцать с лишним очков остались потерянными.
+ *
+ * @async
+ * @param {CPRItem} frame - корпус
+ * @param {String} type - "roll", "static" или "none"
+ * @returns {Promise<Object>} - {type, value}
+ */
+async function measureHumanity(frame, type) {
+  const humanity = frame.system?.humanityLoss ?? {};
+  if (type === "none") return { type, value: 0 };
+  if (type === "static") return { type, value: Number(humanity.static) || 0 };
+
+  // Бросок катим системным классом: карточка в чате выглядит как любая другая
+  // потеря человечности, и мастер видит выпавшие грани.
+  const CPRRolls = await import(`/systems/${SYSTEM_ID}/modules/rolls/cpr-rolls.js`);
+  const CPRChat = await import(`/systems/${SYSTEM_ID}/modules/chat/cpr-chat.js`);
+  const roll = new CPRRolls.CPRHumanityLossRoll(frame.name, `${humanity.roll}`);
+  await roll.roll();
+  roll.entityData = { actor: frame.parent?.id, static: false };
+  CPRChat.default.RenderRollCard(roll);
+  return { type, value: roll.resultTotal };
+}
+
+/**
+ * Списывает посчитанную потерю человечности.
+ *
+ * Повторяет то, что делает системный `loseHumanityValue`, но применяет уже
+ * известное число, а не бросает заново: бросок был на третьем шаге, и второй
+ * дал бы другой результат, чем показанный.
+ *
+ * @async
+ * @param {CPRActor} actor - персонаж
+ * @param {Object} chosen - {type, value}
+ * @returns {Promise<void>}
+ */
+async function applyHumanity(actor, chosen) {
+  if (!chosen || chosen.value <= 0) return;
+  const humanity = actor.system?.derivedStats?.humanity ?? {};
+  const before = Number.isInteger(humanity.value) ? humanity.value : humanity.max;
+  const value = (Number(before) || 0) - chosen.value;
+  await actor.update({ "system.derivedStats.humanity.value": value });
+  await actor.setMaxHumanity();
+  if (value <= 0) ui.notifications.warn(localize("pkt.wizard.cyberpsycho"));
 }
 
 /* ------------------------------------------------------------------ */
@@ -325,6 +384,13 @@ export async function runPktWizard(frame) {
   if (!kit || !(actor instanceof Actor)) return false;
 
   const view = summariseKit(kit);
+  // Лист «шестёрки» можно открыть у актёра любого типа, поэтому смотрим не на
+  // тип, а на то, каким листом его сейчас показывают, — как это делает система.
+  const isMook =
+    actor.type === "mook" ||
+    Object.values(actor.apps ?? {}).some((app) =>
+      String(app?.constructor?.name ?? "").includes("Mook")
+    );
   const title = localize("pkt.wizard.title", { name: frame.name });
   const back = { key: "back", label: localize("pkt.wizard.back"), icon: "fas fa-arrow-left" };
   const next = { key: "next", label: localize("pkt.wizard.next"), icon: "fas fa-arrow-right" };
@@ -362,21 +428,33 @@ export async function runPktWizard(frame) {
           icon: "fas fa-equals",
         },
       ];
+      // У «шестёрок» человечность в Cyberpunk RED не отслеживается — система
+      // сама так и пишет. Но её формула всё равно пересчитывает ЭМП из
+      // человечности, и полсотни очков за корпус уводят непися в минус. Даём
+      // мастеру отказаться от списания, а на листе НИП это ещё и предлагаем.
+      buttons.push({
+        key: "none",
+        label: localize("pkt.wizard.noHumanity"),
+        icon: "fas fa-ban",
+      });
       // Дальше пускаем только когда с человечностью решили: иначе итог на
       // последнем шаге пришлось бы показывать с пустым местом.
       if (chosen) buttons.push(next);
       else buttons.push(no);
 
-      answer = await askStep({ title, content: stepCost(frame, view, chosen), buttons });
+      answer = await askStep({
+        title,
+        content: stepCost(frame, view, chosen, isMook),
+        buttons,
+      });
 
-      if (answer === "roll" || answer === "average") {
-        const type = answer === "roll" ? "roll" : "static";
-        const before = actor.system?.derivedStats?.humanity?.value ?? 0;
-        await actor.loseHumanityValue([frame], type);
-        const after = actor.system?.derivedStats?.humanity?.value ?? before;
-        chosen = { type, value: Math.max(before - after, 0) };
+      if (answer === "roll" || answer === "average" || answer === "none") {
+        const type =
+          answer === "roll" ? "roll" : answer === "average" ? "static" : "none";
+        chosen = await measureHumanity(frame, type);
         // Остаёмся на этом же шаге: игрок должен увидеть результат броска
-        // прежде, чем идти к итогу.
+        // прежде, чем идти к итогу. К листу число пока не применяется —
+        // это произойдёт только после «Установить».
         continue;
       }
     } else {
@@ -399,12 +477,22 @@ export async function runPktWizard(frame) {
     step += 1;
   }
 
-  await deployKit(frame);
-  // Сам корпус ставим здесь же: человечность за него уже списана на третьем
-  // шаге, и системное окно установки спросило бы о ней второй раз.
+  // Порядок важен: сперва раскладываем комплект, потом ставим сам корпус и
+  // только в самом конце трогаем человечность. Отказ на любом шаге до этой
+  // строки не стоит игроку ничего.
+  const deployed = await deployKit(frame);
   if (!frame.system?.isInstalledInActor) await actor.installItems([frame]);
+  await applyHumanity(actor, chosen);
+
+  // Ноль сам по себе ещё не беда: комплект мог быть разложен раньше, и
+  // `deployKit` тогда честно ничего не делает. Тревога — когда после установки
+  // на листе нет ни одной части комплекта. Молчать об этом нельзя: со стороны
+  // это неотличимо от «модуль ничего не сделал», а мастер именно это и увидел.
+  if (!deployed && !kitPartsOf(actor, frame.id).length) {
+    ui.notifications.warn(localize("pkt.wizard.nothingDeployed", { name: frame.name }));
+  }
   return true;
 }
 
 /** Внутренности для самопроверки. */
-export const __test = { FREE, COST, listOf };
+export const __test = { FREE, COST, listOf, measureHumanity, applyHumanity };
