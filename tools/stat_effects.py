@@ -12,9 +12,19 @@
 ровно так пропал эффект у «Эндоскелета Омега». Поэтому таблица одна, лежит в
 docs/stat-effects.json, а сборщики зовут отсюда `apply`.
 
+Форма эффекта повторяет системную дословно, и это не аккуратизм. Cyberpunk RED
+читает у каждого изменения свои флаги — `flags.cyberpunk-red-core.changes.cats`
+и `.situational` — **без всякой проверки**:
+
+    this.category = effect.flags[game.system.id].changes.cats?.[index];
+
+Эффект с пустыми флагами роняет отрисовку листа целиком: «Cannot read properties
+of undefined (reading 'changes')». Лист после этого не открывается вообще —
+именно так у мастера перестала открываться «шестёрка», на которую поставили
+Драгуна.
+
 Проверку замыкает validate-items.js: он читает ту же таблицу и требует, чтобы
-эффект доехал до собранного предмета. Забытый вызов `apply` роняет сборку, а не
-уходит в релиз молча.
+эффект доехал до собранного предмета и был правильной формы.
 """
 
 import io
@@ -29,11 +39,23 @@ TABLE = os.path.join(ROOT, "docs", "stat-effects.json")
 #: старый. Собираем из имени предмета, чтобы не вести отдельный счётчик.
 ID_PREFIX = "cprAddFx"
 
+#: Поля длительности, которые система заполняет у своих эффектов. Пустые, но
+#: присутствовать должны: их читают и лист эффекта, и сравнение при обновлении.
+DURATION = {
+    "combat": None,
+    "rounds": None,
+    "seconds": None,
+    "startRound": None,
+    "startTime": None,
+    "startTurn": None,
+    "turns": None,
+}
+
 
 def load():
     """Читает таблицу эффектов.
 
-    @returns {dict} - {имя предмета: {usage, why, changes}}
+    @returns {dict} - {имя предмета: {usage, why, cat, changes}}
     """
     return json.load(io.open(TABLE, encoding="utf-8"))["items"]
 
@@ -58,6 +80,70 @@ def effect_id(name):
     return ID_PREFIX + tail
 
 
+def category_of(key):
+    """Категория изменения — та, что система показывает на листе эффекта.
+
+    Категорий у неё семь; нам хватает двух. Ключи характеристик — «stat»,
+    прибавки к навыкам — «skill». Ошибиться здесь не страшно для расчёта, но
+    категория попадает в интерфейс, и чужая сбивала бы с толку.
+
+    @param {str} key - ключ изменения
+    @returns {str}
+    """
+    return "stat" if key.startswith("system.stats.") else "skill"
+
+
+def build(name, changes, img=None, description=""):
+    """Собирает активный эффект в том виде, в каком его делает система.
+
+    @param {str} name - имя эффекта, обычно совпадает с именем предмета
+    @param {list} changes - изменения [{key, mode, value}]
+    @param {str} img - иконка
+    @param {str} description - пояснение, откуда правило
+    @returns {dict}
+    """
+    return {
+        "_id": effect_id(name),
+        "name": name,
+        "img": img,
+        "type": "base",
+        "changes": [
+            {
+                "key": change["key"],
+                "mode": change["mode"],
+                "value": change["value"],
+                "priority": None,
+            }
+            for change in changes
+        ],
+        "disabled": False,
+        "duration": dict(DURATION),
+        "description": description,
+        "origin": None,
+        "tint": "#ffffff",
+        "transfer": True,
+        "statuses": [],
+        "sort": 0,
+        "system": {},
+        # Без этих флагов система падает при отрисовке листа: она читает
+        # `flags.cyberpunk-red-core.changes.cats` без проверки на существование.
+        "flags": {
+            "cyberpunk-red-core": {
+                "changes": {
+                    "cats": {
+                        str(index): category_of(change["key"])
+                        for index, change in enumerate(changes)
+                    },
+                    "situational": {
+                        str(index): {"isSituational": False, "onByDefault": False}
+                        for index, _ in enumerate(changes)
+                    },
+                }
+            }
+        },
+    }
+
+
 def apply(doc, table=None):
     """Навешивает на предмет его эффект, если он есть в таблице.
 
@@ -74,28 +160,12 @@ def apply(doc, table=None):
         return False
 
     doc["effects"] = [
-        {
-            "_id": effect_id(doc["name"]),
-            "name": doc["name"],
-            "img": doc.get("img"),
-            "changes": [
-                {
-                    "key": change["key"],
-                    "mode": change["mode"],
-                    "value": change["value"],
-                    "priority": None,
-                }
-                for change in entry["changes"]
-            ],
-            "disabled": False,
-            "duration": {"startTime": None},
-            "description": entry.get("why", ""),
-            "origin": None,
-            "tint": "#ffffff",
-            "transfer": True,
-            "statuses": [],
-            "flags": {},
-        }
+        build(
+            doc["name"],
+            entry["changes"],
+            img=doc.get("img"),
+            description=entry.get("why", ""),
+        )
     ]
     if entry.get("usage"):
         doc.setdefault("system", {})["usage"] = entry["usage"]

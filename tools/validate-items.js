@@ -102,6 +102,51 @@ function readConfigKeys(source, name) {
  * @param {String} label - «пак/файл» для сообщений
  * @param {Map} seenIds - уже занятые идентификаторы
  */
+/**
+ * Проверяет форму активного эффекта.
+ *
+ * Cyberpunk RED читает у каждого изменения свои флаги без всякой проверки:
+ *
+ *     this.category = effect.flags[game.system.id].changes.cats?.[index];
+ *
+ * Эффект с пустыми флагами роняет отрисовку листа целиком — «Cannot read
+ * properties of undefined (reading 'changes')», — и лист перестаёт открываться
+ * вовсе. Ошибка тем неприятнее, что предмет создаётся успешно и всё выглядит
+ * рабочим до первого открытия листа.
+ *
+ * @param {Object} effect - эффект
+ * @param {String} label - что проверяем, для сообщения
+ * @param {Function} fail - куда сообщать
+ * @returns {void}
+ */
+function validateEffect(effect, label, fail) {
+  if (typeof effect !== "object" || effect === null) {
+    fail(label, `эффект записан как ${JSON.stringify(effect)} вместо документа`);
+    return;
+  }
+  if (!effect.name) {
+    fail(label, "у эффекта нет имени — Foundry откажется создавать предмет");
+  }
+  const changes = effect.changes ?? [];
+  const flags = effect.flags?.["cyberpunk-red-core"]?.changes;
+  if (!flags?.cats) {
+    fail(
+      label,
+      `эффект «${effect.name}»: нет flags.cyberpunk-red-core.changes.cats — ` +
+        "система читает их без проверки, и лист персонажа перестанет открываться"
+    );
+    return;
+  }
+  changes.forEach((change, index) => {
+    if (flags.cats[index] === undefined) {
+      fail(label, `эффект «${effect.name}»: нет категории для изменения ${index}`);
+    }
+    if (flags.situational?.[index] === undefined) {
+      fail(label, `эффект «${effect.name}»: нет признака ситуативности для изменения ${index}`);
+    }
+  });
+}
+
 function validateActor(doc, label, seenIds) {
   if (!/^[a-zA-Z0-9]{16}$/.test(doc._id ?? "")) {
     fail(label, `_id должен быть 16 буквенно-цифровых символов, получено "${doc._id}"`);
@@ -199,11 +244,7 @@ function validateActor(doc, label, seenIds) {
   // Foundry такой предмет создать отказывается, а костюм приезжает без него.
   for (const item of doc.items ?? []) {
     for (const effect of item.effects ?? []) {
-      if (typeof effect !== "object" || effect === null) {
-        fail(label, `«${item.name}»: эффект записан как ${JSON.stringify(effect)}`);
-      } else if (!effect.name) {
-        fail(label, `«${item.name}»: у эффекта нет имени`);
-      }
+      validateEffect(effect, `${label} → «${item.name}»`, fail);
     }
   }
 
@@ -851,18 +892,8 @@ const seenIds = new Map();
 
       // 6. Активные эффекты.
       for (const effect of doc.effects ?? []) {
-        // Строка вместо документа — след копирования предмета из пака системы:
-        // там эффекты лежат отдельными записями, а в самом предмете остаются
-        // одни идентификаторы. Foundry такой предмет создать отказывается
-        // («name: may not be undefined»), и весь комплект ПКТ не разворачивался
-        // — при этом ни валидатор, ни сборка ничего не замечали.
-        if (typeof effect !== "object" || effect === null) {
-          fail(label, `эффект записан как ${JSON.stringify(effect)} вместо документа`);
-          continue;
-        }
-        if (!effect.name) {
-          fail(label, "у эффекта нет имени — Foundry откажется создавать предмет");
-        }
+        validateEffect(effect, label, fail);
+        if (typeof effect !== "object" || effect === null) continue;
         if (!/^[a-zA-Z0-9]{16}$/.test(effect._id ?? "")) {
           fail(label, `эффект "${effect.name}": _id должен быть 16 символов`);
         }

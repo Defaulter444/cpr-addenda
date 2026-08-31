@@ -27,6 +27,7 @@ const HERE = path.dirname(fileURLToPath(import.meta.url));
 const MODULE_ROOT = path.resolve(HERE, "..");
 const SCRIPTS = path.join(MODULE_ROOT, "scripts");
 const LANG = path.join(MODULE_ROOT, "lang");
+const SOURCES_ROOT = path.join(MODULE_ROOT, "sources");
 
 let checks = 0;
 let failures = 0;
@@ -209,6 +210,91 @@ console.log("Выключенная настройка запрещает вме
 }
 
 fs.rmSync(tmp, { recursive: true, force: true });
+
+console.log("У эффектов есть флаги, без которых система роняет лист");
+{
+  // Cyberpunk RED читает у каждого изменения свои флаги без всякой проверки:
+  //     this.category = effect.flags[game.system.id].changes.cats?.[index];
+  // Эффект с пустыми флагами роняет отрисовку листа целиком, и лист перестаёт
+  // открываться вовсе. У мастера так перестала открываться «шестёрка», на
+  // которую поставили корпус ПКТ. Ошибка коварная: предмет создаётся успешно,
+  // и всё выглядит рабочим до первого открытия листа.
+  const SYSTEM = "cyberpunk-red-core";
+
+  // 1. Эффект, который модуль вешает на лету.
+  const source = fs.readFileSync(path.join(SCRIPTS, "system-fixes.js"), "utf-8");
+  expect(
+    source.includes("cats:") && source.includes("situational:"),
+    "эффект «Фума Котаро» создаётся без флагов системы — лист перестанет открываться"
+  );
+
+  // 2. Эффекты в исходниках предметов.
+  const roots = fs.readdirSync(SOURCES_ROOT);
+  let checked = 0;
+  const broken = [];
+  const visit = (doc, where) => {
+    for (const effect of doc.effects ?? []) {
+      if (typeof effect !== "object" || effect === null) {
+        broken.push(`${where}: ${doc.name} — строка вместо документа`);
+        continue;
+      }
+      const cats = effect.flags?.[SYSTEM]?.changes?.cats;
+      const situational = effect.flags?.[SYSTEM]?.changes?.situational;
+      if (!cats || !situational) {
+        broken.push(`${where}: ${doc.name} / «${effect.name}» — нет флагов системы`);
+        continue;
+      }
+      (effect.changes ?? []).forEach((change, index) => {
+        if (cats[index] === undefined || situational[index] === undefined) {
+          broken.push(
+            `${where}: ${doc.name} / «${effect.name}» — нет разметки изменения ${index}`
+          );
+        }
+      });
+      checked += 1;
+    }
+  };
+
+  for (const folder of roots) {
+    const dir = path.join(SOURCES_ROOT, folder);
+    if (!fs.statSync(dir).isDirectory()) continue;
+    for (const file of fs.readdirSync(dir)) {
+      if (!file.endsWith(".json")) continue;
+      const doc = JSON.parse(fs.readFileSync(path.join(dir, file), "utf-8"));
+      visit(doc, folder);
+      for (const item of doc.items ?? []) visit(item, `${folder} (актёр)`);
+      const kit = doc.flags?.["cpr-addenda"]?.pktKit;
+      if (kit) {
+        const all = [
+          ...kit.foundations.flatMap((f) => [f.item, ...f.options]),
+          ...kit.carried,
+        ];
+        for (const item of all) visit(item, `${doc.name} (комплект)`);
+      }
+    }
+  }
+
+  expect(broken.length === 0, `эффекты без флагов: ${broken.slice(0, 4).join("; ")}`);
+  expect(checked > 30, `проверено эффектов ${checked} — подозрительно мало`);
+  console.log(`  проверено эффектов: ${checked}`);
+
+  // 3. Починка уже разложенного по чужим листам: обновление пака их не чинит.
+  const migration = fs.readFileSync(path.join(SCRIPTS, "vehicle-migration.js"), "utf-8");
+  expect(
+    migration.includes("repairEffectFlags"),
+    "нет прохода, чинящего эффекты на уже разложенных предметах"
+  );
+  expect(
+    /const MIGRATION_VERSION = ([4-9]|\d\d)/.test(migration),
+    "версия переноса не выросла — миры, прошедшие прошлый, останутся со сломанными листами"
+  );
+  // Чинить надо только сломанное: переписывать чужие флаги мы не вправе.
+  const guard = migration.slice(migration.indexOf("repairEffectFlags"));
+  expect(
+    guard.includes("changes?.cats) continue"),
+    "починка не пропускает эффекты, у которых флаги уже есть"
+  );
+}
 
 console.log(`\nПроверок выполнено: ${checks}, провалов: ${failures}`);
 process.exit(failures > 0 ? 1 : 0);

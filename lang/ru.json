@@ -164,7 +164,7 @@
   "CPRADDENDA.vehicle.notify.oldModuleActive": "Модуль «MMuton's CPR Vehicle Actor Sheet» всё ещё включён. Лист транспорта перенесён в Cyberpunk RED: Addenda — выключите старый модуль, иначе эффекты постов будут выдаваться дважды.",
   "CPRADDENDA.vehicle.effect.position": "Транспорт: {position}",
   "CPRADDENDA.vehicle.effect.pilotMove": "Транспорт: {position} (СКО пилота)",
-  "CPRADDENDA.vehicle.migration.done": "Данные транспорта перенесены: актёров {actors}, предметов {items}, эффектов {effects}, бронеплит {armor}, правок данных системы {fixes}.",
+  "CPRADDENDA.vehicle.migration.done": "Данные транспорта перенесены: актёров {actors}, предметов {items}, эффектов {effects}, бронеплит {armor}, правок данных системы {fixes}, починенных эффектов {effectFlags}.",
   "CPRADDENDA.vehicle.migration.failed": "Перенос данных транспорта не завершён — подробности в консоли (F12). Попытка повторится при следующей загрузке мира.",
   "CPRADDENDA.vehicle.sheetLabel": "Лист транспорта (Addenda)",
   "CPRADDENDA.vehicle.settings.keepGmPermissions.name": "Беречь права доступа, выставленные вручную",

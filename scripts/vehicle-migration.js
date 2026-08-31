@@ -18,6 +18,7 @@
 
 import {
   MODULE_ID,
+  SYSTEM_ID,
   SETTINGS,
   VAS_MODULE_ID,
   VEHICLE_FLAGS,
@@ -29,7 +30,7 @@ import { fixActorItems } from "./system-fixes.js";
  * Версия переноса. Растёт, если однажды придётся переносить что-то ещё, —
  * тогда миры, прошедшие прошлый перенос, пройдут и новый.
  */
-const MIGRATION_VERSION = 3;
+const MIGRATION_VERSION = 4;
 
 /** Как звались флаги в оригинале → как зовутся теперь. */
 const FLAG_MAP = {
@@ -162,19 +163,66 @@ async function migrateArmorPlates(actor, stats) {
   stats.armor += 1;
 }
 
+/**
+ * Чинит эффекты, у которых нет флагов системы.
+ *
+ * Cyberpunk RED читает у каждого изменения `flags.cyberpunk-red-core.changes`
+ * без проверки на существование. Эффект без этих флагов роняет отрисовку листа
+ * целиком: «Cannot read properties of undefined (reading 'changes')», и лист
+ * перестаёт открываться вовсе. Модуль такие эффекты какое-то время выдавал —
+ * у мастера так перестала открываться «шестёрка», на которую поставили корпус.
+ *
+ * Обновление пака чужие листы не чинит: разложенные предметы живут своей
+ * копией. Поэтому проходим по ним здесь. Трогаем только то, что сломано:
+ * эффекты с уже проставленными флагами не переписываем.
+ *
+ * @param {CPRActor} actor - проверяемый актёр
+ * @param {Object} stats - счётчики переноса
+ * @returns {Promise<void>}
+ */
+async function repairEffectFlags(actor, stats) {
+  const category = (key) =>
+    String(key ?? "").startsWith("system.stats.") ? "stat" : "skill";
+
+  for (const item of actor.items) {
+    const updates = [];
+    for (const effect of item.effects ?? []) {
+      const source = effect.toObject();
+      if (source.flags?.[SYSTEM_ID]?.changes?.cats) continue;
+
+      const cats = {};
+      const situational = {};
+      (source.changes ?? []).forEach((change, index) => {
+        cats[index] = category(change.key);
+        situational[index] = { isSituational: false, onByDefault: false };
+      });
+      updates.push({
+        _id: effect.id,
+        [`flags.${SYSTEM_ID}.changes`]: { cats, situational },
+      });
+    }
+    if (updates.length) {
+      // eslint-disable-next-line no-await-in-loop
+      await item.updateEmbeddedDocuments("ActiveEffect", updates);
+      stats.effectFlags += updates.length;
+    }
+  }
+}
+
 export async function migrateVehicleData() {
   if (!game.user.isGM) return;
 
   const done = game.settings.get(MODULE_ID, SETTINGS.vehicleMigration);
   if (done >= MIGRATION_VERSION) return;
 
-  const stats = { actors: 0, items: 0, effects: 0, armor: 0, fixes: 0 };
+  const stats = { actors: 0, items: 0, effects: 0, armor: 0, fixes: 0, effectFlags: 0 };
 
   try {
     for (const actor of game.actors) {
       await migrateActor(actor, stats);
       await migrateArmorPlates(actor, stats);
       await fixActorItems(actor, stats);
+      await repairEffectFlags(actor, stats);
     }
 
     for (const scene of game.scenes) {
@@ -184,6 +232,7 @@ export async function migrateVehicleData() {
         await migrateActor(token.actor, stats);
         await migrateArmorPlates(token.actor, stats);
         await fixActorItems(token.actor, stats);
+        await repairEffectFlags(token.actor, stats);
       }
     }
 
@@ -194,12 +243,17 @@ export async function migrateVehicleData() {
     );
 
     const total =
-      stats.actors + stats.items + stats.effects + stats.armor + stats.fixes;
+      stats.actors +
+      stats.items +
+      stats.effects +
+      stats.armor +
+      stats.fixes +
+      stats.effectFlags;
     if (total > 0) {
       ui.notifications.info(localize("vehicle.migration.done", stats));
     }
     console.log(
-      `${MODULE_ID} | перенос данных транспорта: актёров ${stats.actors}, предметов ${stats.items}, эффектов ${stats.effects}, бронеплит ${stats.armor}, правок данных системы ${stats.fixes}`
+      `${MODULE_ID} | перенос данных транспорта: актёров ${stats.actors}, предметов ${stats.items}, эффектов ${stats.effects}, бронеплит ${stats.armor}, правок данных системы ${stats.fixes}, починенных эффектов ${stats.effectFlags}`
     );
   } catch (error) {
     // Отметку не ставим: следующая загрузка попробует снова, а уже

@@ -19,7 +19,7 @@
  * от смены языка.
  */
 
-import { MODULE_ID, SETTINGS, localize } from "./constants.js";
+import { MODULE_ID, SYSTEM_ID, SETTINGS, localize } from "./constants.js";
 
 /**
  * Что и почему правим.
@@ -63,10 +63,22 @@ const FIXES = [
         {
           name: localize("fixes.fumaStealth.effect"),
           img: item.img,
+          type: "base",
           disabled: false,
           transfer: true,
           changes: [{ key: "bonuses.stealth", mode: 2, value: "2", priority: null }],
-          flags: { [MODULE_ID]: { systemFix: "fumaKotaro" } },
+          // Флаги системы обязательны. Cyberpunk RED читает
+          // `flags.cyberpunk-red-core.changes.cats` без проверки, и эффект без
+          // них роняет отрисовку листа целиком — лист перестаёт открываться.
+          flags: {
+            [SYSTEM_ID]: {
+              changes: {
+                cats: { 0: "skill" },
+                situational: { 0: { isSituational: false, onByDefault: false } },
+              },
+            },
+            [MODULE_ID]: { systemFix: "fumaKotaro" },
+          },
         },
       ],
     }),

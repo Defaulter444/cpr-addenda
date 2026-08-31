@@ -10,6 +10,7 @@
       "_id": "cprAddFx8t58fgyp",
       "name": "Имплантированный Эндоскелет Омега",
       "img": "modules/cpr-addenda/assets/icons/borgware.svg",
+      "type": "base",
       "changes": [
         {
           "key": "system.stats.body.value",
@@ -20,14 +21,36 @@
       ],
       "disabled": false,
       "duration": {
-        "startTime": null
+        "combat": null,
+        "rounds": null,
+        "seconds": null,
+        "startRound": null,
+        "startTime": null,
+        "startTurn": null,
+        "turns": null
       },
       "description": "«Пользователь увеличивает свой ТЕЛ до 16.» Так же система задаёт ТЕЛ своим «Сигме» и «Бете».",
       "origin": null,
       "tint": "#ffffff",
       "transfer": true,
       "statuses": [],
-      "flags": {}
+      "sort": 0,
+      "system": {},
+      "flags": {
+        "cyberpunk-red-core": {
+          "changes": {
+            "cats": {
+              "0": "stat"
+            },
+            "situational": {
+              "0": {
+                "isSituational": false,
+                "onByDefault": false
+              }
+            }
+          }
+        }
+      }
     }
   ],
   "flags": {},
