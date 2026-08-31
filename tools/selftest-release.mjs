@@ -28,7 +28,8 @@
 import fs from "fs";
 import path from "path";
 import { execFileSync } from "child_process";
-import { fileURLToPath } from "url";
+import { createRequire } from "module";
+import { fileURLToPath, pathToFileURL } from "url";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const MODULE_ROOT = path.resolve(HERE, "..");
@@ -193,6 +194,100 @@ console.log("Сборщик архива не молчит о потерях");
     release.includes("check_packs"),
     "make_release.py больше не сверяет паки в архиве с паками на диске"
   );
+}
+
+console.log("Эффекты доезжают до собранных паков");
+{
+  // Проверка появилась после боевой ошибки, точь-в-точь повторившей прошлую с
+  // актёрами: сборщик клал эффекты внутрь записи предмета, а Foundry ждёт их
+  // отдельными ключами `!items.effects!`. Предмет импортировался нормально,
+  // эффект пропадал — молча, и на листе просто ничего не менялось. В
+  // исходниках при этом всё было на месте, поэтому validate-items ошибки не
+  // видел: сверять надо именно собранный пак.
+  const table = JSON.parse(
+    fs.readFileSync(path.join(MODULE_ROOT, "docs", "stat-effects.json"), "utf-8")
+  ).items;
+  const wanted = new Set(Object.keys(table));
+
+  const foundryCandidates = [
+    "C:/Program Files/Foundry Virtual Tabletop/resources/app/package.json",
+    "/opt/foundryvtt/resources/app/package.json",
+  ];
+  let ClassicLevel = null;
+  for (const candidate of foundryCandidates) {
+    if (!fs.existsSync(candidate)) continue;
+    try {
+      ({ ClassicLevel } = createRequire(pathToFileURL(candidate))("classic-level"));
+      break;
+    } catch (error) {
+      // Ищем дальше.
+    }
+  }
+
+  if (!ClassicLevel) {
+    console.log("  пропущено: classic-level недоступен");
+  } else {
+    const found = new Map();
+    let opened = 0;
+    for (const pack of fs.readdirSync(PACKS)) {
+      const dir = path.join(PACKS, pack);
+      if (!fs.statSync(dir).isDirectory()) continue;
+      const db = new ClassicLevel(dir, { valueEncoding: "json" });
+      try {
+        // Пока Foundry запущен, база заблокирована им. Это не повод падать.
+        await db.open();
+        opened += 1;
+        const byId = new Map();
+        const effects = [];
+        for await (const [key, value] of db.iterator()) {
+          if (key.startsWith("!items.effects!")) effects.push([key, value]);
+          else if (key.startsWith("!items!")) byId.set(value._id, value);
+        }
+        for (const [key, effect] of effects) {
+          const owner = key.split("!")[2].split(".")[0];
+          const item = byId.get(owner);
+          if (!item || !wanted.has(item.name)) continue;
+          if (!found.has(item.name)) found.set(item.name, { item, changes: [] });
+          found.get(item.name).changes.push(...(effect.changes ?? []));
+        }
+      } catch (error) {
+        // Заблокированную базу пропускаем молча — ниже об этом скажем.
+      } finally {
+        await db.close().catch(() => {});
+      }
+    }
+
+    if (!opened) {
+      console.log("  пропущено: паки заблокированы (запущен Foundry?)");
+    } else {
+      for (const [name, expected] of Object.entries(table)) {
+        const got = found.get(name);
+        if (!got) {
+          expect(
+            false,
+            `«${name}»: в собранном паке нет эффекта — ` +
+              "он лежит внутри записи предмета вместо отдельного ключа"
+          );
+          continue;
+        }
+        expect(
+          got.item.system?.usage === expected.usage,
+          `«${name}»: в паке usage "${got.item.system?.usage}", а нужен "${expected.usage}"`
+        );
+        for (const want of expected.changes) {
+          const change = got.changes.find((c) => c.key === want.key);
+          expect(change !== undefined, `«${name}»: в паке нет ключа ${want.key}`);
+          if (!change) continue;
+          expect(
+            String(change.value) === String(want.value) && change.mode === want.mode,
+            `«${name}»: в паке ${want.key} = ${change.value} режимом ${change.mode}, ` +
+              `а нужно ${want.value} режимом ${want.mode}`
+          );
+        }
+      }
+      console.log(`  сверено предметов: ${found.size} из ${wanted.size}`);
+    }
+  }
 }
 
 console.log(`\nПроверок выполнено: ${checks}, провалов: ${failures}`);

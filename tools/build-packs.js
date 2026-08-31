@@ -162,7 +162,19 @@ function toEntries(doc, type) {
     ];
   }
 
-  return [[`!items!${doc._id}`, doc]];
+  // Эффекты предмета — та же история, что и предметы актёра: положенный
+  // внутрь записи массив Foundry молча игнорирует. Предмет импортируется,
+  // эффект пропадает, и на листе просто ничего не происходит. Так уехал в
+  // релиз 0.15.0 весь набор эффектов, меняющих характеристики, — при том что
+  // в исходниках они были на месте.
+  const effects = doc.effects ?? [];
+  if (!effects.length) return [[`!items!${doc._id}`, doc]];
+
+  const item = { ...doc, effects: effects.map((e) => e._id) };
+  return [
+    [`!items!${doc._id}`, item],
+    ...effects.map((e) => [`!items.effects!${doc._id}.${e._id}`, e]),
+  ];
 }
 
 /**
