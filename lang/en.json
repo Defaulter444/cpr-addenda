@@ -251,5 +251,7 @@
   "CPRADDENDA.pkt.wizard.tookNone": "No Humanity will be spent.",
   "CPRADDENDA.pkt.wizard.cyberpsycho": "Humanity dropped to zero or below — by the rules that is cyberpsychosis.",
   "CPRADDENDA.pkt.wizard.nothingDeployed": "The “{name}” frame was installed, but none of its kit implants appeared. Check the console (F12): this is a bug, not a design choice.",
-  "CPRADDENDA.pkt.wizard.mookNote": "This is an NPC. Cyberpunk RED does not track Humanity for NPCs, but the system still derives EMP from it — fifty-odd points for a frame will push the NPC into the negative. Mooks usually take “no loss”."
+  "CPRADDENDA.pkt.wizard.mookNote": "This is an NPC. Cyberpunk RED does not track Humanity for NPCs, but the system still derives EMP from it — fifty-odd points for a frame will push the NPC into the negative. Mooks usually take “no loss”.",
+  "CPRADDENDA.settings.mookEmpathy.name": "Keep the EMP you typed on NPCs when installing cyberware",
+  "CPRADDENDA.settings.mookEmpathy.hint": "The system derives EMP from Humanity on every install, and derives Humanity from EMP max — a field the mook sheet does not expose. So the first implant overwrites whatever EMP the GM typed. Cyberpunk RED does not track Humanity for NPCs, so their EMP is restored to the typed value. Player characters are unaffected."
 }

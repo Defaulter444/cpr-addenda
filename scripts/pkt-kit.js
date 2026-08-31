@@ -25,7 +25,7 @@
  * кубики за содержимое корпуса и снимать максимум человечности повторно.
  */
 
-import { MODULE_ID, SYSTEM_ID, FLAGS, localize } from "./constants.js";
+import { MODULE_ID, SYSTEM_ID, FLAGS, SETTINGS, localize } from "./constants.js";
 
 /**
  * Комплект, если предмет его несёт.
@@ -316,6 +316,45 @@ export async function registerPktHumanityPatches() {
     },
     "MIXED"
   );
+
+  // 4. ЭМП у НИП. Система выводит его из человечности при каждой установке
+  //    кибернетики:
+  //
+  //      "system.stats.emp.value": Math.floor(humanity.value / 10)
+  //
+  //    а саму человечность считает от `stats.emp.max`. На листе «шестёрки»
+  //    редактируется только `emp.value`; `emp.max` там показать негде, и он
+  //    остаётся стандартной шестёркой. Поэтому первая же установка любого
+  //    импланта затирает набранный мастером ЭМП значением из человечности —
+  //    у непися с ЭМП 4 он становится 6, а после удаления импланта уезжает
+  //    ещё раз. Мастер видел это на «БИОСИСТЕМЕ», но виноват не имплант:
+  //    так ведёт себя любая кибернетика.
+  //
+  //    Cyberpunk RED человечность у НИП не отслеживает — система пишет об этом
+  //    прямо в комментарии к `loseHumanityValue`. Значит, и выводить из неё
+  //    ЭМП у них незачем: возвращаем то, что поставил мастер.
+  //
+  //    Правим только настоящих «шестёрок» (`type === "mook"`): лист НИП можно
+  //    открыть и у обычного персонажа, а у того человечность считается всерьёз.
+  if (CPRActor.prototype.setMaxHumanity) {
+    libWrapper.register(
+      MODULE_ID,
+      "cprAddendaActorClass.prototype.setMaxHumanity",
+      async function cprAddendaKeepMookEmpathy(wrapped, ...args) {
+        if (this.type !== "mook" || !game.settings.get(MODULE_ID, SETTINGS.mookEmpathy)) {
+          return wrapped(...args);
+        }
+        const before = this.system?.stats?.emp?.value;
+        const result = await wrapped(...args);
+        const after = this.system?.stats?.emp?.value;
+        if (Number.isInteger(before) && after !== before) {
+          await this.update({ "system.stats.emp.value": before });
+        }
+        return result;
+      },
+      "MIXED"
+    );
+  }
 
   console.log(`${MODULE_ID} | Комплекты корпусов ПКТ подключены`);
 }

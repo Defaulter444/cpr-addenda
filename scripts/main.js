@@ -112,6 +112,15 @@ function registerSettings() {
     default: true,
   });
 
+  game.settings.register(MODULE_ID, SETTINGS.mookEmpathy, {
+    name: "CPRADDENDA.settings.mookEmpathy.name",
+    hint: "CPRADDENDA.settings.mookEmpathy.hint",
+    scope: "world",
+    config: true,
+    type: Boolean,
+    default: true,
+  });
+
   game.settings.register(MODULE_ID, SETTINGS.showSheetControls, {
     name: "CPRADDENDA.settings.showSheetControls.name",
     hint: "CPRADDENDA.settings.showSheetControls.hint",

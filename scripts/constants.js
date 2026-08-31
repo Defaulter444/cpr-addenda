@@ -79,6 +79,8 @@ export const SETTINGS = {
   explosiveTemplates: "explosiveTemplates",
   /** Править ли на лету расхождения в данных самой системы. */
   systemFixes: "systemFixes",
+  /** Сохранять ли у НИП набранный мастером ЭМП при установке кибернетики. */
+  mookEmpathy: "mookEmpathy",
 };
 
 /**
