@@ -136,40 +136,145 @@ console.log("Квадрат взрыва: 5 × 5 клеток по цели");
   expect(!A.inBlast({ x: 1000, y: 951 }, g.hit), "точка ниже зоны попала");
 }
 
-console.log("Сектор дроби: три клетки перед стрелком");
+console.log("Зона дроби: блок три на три перед стрелком");
 {
   const shooter = { x: 1000, y: 700 };
   // Направление 0° — вправо по холсту.
   const g = A.areaGeometry(A.SHOT, GRID, shooter, 0);
 
-  expect(g.template.t === "cone", `тип шаблона "${g.template.t}"`);
-  expect(g.template.angle === 180, `раствор ${g.template.angle}, а «перед тобой» — это 180`);
+  expect(g.template.t === "rect", `тип шаблона "${g.template.t}"`);
+  expect(g.hit.size === A.SHOT_SQUARES * GRID.size, `сторона блока ${g.hit.size} пикселей`);
   expect(
-    g.template.distance === A.SHOT_SQUARES * GRID.distance,
-    `дальность ${g.template.distance} ${GRID.units}, а по книге шесть метров`
+    g.metres === A.SHOT_SQUARES * GRID.distance,
+    `сторона ${g.metres} ${GRID.units}, а по книге шесть метров`
   );
-  expect(g.hit.radius === A.SHOT_SQUARES * GRID.size, `радиус в пикселях ${g.hit.radius}`);
+
+  // Блок вплотную перед стрелком: ближняя кромка — соседняя клетка, дальняя —
+  // третья. При клетке в 100 пикселей это от +50 до +350 по X от центра токена.
+  expect(
+    Math.abs(g.hit.x - (shooter.x + 50)) < 1e-9,
+    `ближняя кромка на ${g.hit.x - shooter.x} пикселей, а должна на 50`
+  );
+  expect(
+    Math.abs(g.hit.x + g.hit.size - (shooter.x + 350)) < 1e-9,
+    `дальняя кромка на ${g.hit.x + g.hit.size - shooter.x}, а должна на 350`
+  );
+  // По ширине блок центрирован на стрелке: полторы клетки в каждую сторону.
+  expect(
+    Math.abs(g.hit.y + g.hit.size / 2 - shooter.y) < 1e-9,
+    "блок не центрирован по ширине"
+  );
 
   const at = (dx, dy) => ({ x: shooter.x + dx, y: shooter.y + dy });
-  // Радиус — три клетки, то есть 300 пикселей.
-  expect(A.inCone(at(250, 0), g.hit), "цель прямо перед стволом не попала");
-  expect(A.inCone(at(0, 250), g.hit), "цель сбоку (ровно 90°) не попала — а это край сектора");
-  expect(A.inCone(at(0, -250), g.hit), "цель с другого бока не попала");
-  expect(!A.inCone(at(-250, 0), g.hit), "цель ЗА СПИНОЙ попала под дробь");
-  expect(!A.inCone(at(-10, 250), g.hit), "цель чуть позади линии плеч попала");
-  expect(!A.inCone(at(350, 0), g.hit), "цель дальше шести метров попала");
-  expect(!A.inCone(shooter, g.hit), "стрелок попал в собственную зону");
+  // Клетки блока: первая, вторая и третья вперёд, по три в ряд.
+  expect(A.inBlast(at(100, 0), g.hit), "первая клетка перед стволом не попала");
+  expect(A.inBlast(at(200, 0), g.hit), "вторая клетка не попала");
+  expect(A.inBlast(at(300, 0), g.hit), "третья клетка (6 м) не попала");
+  expect(A.inBlast(at(200, 100), g.hit), "клетка сбоку от оси не попала");
+  expect(A.inBlast(at(200, -100), g.hit), "клетка с другого бока не попала");
 
-  // Разворот сектора: то, что было за спиной, оказывается под ударом.
+  // А это уже мимо.
+  expect(!A.inBlast(shooter, g.hit), "стрелок попал в собственную зону");
+  expect(!A.inBlast(at(400, 0), g.hit), "цель дальше шести метров попала");
+  expect(!A.inBlast(at(-100, 0), g.hit), "цель ЗА СПИНОЙ попала под дробь");
+  expect(!A.inBlast(at(200, 200), g.hit), "цель вне ширины блока попала");
+
+  // Разворот: то, что было за спиной, оказывается под ударом.
   const back = A.areaGeometry(A.SHOT, GRID, shooter, 180);
-  expect(A.inCone(at(-250, 0), back.hit), "после разворота цель сзади так и не попала");
-  expect(!A.inCone(at(250, 0), back.hit), "после разворота цель спереди осталась в зоне");
+  expect(A.inBlast(at(-200, 0), back.hit), "после разворота цель сзади не попала");
+  expect(!A.inBlast(at(200, 0), back.hit), "после разворота цель спереди осталась в зоне");
 
-  // Направление в градусах может прийти любым — считаем по кругу.
-  const skew = A.areaGeometry(A.SHOT, GRID, shooter, -90);
-  expect(A.inCone(at(0, -250), skew.hit), "отрицательное направление считается неверно");
-  const wrap = A.areaGeometry(A.SHOT, GRID, shooter, 450);
-  expect(A.inCone(at(250, 0), wrap.hit), "направление больше круга считается неверно");
+  // Вниз по холсту.
+  const down = A.areaGeometry(A.SHOT, GRID, shooter, 90);
+  expect(A.inBlast(at(0, 200), down.hit), "при стрельбе вниз зона не туда");
+  expect(!A.inBlast(at(200, 0), down.hit), "при стрельбе вниз накрыло вбок");
+}
+
+console.log("Направление округляется до сторон сетки");
+{
+  // Блок идёт по клеткам, а клетки не поворачиваются: произвольный угол
+  // округляем до ближайшей из восьми сторон.
+  const cases = [
+    [0, 0, 1, 0], [10, 0, 1, 0], [44, 45, 1, 1], [90, 90, 0, 1],
+    [180, 180, -1, 0], [270, 270, 0, -1], [-90, 270, 0, -1],
+    [360, 0, 1, 0], [450, 90, 0, 1], [-45, 315, 1, -1],
+  ];
+  for (const [given, degrees, dx, dy] of cases) {
+    const snapped = A.__test.snapToGrid(given);
+    expect(
+      snapped.degrees === degrees && snapped.dx === dx && snapped.dy === dy,
+      `${given}° → ${snapped.degrees}° (${snapped.dx},${snapped.dy}), ` +
+        `а ожидалось ${degrees}° (${dx},${dy})`
+    );
+  }
+}
+
+console.log("Режим дроби решает за боеприпас");
+{
+  // Стрелок сам сказал, чем стреляет: режим важнее того, что в магазине.
+  const withMode = (on, variety, weaponType) => ({
+    id: "wpn0000000000001",
+    type: "weapon",
+    name: "дробовик",
+    system: { weaponType },
+    _getLoadedAmmoProp: () => variety,
+    actor: { getFlag: (scope, key) => (on && key === "shotmode-wpn0000000000001") || false },
+  });
+
+  expect(
+    A.areaKindOf(withMode(true, "shotgunSlug", "shotgun")) === A.SHOT,
+    "включённый режим дроби не перебил жакан в магазине"
+  );
+  expect(
+    A.areaKindOf(withMode(false, "shotgunSlug", "shotgun")) === null,
+    "выключенный режим всё равно дал зону"
+  );
+  expect(
+    A.areaKindOf(withMode(true, undefined, "shotgun")) === A.SHOT,
+    "режим без боеприпаса не сработал"
+  );
+  expect(A.shotModeOn(withMode(true, undefined, "shotgun")), "режим не прочитался");
+  expect(!A.shotModeOn({ id: "x" }), "режим прочитался у предмета без владельца");
+  expect(!A.shotModeOn(undefined), "undefined уронил чтение режима");
+
+  // Переключатель показываем только дробовикам.
+  expect(A.canFireShot({ type: "weapon", system: { weaponType: "shotgun" } }), "дробовик не опознан");
+  for (const type of ["assaultRifle", "rocketLauncher", "medPistol", "bow"]) {
+    expect(
+      !A.canFireShot({ type: "weapon", system: { weaponType: type } }),
+      `"${type}" зря получил переключатель дроби`
+    );
+  }
+  expect(!A.canFireShot({ type: "ammo", system: { weaponType: "shotgun" } }), "патрон получил переключатель");
+}
+
+console.log("Переключатель встаёт в список режимов");
+{
+  const M = await import(pathToFileURL(path.join(tmp, "shot-mode.mjs")).href);
+
+  expect(M.shotFlagKey("abc") === "shotmode-abc", `ключ флага "${M.shotFlagKey("abc")}"`);
+
+  const markup = M.shotToggleMarkup("wpn1", true);
+  expect(markup.includes("fa-circle-dot"), "включённый режим показан пустым кружком");
+  const off = M.shotToggleMarkup("wpn1", false);
+  expect(
+    off.includes("fa-circle ") && !off.includes("fa-circle-dot"),
+    "выключенный режим показан закрашенным кружком"
+  );
+  expect(markup.includes('data-item-id="wpn1"'), "переключатель не знает, к чему относится");
+
+  // Выключение должно снимать флаг, а не писать false: лишние флаги копятся на
+  // актёре навсегда и переживают даже удаление оружия.
+  const source = fs.readFileSync(path.join(SCRIPTS, "shot-mode.js"), "utf-8");
+  expect(source.includes("unsetFlag"), "выключенный режим оставляет флаг на актёре");
+  // Системный firetype трогать нельзя: система попробует бросить «дробь» как
+  // тип броска, получит null и атака не состоится.
+  // Ищем именно обращение к флагу, а не упоминание: в комментарии рядом как раз
+  // объяснено, почему системный firetype трогать нельзя.
+  expect(
+    !/["'`]firetype-|getFlag\([^)]*firetype/.test(source),
+    "режим лезет в системный firetype — система попробует бросить «дробь» как тип броска"
+  );
 }
 
 console.log("Кто попал в зону");

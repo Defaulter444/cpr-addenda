@@ -58,11 +58,18 @@ const BLAST_WEAPONS = ["rocketLauncher", "grenadeLauncher"];
 /** Сторона зоны взрыва в клетках: 10 м при сетке в 2 м. */
 export const BLAST_SQUARES = 5;
 
-/** Дальность дроби в клетках: 6 м при сетке в 2 м. */
+/** Сторона зоны дроби в клетках: блок три на три перед стрелком. */
 export const SHOT_SQUARES = 3;
 
-/** Полный раствор зоны дроби. «Перед тобой» — это половина круга. */
-export const SHOT_ANGLE = 180;
+/**
+ * Флаг режима дроби на актёре.
+ *
+ * Свой, а не системный `firetype`: тот задаёт тип броска, и значение «дробь»
+ * система бросить не умеет — атака бы просто не состоялась. Здесь же режим
+ * только помечает выстрел как площадной, а бросок остаётся обычным
+ * дальнобойным, каким его и описывает книга.
+ */
+export const SHOT_FLAG = "shotmode";
 
 /** РЕФ, начиная с которого правила разрешают уклоняться. */
 export const DODGE_REF = 8;
@@ -102,6 +109,9 @@ export function loadedVariety(item) {
  * @returns {String|null} - BLAST, SHOT или null
  */
 export function areaKindOf(item) {
+  // Включённый режим дроби решает всё: стрелок сам сказал, чем стреляет.
+  if (shotModeOn(item)) return SHOT;
+
   const variety = loadedVariety(item);
   if (BLAST_AMMO.includes(variety)) return BLAST;
   if (variety === "shotgunShell") return SHOT;
@@ -111,6 +121,38 @@ export function areaKindOf(item) {
   if (variety) return null;
 
   return BLAST_WEAPONS.includes(item?.system?.weaponType) ? BLAST : null;
+}
+
+/**
+ * Включён ли у этого оружия режим дроби.
+ *
+ * Режим живёт флагом на актёре, а не на предмете: так же поступает и сама
+ * система с очередью и подавляющим огнём, и по той же причине — оружие может
+ * лежать в компендиуме, а решение стрелять дробью принадлежит тому, кто держит
+ * его в руках.
+ *
+ * @param {CPRItem} item - оружие
+ * @returns {Boolean}
+ */
+export function shotModeOn(item) {
+  if (!item?.id || !item.actor?.getFlag) return false;
+  try {
+    return Boolean(item.actor.getFlag(MODULE_ID, `${SHOT_FLAG}-${item.id}`));
+  } catch (error) {
+    return false;
+  }
+}
+
+/**
+ * Может ли это оружие стрелять дробью.
+ *
+ * Кнопку режима показываем только дробовикам: у остальных дроби не бывает.
+ *
+ * @param {CPRItem} item - оружие
+ * @returns {Boolean}
+ */
+export function canFireShot(item) {
+  return item?.type === "weapon" && item?.system?.weaponType === "shotgun";
 }
 
 /* ------------------------------------------------------------------ */
@@ -137,33 +179,25 @@ export function inBlast(point, area) {
 }
 
 /**
- * Попадает ли точка в сектор дроби.
+ * Направление, приведённое к восьми сторонам сетки.
  *
- * Два условия из книги: не дальше шести метров и «перед тобой». Второе — это
- * половина круга, то есть отклонение от направления выстрела не больше
- * половины раствора.
+ * Зона дроби — квадратный блок по клеткам, и повернуть его на произвольный угол
+ * нельзя: клетки не поворачиваются. Поэтому наведение округляем до ближайшей из
+ * восьми сторон, как это и происходит за столом — «он бьёт туда».
  *
- * Сам стрелок в свою зону не попадает: точка ровно в начале сектора считается
- * вне его.
- *
- * @param {Object} point - {x, y} центр фигуры
- * @param {Object} cone - {x, y, radius, direction, angle} начало, радиус в
- *   пикселях, направление и раствор в градусах
- * @returns {Boolean}
+ * @param {Number} degrees - направление в градусах
+ * @returns {Object} - {dx, dy} шаг в клетках и {degrees} округлённый угол
  */
-export function inCone(point, cone) {
-  const dx = point.x - cone.x;
-  const dy = point.y - cone.y;
-  const distance = Math.hypot(dx, dy);
-  if (distance === 0 || distance > cone.radius) return false;
-
-  // Полный круг раствором в 360° накрывает всё — проверять углы незачем.
-  if (cone.angle >= 360) return true;
-
-  const bearing = Math.atan2(dy, dx) * (180 / Math.PI);
-  let offset = Math.abs(bearing - cone.direction) % 360;
-  if (offset > 180) offset = 360 - offset;
-  return offset <= cone.angle / 2;
+export function snapToGrid(degrees) {
+  const step = Math.round((((degrees % 360) + 360) % 360) / 45) % 8;
+  const angle = step * 45;
+  const radians = (angle * Math.PI) / 180;
+  // Округляем: косинус 45° даёт 0.707, а шаг по клеткам бывает только целым.
+  return {
+    degrees: angle,
+    dx: Math.round(Math.cos(radians)),
+    dy: Math.round(Math.sin(radians)),
+  };
 }
 
 /**
@@ -242,26 +276,35 @@ export function areaGeometry(kind, grid, origin, direction = 0) {
     };
   }
 
-  const radius = SHOT_SQUARES * grid.distance;
+  // Блок три на три вплотную перед стрелком: ближняя кромка — соседняя клетка,
+  // дальняя — третья, то есть шесть метров, как и требует книга. Центр блока
+  // приходится на вторую клетку по ходу выстрела.
+  const facing = snapToGrid(direction);
+  const side = SHOT_SQUARES * grid.size;
+  const centreOffset = 2 * grid.size;
+  const centre = {
+    x: origin.x + facing.dx * centreOffset,
+    y: origin.y + facing.dy * centreOffset,
+  };
+  const corner = { x: centre.x - side / 2, y: centre.y - side / 2 };
+  const sideUnits = SHOT_SQUARES * grid.distance;
+
   return {
     kind,
+    facing: facing.degrees,
     template: {
-      t: "cone",
-      x: origin.x,
-      y: origin.y,
-      direction,
-      distance: radius,
-      angle: SHOT_ANGLE,
+      t: "rect",
+      x: corner.x,
+      y: corner.y,
+      direction: 45,
+      distance: sideUnits * Math.SQRT2,
+      angle: 0,
     },
-    hit: {
-      x: origin.x,
-      y: origin.y,
-      radius: SHOT_SQUARES * grid.size,
-      direction,
-      angle: SHOT_ANGLE,
-    },
+    // Блок проверяется тем же способом, что и квадрат взрыва: обе зоны —
+    // выровненные по сетке квадраты, и разной арифметики им не нужно.
+    hit: { x: corner.x, y: corner.y, size: side },
     squares: SHOT_SQUARES,
-    metres: radius,
+    metres: sideUnits,
   };
 }
 
@@ -279,11 +322,7 @@ export function caughtBy(geometry, tokens, origin = null) {
     const centre = token.center;
     if (!centre) continue;
 
-    const inside =
-      geometry.kind === BLAST
-        ? inBlast(centre, geometry.hit)
-        : inCone(centre, geometry.hit);
-    if (!inside) continue;
+    if (!inBlast(centre, geometry.hit)) continue;
 
     // Дробь достаёт только видимое: книга требует «зону видимости».
     if (geometry.kind === SHOT && origin && sightBlocked(origin, centre)) continue;
@@ -426,10 +465,11 @@ async function postCard({ item, actor, kind, attackTotal, geometry, shooter, cre
       ` data-action="cprAddendaAreaDamage">` +
       `${localize("area.damageButton", { damage: item.system?.damage ?? "?" })}` +
       `</button>` +
-      (kind === SHOT
-        ? `<button type="button" data-action="cprAddendaAreaRecount">` +
-          `${localize("area.recount")}</button>`
-        : "") +
+      // Пересчёт нужен обеим зонам. У дроби — если направление вышло не то, у
+      // взрыва — потому что книга прямо велит мастеру перенести промахнувшийся
+      // взрыв в другую точку квадрата.
+      `<button type="button" data-action="cprAddendaAreaRecount">` +
+      `${localize("area.recount")}</button>` +
       `</div>` +
       `<p class="cpr-addenda-pkt-note">${localize("area.applyHint")}</p>` +
       `<p>${localize("area.dodge", { total: attackTotal })}</p>` +
@@ -577,13 +617,19 @@ async function recountArea(event, area, message) {
   }
 
   const grid = canvas.scene.grid;
-  const geometry = areaGeometry(
-    area.kind,
-    grid,
-    { x: template.x, y: template.y },
-    template.direction
-  );
-  const origin = area.kind === SHOT ? { x: template.x, y: template.y } : null;
+  // Шаблон обеих зон — выровненный квадрат, заданный углом. Пересчитываем по
+  // тому, где он лежит сейчас: игрок мог его подвинуть.
+  const side =
+    (area.kind === SHOT ? SHOT_SQUARES : BLAST_SQUARES) * grid.size;
+  const geometry = {
+    kind: area.kind,
+    hit: { x: template.x, y: template.y, size: side },
+  };
+  // Видимость считаем от стрелка, а не от угла блока: стена между ними и
+  // решает, достала дробь или нет.
+  const shooter = area.shooter ? await fromUuid(area.shooter) : null;
+  const origin =
+    area.kind === SHOT ? tokenOf(shooter?.actor ?? shooter)?.center ?? null : null;
   const caught = caughtBy(geometry, canvas.tokens?.placeables ?? [], origin);
 
   await ChatMessage.create({
@@ -651,6 +697,7 @@ export function activateAreaCard(message, html) {
 /** Внутренности для самопроверки. */
 export const __test = {
   BLAST_AMMO,
+  snapToGrid,
   BLAST_WEAPONS,
   rollAreaDamage,
   rollAreaDodge,

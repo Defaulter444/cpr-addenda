@@ -1,14 +1,14 @@
-2026/09/02-22:28:33.964 3df4 Recovering log #296
-2026/09/02-22:28:33.968 3df4 Delete type=0 #296
-2026/09/02-22:28:33.968 3df4 Delete type=3 #295
-2026/09/02-22:28:33.972 52c Level-0 table #300: started
-2026/09/02-22:28:33.973 52c Level-0 table #300: 33614 bytes OK
-2026/09/02-22:28:33.974 52c Delete type=0 #298
-2026/09/02-22:28:33.974 52c Manual compaction at level-0 from '!' @ 72057594037927935 : 1 .. '\xef\xbf\xbf' @ 0 : 0; will stop at '!items.effects!cprAddGe00210000.cprAddFxtowe82wt' @ 2958 : 0
-2026/09/02-22:28:33.974 52c Compacting 1@0 + 1@1 files
-2026/09/02-22:28:33.976 52c Generated table #301@0: 40 keys, 33173 bytes
-2026/09/02-22:28:33.976 52c Compacted 1@0 + 1@1 files => 33173 bytes
-2026/09/02-22:28:33.978 52c compacted to: files[ 0 1 0 0 0 0 0 ]
-2026/09/02-22:28:33.978 52c Delete type=2 #286
-2026/09/02-22:28:33.978 52c Delete type=2 #300
-2026/09/02-22:28:33.978 52c Manual compaction at level-0 from '!items.effects!cprAddGe00210000.cprAddFxtowe82wt' @ 2958 : 0 .. '\xef\xbf\xbf' @ 0 : 0; will stop at (end)
+2026/09/02-22:46:35.443 59e0 Recovering log #305
+2026/09/02-22:46:35.447 59e0 Delete type=0 #305
+2026/09/02-22:46:35.447 59e0 Delete type=3 #304
+2026/09/02-22:46:35.449 3e14 Level-0 table #309: started
+2026/09/02-22:46:35.451 3e14 Level-0 table #309: 33604 bytes OK
+2026/09/02-22:46:35.452 3e14 Delete type=0 #307
+2026/09/02-22:46:35.452 3e14 Manual compaction at level-0 from '!' @ 72057594037927935 : 1 .. '\xef\xbf\xbf' @ 0 : 0; will stop at '!items.effects!cprAddGe00210000.cprAddFxtowe82wt' @ 3038 : 0
+2026/09/02-22:46:35.452 3e14 Compacting 1@0 + 1@1 files
+2026/09/02-22:46:35.454 3e14 Generated table #310@0: 40 keys, 33188 bytes
+2026/09/02-22:46:35.454 3e14 Compacted 1@0 + 1@1 files => 33188 bytes
+2026/09/02-22:46:35.454 3e14 compacted to: files[ 0 1 0 0 0 0 0 ]
+2026/09/02-22:46:35.454 3e14 Delete type=2 #301
+2026/09/02-22:46:35.454 3e14 Delete type=2 #309
+2026/09/02-22:46:35.454 3e14 Manual compaction at level-0 from '!items.effects!cprAddGe00210000.cprAddFxtowe82wt' @ 3038 : 0 .. '\xef\xbf\xbf' @ 0 : 0; will stop at (end)

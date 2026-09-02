@@ -249,9 +249,9 @@
   "CPRADDENDA.area.blast.damageOnce": "Damage is rolled <strong>once</strong> and applies to every target in the area, including the environment. Armor reduces it as usual.",
   "CPRADDENDA.area.blast.miss": "If the roll fell short of the DV to hit the target, the GM decides where inside this square the blast actually went off, and moves the area there.",
   "CPRADDENDA.area.blast.cover": "The blast deals no damage to a target behind cover unless the damage is enough to destroy that cover. If it is, the cover is gone and the target takes full damage. What counts as cover is the GM's call.",
-  "CPRADDENDA.area.shot.title": "shot area: {squares} squares ({size} {units}) in front of the shooter",
+  "CPRADDENDA.area.shot.title": "shot area: a {squares} × {squares} block ({size} × {size} {units}) in front of the shooter",
   "CPRADDENDA.area.shot.damageOnce": "Shot catches <strong>every target in front of the shooter</strong> within six metres and in line of sight. Damage is rolled <strong>once</strong> and applies to all; armor reduces it as usual.",
-  "CPRADDENDA.area.shot.dv": "Aim the arc with the <strong>mouse wheel</strong>: hover the template and scroll (hold Shift for coarser steps), then press “Recount”. Reminder from the book: firing shot is against <strong>DV 13</strong> regardless of range, and aimed shots are not possible with shot.",
+  "CPRADDENDA.area.shot.dv": "The block is placed directly in front of the shooter, toward the marked target. If the facing came out wrong, drag the template and press “Recount”. Reminder from the book: firing shot is against <strong>DV 13</strong> regardless of range, and aimed shots are not possible with shot.",
   "CPRADDENDA.area.noTarget": "No target is marked, so there is nowhere to place the blast area for “{name}”. Target a token (press T over it) and fire again.",
   "CPRADDENDA.area.noShooter": "The shooter has no token on this scene, so there is nowhere to start the shot arc for “{name}”.",
   "CPRADDENDA.area.failed": "The area was not placed: {message}",
@@ -262,5 +262,9 @@
   "CPRADDENDA.area.dodgeNotYours": "{name} is not your character. Their player or the GM rolls the dodge.",
   "CPRADDENDA.area.noEvasion": "{name} has no Evasion skill, so there is nothing to roll. Add the skill to the sheet.",
   "CPRADDENDA.area.dodgeSuccess": "<strong>{name}</strong> dodges: {result} against {total}. Moved clear, no damage.",
-  "CPRADDENDA.area.dodgeFail": "<strong>{name}</strong> fails to dodge: {result} against {total}. Stays in the area and takes the damage."
+  "CPRADDENDA.area.dodgeFail": "<strong>{name}</strong> fails to dodge: {result} against {total}. Stays in the area and takes the damage.",
+  "CPRADDENDA.shot.short": "Shot",
+  "CPRADDENDA.shot.hint": "Shot mode. The blast covers a 3 × 3 square block in front of the shooter (6 m) and hits everyone in it. Per the book: DV 13 regardless of range, no aimed shots with shot, targets with REF 8+ may dodge.",
+  "CPRADDENDA.shot.on": "{name}: shot mode on — the shot will cover a 3 × 3 block in front.",
+  "CPRADDENDA.shot.off": "{name}: shot mode off, the weapon hits a single target again."
 }

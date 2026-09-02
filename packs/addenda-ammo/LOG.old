@@ -1,7 +1,7 @@
-2026/09/02-22:28:34.034 33c4 Recovering log #245
-2026/09/02-22:28:34.037 33c4 Delete type=0 #245
-2026/09/02-22:28:34.037 33c4 Delete type=3 #244
-2026/09/02-22:28:34.039 52c Level-0 table #249: started
-2026/09/02-22:28:34.039 52c Level-0 table #249: 0 bytes OK
-2026/09/02-22:28:34.040 52c Delete type=0 #247
-2026/09/02-22:28:34.040 52c Manual compaction at level-0 from '!' @ 72057594037927935 : 1 .. '\xef\xbf\xbf' @ 0 : 0; will stop at (end)
+2026/09/02-22:46:35.489 1640 Recovering log #253
+2026/09/02-22:46:35.506 1640 Delete type=0 #253
+2026/09/02-22:46:35.507 1640 Delete type=3 #252
+2026/09/02-22:46:35.507 3e14 Level-0 table #257: started
+2026/09/02-22:46:35.507 3e14 Level-0 table #257: 0 bytes OK
+2026/09/02-22:46:35.508 3e14 Delete type=0 #255
+2026/09/02-22:46:35.508 3e14 Manual compaction at level-0 from '!' @ 72057594037927935 : 1 .. '\xef\xbf\xbf' @ 0 : 0; will stop at (end)

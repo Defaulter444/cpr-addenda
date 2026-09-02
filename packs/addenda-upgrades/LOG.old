@@ -1,14 +1,14 @@
-2026/09/02-22:28:33.916 5b8c Recovering log #305
-2026/09/02-22:28:33.919 5b8c Delete type=0 #305
-2026/09/02-22:28:33.919 5b8c Delete type=3 #304
-2026/09/02-22:28:33.926 52c Level-0 table #309: started
-2026/09/02-22:28:33.928 52c Level-0 table #309: 55528 bytes OK
-2026/09/02-22:28:33.929 52c Delete type=0 #307
-2026/09/02-22:28:33.929 52c Manual compaction at level-0 from '!' @ 72057594037927935 : 1 .. '\xef\xbf\xbf' @ 0 : 0; will stop at '!items!cprAddWm00110000' @ 3214 : 0
-2026/09/02-22:28:33.929 52c Compacting 1@0 + 1@1 files
-2026/09/02-22:28:33.931 52c Generated table #310@0: 39 keys, 55067 bytes
-2026/09/02-22:28:33.931 52c Compacted 1@0 + 1@1 files => 55067 bytes
-2026/09/02-22:28:33.933 52c compacted to: files[ 0 1 0 0 0 0 0 ]
-2026/09/02-22:28:33.933 52c Delete type=2 #295
-2026/09/02-22:28:33.933 52c Delete type=2 #309
-2026/09/02-22:28:33.934 52c Manual compaction at level-0 from '!items!cprAddWm00110000' @ 3214 : 0 .. '\xef\xbf\xbf' @ 0 : 0; will stop at (end)
+2026/09/02-22:46:35.402 804 Recovering log #314
+2026/09/02-22:46:35.402 804 Delete type=0 #314
+2026/09/02-22:46:35.402 804 Delete type=3 #313
+2026/09/02-22:46:35.410 3e14 Level-0 table #318: started
+2026/09/02-22:46:35.410 3e14 Level-0 table #318: 55543 bytes OK
+2026/09/02-22:46:35.410 3e14 Delete type=0 #316
+2026/09/02-22:46:35.410 3e14 Manual compaction at level-0 from '!' @ 72057594037927935 : 1 .. '\xef\xbf\xbf' @ 0 : 0; will stop at '!items!cprAddWm00110000' @ 3292 : 0
+2026/09/02-22:46:35.410 3e14 Compacting 1@0 + 1@1 files
+2026/09/02-22:46:35.410 3e14 Generated table #319@0: 39 keys, 55096 bytes
+2026/09/02-22:46:35.410 3e14 Compacted 1@0 + 1@1 files => 55096 bytes
+2026/09/02-22:46:35.410 3e14 compacted to: files[ 0 1 0 0 0 0 0 ]
+2026/09/02-22:46:35.410 3e14 Delete type=2 #310
+2026/09/02-22:46:35.410 3e14 Delete type=2 #318
+2026/09/02-22:46:35.410 3e14 Manual compaction at level-0 from '!items!cprAddWm00110000' @ 3292 : 0 .. '\xef\xbf\xbf' @ 0 : 0; will stop at (end)
