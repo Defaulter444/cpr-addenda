@@ -30,7 +30,6 @@ import {
   reconcileEffects,
 } from "./vehicle-effects.js";
 import { findSkill, skillNamesHint } from "./vehicle-skills.js";
-import { isExplosive, placeBlast } from "./vehicle-explosives.js";
 
 /**
  * Утилиты системы. Нужны ровно в одном месте — за списком таблиц дальности при
@@ -1085,9 +1084,9 @@ export class VehicleSheet extends ActorSheet {
 
       // Ракетница и гранатомёт бьют по площади: ставим зону поражения и
       // напоминаем правило. Только на атаке — бросок урона зону не двигает.
-      if (rollTypeFromButton === "attack" && isExplosive(item)) {
-        await placeBlast(item, cprRoll.resultTotal, gunner);
-      }
+      // Зону поражения здесь больше не ставим: этим занимается обёртка над
+      // отрисовкой карточки атаки, одна на все листы сразу. Иначе выстрел с
+      // поста давал бы две зоны, а выстрел с листа персонажа — ни одной.
 
       // Мастеру анимацию рисует сам Automated Animations по карточке чата, а
       // игроку — нет: карточка приходит от чужого актёра. Запускаем вручную.

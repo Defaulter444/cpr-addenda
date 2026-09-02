@@ -11,7 +11,7 @@
  */
 
 import { MODULE_ID, SETTINGS, VEHICLE_FLAGS, localize } from "./constants.js";
-import { activateBlastCard } from "./vehicle-explosives.js";
+import { activateAreaCard } from "./area-attacks.js";
 import { VehicleSheet } from "./vehicle-sheet.js";
 import {
   reconcilePermissions,
@@ -81,12 +81,12 @@ export function registerVehicleHooks() {
 
   // Рассадку меняет не только лист: мастер правит флаг макросом, игрок
   // выходит из машины со своего листа. Сверяемся на само изменение флага.
-  // Кнопки на карточке взрыва: урон и уклонение. Вешаем на отрисовку сообщения —
+  // Кнопки на карточке зоны: урон, уклонение и пересчёт. Вешаем на отрисовку сообщения —
 // содержимое чата Foundry перерисовывает и при перезагрузке мира, и при
 // прокрутке далеко вверх, так что разовой привязки при создании не хватило бы.
 Hooks.on("renderChatMessage", (message, html) => {
   try {
-    activateBlastCard(message, html);
+    activateAreaCard(message, html);
   } catch (error) {
     console.error(`${MODULE_ID} | кнопки карточки взрыва не повешены:`, error);
   }

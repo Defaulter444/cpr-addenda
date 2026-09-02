@@ -30,6 +30,7 @@ import {
 } from "./dv-tables.js";
 import { checkUpgradeFit } from "./install-restrictions.js";
 import { fixOnCreate } from "./system-fixes.js";
+import { registerAreaAttacks } from "./area-hook.js";
 import { buildPackIndex, findMatches } from "./audit.js";
 import { setWeaponTypes, diagnose } from "./api.js";
 import {
@@ -189,6 +190,7 @@ Hooks.once("ready", async () => {
 
   // Перенос данных транспорта — до сверки эффектов: сверка читает уже новые
   // флаги и без переноса не нашла бы ни одной машины.
+  await registerAreaAttacks();
   await migrateVehicleData();
   warnAboutVasModule();
   await reconcileVehiclesOnReady();
