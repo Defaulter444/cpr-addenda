@@ -248,6 +248,181 @@ console.log("Появление книги в мире");
   expect(created.length === 0, "игрок добавил книгу в мир");
 }
 
+console.log("Ссылки оглавления в исходнике");
+{
+  const toc = (coreJournal?.pages ?? []).find(
+    (p) => p.type === "text" && (p.text?.content ?? "").includes("@UUID[")
+  );
+  expect(toc !== undefined, "в книге нет страницы-оглавления со ссылками");
+
+  if (toc) {
+    const html = toc.text.content;
+
+    // Абсолютная ссылка намертво прибита к журналу одного мира. При импорте в
+    // любой другой она мертва — так и было: все 101 ссылка вели на журнал того
+    // мира, где книгу когда-то собирали руками.
+    const absolute = html.match(/@UUID\[JournalEntry\./g) ?? [];
+    expect(
+      absolute.length === 0,
+      `в оглавлении ${absolute.length} ссылок, прибитых к чужому журналу`
+    );
+
+    const targets = [...html.matchAll(/@UUID\[\.([A-Za-z0-9]+)/g)].map((m) => m[1]);
+    expect(targets.length > 50, `относительных ссылок всего ${targets.length}`);
+
+    const own = new Set(coreJournal.pages.map((p) => p._id));
+    const stray = targets.filter((id) => !own.has(id));
+    expect(stray.length === 0, `ссылки ведут мимо книги: ${[...new Set(stray)].join(", ")}`);
+
+    // Номер страницы в ссылке должен остаться: движок отрезает хвост «#page=»
+    // до разбора, и без него ссылка откроет книгу на первой странице.
+    const anchored = html.match(/@UUID\[\.[A-Za-z0-9]+#page=\d+/g) ?? [];
+    expect(anchored.length > 50, `ссылок с номером страницы всего ${anchored.length}`);
+  }
+}
+
+console.log("Пересчёт ссылок оглавления");
+{
+  const pages = [
+    { _id: "src1", name: "Введение" },
+    { _id: "src2", name: "Перестрелка" },
+    { _id: "src3", name: "Нетраннинг" },
+  ];
+  const live = [
+    { id: "w1", name: "Введение" },
+    { id: "w2", name: "Перестрелка" },
+    { id: "w3", name: "Нетраннинг" },
+  ];
+
+  // Относительные ссылки исходника переезжают на страницы мира.
+  const html = "@UUID[.src2#page=175]{Рукопашный бой} и @UUID[.src3#page=200]{Сеть}";
+  const fixed = corebook.relinkContents(html, pages, live);
+  expect(fixed.includes("@UUID[.w2#page=175]"), `вышло: ${fixed}`);
+  expect(fixed.includes("@UUID[.w3#page=200]"), `вышло: ${fixed}`);
+  expect(fixed.includes("{Рукопашный бой}"), "подпись ссылки потерялась");
+
+  // Старая запись, прибитая к чужому журналу, тоже чинится.
+  const old = "@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.src1#page=4]{Введение}";
+  expect(
+    corebook.relinkContents(old, pages, live).includes("@UUID[.w1#page=4]"),
+    "ссылка на чужой журнал не переехала"
+  );
+
+  // Страницу, которой в книге нет, не трогаем: пусть остаётся видимо битой.
+  const unknown = "@UUID[.qqqq0000qqqq0000#page=9]{Ничто}";
+  expect(
+    corebook.relinkContents(unknown, pages, live) === unknown,
+    "неизвестная цель молча уехала на чужую главу"
+  );
+
+  // Сопоставление идёт по названию: переставленные страницы не путаются.
+  const shuffled = [
+    { id: "wB", name: "Нетраннинг" },
+    { id: "wA", name: "Перестрелка" },
+  ];
+  const byName = corebook.relinkContents("@UUID[.src2]{П} @UUID[.src3]{Н}", pages, shuffled);
+  expect(byName.includes("@UUID[.wA]") && byName.includes("@UUID[.wB]"), `вышло: ${byName}`);
+
+  // Мусор на входе не должен ронять пересчёт.
+  expect(corebook.relinkContents(undefined, pages, live) === undefined, "undefined уронил пересчёт");
+  expect(corebook.linkTargets(undefined).length === 0, "цели у пустоты");
+  expect(corebook.linkTargets("текст без ссылок").length === 0, "цели там, где ссылок нет");
+  expect(
+    corebook.linkTargets("@UUID[.abc#page=7]{x}").join() === "abc",
+    "номер страницы попал в идентификатор"
+  );
+}
+
+console.log("Битые ссылки оглавления опознаются");
+{
+  const book = (contents) => ({
+    pages: [
+      { id: "p1", name: "Содержание", type: "text", text: { content: contents } },
+      { id: "p2", name: "Перестрелка", type: "pdf" },
+      { id: "p3", name: "Нетраннинг", type: "pdf" },
+    ],
+  });
+
+  expect(
+    !corebook.contentsLinksBroken(book("@UUID[.p2]{П} @UUID[.p3]{Н}")),
+    "целые ссылки объявлены битыми"
+  );
+  expect(
+    corebook.contentsLinksBroken(book("@UUID[.zzzz9999zzzz9999]{П}")),
+    "ссылка на несуществующую страницу сошла за целую"
+  );
+  expect(
+    corebook.contentsLinksBroken(
+      book("@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.rah0emtTbIkRUh9s]{П}")
+    ),
+    "ссылка на чужой журнал сошла за целую"
+  );
+  // Книга без оглавления — не повод чинить.
+  expect(!corebook.contentsLinksBroken({ pages: [] }), "у пустой книги нашлись битые ссылки");
+  expect(!corebook.contentsLinksBroken(undefined), "undefined уронил проверку");
+
+  // Оглавление ищем по ссылкам, а не по названию: мастер мог переименовать.
+  const renamed = book("@UUID[.p2]{П}");
+  renamed.pages[0].name = "Как читать книгу";
+  expect(corebook.findContentsPage(renamed)?.id === "p1", "оглавление не нашлось после переименования");
+  expect(corebook.findContentsPage({ pages: [{ id: "x", type: "pdf" }] }) === null,
+    "оглавлением объявлена страница PDF");
+}
+
+console.log("Починка оглавления в мире");
+{
+  const updates = [];
+  const livePages = [
+    {
+      id: "p1", name: "Содержание", type: "text",
+      text: { content: "@UUID[JournalEntry.Imv8ZTFi8ITnah3S.JournalEntryPage.src2#page=175]{Бой}" },
+      update: async (data) => updates.push(data),
+    },
+    { id: "p2", name: "Перестрелка", type: "pdf" },
+  ];
+  const journal = { pages: livePages };
+
+  const sourceDoc = {
+    pages: {
+      contents: [
+        {
+          id: "src1", name: "Содержание", type: "text",
+          text: { content: "@UUID[.src2#page=175]{Бой}" },
+        },
+        { id: "src2", name: "Перестрелка", type: "pdf" },
+      ],
+    },
+  };
+  const realPacks = globalThis.game.packs;
+  globalThis.game.packs = { get: () => ({ getDocument: async () => sourceDoc }) };
+
+  expect(await corebook.repairContents(journal), "битое оглавление не починилось");
+  expect(updates.length === 1, `обновлений страницы: ${updates.length}`);
+  expect(
+    updates[0]["text.content"] === "@UUID[.p2#page=175]{Бой}",
+    `записано: ${updates[0]["text.content"]}`
+  );
+
+  // Целое оглавление трогать нельзя: у мастера там могут быть свои пометки.
+  updates.length = 0;
+  livePages[0].text.content = "@UUID[.p2#page=175]{Бой}";
+  expect(!(await corebook.repairContents(journal)), "целое оглавление всё равно переписали");
+  expect(updates.length === 0, "целую страницу зря обновили");
+
+  globalThis.game.packs = realPacks;
+}
+
+console.log("Импорт пересчитывает ссылки");
+{
+  const source = fs.readFileSync(path.join(SCRIPTS, "corebook.js"), "utf-8");
+  const created = source.indexOf("await JournalEntry.create(");
+  const relinked = source.indexOf("await relinkImported(");
+  expect(created > 0 && relinked > created, "после создания книги ссылки не пересчитываются");
+  // Чинить надо и книгу, которая уже лежит в мире со времён старого выпуска.
+  expect(source.includes("await repairContents(existing.parent)"),
+    "уже стоящая в мире книга не чинится при входе");
+}
+
 console.log("Номера страниц: из английского издания в русское");
 {
   const pages = await import(pathToFileURL(path.join(tmp, "corebook-pages.mjs")).href);
@@ -489,6 +664,7 @@ console.log("Тексты сообщений");
     "CPRADDENDA.corebook.alreadyHere",
     "CPRADDENDA.corebook.failed",
     "CPRADDENDA.corebook.needPdfPager",
+    "CPRADDENDA.corebook.relinked",
     "CPRADDENDA.settings.importCorebook.name",
     "CPRADDENDA.settings.importCorebook.hint",
   ]) {

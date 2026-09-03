@@ -94,6 +94,12 @@ export async function importCorebook({ silent = false } = {}) {
     // Без keepId: если мир когда-то уже видел этот идентификатор, создание
     // упало бы, а книга — не тот документ, ради которого стоит рисковать.
     const journal = await JournalEntry.create(source.toObject());
+
+    // Идентификаторы страниц Foundry раздал заново, и ссылки оглавления теперь
+    // ведут в никуда. Пересчитываем сразу, иначе книга приедет с сотней
+    // мёртвых ссылок — а именно ими её и листают.
+    await relinkImported(journal, source);
+
     if (!silent) {
       ui.notifications.info(localize("corebook.imported"));
     }
@@ -103,6 +109,34 @@ export async function importCorebook({ silent = false } = {}) {
     console.error(`${MODULE_ID} | не удалось добавить книгу правил в мир:`, error);
     if (!silent) ui.notifications.error(localize("corebook.failed"));
     return null;
+  }
+}
+
+/**
+ * Пересчитывает ссылки оглавления сразу после импорта.
+ *
+ * @async
+ * @param {JournalEntry} journal - только что созданная книга
+ * @param {JournalEntry} source - её исходник из компендиума
+ * @returns {Promise<void>}
+ */
+async function relinkImported(journal, source) {
+  try {
+    const page = findContentsPage(journal);
+    const sourcePages = source?.pages?.contents ?? [];
+    const sourceContents = sourcePages.find(
+      (p) => p.type === "text" && linkTargets(p.text?.content).length
+    );
+    if (!page || !sourceContents) return;
+
+    const fixed = relinkContents(
+      sourceContents.text.content,
+      sourcePages.map((p) => ({ _id: p.id, name: p.name })),
+      journal.pages.map((p) => ({ id: p.id, name: p.name }))
+    );
+    if (fixed !== page.text?.content) await page.update({ "text.content": fixed });
+  } catch (error) {
+    console.error(`${MODULE_ID} | не удалось пересчитать ссылки оглавления:`, error);
   }
 }
 
@@ -122,7 +156,10 @@ export async function checkCorebook() {
   if (existing) {
     // Книгу могли занести до того, как у страниц появился флаг издания:
     // помечаем свою по файлу, иначе поправка страниц её не признает.
-    await markEdition(existing);
+    const ours = await markEdition(existing);
+    // Оглавление могло приехать со ссылками на чужой мир — тогда все сто с
+    // лишним ссылок в нём мертвы, а именно ими книгу и листают.
+    if (ours) await repairContents(existing.parent);
     return;
   }
 
@@ -133,6 +170,145 @@ export async function checkCorebook() {
   }
 
   await importCorebook();
+}
+
+/* ------------------------------------------------------------------ */
+/*  Ссылки оглавления                                                  */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Ссылки на страницы книги внутри её же оглавления.
+ *
+ * Foundry понимает две записи: полную — `@UUID[JournalEntry.<ж>.JournalEntryPage.<с>]`
+ * — и относительную, `@UUID[.<с>]`, которая резолвится от той страницы, где
+ * написана. Лист страницы журнала передаёт `relativeTo`, поэтому относительная
+ * работает и в мире, и в компендиуме.
+ *
+ * Хвост `#page=130` в счёт не идёт: движок отрезает его до разбора ссылки.
+ */
+const LINK_PATTERN =
+  /@UUID\[(?:JournalEntry\.[A-Za-z0-9]+\.JournalEntryPage\.|\.)([A-Za-z0-9]+)/g;
+
+/**
+ * На какие страницы ссылается текст.
+ *
+ * @param {String} html - содержимое страницы
+ * @returns {String[]} - идентификаторы страниц
+ */
+export function linkTargets(html) {
+  if (typeof html !== "string") return [];
+  return [...html.matchAll(LINK_PATTERN)].map((match) => match[1]);
+}
+
+/**
+ * Страница-оглавление книги — та, что ссылается на остальные.
+ *
+ * Ищем по ссылкам, а не по названию: название мастер может переименовать, а
+ * оглавление без ссылок — уже не оглавление.
+ *
+ * @param {JournalEntry} journal - книга
+ * @returns {JournalEntryPage|null}
+ */
+export function findContentsPage(journal) {
+  for (const page of journal?.pages ?? []) {
+    if (page.type !== "text") continue;
+    if (linkTargets(page.text?.content).length) return page;
+  }
+  return null;
+}
+
+/**
+ * Переписывает ссылки оглавления на страницы этого же журнала.
+ *
+ * Идентификаторы страниц Foundry раздаёт заново при каждом импорте, поэтому
+ * ссылки, записанные в исходнике, в мире ведут в никуда. Сопоставляем страницы
+ * по НАЗВАНИЮ — оно у книги стабильно и осмысленно, в отличие от
+ * идентификатора.
+ *
+ * @param {String} html - оглавление из исходника
+ * @param {Array} sourcePages - страницы исходника ({_id, name})
+ * @param {Array} livePages - страницы в мире ({id, name})
+ * @returns {String} - оглавление со ссылками на живые страницы
+ */
+export function relinkContents(html, sourcePages, livePages) {
+  if (typeof html !== "string") return html;
+
+  const liveByName = new Map();
+  for (const page of livePages ?? []) liveByName.set(page.name, page.id ?? page._id);
+
+  const replacement = new Map();
+  for (const page of sourcePages ?? []) {
+    const live = liveByName.get(page.name);
+    if (live) replacement.set(page._id ?? page.id, live);
+  }
+
+  return html.replace(LINK_PATTERN, (whole, target) => {
+    const live = replacement.get(target);
+    // Страницу, которой в книге нет, не трогаем: пусть остаётся битой и
+    // видимой, чем молча уедет на соседнюю главу.
+    return live ? `@UUID[.${live}` : whole;
+  });
+}
+
+/**
+ * Целы ли ссылки оглавления.
+ *
+ * Ссылка цела, когда ведёт на страницу этой же книги. Всё остальное — след
+ * чужого мира: идентификаторы у страниц новые, а в оглавлении остались старые.
+ *
+ * @param {JournalEntry} journal - книга в мире
+ * @returns {Boolean}
+ */
+export function contentsLinksBroken(journal) {
+  const page = findContentsPage(journal);
+  if (!page) return false;
+
+  const own = new Set((journal.pages ?? []).map((p) => p.id ?? p._id));
+  return linkTargets(page.text?.content).some((target) => !own.has(target));
+}
+
+/**
+ * Чинит оглавление книги, лежащей в мире.
+ *
+ * Берёт оглавление из компендиума модуля и переписывает его ссылки на страницы
+ * той книги, что уже стоит в мире. Трогает страницу только если ссылки и правда
+ * никуда не ведут: у мастера могут быть свои пометки, и переписывать рабочую
+ * страницу просто так нельзя.
+ *
+ * @async
+ * @param {JournalEntry} journal - книга в мире
+ * @returns {Promise<Boolean>} - чинили ли
+ */
+export async function repairContents(journal) {
+  if (!contentsLinksBroken(journal)) return false;
+
+  const page = findContentsPage(journal);
+  const pack = game.packs.get(JOURNAL_PACK);
+  if (!page || !pack) return false;
+
+  try {
+    const source = await pack.getDocument(CORE_JOURNAL_ID);
+    const sourcePages = source?.pages?.contents ?? [];
+    const sourceContents = sourcePages.find(
+      (p) => p.type === "text" && linkTargets(p.text?.content).length
+    );
+    if (!sourceContents) return false;
+
+    const fixed = relinkContents(
+      sourceContents.text.content,
+      sourcePages.map((p) => ({ _id: p.id, name: p.name })),
+      journal.pages.map((p) => ({ id: p.id, name: p.name }))
+    );
+    if (fixed === page.text?.content) return false;
+
+    await page.update({ "text.content": fixed });
+    console.log(`${MODULE_ID} | ссылки в оглавлении книги пересчитаны на страницы мира`);
+    ui.notifications.info(localize("corebook.relinked"));
+    return true;
+  } catch (error) {
+    console.error(`${MODULE_ID} | не удалось починить оглавление книги:`, error);
+    return false;
+  }
 }
 
 /**
