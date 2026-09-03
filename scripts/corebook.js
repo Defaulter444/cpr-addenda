@@ -21,12 +21,16 @@
  */
 
 import { MODULE_ID, SETTINGS, localize } from "./constants.js";
+import { BOOK_EDITION, bookPage } from "./corebook-pages.js";
 
 /** Модуль, который показывает PDF и держит соответствие «код -> страница». */
 const PDF_PAGER = "pdf-pager";
 
 /** Код книги, по которому `cpr-source-links` просит открыть страницу. */
 const CORE_CODE = "Core";
+
+/** Флаг издания на нашей странице книги — по нему узнаём свою. */
+const EDITION_FLAG = "edition";
 
 /** Компендиум и документ, откуда берём книгу. */
 const JOURNAL_PACK = `${MODULE_ID}.addenda-journals`;
@@ -114,7 +118,13 @@ export async function checkCorebook() {
   if (!game.user.isGM) return;
   if (!game.settings.get(MODULE_ID, SETTINGS.importCorebook)) return;
 
-  if (findCorebookPage()) return;
+  const existing = findCorebookPage();
+  if (existing) {
+    // Книгу могли занести до того, как у страниц появился флаг издания:
+    // помечаем свою по файлу, иначе поправка страниц её не признает.
+    await markEdition(existing);
+    return;
+  }
 
   // Без pdf-pager книга в мире бесполезна: показывать PDF будет нечем.
   if (!game.modules.get(PDF_PAGER)?.active) {
@@ -123,4 +133,120 @@ export async function checkCorebook() {
   }
 
   await importCorebook();
+}
+
+/**
+ * Помечает нашу книгу флагом издания, если его ещё нет.
+ *
+ * Книга могла попасть в мир раньше, чем появилась поправка страниц, — тогда
+ * флага у неё нет, и узнать её можно только по файлу, из которого она читается.
+ *
+ * @async
+ * @param {JournalEntryPage} page - страница с кодом «Core»
+ * @returns {Promise<Boolean>} - наша ли это книга теперь
+ */
+export async function markEdition(page) {
+  if (isRussianEdition(page)) return true;
+  if (!page?.src?.includes(`modules/${MODULE_ID}/pdfs/`)) return false;
+
+  try {
+    await page.setFlag(MODULE_ID, EDITION_FLAG, BOOK_EDITION);
+    console.log(`${MODULE_ID} | книга в мире помечена как издание ${BOOK_EDITION}`);
+    return true;
+  } catch (error) {
+    console.error(`${MODULE_ID} | не удалось пометить книгу:`, error);
+    return false;
+  }
+}
+
+/**
+ * Наша ли это книга.
+ *
+ * Поправка страниц верна только для русского издания. Если мастер положил в мир
+ * английский корбук и пометил его кодом «Core», сдвигать ничего нельзя: там
+ * номера и так совпадают. Поэтому смотрим не на код, а на флаг издания —
+ * его ставим мы сами.
+ *
+ * @param {JournalEntryPage|null} page - страница с кодом «Core»
+ * @returns {Boolean}
+ */
+export function isRussianEdition(page) {
+  try {
+    return page?.getFlag(MODULE_ID, EDITION_FLAG) === BOOK_EDITION;
+  } catch (error) {
+    return false;
+  }
+}
+
+/**
+ * Переводит номер страницы для ссылки на источник.
+ *
+ * Возвращает исходные настройки без изменений, если книга в мире не наша или
+ * страницу вообще не просили: лучше открыть книгу не на той странице, чем не
+ * открыть вовсе.
+ *
+ * @param {String} code - код книги из ссылки
+ * @param {Object} options - настройки openPDFByCode
+ * @returns {Object} - настройки с поправленной страницей
+ */
+export function correctPage(code, options) {
+  if (code !== CORE_CODE || !options?.page) return options;
+  if (!isRussianEdition(findCorebookPage())) return options;
+
+  const page = bookPage(options.page);
+  if (page === options.page) return options;
+
+  console.log(
+    `${MODULE_ID} | ссылка «${code}, ${options.page}» ведёт на ${page} русского издания`
+  );
+  return { ...options, page };
+}
+
+/**
+ * Подключает поправку к ссылкам на источники.
+ *
+ * `cpr-source-links` зовёт `ui.pdfpager.openPDFByCode` напрямую, и это
+ * единственная воронка: через неё проходят и ссылки с листов предметов, и
+ * ручной вызов из макроса. Поэтому оборачиваем её, а не обработчик щелчка.
+ *
+ * libWrapper здесь не годится: `ui.pdfpager` — обычный объект, который
+ * pdf-pager создаёт у себя в `ready`, а не класс из пространства имён игры.
+ *
+ * Оттуда же и попытки: `ui.pdfpager` появляется в чужом обработчике `ready`, а
+ * порядок обработчиков — это порядок загрузки модулей, и рассчитывать на него
+ * нельзя. Занять объект заранее тоже не выйдет: pdf-pager создаёт его через
+ * `if (!ui.pdfpager)` и, увидев чужой, не положит туда ничего вовсе.
+ *
+ * @param {Number} attemptsLeft - сколько попыток дождаться pdf-pager осталось
+ * @returns {Boolean} - удалось ли подключиться сразу
+ */
+export function registerPageMap(attemptsLeft = 10) {
+  const pager = ui.pdfpager;
+  if (typeof pager?.openPDFByCode !== "function") {
+    if (attemptsLeft > 0) {
+      setTimeout(() => registerPageMap(attemptsLeft - 1), 500);
+      return false;
+    }
+    console.warn(`${MODULE_ID} | pdf-pager не появился, поправка страниц не подключена`);
+    return false;
+  }
+  if (pager.openPDFByCode.cprAddendaWrapped) return true;
+
+  const original = pager.openPDFByCode;
+  const wrapped = function openPDFByCode(code, options = {}) {
+    let corrected = options;
+    try {
+      corrected = correctPage(code, options);
+    } catch (error) {
+      // Поправка — удобство, а не условие работы: если она упала, ссылка
+      // всё равно должна открыть книгу.
+      console.error(`${MODULE_ID} | не удалось поправить страницу:`, error);
+    }
+    return original.call(this, code, corrected);
+  };
+  wrapped.cprAddendaWrapped = true;
+  pager.openPDFByCode = wrapped;
+
+  console.log(`${MODULE_ID} | ссылки на источники переведены на русское издание`);
+  return true;
 }

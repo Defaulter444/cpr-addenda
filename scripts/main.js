@@ -44,7 +44,13 @@ import {
   migrateVehicleData,
   warnAboutVasModule,
 } from "./vehicle-migration.js";
-import { checkCorebook, importCorebook, findCorebookPage } from "./corebook.js";
+import {
+  checkCorebook,
+  importCorebook,
+  findCorebookPage,
+  registerPageMap,
+} from "./corebook.js";
+import { bookPage } from "./corebook-pages.js";
 
 /**
  * Настройки модуля. Все три — переключатели, потому что мастер должен иметь
@@ -200,6 +206,7 @@ Hooks.once("ready", async () => {
   // Ссылки на страницы книги ищут её только среди журналов мира, поэтому
   // книгу надо туда положить — иначе в новом мире ссылки просто мертвы.
   await checkCorebook();
+  registerPageMap();
 
   const api = {
     /** Проверка «встанет ли эта модификация в этот предмет». */
@@ -220,6 +227,8 @@ Hooks.once("ready", async () => {
     importCorebook,
     /** Найти страницу книги, которую откроют ссылки, или null. */
     findCorebookPage,
+    /** Куда в русском издании ведёт номер страницы из английского. */
+    bookPage,
   };
 
   const module = game.modules.get(MODULE_ID);
