@@ -99,6 +99,26 @@ let coreJournal;
     if (!missing) {
       console.log(`  страниц PDF: ${coreJournal.pages.filter((p) => p.type === "pdf").length}, все файлы на месте`);
     }
+
+    // Файл должен быть линеаризован. У обычного PDF таблица объектов лежит в
+    // конце, и просмотрщик не покажет первую страницу, пока не доберётся до
+    // хвоста — на практике качает файл целиком. Ради этого книгу и резали на
+    // главы, так что не линеаризованная глава сводит нарезку на нет.
+    let flat = 0;
+    for (const p of coreJournal.pages) {
+      if (p.type !== "pdf" || typeof p.src !== "string") continue;
+      const file = path.join(MODULE_ROOT, p.src.replace("modules/cpr-addenda/", ""));
+      if (!fs.existsSync(file)) continue;
+      const head = Buffer.alloc(2048);
+      const fd = fs.openSync(file, "r");
+      fs.readSync(fd, head, 0, 2048, 0);
+      fs.closeSync(fd);
+      if (!head.includes("/Linearized")) {
+        flat += 1;
+        expect(false, `не линеаризован, будет качаться целиком: ${p.src}`);
+      }
+    }
+    if (!flat) console.log("  все файлы книги линеаризованы");
   }
 }
 
