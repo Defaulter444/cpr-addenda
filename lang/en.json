@@ -253,7 +253,7 @@
   "CPRADDENDA.area.shot.damageOnce": "Shot catches <strong>every target in front of the shooter</strong> within six metres and in line of sight. Damage is rolled <strong>once</strong> and applies to all; armor reduces it as usual.",
   "CPRADDENDA.area.shot.dv": "The block is placed directly in front of the shooter, toward the marked target. If the facing came out wrong, drag the template and press “Recount”. Reminder from the book: firing shot is against <strong>DV 13</strong> regardless of range, and aimed shots are not possible with shot.",
   "CPRADDENDA.area.noTarget": "No target is marked, so there is nowhere to place the blast area for “{name}”. Target a token (press T over it) and fire again.",
-  "CPRADDENDA.area.noShooter": "The shooter has no token on this scene, so there is nowhere to start the shot arc for “{name}”.",
+  "CPRADDENDA.area.noShooter": "The shooter has no token on this scene, so there is nowhere to build the shot area for “{name}”.",
   "CPRADDENDA.area.failed": "The area was not placed: {message}",
   "CPRADDENDA.area.weaponGone": "The weapon from this shot can no longer be found — it was deleted or the world changed. Fire again.",
   "CPRADDENDA.area.tokenGone": "That token is no longer on the scene, so there is nobody to dodge.",
