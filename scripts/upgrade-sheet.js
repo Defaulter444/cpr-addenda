@@ -190,9 +190,20 @@ export function registerSheetHooks() {
   // Система регистрирует свой лист под именем CPRItemSheet, поэтому Foundry
   // выпускает хук с этим именем. Подписываемся и на общий, если система
   // когда-нибудь переименует класс.
-  Hooks.on("renderCPRItemSheet", onRenderItemSheet);
+  // Foundry поймает исключение обработчика и лист всё равно откроется, но
+  // поймает шумно — красным уведомлением при каждом открытии. Остальные хуки
+  // модуля пишут в консоль и молчат на экране; здесь так же.
+  const safely = (app, html) => {
+    try {
+      onRenderItemSheet(app, html);
+    } catch (err) {
+      console.error(`${MODULE_ID} | Строки модификации не добавлены`, err);
+    }
+  };
+
+  Hooks.on("renderCPRItemSheet", safely);
   Hooks.on("renderItemSheet", (app, html) => {
     if (app.constructor.name === "CPRItemSheet") return;
-    onRenderItemSheet(app, html);
+    safely(app, html);
   });
 }

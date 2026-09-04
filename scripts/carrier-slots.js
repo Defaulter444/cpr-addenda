@@ -92,9 +92,20 @@ function onRenderCarrierSheet(app, html) {
 }
 
 export function registerCarrierHooks() {
-  Hooks.on("renderCPRItemSheet", onRenderCarrierSheet);
+  // Foundry поймает исключение обработчика и лист всё равно откроется, но
+  // поймает шумно — красным уведомлением при каждом открытии. Остальные хуки
+  // модуля пишут в консоль и молчат на экране; здесь так же.
+  const safely = (app, html) => {
+    try {
+      onRenderCarrierSheet(app, html);
+    } catch (err) {
+      console.error(`${MODULE_ID} | Переключатель слотов не добавлен`, err);
+    }
+  };
+
+  Hooks.on("renderCPRItemSheet", safely);
   Hooks.on("renderItemSheet", (app, html) => {
     if (app.constructor.name === "CPRItemSheet") return;
-    onRenderCarrierSheet(app, html);
+    safely(app, html);
   });
 }

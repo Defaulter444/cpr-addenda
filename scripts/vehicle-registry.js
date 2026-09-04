@@ -102,19 +102,40 @@ Hooks.on("updateActor", async (actor, changes) => {
     ) {
       return;
     }
-    await reconcilePermissions(actor);
-    await reconcileEffects(actor);
+    // Foundry ловит исключения обработчиков, но только СИНХРОННЫЕ: асинхронный
+    // возвращает промис, и его отказ уже никто не поймает. Без этого сбой прав
+    // экипажа прошёл бы совсем молча — ни сообщения, ни следа в журнале.
+    try {
+      await reconcilePermissions(actor);
+      await reconcileEffects(actor);
+    } catch (err) {
+      console.error(
+        `${MODULE_ID} | Не удалось привести в порядок экипаж «${actor?.name}»`,
+        err
+      );
+    }
   });
 
   Hooks.on("deleteActor", async (actor) => {
     if (!game.user.isGM) return;
     if (!actor.getFlag(MODULE_ID, VEHICLE_FLAGS.positions)) return;
-    await cleanupOrphanedEffects(actor.id);
+    try {
+      await cleanupOrphanedEffects(actor.id);
+    } catch (err) {
+      console.error(
+        `${MODULE_ID} | Не удалось убрать эффекты удалённого транспорта «${actor?.name}»`,
+        err
+      );
+    }
   });
 
-  Hooks.on("renderActorSheet", (sheet, html) =>
-    addEjectButton(sheet, html)
-  );
+  Hooks.on("renderActorSheet", (sheet, html) => {
+    try {
+      addEjectButton(sheet, html);
+    } catch (err) {
+      console.error(`${MODULE_ID} | Кнопка высадки не добавлена`, err);
+    }
+  });
 }
 
 /**
