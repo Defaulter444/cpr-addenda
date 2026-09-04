@@ -267,5 +267,6 @@
   "CPRADDENDA.shot.hint": "Shot mode. The blast covers a 3 × 3 square block in front of the shooter (6 m) and hits everyone in it. Per the book: DV 13 regardless of range, no aimed shots with shot, targets with REF 8+ may dodge.",
   "CPRADDENDA.shot.on": "{name}: shot mode on — the shot will cover a 3 × 3 block in front.",
   "CPRADDENDA.shot.off": "{name}: shot mode off, the weapon hits a single target again.",
-  "CPRADDENDA.corebook.relinked": "The rulebook contents links now point at this world's pages."
+  "CPRADDENDA.corebook.relinked": "The rulebook contents links now point at this world's pages.",
+  "CPRADDENDA.area.shot.noAimed": "«{name}»: you cannot make an aimed shot with shotgun shot (rulebook p. 175). No area was placed — either fire a normal attack or turn the Shot mode off."
 }

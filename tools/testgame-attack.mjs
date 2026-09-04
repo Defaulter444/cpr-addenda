@@ -59,7 +59,15 @@ function makeToken(name, x, y, { ref = 8, actorId = null } = {}) {
       uuid: `Actor.${id}`,
       system: { stats: { ref: { value: ref } } },
     },
-    document: { uuid: `Scene.main.Token.token-${name}`, rotation: 0 },
+    // Настоящий TokenDocument несёт имя, свой id и актёра — карточка урона
+    // берёт у него именно их.
+    document: {
+      uuid: `Scene.main.Token.token-${name}`,
+      id: `token-${name}`,
+      name,
+      rotation: 0,
+      actor: { id, name },
+    },
   };
   return token;
 }
@@ -222,7 +230,12 @@ function makeWeapon(name, weaponType, ammoVariety, actor, { shotMode = false } =
     name,
     type: "weapon",
     system: { weaponType },
-    actor,
+    // Режим дроби модуль читает флагом с ВЛАДЕЛЬЦА оружия.
+    actor: {
+      ...actor,
+      getFlag: (scope, key) =>
+        scope === "cpr-addenda" && key === "shotmode-wpn1" ? shotMode : undefined,
+    },
     isOwner: true,
     _getLoadedAmmoProp: () => ammoVariety,
     createRoll: (type, who, extra) => ({
@@ -591,6 +604,128 @@ console.log("Карточка зоны уходит тем же, кому ушё
     );
   }
   console.log(`  проверено режимов: ${modes.length}`);
+}
+
+console.log("Дробовик ставит зону только в режиме дроби");
+{
+  const shooter = makeToken("Стрелок", SHOOTER.x, SHOOTER.y);
+  const victim = makeToken("Цель", 1200, 1000);
+
+  // Обычный патрон дробовика сам по себе зоны давать не должен: раньше
+  // shotgunShell опознавался как «дробь», и зона вставала на КАЖДЫЙ выстрел,
+  // включая прицельный, хотя книга прицельную стрельбу дробью запрещает.
+  const cases = [
+    ["shotgunShell", false, null, "обычный патрон без режима"],
+    ["shotgunSlug", false, null, "жакан без режима"],
+    [undefined, false, null, "пустой дробовик"],
+    ["shotgunShell", true, area.SHOT, "обычный патрон, режим включён"],
+    ["shotgunSlug", true, area.SHOT, "жакан, но режим включён"],
+    [undefined, true, area.SHOT, "режим включён без патрона"],
+  ];
+
+  for (const [ammo, shotMode, want, what] of cases) {
+    const weapon = makeWeapon("Дробовик", "shotgun", ammo, shooter.actor, { shotMode });
+    const kind = area.areaKindOf(weapon);
+    expect(kind === want, `${what}: вид зоны «${kind}», а ожидался «${want}»`);
+  }
+
+  // Ракета и граната взрываются независимо от режима — там решает заряженное.
+  for (const [ammo, type, want] of [
+    ["rocket", "rocketLauncher", area.BLAST],
+    ["grenade", "grenadeLauncher", area.BLAST],
+    ["grenade", "thrownWeapon", area.BLAST],
+    [undefined, "rocketLauncher", area.BLAST],
+    [undefined, "thrownWeapon", null],
+  ]) {
+    const weapon = makeWeapon("Ствол", type, ammo, shooter.actor);
+    expect(
+      area.areaKindOf(weapon) === want,
+      `${type} с «${ammo}»: вид зоны «${area.areaKindOf(weapon)}», ожидался «${want}»`
+    );
+  }
+  console.log(`  разобрано случаев: ${cases.length + 5}`);
+}
+
+console.log("Прицельный выстрел дробью зоны не даёт");
+{
+  const hook = await import(pathToFileURL(path.join(modulePath, "area-hook.mjs")).href);
+  const { isCard, AIMED_CARD, DAMAGE_CARD } = hook.__test;
+
+  expect(
+    isCard({ rollCard: "systems/x/templates/chat/cpr-aimed-attack-rollcard.hbs" }, AIMED_CARD),
+    "прицельная карточка не опознана"
+  );
+  expect(
+    !isCard({ rollCard: "systems/x/templates/chat/cpr-attack-rollcard.hbs" }, AIMED_CARD),
+    "обычная атака принята за прицельную"
+  );
+  expect(
+    isCard({ rollCard: "systems/x/templates/chat/cpr-damage-rollcard.hbs" }, DAMAGE_CARD),
+    "карточка урона не опознана"
+  );
+  expect(!isCard(undefined, AIMED_CARD), "undefined уронил опознание карточки");
+
+  // Проверка самого запрета живёт в обёртке над карточкой системы, а её вне
+  // Foundry не поднять. Здесь сверяем, что запрет в коде есть и текст к нему
+  // существует: без текста мастер увидел бы сырой ключ.
+  const source = fs.readFileSync(path.join(SCRIPTS, "area-hook.js"), "utf-8");
+  expect(
+    source.includes("kind === SHOT && isCard(roll, AIMED_CARD)"),
+    "прицельная стрельба дробью не запрещена"
+  );
+  expect(source.includes("area.shot.noAimed"), "нет сообщения о запрете");
+}
+
+console.log("Урон после зоны достаётся всем, кого накрыло");
+{
+  const hook = await import(pathToFileURL(path.join(modulePath, "area-hook.mjs")).href);
+  const { widenDamage } = hook.__test;
+
+  scene();
+  const shooter = makeToken("Стрелок", SHOOTER.x, SHOOTER.y);
+  const hitA = makeToken("Попал А", 1300, 1000);
+  const hitB = makeToken("Попал Б", 1300, 1100);
+  const outside = makeToken("Мимо", 1300, 2000);
+  tokens = [shooter, hitA, hitB, outside];
+  targets = new Set([hitA]);
+  globalThis.__weapon = makeWeapon("Ракетница", "rocketLauncher", "rocket", shooter.actor);
+
+  await area.placeArea({
+    item: globalThis.__weapon,
+    actor: shooter.actor,
+    kind: area.BLAST,
+    attackTotal: 15,
+  });
+
+  // Система кладёт в карточку урона ТОЛЬКО помеченные фигуры — одну.
+  const roll = {
+    rollCard: "systems/x/templates/chat/cpr-damage-rollcard.hbs",
+    entityData: { actor: shooter.actor.id, item: "wpn1", tokens: [hitA.document] },
+  };
+  const widened = widenDamage(roll);
+
+  expect(widened === 2, `подставлено фигур ${widened}, а в зоне двое`);
+  const names = roll.entityData.tokens.map((t) => t.name);
+  expect(names.includes("Попал А") && names.includes("Попал Б"), `в карточке: ${names}`);
+  expect(!names.includes("Мимо"), "в карточку урона попал тот, кто вне зоны");
+  expect(!names.includes("Стрелок"), "в карточку урона попал стрелок");
+
+  // Чужое оружие и чужой стрелок зону не наследуют.
+  const alien = {
+    rollCard: "systems/x/templates/chat/cpr-damage-rollcard.hbs",
+    entityData: { actor: shooter.actor.id, item: "wpn2", tokens: [hitA.document] },
+  };
+  expect(widenDamage(alien) === 0, "зона досталась другому оружию");
+
+  // Забытая зона больше не расширяет урон: иначе выключенный режим дроби
+  // оставил бы за собой список, и обычный выстрел раздал бы урон по вчерашней.
+  area.forgetArea(shooter.actor.id, "wpn1");
+  const after = {
+    rollCard: "systems/x/templates/chat/cpr-damage-rollcard.hbs",
+    entityData: { actor: shooter.actor.id, item: "wpn1", tokens: [hitA.document] },
+  };
+  expect(widenDamage(after) === 0, "забытая зона всё ещё раздаёт урон");
+  expect(after.entityData.tokens.length === 1, "список целей испорчен после забывания");
 }
 
 console.log(`\nПроверок выполнено: ${checks}, провалов: ${failures}`);

@@ -51,8 +51,8 @@ const BLAST_AMMO = ["rocket", "grenade"];
  * Типы оружия, взрывающиеся и без сведений о заряженном.
  *
  * Метательного оружия здесь намеренно нет: гранату кидают им же, но им же
- * кидают и нож, а книга даёт зону только гранате. Дробовика тоже нет — не зная
- * боеприпаса, отличить дробь от жакана невозможно, а жакан бьёт по одному.
+ * кидают и нож, а книга даёт зону только гранате. Дробовика тоже нет — он
+ * стреляет площадью только в режиме дроби, а режим спрашивают отдельно.
  */
 const BLAST_WEAPONS = ["rocketLauncher", "grenadeLauncher"];
 
@@ -110,15 +110,18 @@ export function loadedVariety(item) {
  * @returns {String|null} - BLAST, SHOT или null
  */
 export function areaKindOf(item) {
-  // Включённый режим дроби решает всё: стрелок сам сказал, чем стреляет.
+  // Дробь — РЕЖИМ стрельбы, и опознаётся только по нему.
+  //
+  // Раньше её узнавали ещё и по заряженному патрону `shotgunShell`. Это было
+  // ошибкой: shotgunShell — обычный патрон дробовика, и зона вставала на КАЖДЫЙ
+  // выстрел, включая прицельный, хотя книга прицельную стрельбу дробью прямо
+  // запрещает. Стрелок сам говорит, чем стреляет, — переключателем «Дробь».
   if (shotModeOn(item)) return SHOT;
 
+  // У взрыва иначе: ракета и граната взрываются независимо от режима, тут
+  // решает заряженное.
   const variety = loadedVariety(item);
   if (BLAST_AMMO.includes(variety)) return BLAST;
-  if (variety === "shotgunShell") return SHOT;
-  // Жакан назван явно: это выстрел по одной цели, и запасной путь по типу
-  // оружия не должен превращать его в площадную атаку.
-  if (variety === "shotgunSlug") return null;
   if (variety) return null;
 
   return BLAST_WEAPONS.includes(item?.system?.weaponType) ? BLAST : null;
@@ -340,6 +343,52 @@ export function caughtBy(geometry, tokens, origin = null) {
 }
 
 /**
+ * Последняя зона по каждому стрелку и оружию.
+ *
+ * Нужна карточке урона. Система кладёт в неё только ПОМЕЧЕННЫЕ фигуры
+ * (`getUserTargetedOrSelected("targeted")`), поэтому после площадной атаки урон
+ * предлагался одной цели, хотя накрыло нескольких. Здесь помним, кого накрыло,
+ * и подставляем этот список, когда тем же оружием бросают урон.
+ *
+ * Ключ — стрелок и оружие: у одного бойца может быть и ракетница, и дробовик.
+ * Новая зона тем же оружием вытесняет прежнюю — за столом «последний выстрел» и
+ * есть тот, за который считают урон.
+ */
+const lastArea = new Map();
+
+/** Ключ памяти зоны. */
+function areaKey(actorId, itemId) {
+  return `${actorId ?? "?"}:${itemId ?? "?"}`;
+}
+
+/**
+ * Запоминает, кого накрыла зона.
+ *
+ * @param {String} actorId - стрелок
+ * @param {String} itemId - оружие
+ * @param {Array} caught - фигуры в зоне
+ */
+export function rememberArea(actorId, itemId, caught) {
+  lastArea.set(areaKey(actorId, itemId), caught ?? []);
+}
+
+/**
+ * Кого накрыла последняя зона этого оружия.
+ *
+ * @param {String} actorId - стрелок
+ * @param {String} itemId - оружие
+ * @returns {Array|null}
+ */
+export function recallArea(actorId, itemId) {
+  return lastArea.get(areaKey(actorId, itemId)) ?? null;
+}
+
+/** Забывает зону — например, когда урон по ней уже раздали. */
+export function forgetArea(actorId, itemId) {
+  lastArea.delete(areaKey(actorId, itemId));
+}
+
+/**
  * Отправляет карточку модуля тем же, кому ушла карточка выстрела.
  *
  * Система подчиняет свои карточки настройке «режим броска»: при приватном
@@ -447,6 +496,18 @@ export async function placeArea({ item, actor, kind, attackTotal }) {
 async function postCard({ item, actor, kind, attackTotal, geometry, shooter, created }) {
   const origin = kind === SHOT && shooter ? shooter.center : null;
   const caught = caughtBy(geometry, canvas.tokens?.placeables ?? [], origin);
+
+  // Карточке урона нужны сами фигуры: она берёт у каждой имя, `id` и `actor.id`.
+  // В списке зоны лежат только имена и адреса, поэтому документы достаём здесь,
+  // пока сцена под рукой.
+  const inZone = new Set(caught.map((t) => t.uuid));
+  rememberArea(
+    actor?.id,
+    item?.id,
+    (canvas.tokens?.placeables ?? [])
+      .filter((t) => inZone.has(t.document?.uuid))
+      .map((t) => t.document)
+  );
 
   const roster = caught.length
     ? "<ul>" +
