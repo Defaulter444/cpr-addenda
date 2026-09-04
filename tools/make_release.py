@@ -24,8 +24,45 @@ ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "module.zip"
 
 
+def sync_download(version):
+    """Приводит ссылку на архив в манифесте к текущей версии.
+
+    Ссылку легко не заметить: Foundry берёт из манифеста ЕЁ, а не версию, и
+    если она отстала, мастер «обновляется» на старый архив. Внешне всё
+    благополучно: версия в списке модулей новая, а код на диске прежний.
+
+    Так и вышло с выпусками 0.19.0–0.19.2: ссылка осталась от 0.18.1, и всё
+    это время раздавался архив трёхмесячной давности. Поэтому теперь она не
+    правится руками, а собирается из версии.
+
+    @param {str} version - версия из манифеста
+    @returns {bool} - пришлось ли править
+    """
+    path = ROOT / "module.json"
+    text = path.read_text(encoding="utf-8")
+    manifest = json.loads(text)
+
+    want = (
+        "https://github.com/Defaulter444/cpr-addenda/releases/download/"
+        f"v{version}/module.zip"
+    )
+    if manifest.get("download") == want:
+        return False
+
+    was = manifest.get("download", "—")
+    path.write_text(
+        text.replace(f'"download": "{was}"', f'"download": "{want}"'),
+        encoding="utf-8",
+        newline="\n",
+    )
+    print(f"Ссылка на архив была {was}")
+    print(f"                стала {want}")
+    return True
+
+
 def main():
     version = json.loads((ROOT / "module.json").read_text(encoding="utf-8"))["version"]
+    sync_download(version)
 
     # `-z` обязателен: без него git экранирует имена с не-ASCII символами —
     # «vneshniy-ekzoskelet-ω-omega.json» превращается в строку с кавычками и

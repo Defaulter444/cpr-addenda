@@ -63,6 +63,38 @@ function packFiles() {
 
 /* ------------------------------------------------------------------ */
 
+console.log("Ссылка на архив в манифесте ведёт на текущую версию");
+{
+  // Foundry при обновлении берёт из манифеста ИМЕННО ссылку `download`, а не
+  // версию. Отстанет ссылка — мастер «обновится» на старый архив, и внешне всё
+  // будет благополучно: в списке модулей новая версия, а код на диске прежний.
+  //
+  // Так и вышло с выпусками 0.19.0-0.19.2: ссылка осталась от 0.18.1, и всё это
+  // время раздавался архив трёхмесячной давности. Ошибку не видно ни в одной
+  // другой проверке — архив-то собирался правильный, промахивалась раздача.
+  const manifest = JSON.parse(
+    fs.readFileSync(path.join(MODULE_ROOT, "module.json"), "utf-8")
+  );
+  const want =
+    "https://github.com/Defaulter444/cpr-addenda/releases/download/" +
+    `v${manifest.version}/module.zip`;
+
+  expect(
+    manifest.download === want,
+    `ссылка ведёт на «${manifest.download}», а версия ${manifest.version} — ` +
+      "мастер обновится на чужой архив"
+  );
+
+  // Ссылка на сам манифест, наоборот, обязана быть плавающей: она одна и та же
+  // во всех выпусках, по ней Foundry и узнаёт о новой версии.
+  expect(
+    manifest.manifest ===
+      "https://github.com/Defaulter444/cpr-addenda/releases/latest/download/module.json",
+    `ссылка на манифест «${manifest.manifest}» — она должна вести на latest`
+  );
+  console.log(`  версия ${manifest.version}, ссылка на архив совпадает`);
+}
+
 console.log("Ни один файл пака не игнорируется");
 {
   const files = packFiles();
