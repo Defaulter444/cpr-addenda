@@ -83,6 +83,7 @@ function crosses(a, b) {
 }
 
 const created = { templates: [], messages: [] };
+globalThis.__rollMode = "publicroll";
 let tokens = [];
 let targets = new Set();
 let notified = [];
@@ -127,7 +128,10 @@ function stubFoundry() {
         return targets;
       },
     },
-    settings: { get: () => true },
+    settings: {
+      get: (scope, key) =>
+        scope === "core" && key === "rollMode" ? globalThis.__rollMode : true,
+    },
     i18n: {
       localize: (key) => key,
       format: (key, data) => `${key}|${JSON.stringify(data)}`,
@@ -146,6 +150,20 @@ function stubFoundry() {
 
   globalThis.ChatMessage = {
     getSpeaker: ({ actor }) => ({ actor: actor?.id ?? null }),
+    getWhisperRecipients: () => [{ id: "gm1" }],
+    // Повторяет ядро Foundry (client/data/documents/chat-message.js).
+    applyRollMode(data, mode) {
+      const rollMode = mode === "roll" ? globalThis.__rollMode : mode;
+      if (rollMode === "gmroll" || rollMode === "blindroll") {
+        data.whisper = ChatMessage.getWhisperRecipients("GM").map((u) => u.id);
+      } else if (rollMode === "selfroll") {
+        data.whisper = [game.user.id];
+      } else if (rollMode === "publicroll") {
+        data.whisper = [];
+      }
+      data.blind = rollMode === "blindroll";
+      return data;
+    },
     async create(data) {
       const message = { ...data, id: `msg${created.messages.length}`, update: async () => {} };
       created.messages.push(message);
@@ -271,6 +289,7 @@ function scene() {
   notified = [];
   targets = new Set();
   walls = [];
+  globalThis.__rollMode = "publicroll";
 }
 
 const SHOOTER = { x: 1000, y: 1000 };
@@ -521,6 +540,57 @@ console.log("Зону двигают — список пересчитывает
   const now = area.caughtBy(geometry, tokens).map((t) => t.uuid);
   expect(now.includes(second.document.uuid), "после переноса второй не попал");
   expect(!now.includes(first.document.uuid), "после переноса первый остался в зоне");
+}
+
+console.log("Карточка зоны уходит тем же, кому ушёл выстрел");
+{
+  // Система подчиняет карточку выстрела настройке «режим броска». Карточка
+  // модуля этого не делала и всегда шла в общий чат: при приватном броске
+  // мастера за столом выходило, будто выстрела не было вовсе — зона видна
+  // всем, а карточка атаки только мастеру. При слепом броске было хуже:
+  // модуль публично объявлял итог, который как раз и прятали, ведь в
+  // карточке зоны написано, что уклонение должно его превзойти.
+  const shooter = makeToken("Стрелок", SHOOTER.x, SHOOTER.y);
+  const victim = makeToken("Цель", 1300, 1000);
+
+  const modes = [
+    ["publicroll", false, false],
+    ["gmroll", true, false],
+    ["blindroll", true, true],
+    ["selfroll", true, false],
+  ];
+
+  for (const [mode, hidden, blind] of modes) {
+    scene();
+    globalThis.__rollMode = mode;
+    tokens = [shooter, victim];
+    targets = new Set([victim]);
+    globalThis.__weapon = makeWeapon("Ракетница", "rocketLauncher", "rocket", shooter.actor);
+
+    // eslint-disable-next-line no-await-in-loop
+    await area.placeArea({
+      item: globalThis.__weapon,
+      actor: shooter.actor,
+      kind: area.BLAST,
+      attackTotal: 15,
+    });
+
+    const card = created.messages[0];
+    expect(card !== undefined, `при режиме «${mode}» карточка зоны не создана`);
+    if (!card) continue;
+
+    const whispered = Array.isArray(card.whisper) && card.whisper.length > 0;
+    expect(
+      whispered === hidden,
+      `при режиме «${mode}» карточка ${whispered ? "спрятана" : "публична"}, ` +
+        `а должна быть ${hidden ? "спрятана" : "публична"}`
+    );
+    expect(
+      Boolean(card.blind) === blind,
+      `при режиме «${mode}» blind=${card.blind}, а ожидалось ${blind}`
+    );
+  }
+  console.log(`  проверено режимов: ${modes.length}`);
 }
 
 console.log(`\nПроверок выполнено: ${checks}, провалов: ${failures}`);

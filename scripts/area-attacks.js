@@ -340,6 +340,34 @@ export function caughtBy(geometry, tokens, origin = null) {
 }
 
 /**
+ * Отправляет карточку модуля тем же, кому ушла карточка выстрела.
+ *
+ * Система подчиняет свои карточки настройке «режим броска»: при приватном
+ * броске мастера и при слепом она шепчет их только мастеру, при «себе» — только
+ * бросавшему. Карточки модуля этого не делали и всегда уходили в общий чат.
+ *
+ * За столом это выглядело так, будто выстрела не было вовсе: зона поражения
+ * появлялась у всех, а карточка атаки — только у мастера. А при слепом броске
+ * было хуже: модуль публично объявлял итог, который как раз и прятали, — ведь
+ * в карточке зоны написано, что уклонение должно превзойти это число.
+ *
+ * `applyRollMode` с «roll» берёт текущую настройку сам и расставляет `whisper`
+ * и `blind` ровно так же, как это делает система.
+ *
+ * @param {Object} data - данные сообщения
+ * @returns {Object} - они же, с учётом режима броска
+ */
+function asRolled(data) {
+  try {
+    return ChatMessage.applyRollMode({ ...data }, "roll");
+  } catch (error) {
+    // Режим — удобство, а не условие: сообщение должно уйти в любом случае.
+    console.error(`${MODULE_ID} | режим броска не применён к карточке:`, error);
+    return data;
+  }
+}
+
+/**
  * Ставит зону и выдаёт карточку с кнопками.
  *
  * @async
@@ -458,7 +486,7 @@ async function postCard({ item, actor, kind, attackTotal, geometry, shooter, cre
       : `<p>${localize("area.shot.damageOnce")}</p>` +
         `<p class="cpr-addenda-pkt-note">${localize("area.shot.dv")}</p>`;
 
-  await ChatMessage.create({
+  await ChatMessage.create(asRolled({
     speaker: ChatMessage.getSpeaker({ actor }),
     content:
       `<p><strong>${esc(item.name)}</strong> — ${head}</p>` +
@@ -490,7 +518,7 @@ async function postCard({ item, actor, kind, attackTotal, geometry, shooter, cre
         },
       },
     },
-  });
+  }));
 }
 
 /* ------------------------------------------------------------------ */
@@ -596,13 +624,13 @@ async function rollAreaDodge(event, area, tokenUuid) {
   // «против чего бросали», а без этого числа бросок ничего не решает.
   const total = Number(area.attack);
   const escaped = cprRoll.resultTotal > total;
-  await ChatMessage.create({
+  await ChatMessage.create(asRolled({
     speaker: ChatMessage.getSpeaker({ actor }),
     content: `<p>${localize(
       escaped ? "area.dodgeSuccess" : "area.dodgeFail",
       { name: actor.name, result: cprRoll.resultTotal, total }
     )}</p>`,
-  });
+  }));
 }
 
 /**
@@ -636,7 +664,7 @@ async function recountArea(event, area, message) {
     area.kind === SHOT ? tokenOf(shooter?.actor ?? shooter)?.center ?? null : null;
   const caught = caughtBy(geometry, canvas.tokens?.placeables ?? [], origin);
 
-  await ChatMessage.create({
+  await ChatMessage.create(asRolled({
     speaker: message.speaker,
     content:
       `<p><strong>${localize("area.recounted")}</strong></p>` +
@@ -659,7 +687,7 @@ async function recountArea(event, area, message) {
         area: { ...area, caught: caught.map((t) => t.uuid).filter(Boolean) },
       },
     },
-  });
+  }));
 }
 
 /**
