@@ -152,8 +152,34 @@ console.log("Все запрошенные ключи существуют");
 
 console.log("Ключи, собранные из кусков");
 {
-  // Единственное такое место у модуля — сообщения об исправлениях системы.
-  // Их набор известен: сколько починок объявлено, столько и текстов.
+  // Подписи ролей, ступеней и имплантов в окне раскладчика собираются из
+  // ключей списка: `random.roles.${key}`. Набор известен — он объявлен в
+  // `mook-random.js`, — так что и проверить его можно целиком. Без этого
+  // забытая роль показалась бы мастеру голым ключом вместо названия.
+  const plan = fs.readFileSync(path.join(MODULE_ROOT, "scripts", "mook-random.js"), "utf-8");
+  const listOf = (name) => {
+    const at = plan.indexOf(`export const ${name} = [`);
+    if (at < 0) return [];
+    const body = plan.slice(at, plan.indexOf("]", at));
+    return [...body.matchAll(/"([^"]+)"/g)].map((m) => m[1]);
+  };
+  const lists = [
+    ["random.roles", listOf("ROLE_ORDER")],
+    ["random.tiers", listOf("TIER_ORDER")],
+    ["random.chromes", listOf("CHROME_ORDER")],
+  ];
+  for (const [prefix, keys] of lists) {
+    expect(keys.length > 0, `в mook-random.js не нашлось списка для «${prefix}»`);
+    for (const key of keys) {
+      const full = `${PREFIX}${prefix}.${key}`;
+      expect(full in ru, `нет русской подписи для «${prefix}.${key}»`);
+      expect(full in en, `нет английской подписи для «${prefix}.${key}»`);
+    }
+    console.log(`  ${prefix}: ${keys.length}`);
+  }
+
+  // Сообщения об исправлениях системы: сколько починок объявлено, столько и
+  // текстов.
   const fixes = fs.readFileSync(path.join(MODULE_ROOT, "scripts", "system-fixes.js"), "utf-8");
   const kinds = [...fixes.matchAll(/what:\s*"([^"]+)"/g)].map((m) => m[1]);
   expect(kinds.length > 0, "в system-fixes.js не нашлось ни одной починки");

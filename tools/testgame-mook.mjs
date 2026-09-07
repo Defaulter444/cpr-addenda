@@ -176,7 +176,7 @@ console.log("Правки на месте");
   console.log(`  записей в разбивке: ${Object.keys(table).length}`);
 }
 
-console.log("Кнопка «Собрать шестёрку» встаёт во вкладку актёров");
+console.log("Кнопки шестёрок встают во вкладку актёров");
 {
   // Кнопки не было видно, потому что обработчик вешался в `ready` — боковая
   // панель к тому времени уже нарисована и второй раз не рисуется. Проверяем и
@@ -200,12 +200,16 @@ console.log("Кнопка «Собрать шестёрку» встаёт во 
   };
   const root = {
     querySelector: (selector) => {
-      if (selector === ".cpr-addenda-build-mook") {
-        return buttons.length ? buttons[0] : null;
+      if (selector === ".cpr-addenda-mook-row") {
+        return headerChildren.length ? headerChildren[0] : null;
       }
       if (selector === ".directory-header") return header;
       return null;
     },
+  };
+  const reset = () => {
+    buttons.length = 0;
+    headerChildren.length = 0;
   };
   globalThis.document = {
     createElement: (tag) => {
@@ -242,13 +246,23 @@ console.log("Кнопка «Собрать шестёрку» встаёт во 
     pathToFileURL(path.join(prepareAddendaScripts(), "mook-button.mjs")).href
   );
 
-  expect(mookButton.injectMookButton({}, [root]), "кнопка не добавлена");
-  expect(buttons.length === 1, `кнопок создано ${buttons.length}`);
+  expect(mookButton.injectMookButton({}, [root]), "кнопки не добавлены");
+  const classes = buttons.map((button) => button.className);
+  expect(classes.length === 2, `кнопок создано ${classes.length}: ${classes.join(", ")}`);
   expect(
-    buttons[0].className === "cpr-addenda-build-mook",
-    `у кнопки класс «${buttons[0].className}»`
+    classes.includes("cpr-addenda-random-mook"),
+    `нет кнопки раскладчика, есть: ${classes.join(", ")}`
   );
-  expect(typeof buttons[0].listeners.click === "function", "на кнопку не повешен щелчок");
+  expect(
+    classes.includes("cpr-addenda-build-mook"),
+    `нет кнопки конструктора, есть: ${classes.join(", ")}`
+  );
+  for (const button of buttons) {
+    expect(
+      typeof button.listeners.click === "function",
+      `на кнопку «${button.className}» не повешен щелчок`
+    );
+  }
 
   // Строкой во всю ширину, как это делают соседние модули, а не втискиванием
   // в системный ряд «Создать актёра».
@@ -258,23 +272,26 @@ console.log("Кнопка «Собрать шестёрку» встаёт во 
     `строка кнопки получила класс «${headerChildren[0].className}»`
   );
 
-  // Повторная отрисовка не должна плодить вторую кнопку.
-  expect(!mookButton.injectMookButton({}, [root]), "кнопка добавилась во второй раз");
-  expect(buttons.length === 1, `после второй отрисовки кнопок ${buttons.length}`);
+  // Повторная отрисовка не должна плодить второй ряд.
+  expect(!mookButton.injectMookButton({}, [root]), "ряд кнопок добавился во второй раз");
+  expect(buttons.length === 2, `после второй отрисовки кнопок ${buttons.length}`);
 
-  // Без конструктора шестёрок кнопке делать нечего.
+  // Раскладчик — наш и работает сам по себе. Выключенный чужой конструктор
+  // забирает с собой только свою кнопку, а не весь ряд: раньше пропадало всё.
+  reset();
   game.modules = { get: () => ({ active: false }) };
-  buttons.length = 0;
-  headerChildren.length = 0;
+  expect(mookButton.injectMookButton({}, [root]), "ряд пропал вместе с чужим модулем");
   expect(
-    !mookButton.injectMookButton({}, [root]),
-    "кнопка появилась при выключенном конструкторе"
+    buttons.length === 1 && buttons[0].className === "cpr-addenda-random-mook",
+    `без конструктора осталось кнопок ${buttons.length}: ${buttons.map((b) => b.className).join(", ")}`
   );
 
-  // Игроку кнопка не положена: заготовки и сцену правит мастер.
+  // Игроку кнопки не положены: заготовки и сцену правит мастер.
+  reset();
   game.modules = { get: () => ({ active: true }) };
   game.user = { isGM: false };
-  expect(!mookButton.injectMookButton({}, [root]), "кнопка показана игроку");
+  expect(!mookButton.injectMookButton({}, [root]), "кнопки показаны игроку");
+  expect(buttons.length === 0, `игроку создано кнопок ${buttons.length}`);
 
   Object.assign(game, stubs);
   delete globalThis.document;
