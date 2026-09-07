@@ -328,6 +328,11 @@ function makeFoundryStub({ translate }) {
 
   class FakeActor {
     constructor(data) {
+      // Свой id у каждого актёра — как в Foundry. Без него «новый актёр»
+      // неотличим от старого, и сборка не находит того, кого только что
+      // создала.
+      this.id = nextId();
+      this._id = this.id;
       this.name = data.name;
       this.type = data.type;
       this.folder = data.folder;
@@ -363,12 +368,16 @@ function makeFoundryStub({ translate }) {
         .filter((item) => item.type === "cyberware")
         .map((item) => item.id);
       actor.system.installedItems.list = ids;
-      globalThis.Hooks.callAll("createActor", actor);
+      globalThis.game.actors.push(actor);
 
-      // Ловушка один в один как у системы: `CPRActor.create` заканчивается на
-      // `actor.update({...installedItems.list})`, а `Document#update` отдаёт
-      // `updates.shift()` — пустоту, когда менять нечего. Список уже такой,
-      // какой нужно, и создание возвращает НИЧЕГО при созданном актёре.
+      // Ловушка один в один как на столе. Во-первых, `CPRActor.create`
+      // заканчивается на `actor.update({...installedItems.list})`, а
+      // `Document#update` отдаёт `updates.shift()` — пустоту, когда менять
+      // нечего; список уже правильный, и создание возвращает НИЧЕГО при
+      // созданном актёре. Во-вторых, хук `createActor` здесь намеренно НЕ
+      // зовётся: у мастера он тоже не выручил, и сборка не должна на него
+      // рассчитывать. Остаётся единственный надёжный признак — актёр,
+      // которого в мире не было.
       return actor.update({ "system.installedItems.list": ids });
     }
 
@@ -438,6 +447,7 @@ function makeFoundryStub({ translate }) {
   globalThis.game = {
     system: { id: "cyberpunk-red-core" },
     folders: [],
+    actors: [],
     i18n: {
       localize: (key) => key,
       format: (key, data) => `${key} ${JSON.stringify(data)}`,

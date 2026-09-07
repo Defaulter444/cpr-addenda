@@ -477,33 +477,32 @@ async function applyRole(actor, index, plan) {
 export async function createMook(plan, index, folder) {
   // Класс берём у системы, а не глобальный `Actor`: раздача базовых навыков и
   // корпусов под импланты живёт в `CPRActor.create`, и мимо неё актёр выходит
-  // пустым. Без ключа `system` — иначе система примет его за копию.
+  // пустым.
   //
-  // Возврат `create` при этом НЕНАДЁЖЕН. `CPRActor.create` заканчивается на
-  // `actor.update({...installedItems.list})`, а `Document#update` возвращает
-  // `updates.shift()` — то есть `undefined`, когда менять нечего. Список
-  // корпусов к этому моменту уже такой, какой нужно, обновлять нечего, и
-  // система отдаёт пустоту, хотя актёр создан и заполнен. Поэтому ловим его
-  // хуком, а возврат берём как подсказку.
-  let caught = null;
-  const watcher = Hooks.on("createActor", (document) => {
-    if (document?.name === plan.name) caught = document;
+  // А вот ЧТО вернёт этот вызов — не наше дело и полагаться на это нельзя.
+  // `CPRActor.create` заканчивается на `actor.update({...installedItems.list})`,
+  // а `Document#update` возвращает `updates.shift()` — пустоту, когда менять
+  // нечего. Список корпусов к тому моменту уже правильный, так что система
+  // отдаёт ничто при полностью созданном актёре.
+  //
+  // Ловить его хуком `createActor` тоже оказалось ненадёжно. Поэтому берём то,
+  // что нельзя не заметить: актёр, которого в мире не было до вызова, и есть
+  // наш. К моменту, когда `create` завершился, он уже лежит в `game.actors`.
+  const before = new Set((game.actors ?? []).map((existing) => existing.id));
+
+  // Без ключа `system`: иначе система примет актёра за копию и ничего не выдаст.
+  await getDocumentClass("Actor").create({
+    name: plan.name,
+    type: "mook",
+    folder: folder?.id ?? null,
+    items: [],
   });
 
-  let returned = null;
-  try {
-    returned = await getDocumentClass("Actor").create({
-      name: plan.name,
-      type: "mook",
-      folder: folder?.id ?? null,
-      items: [],
-    });
-  } finally {
-    Hooks.off("createActor", watcher);
-  }
-
-  const actor = returned ?? caught;
-  if (!actor) throw new Error("создание актёра вернуло пусто");
+  const fresh = (game.actors ?? []).filter((made) => !before.has(made.id));
+  // Имя — уточнение на случай, если в ту же секунду актёра завёл кто-то ещё,
+  // а не обязательное условие: важно, что актёр новый.
+  const actor = fresh.find((made) => made.name === plan.name) ?? fresh[0] ?? null;
+  if (!actor) throw new Error("актёр не появился в мире после создания");
 
   const missing = [];
   missing.push(...(await applySkills(actor, index, plan.skills)));
