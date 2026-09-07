@@ -359,10 +359,17 @@ function makeFoundryStub({ translate }) {
         system: { type: kind, isFoundational: true, size: 1, installedItems: { list: [], usedSlots: 0, slots: 7 } },
       }));
       await actor.createEmbeddedDocuments("Item", [...core, ...frames]);
-      actor.system.installedItems.list = actor.items
+      const ids = actor.items
         .filter((item) => item.type === "cyberware")
         .map((item) => item.id);
-      return actor;
+      actor.system.installedItems.list = ids;
+      globalThis.Hooks.callAll("createActor", actor);
+
+      // Ловушка один в один как у системы: `CPRActor.create` заканчивается на
+      // `actor.update({...installedItems.list})`, а `Document#update` отдаёт
+      // `updates.shift()` — пустоту, когда менять нечего. Список уже такой,
+      // какой нужно, и создание возвращает НИЧЕГО при созданном актёре.
+      return actor.update({ "system.installedItems.list": ids });
     }
 
     async createEmbeddedDocuments(kind, list) {
@@ -383,8 +390,15 @@ function makeFoundryStub({ translate }) {
     }
 
     async update(changes) {
-      for (const [key, value] of Object.entries(changes)) setProperty(this, key, value);
-      return this;
+      let touched = false;
+      for (const [key, value] of Object.entries(changes)) {
+        const before = JSON.stringify(getProperty(this, key));
+        if (before === JSON.stringify(value)) continue;
+        setProperty(this, key, value);
+        touched = true;
+      }
+      // Как Foundry: менять нечего — возвращать нечего.
+      return touched ? this : undefined;
     }
 
     get sheet() {
@@ -432,6 +446,23 @@ function makeFoundryStub({ translate }) {
   };
   globalThis.ui = { notifications: { warn() {}, info() {}, error() {} } };
 
+  const listeners = new Map();
+  let hookId = 0;
+  globalThis.Hooks = {
+    on: (event, fn) => {
+      hookId += 1;
+      listeners.set(hookId, { event, fn });
+      return hookId;
+    },
+    off: (event, id) => listeners.delete(id),
+    callAll: (event, ...args) => {
+      for (const entry of listeners.values()) {
+        if (entry.event === event) entry.fn(...args);
+      }
+    },
+  };
+  state.hooks = listeners;
+
   return {
     get createdWithSystem() {
       return state.createdWithSystem;
@@ -439,8 +470,11 @@ function makeFoundryStub({ translate }) {
     get usedBareActor() {
       return state.usedBareActor;
     },
+    get danglingHooks() {
+      return state.hooks ? state.hooks.size : 0;
+    },
     restore() {
-      for (const key of ["Actor", "Folder", "getDocumentClass", "foundry", "game", "ui"]) {
+      for (const key of ["Actor", "Folder", "getDocumentClass", "Hooks", "foundry", "game", "ui"]) {
         if (key in saved) globalThis[key] = saved[key];
         else delete globalThis[key];
       }
@@ -821,19 +855,35 @@ console.log("\nСборка актёра: имена ищутся по-англ�
     "для марочного оружия придумана несуществующая позиция качества"
   );
 
-  const { actors, missing } = await create.createMooks({
-    role: "solo", tier: "boss", chrome: "fullborg", count: 1, name: "Тест",
-  });
+  // Сборка обязана дожить до конца. Один раз она падала здесь с «создание
+  // актёра вернуло пусто»: система возвращает пустоту из `create`, когда её
+  // завершающему `update` нечего менять, — а актёр при этом создан. Ловим это
+  // проверкой, а не обвалом всего прогона.
+  let built = null;
+  try {
+    built = await create.createMooks({
+      role: "solo", tier: "boss", chrome: "fullborg", count: 1, name: "Тест",
+    });
+  } catch (error) {
+    expect(false, `сборка сорвалась: ${error.message}`);
+    built = { actors: [], missing: [] };
+  }
+  const { actors, missing } = built;
+  if (!actors.length) expect(false, "сборка не вернула ни одного актёра");
+  const mookOk = actors.length > 0;
   expect(missing.length === 0, `не нашлось: ${missing.join(", ")}`);
   expect(actors.length === 1, `собрано актёров ${actors.length}`);
 
-  const mook = actors[0];
+  const mook = mookOk ? actors[0] : null;
+  if (mookOk) {
   expect(mook.type === "mook", `тип актёра «${mook.type}»`);
 
   // Главное: актёр создан классом СИСТЕМЫ. Глобальный `Actor` — базовый класс
   // Foundry, и раздача 63 базовых навыков с корпусами под импланты живёт не в
   // нём. Один раз сборка пошла мимо — шестёрки вышли вообще без навыков.
   expect(!stub.usedBareActor, "актёр создан через глобальный `Actor` — мимо раздачи системы");
+  // Актёр найден, хотя создание вернуло пустоту, — и слушатель за собой убран.
+  expect(stub.danglingHooks === 0, `после сборки осталось висеть слушателей: ${stub.danglingHooks}`);
   const allSkills = mook.items.filter((i) => i.type === "skill");
   expect(
     allSkills.length >= coreSkillNames().length,
@@ -965,6 +1015,7 @@ console.log("\nСборка актёра: имена ищутся по-англ�
     "активной ролью записано английское имя — система не найдёт её на переведённом листе"
   );
 
+  }
   stub.restore();
 }
 
