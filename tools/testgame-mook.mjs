@@ -163,6 +163,37 @@ console.log("Правки на месте");
   console.log(`  записей в разбивке: ${Object.keys(table).length}`);
 }
 
+console.log("Окно растягивается, поля не налезают");
+{
+  const form = fs.readFileSync(path.join(MOOK, "scripts", "mook-form.js"), "utf-8");
+  expect(form.includes("resizable: true"), "окно конструктора не растягивается за угол");
+
+  const css = fs.readFileSync(path.join(MOOK, "styles", "pneuma-mook-maker.css"), "utf-8");
+  // Жёсткие 360px не давали колонке ужиматься, и русское «Своё значение»
+  // выталкивало поле ввода на соседнюю колонку.
+  expect(
+    !css.includes("grid-template-columns: 360px"),
+    "колонка характеристик снова заперта в 360px — поля будут налезать"
+  );
+  expect(
+    css.includes("minmax(320px, 1fr)"),
+    "колонка характеристик не тянется за окном"
+  );
+  expect(
+    /radio-row \{[^}]*flex: 1 1 auto[^}]*min-width: 0/s.test(css),
+    "строка переключателей снова не ужимается"
+  );
+  expect(
+    /pneuma-mook-maker-custom-choice \{[^}]*flex-wrap: wrap/s.test(css),
+    "поле своего значения не переносится на новую строку"
+  );
+
+  // Скобки в стилях должны сойтись — иначе браузер бросит весь файл.
+  const opens = (css.match(/\{/g) ?? []).length;
+  const closes = (css.match(/\}/g) ?? []).length;
+  expect(opens === closes, `в стилях ${opens} открывающих скобок и ${closes} закрывающих`);
+}
+
 console.log("Русские навыки классифицируются");
 {
   const map = settings.getSkillClassifications();

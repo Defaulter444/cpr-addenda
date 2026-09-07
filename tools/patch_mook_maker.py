@@ -239,6 +239,86 @@ def patch_weapons(check):
     return True, "опознание по типу оружия"
 
 
+def patch_window(check):
+    """Делает окно конструктора растягиваемым.
+
+    `new Dialog(..., { width: 650 })` — окно фиксированной ширины: за угол его не
+    потянуть. С русскими подписями, которые длиннее английских, этого не хватает.
+    """
+    path, text = read("mook-form.js")
+    if MARK in text:
+        return False, "уже применена"
+
+    old = "}, { width: 650 });"
+    if old not in text:
+        sys.exit("mook-form.js: не нашёл настройки окна — модуль изменился")
+
+    new = (
+        "}, { width: 650, height: \"auto\", resizable: true }); // " + MARK
+    )
+    text = text.replace(old, new, 1)
+    if not check:
+        io.open(path, "w", encoding="utf-8", newline="\n").write(text)
+    return True, "окно растягивается за угол"
+
+
+def patch_layout(check):
+    """Убирает наложение полей друг на друга.
+
+    Колонки в `.pneuma-mook-maker-stat-grid` заданы жёстко в пикселях, строка
+    переключателей объявлена `flex: 0 0 auto`, а сами переключатели —
+    `white-space: nowrap`. Пока подписи были английские, всё помещалось. Русское
+    «Своё значение» длиннее «Custom», строка не ужимается и не переносится — и
+    поле ввода вылезает за рамку на соседнюю колонку.
+
+    Правим три вещи: первая колонка тянется вместе с окном, строка
+    переключателей может ужиматься и переноситься, а подпись со своим значением
+    переносит поле ввода на новую строку, если места не хватило.
+    """
+    path = os.path.join(MOOK, "styles", "pneuma-mook-maker.css")
+    if not os.path.isfile(path):
+        sys.exit("нет файла стилей: " + path)
+    text = io.open(path, encoding="utf-8").read()
+    if MARK in text:
+        return False, "уже применена"
+
+    edits = [
+        (
+            "  grid-template-columns: 360px 105px 90px;",
+            "  /* " + MARK + ": колонка тянется за окном, а не заперта в 360px */\n"
+            "  grid-template-columns: minmax(320px, 1fr) 105px 90px;",
+        ),
+        (
+            ".pneuma-mook-maker-combat-options > .pneuma-mook-maker-radio-row {\n"
+            "  flex: 0 0 auto;\n"
+            "  justify-content: flex-start;\n"
+            "}",
+            ".pneuma-mook-maker-combat-options > .pneuma-mook-maker-radio-row {\n"
+            "  /* " + MARK + ": даём строке ужиматься, иначе она лезет на соседа */\n"
+            "  flex: 1 1 auto;\n"
+            "  min-width: 0;\n"
+            "  justify-content: flex-start;\n"
+            "}",
+        ),
+        (
+            ".pneuma-mook-maker-custom-choice {\n  gap: 0.3rem;\n}",
+            ".pneuma-mook-maker-custom-choice {\n"
+            "  gap: 0.3rem;\n"
+            "  /* " + MARK + ": не хватило места — поле уходит на новую строку */\n"
+            "  flex-wrap: wrap;\n"
+            "}",
+        ),
+    ]
+    for old, new in edits:
+        if old not in text:
+            sys.exit("стили изменились, не нашёл: " + old.splitlines()[0])
+        text = text.replace(old, new, 1)
+
+    if not check:
+        io.open(path, "w", encoding="utf-8", newline="\n").write(text)
+    return True, "поля больше не налезают"
+
+
 def main():
     check = "--check" in sys.argv
     if not os.path.isdir(MOOK):
@@ -248,6 +328,8 @@ def main():
         ("навыки", *patch_skills(check)),
         ("подвиды", *patch_families(check)),
         ("оружие", *patch_weapons(check)),
+        ("окно", *patch_window(check)),
+        ("вёрстка", *patch_layout(check)),
     ]
     changed = 0
     for what, did, note in results:
