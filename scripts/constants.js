@@ -81,6 +81,7 @@ export const SETTINGS = {
   systemFixes: "systemFixes",
   /** Сохранять ли у НИП набранный мастером ЭМП при установке кибернетики. */
   mookEmpathy: "mookEmpathy",
+  mookButton: "mookButton",
 };
 
 /**

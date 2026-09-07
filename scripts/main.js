@@ -51,6 +51,7 @@ import {
   registerPageMap,
 } from "./corebook.js";
 import { bookPage } from "./corebook-pages.js";
+import { registerMookButton } from "./mook-button.js";
 
 /**
  * Настройки модуля. Все три — переключатели, потому что мастер должен иметь
@@ -123,6 +124,15 @@ function registerSettings() {
   game.settings.register(MODULE_ID, SETTINGS.mookEmpathy, {
     name: "CPRADDENDA.settings.mookEmpathy.name",
     hint: "CPRADDENDA.settings.mookEmpathy.hint",
+    scope: "world",
+    config: true,
+    type: Boolean,
+    default: true,
+  });
+
+  game.settings.register(MODULE_ID, SETTINGS.mookButton, {
+    name: "CPRADDENDA.settings.mookButton.name",
+    hint: "CPRADDENDA.settings.mookButton.hint",
     scope: "world",
     config: true,
     type: Boolean,
@@ -207,6 +217,7 @@ Hooks.once("ready", async () => {
   // книгу надо туда положить — иначе в новом мире ссылки просто мертвы.
   await checkCorebook();
   registerPageMap();
+  registerMookButton();
 
   const api = {
     /** Проверка «встанет ли эта модификация в этот предмет». */
