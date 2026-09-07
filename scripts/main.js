@@ -150,6 +150,10 @@ function registerSettings() {
 }
 
 Hooks.once("init", () => {
+  // Кнопку вешаем здесь, а не в `ready`: боковая панель рисуется один раз
+  // при запуске, и обработчик, повешенный позже, к ней уже не успевает.
+  registerMookButton();
+
   registerSettings();
 
   if (typeof libWrapper !== "function" && !globalThis.libWrapper) {
@@ -217,7 +221,6 @@ Hooks.once("ready", async () => {
   // книгу надо туда положить — иначе в новом мире ссылки просто мертвы.
   await checkCorebook();
   registerPageMap();
-  registerMookButton();
 
   const api = {
     /** Проверка «встанет ли эта модификация в этот предмет». */

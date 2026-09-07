@@ -95,6 +95,19 @@ function prepareMookScripts() {
   return tmp;
 }
 
+/** Копия скриптов cpr-addenda с расширением .mjs. */
+function prepareAddendaScripts() {
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "cpr-addenda-scripts-"));
+  for (const file of fs.readdirSync(path.join(MODULE_ROOT, "scripts"))) {
+    if (!file.endsWith(".js")) continue;
+    const body = fs
+      .readFileSync(path.join(MODULE_ROOT, "scripts", file), "utf-8")
+      .replace(/from "\.\/([^"]+)\.js"/g, 'from "./$1.mjs"');
+    fs.writeFileSync(path.join(tmp, file.replace(/\.js$/, ".mjs")), body, "utf-8");
+  }
+  return tmp;
+}
+
 /** Шестёрка с русскими навыками и оружием — как её видит конструктор. */
 function makeMook() {
   const stats = { ref: 6, dex: 5, int: 5, tech: 4, cool: 5, will: 5, body: 6 };
@@ -161,6 +174,110 @@ console.log("Правки на месте");
   expect(table["Взяточничество"] === 3, "«Взяточничество» не прочий");
   expect(table.Brawling === 1, "английские названия пропали из таблицы");
   console.log(`  записей в разбивке: ${Object.keys(table).length}`);
+}
+
+console.log("Кнопка «Собрать шестёрку» встаёт во вкладку актёров");
+{
+  // Кнопки не было видно, потому что обработчик вешался в `ready` — боковая
+  // панель к тому времени уже нарисована и второй раз не рисуется. Проверяем и
+  // сам факт вставки, и то, что подключение объявлено в `init`.
+  const main = fs.readFileSync(path.join(MODULE_ROOT, "scripts", "main.js"), "utf-8");
+  const init = main.indexOf('Hooks.once("init"');
+  const ready = main.indexOf('Hooks.once("ready"');
+  const call = main.indexOf("registerMookButton();");
+  expect(init >= 0 && ready > init, "не нашёл хуки запуска в main.js");
+  expect(
+    call > init && call < ready,
+    "кнопка подключается не в init — панель уже нарисована, и её не будет видно"
+  );
+
+  // Разметка вкладки актёров, как её отдаёт Foundry.
+  const buttons = [];
+  const headerChildren = [];
+  const header = {
+    className: "directory-header",
+    append: (node) => headerChildren.push(node),
+  };
+  const root = {
+    querySelector: (selector) => {
+      if (selector === ".cpr-addenda-build-mook") {
+        return buttons.length ? buttons[0] : null;
+      }
+      if (selector === ".directory-header") return header;
+      return null;
+    },
+  };
+  globalThis.document = {
+    createElement: (tag) => {
+      const node = {
+        tag,
+        className: "",
+        type: "",
+        title: "",
+        innerHTML: "",
+        children: [],
+        listeners: {},
+        append: (child) => node.children.push(child),
+        addEventListener: (event, fn) => {
+          node.listeners[event] = fn;
+        },
+      };
+      if (tag === "button") buttons.push(node);
+      return node;
+    },
+  };
+
+  const stubs = {
+    settings: game.settings,
+    modules: game.modules,
+    user: game.user,
+    folders: game.folders,
+  };
+  game.settings = { get: () => true };
+  game.modules = { get: (id) => (id === "pneuma-mook-maker" ? { active: true } : null) };
+  game.user = { isGM: true };
+  game.folders = [];
+
+  const mookButton = await import(
+    pathToFileURL(path.join(prepareAddendaScripts(), "mook-button.mjs")).href
+  );
+
+  expect(mookButton.injectMookButton({}, [root]), "кнопка не добавлена");
+  expect(buttons.length === 1, `кнопок создано ${buttons.length}`);
+  expect(
+    buttons[0].className === "cpr-addenda-build-mook",
+    `у кнопки класс «${buttons[0].className}»`
+  );
+  expect(typeof buttons[0].listeners.click === "function", "на кнопку не повешен щелчок");
+
+  // Строкой во всю ширину, как это делают соседние модули, а не втискиванием
+  // в системный ряд «Создать актёра».
+  expect(headerChildren.length === 1, `в шапку добавлено узлов: ${headerChildren.length}`);
+  expect(
+    String(headerChildren[0].className).includes("header-actions"),
+    `строка кнопки получила класс «${headerChildren[0].className}»`
+  );
+
+  // Повторная отрисовка не должна плодить вторую кнопку.
+  expect(!mookButton.injectMookButton({}, [root]), "кнопка добавилась во второй раз");
+  expect(buttons.length === 1, `после второй отрисовки кнопок ${buttons.length}`);
+
+  // Без конструктора шестёрок кнопке делать нечего.
+  game.modules = { get: () => ({ active: false }) };
+  buttons.length = 0;
+  headerChildren.length = 0;
+  expect(
+    !mookButton.injectMookButton({}, [root]),
+    "кнопка появилась при выключенном конструкторе"
+  );
+
+  // Игроку кнопка не положена: заготовки и сцену правит мастер.
+  game.modules = { get: () => ({ active: true }) };
+  game.user = { isGM: false };
+  expect(!mookButton.injectMookButton({}, [root]), "кнопка показана игроку");
+
+  Object.assign(game, stubs);
+  delete globalThis.document;
 }
 
 console.log("Окно растягивается, поля не налезают");

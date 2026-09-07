@@ -180,14 +180,16 @@ export function injectMookButton(app, html) {
   if (!root?.querySelector) return false;
   if (root.querySelector(".cpr-addenda-build-mook")) return false;
 
-  // Цепляемся за строку действий папки, а не за произвольное место: она есть у
-  // вкладки всегда, и кнопка встаёт рядом с «Создать актёра».
-  const header =
-    root.querySelector(".header-actions") ??
-    root.querySelector(".directory-header");
+  // Цепляемся за шапку вкладки, а не за строку с «Создать актёра». Соседние
+  // модули вешают свои кнопки отдельными строками под ней, и кнопка во всю
+  // ширину встаёт в общий ряд, а не сжимает системные.
+  const header = root.querySelector(".directory-header");
   if (!header) return false;
 
   const label = localize("mook.build");
+  const row = document.createElement("div");
+  row.className = "header-actions action-buttons flexrow cpr-addenda-mook-row";
+
   const button = document.createElement("button");
   button.type = "button";
   button.className = "cpr-addenda-build-mook";
@@ -204,15 +206,31 @@ export function injectMookButton(app, html) {
     }
   });
 
-  header.append(button);
+  row.append(button);
+  header.append(row);
   return true;
 }
 
-/** Подключает кнопку к вкладке актёров. */
+/**
+ * Подключает кнопку к вкладке актёров.
+ *
+ * Зовётся из `init`, а НЕ из `ready`: боковая панель рисуется один раз при
+ * запуске, и обработчик, повешенный позже, к ней уже не успевает — кнопка не
+ * появлялась до тех пор, пока вкладку не перерисует что-нибудь ещё.
+ */
 export function registerMookButton() {
   Hooks.on("renderActorDirectory", (app, html) => {
     try {
-      if (!game.settings.get(MODULE_ID, SETTINGS.mookButton)) return;
+      // Настройка читается в момент отрисовки, а не подключения. Если её ещё не
+      // объявили — показываем кнопку: спрятать её молча хуже, чем показать
+      // лишний раз, потому что искать пропажу мастеру негде.
+      let enabled = true;
+      try {
+        enabled = game.settings.get(MODULE_ID, SETTINGS.mookButton);
+      } catch (error) {
+        console.warn(`${MODULE_ID} | настройка кнопки шестёрки ещё не готова`, error);
+      }
+      if (!enabled) return;
       injectMookButton(app, html);
     } catch (error) {
       console.error(`${MODULE_ID} | кнопка сборки шестёрки не добавлена:`, error);
