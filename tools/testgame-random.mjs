@@ -12,6 +12,7 @@
  */
 
 import fs from "fs";
+import os from "os";
 import path from "path";
 import { fileURLToPath, pathToFileURL } from "url";
 
@@ -93,29 +94,59 @@ async function packNames() {
   // ровно то, что есть, а `createIfMissing: false` не даёт создать лишнего.
   const packs = JSON.parse(fs.readFileSync(manifest, "utf-8")).packs ?? [];
   const names = new Map();
-  for (const entry of packs) {
-    const dir = path.resolve(SYSTEM, entry.path);
-    if (!fs.existsSync(path.join(dir, "CURRENT"))) continue;
+
+  /**
+   * Вычитывает одну базу.
+   *
+   * @param {String} dir - папка базы
+   * @returns {Promise<Boolean>} - удалось ли
+   */
+  const read = async (dir) => {
     const db = new ClassicLevel(dir, { valueEncoding: "json", createIfMissing: false });
     try {
-      // eslint-disable-next-line no-await-in-loop
       await db.open();
-      // eslint-disable-next-line no-await-in-loop
       for await (const [key, value] of db.iterator()) {
         if (!key.startsWith("!items!") || !value?.name) continue;
-        if (names.has(value.name)) continue;
-        names.set(value.name, {
+        // Ключ — ВИД и название: «Subdermal Armor» есть и среди брони, и среди
+        // имплантов, и по одному названию они неразличимы.
+        const id = `${value.type}|${value.name}`;
+        if (names.has(id)) continue;
+        names.set(id, {
+          name: value.name,
           type: value.type,
           weaponType: value.system?.weaponType ?? "",
         });
       }
+      return true;
     } catch {
-      // Пакет занят запущенной Foundry — пропускаем, остальные прочитаются.
+      return false;
     } finally {
-      // eslint-disable-next-line no-await-in-loop
       await db.close().catch(() => {});
     }
+  };
+
+  let copies = null;
+  for (const entry of packs) {
+    const dir = path.resolve(SYSTEM, entry.path);
+    if (!fs.existsSync(path.join(dir, "CURRENT"))) continue;
+    // eslint-disable-next-line no-await-in-loop
+    if (await read(dir)) continue;
+
+    // База занята запущенной Foundry. Это обычное дело — мастер играет, — но
+    // пропускать сверку названий из-за этого нельзя: именно она ловит опечатки
+    // вроде «Heavy Melee Weapon». Читаем копию: у неё свой LOCK.
+    copies ??= fs.mkdtempSync(path.join(os.tmpdir(), "cpr-packs-"));
+    const spare = path.join(copies, entry.name);
+    try {
+      fs.cpSync(dir, spare, { recursive: true });
+      fs.rmSync(path.join(spare, "LOCK"), { force: true });
+      // eslint-disable-next-line no-await-in-loop
+      await read(spare);
+    } catch {
+      // Не вышло и с копией — этот пакет просто не попадёт в сверку.
+    }
   }
+  if (copies) fs.rmSync(copies, { recursive: true, force: true });
   return names.size ? names : null;
 }
 
@@ -179,6 +210,10 @@ function packContents() {
       items.push({ name: `${armour} (${spot})`, type: "armor", system: { equipped: "owned" } });
     }
   }
+  // Ловушка из настоящих компендиумов: подкожная броня лежит и среди брони,
+  // и среди имплантов. Поиск по одному названию отдавал броню — шестёрка
+  // получала третий кусок брони вместо подкожки.
+  items.push({ name: "Subdermal Armor", type: "armor", system: { equipped: "owned" } });
 
   const chrome = [
     ["Neural Link", "neuralWare", true], ["Cyberaudio Suite", "cyberAudioSuite", true],
@@ -186,6 +221,15 @@ function packContents() {
     ["Cyberleg", "cyberLeg", true],
     ["Subdermal Armor", "cyberwareExternal", false],
     ["Grafted Muscle and Bone Lace", "cyberwareInternal", false],
+    // Опции: вид у них тот же, что у опоры, — иначе внутрь не встанут.
+    ["Interface Plugs", "neuralWare", false], ["Kerenzikov", "neuralWare", false],
+    ["Sandevistan", "neuralWare", false],
+    ["Amplified Hearing", "cyberAudioSuite", false],
+    ["Radio Communicator", "cyberAudioSuite", false],
+    ["Low Light/IR/UV", "cyberEye", false], ["Image Enhance", "cyberEye", false],
+    ["Targeting Scope", "cyberEye", false],
+    ["Rippers", "cyberArm", false], ["Standard Hand", "cyberArm", false],
+    ["Standard Foot", "cyberLeg", false], ["Jump Booster", "cyberLeg", false],
   ];
   for (const [name, kind, foundational] of chrome) {
     items.push({
@@ -231,7 +275,7 @@ function coreSkillNames() {
  */
 function makeFoundryStub({ translate }) {
   const saved = { ...globalThis };
-  const state = { createdWithSystem: false };
+  const state = { createdWithSystem: false, usedBareActor: false };
   let counter = 0;
   const nextId = () => `id${(counter += 1)}`;
 
@@ -258,9 +302,12 @@ function makeFoundryStub({ translate }) {
 
   /** Предмет на листе. */
   const makeItem = (data) => {
+    // Свой id на каждый предмет: Foundry тоже раздаёт новые, а не тянет id из
+    // компендиума. Если сборка пришлёт две копии с одним `_id`, две киберруки
+    // окажутся одной — проверка опций это увидит.
     const item = {
       ...data,
-      id: data._id ?? nextId(),
+      id: nextId(),
       system: JSON.parse(JSON.stringify(data.system ?? {})),
       _english: data.flags?.babele?.originalName ?? data.name,
     };
@@ -345,7 +392,22 @@ function makeFoundryStub({ translate }) {
     }
   }
 
-  globalThis.Actor = FakeActor;
+  // Глобальный `Actor` — БАЗОВЫЙ класс Foundry, и системной раздачи навыков в
+  // нём нет: систему подключают через `CONFIG.Actor.documentClass`. Здесь это
+  // воспроизведено буквально — подсовываем пустышку. Если сборка снова полезет
+  // в глобальный `Actor`, шестёрка выйдет без навыков и проверка это увидит.
+  class BareActor extends FakeActor {
+    static async create(data) {
+      state.usedBareActor = true;
+      return new BareActor(data);
+    }
+  }
+  globalThis.Actor = BareActor;
+  globalThis.getDocumentClass = (name) => {
+    if (name === "Actor") return FakeActor;
+    if (name === "Folder") return globalThis.Folder;
+    return null;
+  };
   globalThis.Folder = {
     create: async (data) => {
       const folder = { ...data, id: `folder-${data.name}` };
@@ -374,8 +436,11 @@ function makeFoundryStub({ translate }) {
     get createdWithSystem() {
       return state.createdWithSystem;
     },
+    get usedBareActor() {
+      return state.usedBareActor;
+    },
     restore() {
-      for (const key of ["Actor", "Folder", "foundry", "game", "ui"]) {
+      for (const key of ["Actor", "Folder", "getDocumentClass", "foundry", "game", "ui"]) {
         if (key in saved) globalThis[key] = saved[key];
         else delete globalThis[key];
       }
@@ -567,22 +632,41 @@ console.log("\nЖелезо по выбранной степени");
 {
   const random = seeded(77);
   const counts = {};
+  const options = {};
   for (const chrome of R.CHROME_ORDER) {
     const plan = R.planMook({ role: "solo", tier: "boss", chrome, random, catalogue: CATALOGUE });
     counts[chrome] = plan.cyberware.length;
+    options[chrome] = plan.cyberware.reduce((sum, part) => sum + part.options.length, 0);
   }
   expect(counts.none === 0, `«без имплантов» дал ${counts.none} штук`);
   expect(counts.minimal > 0 && counts.minimal < counts.serious,
     `минимум ${counts.minimal}, серьёзный ${counts.serious} — порядок нарушен`);
   expect(counts.serious < counts.fullborg,
     `серьёзный ${counts.serious}, полная конверсия ${counts.fullborg}`);
-  console.log(`  имплантов по степеням: ${R.CHROME_ORDER.map((c) => `${c} ${counts[c]}`).join(", ")}`);
+  console.log(
+    `  имплантов по степеням: ${R.CHROME_ORDER.map((c) => `${c} ${counts[c]} (опций ${options[c]})`).join(", ")}`
+  );
+  expect(options.none === 0, `«без имплантов» дал ${options.none} опций`);
+  expect(options.minimal > 0, "у минимального набора нет ни одной опции");
+  expect(options.fullborg > options.serious, `опций: серьёзный ${options.serious}, борг ${options.fullborg}`);
 
   // Полная конверсия — это обе руки и обе ноги, иначе она не полная.
   const full = R.planMook({ role: "solo", tier: "boss", chrome: "fullborg", random, catalogue: CATALOGUE });
-  const arms = full.cyberware.filter((n) => n === "Cyberarm").length;
-  const legs = full.cyberware.filter((n) => n === "Cyberleg").length;
+  const arms = full.cyberware.filter((part) => part.name === "Cyberarm").length;
+  const legs = full.cyberware.filter((part) => part.name === "Cyberleg").length;
   expect(arms === 2 && legs === 2, `у полной конверсии рук ${arms}, ног ${legs}`);
+
+  // Голая киберрука ничего не делает — весь смысл в том, что в неё вставлено.
+  // Пустые опоры и были жалобой: «отсутствуют опции имплантов».
+  for (const level of ["minimal", "serious", "fullborg"]) {
+    const plan = R.planMook({ role: "solo", tier: "boss", chrome: level, random, catalogue: CATALOGUE });
+    const bare = plan.cyberware.filter((part) => !part.options.length);
+    const named = bare.map((part) => part.name);
+    // Подкожная броня и мышцы опций не имеют по своей природе — они не корпуса.
+    const allowedBare = ["Subdermal Armor", "Grafted Muscle and Bone Lace"];
+    const wrong = named.filter((name) => !allowedBare.includes(name));
+    expect(wrong.length === 0, `на степени «${level}» без опций остались: ${wrong.join(", ")}`);
+  }
 }
 
 console.log("\nУ рядовой шестёрки нет роли");
@@ -632,34 +716,51 @@ console.log("\nВсё, что просит раскладчик, есть в к�
   } else {
     console.log(`  прочитано записей: ${names.size}`);
 
-    const asked = new Set();
+    const asked = new Map();
+    const ask = (type, name) => asked.set(`${type}|${name}`, `${name} (${type})`);
+
     for (const role of Object.values(R.ROLES)) {
-      for (const weapon of role.weapons) asked.add(weapon);
-      if (role.melee) asked.add(role.melee);
-      for (const skill of Object.keys(role.skills)) asked.add(skill);
+      for (const weapon of role.weapons) ask("weapon", weapon);
+      if (role.melee) ask("weapon", role.melee);
+      for (const skill of Object.keys(role.skills)) ask("skill", skill);
     }
     for (const chrome of Object.values(R.CHROME)) {
-      for (const item of chrome.items) asked.add(item);
+      for (const part of chrome.parts) {
+        ask("cyberware", part.name);
+        // Опции — половина смысла импланта, и промах в их названии виден так же
+        // плохо, как промах в самом импланте: гнездо просто останется пустым.
+        for (const option of part.options) ask("cyberware", option);
+      }
     }
     for (const tier of Object.values(R.TIERS)) {
-      asked.add(`${tier.armor} (Body)`);
-      asked.add(`${tier.armor} (Head)`);
+      ask("armor", `${tier.armor} (Body)`);
+      ask("armor", `${tier.armor} (Head)`);
       // Оружие качества — тоже отдельные позиции в компендиуме.
       for (const role of Object.values(R.ROLES)) {
         for (const weapon of role.weapons) {
-          if (tier.quality === "poor") asked.add(`${weapon} (Poor)`);
-          if (tier.quality === "excellent") asked.add(`${weapon} (Excellent)`);
+          if (tier.quality === "poor") ask("weapon", `${weapon} (Poor)`);
+          if (tier.quality === "excellent") ask("weapon", `${weapon} (Excellent)`);
         }
       }
     }
     for (const role of R.ROLE_ORDER) {
       if (role === "none") continue;
-      asked.add(role.charAt(0).toUpperCase() + role.slice(1));
+      ask("role", role.charAt(0).toUpperCase() + role.slice(1));
     }
 
-    const gone = [...asked].filter((name) => !names.has(name)).sort();
+    const gone = [...asked.entries()]
+      .filter(([key]) => !names.has(key))
+      .map(([, label]) => label)
+      .sort();
     expect(gone.length === 0, `нет в компендиумах: ${gone.join(", ")}`);
     console.log(`  проверено названий: ${asked.size}, ненайденных: ${gone.length}`);
+
+    // Ловушка, ради которой ключ стал парой: подкожная броня существует в двух
+    // видах сразу, и раньше поиск по имени отдавал броню вместо импланта.
+    expect(
+      names.has("armor|Subdermal Armor") && names.has("cyberware|Subdermal Armor"),
+      "подкожной брони нет в обоих видах — проверка на путаницу видов пустая"
+    );
 
     // И типы оружия: список разрешённого по ступеням должен описывать то, что
     // в системе действительно есть, иначе ступень запрещает пустоту.
@@ -688,8 +789,15 @@ console.log("\nСборка актёра: имена ищутся по-англ�
   );
 
   const index = await create.itemIndex();
-  expect(index.has("Assault Rifle"), "по английскому названию винтовка не нашлась");
-  expect(!index.has("Штурмовая винтовка"), "в указатель попало переведённое имя");
+  expect(create.lookup(index, "weapon", "Assault Rifle"), "по английскому названию винтовка не нашлась");
+  expect(!create.lookup(index, "weapon", "Штурмовая винтовка"), "в указатель попало переведённое имя");
+
+  // Одно название, два вида: подкожная броня. Указатель обязан различать их,
+  // иначе имплант подменяется бронёй.
+  expect(create.lookup(index, "armor", "Subdermal Armor"), "подкожная броня не нашлась как броня");
+  const asChrome = create.lookup(index, "cyberware", "Subdermal Armor");
+  expect(asChrome, "подкожная броня не нашлась как имплант");
+  expect(asChrome?.type === "cyberware", `по виду «cyberware» вернулся «${asChrome?.type}»`);
 
   const catalogue = create.weaponCatalogue(index);
   expect(catalogue.length > 0, "список оружия пуст");
@@ -721,6 +829,20 @@ console.log("\nСборка актёра: имена ищутся по-англ�
 
   const mook = actors[0];
   expect(mook.type === "mook", `тип актёра «${mook.type}»`);
+
+  // Главное: актёр создан классом СИСТЕМЫ. Глобальный `Actor` — базовый класс
+  // Foundry, и раздача 63 базовых навыков с корпусами под импланты живёт не в
+  // нём. Один раз сборка пошла мимо — шестёрки вышли вообще без навыков.
+  expect(!stub.usedBareActor, "актёр создан через глобальный `Actor` — мимо раздачи системы");
+  const allSkills = mook.items.filter((i) => i.type === "skill");
+  expect(
+    allSkills.length >= coreSkillNames().length,
+    `навыков на листе ${allSkills.length}, а система раздаёт ${coreSkillNames().length}`
+  );
+  const frames = mook.items.filter(
+    (i) => i.type === "cyberware" && /\(7 Option Slots\)$/.test(i._english)
+  );
+  expect(frames.length === 3, `корпусов под импланты ${frames.length}`);
   expect(mook.folder === "folder-MookMaker", `актёр положен в «${mook.folder}»`);
 
   // Актёр создан БЕЗ ключа `system` — иначе система примет его за копию и не
@@ -740,10 +862,13 @@ console.log("\nСборка актёра: имена ищутся по-англ�
 
   // Навыки: базовые лежали на актёре с английскими именами, им проставили
   // уровни; те, которых не было, донесены из отдельных компендиумов.
-  const autofire = mook.items.find((i) => i.type === "skill" && i.name === "Autofire");
+  const autofire = mook.items.find((i) => i.type === "skill" && i._english === "Autofire");
   expect(autofire?.system.level >= 10, `автоогонь ${autofire?.system.level}`);
-  const swim = mook.items.find((i) => i.type === "skill" && i.name === "Athletics");
+  const swim = mook.items.find((i) => i.type === "skill" && i._english === "Athletics");
   expect(swim?.system.level === 2, `атлетика ${swim?.system.level} — ступень задела базовый навык`);
+  // Навык, которого нет среди базовых, донесён из отдельного компендиума.
+  const chem = mook.items.find((i) => i.type === "skill" && i._english === "Science (Chemistry)");
+  expect(!chem || chem.system.level >= 0, "подвид навыка пришёл сломанным");
 
   // Оружие: в руках два ствола, остальное числится в снаряжении.
   const weapons = mook.items.filter((i) => i.type === "weapon");
@@ -759,15 +884,59 @@ console.log("\nСборка актёра: имена ищутся по-англ�
 
   // Броня: две позиции, на корпус и на голову, обе надеты.
   const armour = mook.items.filter((i) => i.type === "armor");
-  expect(armour.length === 2, `брони выдано ${armour.length}`);
+  expect(
+    armour.length === 2,
+    `брони выдано ${armour.length}: ${armour.map((i) => i._english).join(", ")}`
+  );
   expect(
     armour.every((i) => i.system.equipped === "equipped"),
     "броня выдана, но не надета"
   );
 
   // Импланты: полная конверсия и все вживлены, а не лежат в рюкзаке.
+  // Полная конверсия: десять опор плюс их опции.
   const chrome = implants(mook);
-  expect(chrome.length === 10, `имплантов выдано ${chrome.length}`);
+  const plannedParts = R.CHROME.fullborg.parts;
+  const plannedOptions = plannedParts.reduce((sum, part) => sum + part.options.length, 0);
+  expect(
+    chrome.length === plannedParts.length + plannedOptions,
+    `имплантов с опциями ${chrome.length}, ждали ${plannedParts.length + plannedOptions}`
+  );
+
+  // Подкожная броня пришла имплантом, а не третьим куском брони.
+  expect(
+    chrome.some((i) => i._english === "Subdermal Armor"),
+    "подкожной брони нет среди имплантов — её снова подменили бронёй"
+  );
+
+  // И опции стоят ВНУТРИ своих опор, а не лежат рядом в рюкзаке.
+  // Опор с одинаковым названием бывает две (две руки, два глаза) с РАЗНОЙ
+  // начинкой, поэтому каждой запланированной опоре подбираем СВОЮ и больше её
+  // не трогаем. Иначе обе проверки сойдутся на первой руке и вторая, пустая,
+  // останется незамеченной — а именно на пустые гнёзда и была жалоба.
+  const taken = new Set();
+  const contentsOf = (item) =>
+    (item.system?.installedItems?.list ?? [])
+      .map((id) => chrome.find((other) => other.id === id)?._english)
+      .filter(Boolean);
+
+  for (const part of plannedParts) {
+    if (!part.options.length) continue;
+    const match = chrome.find((item) => {
+      if (taken.has(item.id) || item._english !== part.name) return false;
+      const inside = contentsOf(item);
+      return part.options.every((option) => inside.includes(option));
+    });
+    if (match) {
+      taken.add(match.id);
+      continue;
+    }
+    const same = chrome
+      .filter((item) => item._english === part.name)
+      .map((item) => `[${contentsOf(item).join(", ") || "пусто"}]`)
+      .join(" ");
+    expect(false, `в «${part.name}» нет набора ${part.options.join(", ")}; есть: ${same}`);
+  }
   const inBody = new Set(mook.system.installedItems.list);
   const foundations = chrome.filter((i) => i.system.isFoundational);
   expect(

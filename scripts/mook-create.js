@@ -13,13 +13,28 @@
  * Babele кладёт исходное имя в `flags.babele.originalName`, и оно неизменно.
  * По нему и ищем, а на лист попадает уже переведённое имя.
  *
+ * ПОЧЕМУ АКТЁР СОЗДАЁТСЯ ЧЕРЕЗ `getDocumentClass`, А НЕ ЧЕРЕЗ `Actor`
+ *
+ * Глобальный `Actor` — это БАЗОВЫЙ класс Foundry. Система подменяет не его, а
+ * `CONFIG.Actor.documentClass`, и весь её `CPRActor.create` — раздача 63
+ * базовых навыков и трёх корпусов под импланты — висит именно там. Вызов
+ * `Actor.create()` проходит мимо: актёр получается правильного вида, но пустой,
+ * без единого навыка и без гнёзд, куда вставлять опции имплантов. Ровно это и
+ * случилось. `getDocumentClass("Actor")` возвращает класс системы.
+ *
  * ПОЧЕМУ АКТЁР СОЗДАЁТСЯ БЕЗ `system`
  *
- * `CPRActor.create` раздаёт новому актёру все 63 базовых навыка и корпуса для
- * имплантов — но только если в данных НЕТ ключа `system` (система по нему
- * отличает нового актёра от копии). Поэтому создаём пустым, а характеристики
- * прописываем следующим шагом. Заодно система сама затирает переданные `items`,
- * так что снаряжение добавляется тоже после создания.
+ * Ту раздачу система делает только если в данных НЕТ ключа `system` (по нему
+ * она отличает нового актёра от копии). Поэтому создаём пустым, а
+ * характеристики прописываем следующим шагом. Заодно система сама затирает
+ * переданные `items`, так что снаряжение добавляется тоже после создания.
+ *
+ * ПОЧЕМУ ПОИСК ИДЁТ ПО ПАРЕ «ВИД + НАЗВАНИЕ»
+ *
+ * Одно и то же название встречается у предметов разного вида: «Subdermal
+ * Armor» есть и среди брони, и среди имплантов, «Skin Weave» тоже. Поиск по
+ * одному названию выдавал броню вместо импланта — шестёрка получала третий
+ * элемент брони и оставалась без подкожки.
  */
 
 import { MODULE_ID, SYSTEM_ID, localize } from "./constants.js";
@@ -83,8 +98,11 @@ export async function itemIndex() {
     });
     for (const entry of index) {
       const name = englishName(entry);
-      if (!name || found.has(name)) continue;
-      found.set(name, {
+      if (!name || !entry.type) continue;
+      const key = `${entry.type}|${name}`;
+      if (found.has(key)) continue;
+      found.set(key, {
+        name,
         pack: pack.collection,
         id: entry._id,
         type: entry.type,
@@ -94,6 +112,18 @@ export async function itemIndex() {
     }
   }
   return found;
+}
+
+/**
+ * Запись указателя по виду и названию.
+ *
+ * @param {Map} index - указатель
+ * @param {String} type - вид предмета: weapon, armor, cyberware, skill, role
+ * @param {String} name - английское название
+ * @returns {Object|null}
+ */
+export function lookup(index, type, name) {
+  return index.get(`${type}|${name}`) ?? null;
 }
 
 /**
@@ -108,10 +138,10 @@ export async function itemIndex() {
  */
 export function weaponCatalogue(index) {
   const catalogue = [];
-  for (const [name, entry] of index) {
+  for (const entry of index.values()) {
     if (entry.type !== "weapon" || !entry.weaponType) continue;
-    if (/\s\((?:Poor|Excellent)\)$/.test(name)) continue;
-    catalogue.push({ name, type: entry.weaponType });
+    if (/\s\((?:Poor|Excellent)\)$/.test(entry.name)) continue;
+    catalogue.push({ name: entry.name, type: entry.weaponType });
   }
   return catalogue.sort((left, right) => left.name.localeCompare(right.name));
 }
@@ -131,11 +161,44 @@ export function qualityName(index, name, quality) {
   const suffix = QUALITY_SUFFIX[quality] ?? "";
   if (!suffix) return name;
   const graded = `${name}${suffix}`;
-  return index.has(graded) ? graded : name;
+  return lookup(index, "weapon", graded) ? graded : name;
 }
 
 /**
- * Достаёт предметы из компендиумов по английским названиям.
+ * Достаёт один предмет из компендиума.
+ *
+ * @async
+ * @param {Map} index - указатель
+ * @param {String} type - вид предмета
+ * @param {String} name - английское название
+ * @param {Map} cache - общий кэш на сборку
+ * @returns {Promise<Object|null>} - данные предмета или null
+ */
+async function fetchOne(index, type, name, cache) {
+  const key = `${type}|${name}`;
+  if (!cache.has(key)) {
+    const entry = lookup(index, type, name);
+    if (!entry) return null;
+    const pack = game.packs.get(entry.pack);
+    const document = await pack?.getDocument(entry.id);
+    if (!document) return null;
+    cache.set(key, document.toObject());
+  }
+  // Копия на каждое вхождение: две кибернетические руки — два разных предмета.
+  const copy = foundry.utils.deepClone(cache.get(key));
+  // Опознавательные поля исходного документа снимаем — так же, как это делает
+  // сама система, когда переносит предмет из компендиума. Иначе обе киберруки
+  // приходят с ОДНИМ `_id`, и это ровно тот случай, когда «два предмета»
+  // незаметно оказываются одним.
+  delete copy._id;
+  delete copy.folder;
+  delete copy.sort;
+  delete copy._stats;
+  return copy;
+}
+
+/**
+ * Достаёт предметы из компендиумов по виду и английскому названию.
  *
  * Ненайденные молча пропускаются, а их список возвращается отдельно: сорвать
  * сборку целиком из-за одного отсутствующего импланта — плохой размен, мастеру
@@ -143,32 +206,22 @@ export function qualityName(index, name, quality) {
  *
  * @async
  * @param {Map} index - указатель
- * @param {Array<String>} names - что искать (повторы допустимы: две руки — два предмета)
- * @returns {Promise<Object>} - {items: [данные предметов], missing: [названия]}
+ * @param {Array<Object>} requests - [{type, name}], повторы допустимы
+ * @returns {Promise<Object>} - {items: [данные], missing: [названия]}
  */
-export async function fetchItems(index, names) {
+export async function fetchItems(index, requests) {
   const items = [];
   const missing = [];
   const cache = new Map();
 
-  for (const name of names) {
-    const entry = index.get(name);
-    if (!entry) {
-      if (!missing.includes(name)) missing.push(name);
+  for (const request of requests) {
+    // eslint-disable-next-line no-await-in-loop
+    const data = await fetchOne(index, request.type, request.name, cache);
+    if (!data) {
+      if (!missing.includes(request.name)) missing.push(request.name);
       continue;
     }
-    if (!cache.has(name)) {
-      const pack = game.packs.get(entry.pack);
-      // eslint-disable-next-line no-await-in-loop
-      const document = await pack?.getDocument(entry.id);
-      if (!document) {
-        if (!missing.includes(name)) missing.push(name);
-        continue;
-      }
-      cache.set(name, document.toObject());
-    }
-    // Копия на каждое вхождение: две кибернетические руки — два разных предмета.
-    items.push(foundry.utils.deepClone(cache.get(name)));
+    items.push(data);
   }
   return { items, missing };
 }
@@ -191,7 +244,7 @@ export async function mookFolder() {
     (folder) => folder.type === "Actor" && folder.name === ROOT_FOLDER && !folder.folder
   );
   if (existing) return existing;
-  return Folder.create({ name: ROOT_FOLDER, type: "Actor" });
+  return getDocumentClass("Folder").create({ name: ROOT_FOLDER, type: "Actor" });
 }
 
 /* ------------------------------------------------------------------ */
@@ -203,8 +256,8 @@ export async function mookFolder() {
  *
  * Базовые навыки уже стоят на актёре — их система выдала при создании, и имена у
  * них английские (у `internal_skills` перевода Babele нет). Те, которых нет
- * совсем — «Science (Chemistry)», «Play Instrument» и прочие подвиды, — лежат в
- * отдельных компендиумах, и их доносим.
+ * совсем — «Science (Chemistry)», «Play Instrument (Guitar)» и прочие подвиды, —
+ * лежат в отдельных компендиумах, и их доносим.
  *
  * @async
  * @param {Actor} actor - собираемая шестёрка
@@ -218,16 +271,18 @@ async function applySkills(actor, index, levels) {
 
   for (const item of actor.items) {
     if (item.type !== "skill") continue;
-    const level = wanted.get(englishName(item)) ?? wanted.get(item.name);
+    const name = englishName(item);
+    const level = wanted.get(name) ?? wanted.get(item.name);
     if (level === undefined) continue;
     updates.push({ _id: item.id, "system.level": level });
-    wanted.delete(englishName(item));
+    wanted.delete(name);
     wanted.delete(item.name);
   }
   if (updates.length) await actor.updateEmbeddedDocuments("Item", updates);
 
   if (!wanted.size) return [];
-  const { items, missing } = await fetchItems(index, [...wanted.keys()]);
+  const requests = [...wanted.keys()].map((name) => ({ type: "skill", name }));
+  const { items, missing } = await fetchItems(index, requests);
   for (const data of items) {
     data.system = { ...(data.system ?? {}), level: wanted.get(englishName(data)) ?? 0 };
   }
@@ -236,7 +291,7 @@ async function applySkills(actor, index, levels) {
 }
 
 /**
- * Выдаёт оружие, броню и импланты.
+ * Выдаёт оружие и броню.
  *
  * @async
  * @param {Actor} actor - шестёрка
@@ -249,8 +304,13 @@ async function applyGear(actor, index, plan) {
 
   // Оружие: качество задаёт ступень. В руках держим два ствола, остальное
   // числится в снаряжении — так же делает конструктор шестёрок.
-  const weaponNames = plan.weapons.map((weapon) => qualityName(index, weapon.name, plan.quality));
-  const weapons = await fetchItems(index, weaponNames);
+  const weapons = await fetchItems(
+    index,
+    plan.weapons.map((weapon) => ({
+      type: "weapon",
+      name: qualityName(index, weapon.name, plan.quality),
+    }))
+  );
   missing.push(...weapons.missing);
   weapons.items.forEach((data, position) => {
     data.system = {
@@ -260,69 +320,124 @@ async function applyGear(actor, index, plan) {
   });
 
   // Броня: в компендиуме это две отдельные позиции, на голову и на корпус.
-  const armour = await fetchItems(index, [`${plan.armor} (Body)`, `${plan.armor} (Head)`]);
+  const armour = await fetchItems(index, [
+    { type: "armor", name: `${plan.armor} (Body)` },
+    { type: "armor", name: `${plan.armor} (Head)` },
+  ]);
   missing.push(...armour.missing);
   for (const data of armour.items) {
     data.system = { ...(data.system ?? {}), equipped: "equipped" };
   }
 
-  const chrome = await fetchItems(index, plan.cyberware);
-  missing.push(...chrome.missing);
-
-  const created = await actor.createEmbeddedDocuments("Item", [
-    ...weapons.items,
-    ...armour.items,
-    ...chrome.items,
-  ]);
-
-  await installChrome(actor, created);
+  await actor.createEmbeddedDocuments("Item", [...weapons.items, ...armour.items]);
   return missing;
 }
 
 /**
- * Вживляет импланты.
+ * Корпус, в который встаёт неопорный имплант.
  *
- * Опорные («Neural Link», «Cyberarm») ставятся прямо в актёра — так же, как
- * система ставит базовые корпуса при создании. Остальные идут внутрь корпуса
- * своего вида: «Subdermal Armor» — во «External», «Grafted Muscle and Bone
- * Lace» — во «Internal». Оба корпуса система выдала сама.
- *
- * Не вживлённый имплант на листе выглядит как вещь в рюкзаке и ничего не даёт,
- * поэтому шаг обязательный, а не украшение.
- *
- * @async
  * @param {Actor} actor - шестёрка
- * @param {Array<Item>} created - только что созданные предметы
+ * @param {Item} item - имплант
+ * @param {Set<String>} fresh - id только что созданных: сами себе не корпуса
+ * @returns {Item|null}
  */
-async function installChrome(actor, created) {
-  const chrome = created.filter((item) => item.type === "cyberware");
-  if (!chrome.length) return;
-
-  const foundational = chrome.filter((item) => item.system?.isFoundational);
-  const optional = chrome.filter((item) => !item.system?.isFoundational);
-
-  if (foundational.length) {
-    const list = [
-      ...(actor.system?.installedItems?.list ?? []),
-      ...foundational.map((item) => item.id),
-    ];
-    await actor.update({ "system.installedItems.list": [...new Set(list)] });
-  }
-
-  for (const item of optional) {
-    const kind = item.system?.type;
-    const host = actor.items.find(
+function hostFor(actor, item, fresh) {
+  const kind = item.system?.type;
+  return (
+    actor.items.find(
       (candidate) =>
         candidate.type === "cyberware" &&
         candidate.system?.isFoundational &&
         candidate.system?.type === kind &&
+        !fresh.has(candidate.id) &&
         typeof candidate.installItems === "function"
-    );
+    ) ?? null
+  );
+}
+
+/**
+ * Выдаёт и вживляет импланты вместе с их опциями.
+ *
+ * Голая киберрука не делает ничего — весь смысл в том, что в неё вставлено,
+ * поэтому опции здесь не украшение, а половина работы.
+ *
+ * Опорные импланты («Neural Link», «Cyberarm») вживляются прямо в актёра — так
+ * же, как система ставит базовые корпуса при создании. Неопорные идут внутрь
+ * корпуса своего вида: «Subdermal Armor» — во «External», «Grafted Muscle and
+ * Bone Lace» — во «Internal». Оба корпуса система выдала сама.
+ *
+ * Невживлённый имплант на листе выглядит как вещь в рюкзаке и ничего не даёт,
+ * поэтому шаг обязательный.
+ *
+ * @async
+ * @param {Actor} actor - шестёрка
+ * @param {Map} index - указатель
+ * @param {Object} plan - расклад
+ * @returns {Promise<Array<String>>} - чего не нашлось
+ */
+async function applyChrome(actor, index, plan) {
+  const missing = [];
+  if (!plan.cyberware.length) return missing;
+
+  // Опоры достаём по одной, сохраняя связь с их опциями: две киберруки — это
+  // два разных предмета с разной начинкой, и по имени их потом не различить.
+  const parts = [];
+  for (const part of plan.cyberware) {
+    // eslint-disable-next-line no-await-in-loop
+    const { items, missing: gone } = await fetchItems(index, [
+      { type: "cyberware", name: part.name },
+    ]);
+    missing.push(...gone);
+    if (items[0]) parts.push({ data: items[0], options: part.options ?? [] });
+  }
+  if (!parts.length) return missing;
+
+  const created = await actor.createEmbeddedDocuments(
+    "Item",
+    parts.map((part) => part.data)
+  );
+  const fresh = new Set(created.map((item) => item.id));
+
+  // Опоры — в самого актёра.
+  const foundations = created.filter((item) => item.system?.isFoundational);
+  if (foundations.length) {
+    const list = [
+      ...(actor.system?.installedItems?.list ?? []),
+      ...foundations.map((item) => item.id),
+    ];
+    await actor.update({ "system.installedItems.list": [...new Set(list)] });
+  }
+
+  // Неопорные — в системный корпус своего вида.
+  for (const item of created) {
+    if (item.system?.isFoundational) continue;
+    const host = hostFor(actor, item, fresh);
     // Корпуса нужного вида нет — имплант остаётся в снаряжении. Это лучше, чем
     // засунуть его в чужой корпус и сломать лист.
     // eslint-disable-next-line no-await-in-loop
     if (host) await host.installItems([item]);
   }
+
+  // Опции — внутрь своей опоры.
+  for (let position = 0; position < created.length; position += 1) {
+    const foundation = created[position];
+    const options = parts[position]?.options ?? [];
+    if (!options.length || !foundation?.system?.isFoundational) continue;
+
+    // eslint-disable-next-line no-await-in-loop
+    const { items, missing: gone } = await fetchItems(
+      index,
+      options.map((name) => ({ type: "cyberware", name }))
+    );
+    missing.push(...gone);
+    if (!items.length) continue;
+
+    // eslint-disable-next-line no-await-in-loop
+    const made = await actor.createEmbeddedDocuments("Item", items);
+    // eslint-disable-next-line no-await-in-loop
+    await foundation.installItems(made);
+  }
+  return missing;
 }
 
 /**
@@ -339,7 +454,7 @@ async function applyRole(actor, index, plan) {
 
   // В компендиуме роль называется с большой буквы: solo -> Solo.
   const english = plan.role.charAt(0).toUpperCase() + plan.role.slice(1);
-  const { items } = await fetchItems(index, [english]);
+  const { items } = await fetchItems(index, [{ type: "role", name: english }]);
   const data = items[0];
   if (!data) return "";
 
@@ -360,19 +475,21 @@ async function applyRole(actor, index, plan) {
  * @returns {Promise<Object>} - {actor, missing}
  */
 export async function createMook(plan, index, folder) {
-  // Без ключа `system`: иначе система примет актёра за копию и не выдаст ни
-  // базовых навыков, ни корпусов для имплантов.
-  const actor = await Actor.create({
+  // Класс берём у системы, а не глобальный `Actor`: раздача базовых навыков и
+  // корпусов под импланты живёт в `CPRActor.create`, и мимо неё актёр выходит
+  // пустым. Без ключа `system` — иначе система примет его за копию.
+  const actor = await getDocumentClass("Actor").create({
     name: plan.name,
     type: "mook",
     folder: folder?.id ?? null,
     items: [],
   });
-  if (!actor) throw new Error("Actor.create вернул пусто");
+  if (!actor) throw new Error("создание актёра вернуло пусто");
 
   const missing = [];
   missing.push(...(await applySkills(actor, index, plan.skills)));
   missing.push(...(await applyGear(actor, index, plan)));
+  missing.push(...(await applyChrome(actor, index, plan)));
   const roleName = await applyRole(actor, index, plan);
 
   const stats = {};

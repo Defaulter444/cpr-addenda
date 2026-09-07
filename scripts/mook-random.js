@@ -284,27 +284,52 @@ export const HEAVY_TYPES = ["grenadeLauncher", "rocketLauncher", "heavyWeapon"];
 /**
  * Четыре степени оснащения.
  *
+ * Каждая запись — ОПОРНЫЙ имплант и его опции. Опции важны не меньше самого
+ * импланта: голая киберрука не делает ничего, весь смысл в том, что в неё
+ * вставлено, а пустые киберглаза не дают даже ночного зрения. Раньше выдавались
+ * только опорные, и на листе они выглядели как четыре пустых гнезда.
+ *
+ * Опции обязаны совпадать с опорным по виду (`system.type`): в киберруку
+ * встаёт только то, что помечено `cyberArm`. Здесь это соблюдено.
+ *
  * Названия предметов английские — такие они в компендиумах.
  */
 export const CHROME = {
-  none: { key: "none", items: [] },
+  none: { key: "none", parts: [] },
   minimal: {
     key: "minimal",
-    items: ["Neural Link", "Cyberaudio Suite"],
+    parts: [
+      { name: "Neural Link", options: ["Interface Plugs"] },
+      { name: "Cyberaudio Suite", options: ["Amplified Hearing"] },
+    ],
   },
   serious: {
     key: "serious",
-    items: [
-      "Neural Link", "Cyberaudio Suite", "Cybereye", "Cybereye",
-      "Subdermal Armor", "Grafted Muscle and Bone Lace",
+    parts: [
+      { name: "Neural Link", options: ["Interface Plugs", "Kerenzikov"] },
+      { name: "Cyberaudio Suite", options: ["Amplified Hearing", "Radio Communicator"] },
+      { name: "Cybereye", options: ["Low Light/IR/UV"] },
+      { name: "Cybereye", options: ["Image Enhance"] },
+      { name: "Subdermal Armor", options: [] },
+      { name: "Grafted Muscle and Bone Lace", options: [] },
     ],
   },
   fullborg: {
     key: "fullborg",
-    items: [
-      "Neural Link", "Cyberaudio Suite", "Cybereye", "Cybereye",
-      "Cyberarm", "Cyberarm", "Cyberleg", "Cyberleg",
-      "Subdermal Armor", "Grafted Muscle and Bone Lace",
+    parts: [
+      { name: "Neural Link", options: ["Interface Plugs", "Sandevistan"] },
+      { name: "Cyberaudio Suite", options: ["Amplified Hearing", "Radio Communicator"] },
+      { name: "Cybereye", options: ["Low Light/IR/UV"] },
+      { name: "Cybereye", options: ["Targeting Scope"] },
+      // Киберпсих из книги (с. 418) — с выкидным гранатомётом в руке. Рядовому
+      // боргу его не даём: это оружие уровня босса, и правило про РПГ здесь
+      // тоже действует. Руки получают когти и обычную кисть.
+      { name: "Cyberarm", options: ["Rippers", "Standard Hand"] },
+      { name: "Cyberarm", options: ["Standard Hand"] },
+      { name: "Cyberleg", options: ["Standard Foot", "Jump Booster"] },
+      { name: "Cyberleg", options: ["Standard Foot"] },
+      { name: "Subdermal Armor", options: [] },
+      { name: "Grafted Muscle and Bone Lace", options: [] },
     ],
   },
 };
@@ -456,7 +481,7 @@ export function planMook({ role, tier, chrome, random = Math.random, catalogue =
     weapons: chooseWeapons(random, roleData, tierData, catalogue),
     armor: tierData.armor,
     quality: tierData.quality,
-    cyberware: [...chromeData.items],
+    cyberware: chromeData.parts.map((part) => ({ ...part, options: [...part.options] })),
     // Роль на листе появляется только у сколько-нибудь серьёзной угрозы: у
     // книжных шестёрок ролей нет вовсе (с. 414).
     roleRank: roleData.key === "none" ? 0 : tierData.roleRank,
