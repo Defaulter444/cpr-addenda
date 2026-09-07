@@ -1,25 +1,23 @@
 /**
- * Кнопки шестёрок во вкладке актёров.
+ * Кнопка «Собрать шестёрку» во вкладке актёров.
  *
- * Их две, и делают они разное.
- *
- * «Случайная шестёрка» открывает наш раскладчик: мастер называет роль, уровень
- * угрозы и количество железа, а НИП собирается из книжных таблиц и предметов
- * компендиума. Чужих модулей ей не нужно.
- *
- * «Собрать шестёрку» — проводник к чужому конструктору (Pneuma Mook Maker). Тот
- * работает так: заводит папку `MookMaker/Templates` с заготовкой, заготовку надо
- * ВЫТАЩИТЬ НА СЦЕНУ, и только у полученного токена в меню появляется маленькая
- * иконка шестерёнки, которая и открывает конструктор.
+ * Это проводник к чужому конструктору (Pneuma Mook Maker). Тот работает так:
+ * заводит папку `MookMaker/Templates` с заготовкой, заготовку надо ВЫТАЩИТЬ НА
+ * СЦЕНУ, и только у полученного токена в меню появляется маленькая иконка
+ * шестерёнки, которая и открывает конструктор.
  *
  * Ниоткуда это не следует. Мастер видит папку с актёром, открывает его — и не
  * находит ничего похожего на конструктор: у самого актёра кнопки нет, потому
  * что редактируется не он, а несвязанный токен на сцене. Кнопка проходит весь
  * путь за один щелчок.
  *
- * Обе кнопки живут здесь, а не в самом конструкторе, намеренно: тот модуль
- * чужой, и его обновление затёрло бы правку. Всё, что нужно от него, — открытая
- * функция `showMookMakerMenu`, и её мы зовём по имени файла.
+ * Кнопка живёт здесь, а не в самом конструкторе, намеренно: тот модуль чужой, и
+ * его обновление затёрло бы правку. Всё, что нужно от него, — открытая функция
+ * `showMookMakerMenu`, и её мы зовём по имени файла.
+ *
+ * Раскладчик случайных шестёрок жил рядом и переехал в отдельный модуль
+ * `cpr-mook-randomizer`: он ни от чего здесь не зависел, а две одинаковые
+ * кнопки в одной вкладке — худшее из решений.
  */
 
 import { MODULE_ID, SETTINGS, localize } from "./constants.js";
@@ -178,50 +176,17 @@ async function chooseTemplate() {
  * @returns {Boolean} - добавлена ли кнопка
  */
 /**
- * Делает кнопку для строки в шапке вкладки.
+ * Дописывает кнопку в заголовок вкладки актёров.
  *
- * @param {String} className - опознавательный класс
- * @param {String} icon - класс значка Font Awesome
- * @param {String} label - подпись
- * @param {String} hint - подсказка при наведении
- * @param {Function} onClick - что делать по щелчку
- * @returns {HTMLButtonElement}
- */
-function makeButton(className, icon, label, hint, onClick) {
-  const button = document.createElement("button");
-  button.type = "button";
-  button.className = className;
-  button.title = hint;
-  button.innerHTML = `<i class="fas ${icon}"></i> ${label}`;
-  button.addEventListener("click", async (event) => {
-    event.preventDefault();
-    try {
-      await onClick();
-    } catch (error) {
-      console.error(`${MODULE_ID} | не удалось собрать шестёрку:`, error);
-      ui.notifications.error(localize("mook.failed"));
-    }
-  });
-  return button;
-}
-
-/**
- * Дописывает кнопки шестёрок в заголовок вкладки актёров.
- *
- * Кнопок две, и живут они по разным правилам:
- *
- * «Случайная шестёрка» — наша, работает всегда: она собирает НИП из книжных
- * раскладов и компендиумов системы, чужих модулей ей не нужно.
- *
- * «Собрать шестёрку» — проводник к чужому конструктору (Pneuma Mook Maker), и
- * без него она бессмысленна, поэтому появляется только когда тот включён.
+ * Без конструктора шестёрок кнопка бессмысленна, поэтому появляется только
+ * когда тот включён.
  *
  * @param {Application} app - боковая вкладка
  * @param {jQuery} html - её разметка
- * @returns {Boolean} - добавлено ли что-нибудь
+ * @returns {Boolean} - добавлена ли кнопка
  */
 export function injectMookButton(app, html) {
-  if (!game.user?.isGM) return false;
+  if (!game.user?.isGM || !mookMakerActive()) return false;
 
   const root = html?.[0] ?? html;
   if (!root?.querySelector) return false;
@@ -236,40 +201,29 @@ export function injectMookButton(app, html) {
   const row = document.createElement("div");
   row.className = "header-actions action-buttons flexrow cpr-addenda-mook-row";
 
-  row.append(
-    makeButton(
-      "cpr-addenda-random-mook",
-      "fa-dice",
-      localize("random.make"),
-      localize("random.hint"),
-      async () => {
-        const { showRandomMookForm } = await import("./mook-random-form.js");
-        await showRandomMookForm();
-      }
-    )
-  );
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = "cpr-addenda-build-mook";
+  button.title = localize("mook.buildHint");
+  button.innerHTML = `<i class="fas fa-user-gear"></i> ${localize("mook.build")}`;
+  button.addEventListener("click", async (event) => {
+    event.preventDefault();
+    try {
+      const template = await chooseTemplate();
+      if (template) await buildMook(template);
+    } catch (error) {
+      console.error(`${MODULE_ID} | не удалось собрать шестёрку:`, error);
+      ui.notifications.error(localize("mook.failed"));
+    }
+  });
 
-  if (mookMakerActive()) {
-    row.append(
-      makeButton(
-        "cpr-addenda-build-mook",
-        "fa-user-gear",
-        localize("mook.build"),
-        localize("mook.buildHint"),
-        async () => {
-          const template = await chooseTemplate();
-          if (template) await buildMook(template);
-        }
-      )
-    );
-  }
-
+  row.append(button);
   header.append(row);
   return true;
 }
 
 /**
- * Подключает кнопки к вкладке актёров.
+ * Подключает кнопку к вкладке актёров.
  *
  * Зовётся из `init`, а НЕ из `ready`: боковая панель рисуется один раз при
  * запуске, и обработчик, повешенный позже, к ней уже не успевает — кнопка не

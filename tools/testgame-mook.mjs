@@ -176,7 +176,7 @@ console.log("Правки на месте");
   console.log(`  записей в разбивке: ${Object.keys(table).length}`);
 }
 
-console.log("Кнопки шестёрок встают во вкладку актёров");
+console.log("Кнопка «Собрать шестёрку» встаёт во вкладку актёров");
 {
   // Кнопки не было видно, потому что обработчик вешался в `ready` — боковая
   // панель к тому времени уже нарисована и второй раз не рисуется. Проверяем и
@@ -246,23 +246,13 @@ console.log("Кнопки шестёрок встают во вкладку ак
     pathToFileURL(path.join(prepareAddendaScripts(), "mook-button.mjs")).href
   );
 
-  expect(mookButton.injectMookButton({}, [root]), "кнопки не добавлены");
-  const classes = buttons.map((button) => button.className);
-  expect(classes.length === 2, `кнопок создано ${classes.length}: ${classes.join(", ")}`);
+  expect(mookButton.injectMookButton({}, [root]), "кнопка не добавлена");
+  expect(buttons.length === 1, `кнопок создано ${buttons.length}`);
   expect(
-    classes.includes("cpr-addenda-random-mook"),
-    `нет кнопки раскладчика, есть: ${classes.join(", ")}`
+    buttons[0].className === "cpr-addenda-build-mook",
+    `у кнопки класс «${buttons[0].className}»`
   );
-  expect(
-    classes.includes("cpr-addenda-build-mook"),
-    `нет кнопки конструктора, есть: ${classes.join(", ")}`
-  );
-  for (const button of buttons) {
-    expect(
-      typeof button.listeners.click === "function",
-      `на кнопку «${button.className}» не повешен щелчок`
-    );
-  }
+  expect(typeof buttons[0].listeners.click === "function", "на кнопку не повешен щелчок");
 
   // Строкой во всю ширину, как это делают соседние модули, а не втискиванием
   // в системный ряд «Создать актёра».
@@ -272,25 +262,23 @@ console.log("Кнопки шестёрок встают во вкладку ак
     `строка кнопки получила класс «${headerChildren[0].className}»`
   );
 
-  // Повторная отрисовка не должна плодить второй ряд.
-  expect(!mookButton.injectMookButton({}, [root]), "ряд кнопок добавился во второй раз");
-  expect(buttons.length === 2, `после второй отрисовки кнопок ${buttons.length}`);
+  // Повторная отрисовка не должна плодить вторую кнопку.
+  expect(!mookButton.injectMookButton({}, [root]), "кнопка добавилась во второй раз");
+  expect(buttons.length === 1, `после второй отрисовки кнопок ${buttons.length}`);
 
-  // Раскладчик — наш и работает сам по себе. Выключенный чужой конструктор
-  // забирает с собой только свою кнопку, а не весь ряд: раньше пропадало всё.
+  // Без конструктора шестёрок кнопке делать нечего: она только проводник к нему.
+  // Раскладчик случайных шестёрок переехал в модуль `cpr-mook-randomizer`, и
+  // своей кнопки здесь больше нет.
   reset();
   game.modules = { get: () => ({ active: false }) };
-  expect(mookButton.injectMookButton({}, [root]), "ряд пропал вместе с чужим модулем");
-  expect(
-    buttons.length === 1 && buttons[0].className === "cpr-addenda-random-mook",
-    `без конструктора осталось кнопок ${buttons.length}: ${buttons.map((b) => b.className).join(", ")}`
-  );
+  expect(!mookButton.injectMookButton({}, [root]), "кнопка появилась без конструктора");
+  expect(buttons.length === 0, `без конструктора создано кнопок ${buttons.length}`);
 
-  // Игроку кнопки не положены: заготовки и сцену правит мастер.
+  // Игроку кнопка не положена: заготовки и сцену правит мастер.
   reset();
   game.modules = { get: () => ({ active: true }) };
   game.user = { isGM: false };
-  expect(!mookButton.injectMookButton({}, [root]), "кнопки показаны игроку");
+  expect(!mookButton.injectMookButton({}, [root]), "кнопка показана игроку");
   expect(buttons.length === 0, `игроку создано кнопок ${buttons.length}`);
 
   Object.assign(game, stubs);
