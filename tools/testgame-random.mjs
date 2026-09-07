@@ -334,9 +334,11 @@ function makeFoundryStub({ translate }) {
       this.id = nextId();
       this._id = this.id;
       this.name = data.name;
+      // `items` у Foundry — коллекция, и сборка ждёт её наполнения по `size`.
+      this.items = [];
+      Object.defineProperty(this.items, "size", { get: () => this.items.length });
       this.type = data.type;
       this.folder = data.folder;
-      this.items = [];
       this.system = {
         stats: Object.fromEntries(
           ["int", "ref", "dex", "tech", "cool", "will", "luck", "move", "body", "emp"]
@@ -352,33 +354,43 @@ function makeFoundryStub({ translate }) {
       // Система раздаёт базовые навыки и корпуса ТОЛЬКО актёру без `system`.
       if (data.system !== undefined) state.createdWithSystem = true;
       const actor = new FakeActor(data);
-      const core = coreSkillNames().map((name) => ({
-        _id: nextId(), name, type: "skill", system: { level: 0, stat: "int" },
-      }));
-      const frames = [
-        ["External (7 Option Slots)", "cyberwareExternal"],
-        ["Internal (7 Option Slots)", "cyberwareInternal"],
-        ["Fashionware (7 Option Slots)", "fashionware"],
-      ].map(([name, kind]) => ({
-        _id: nextId(), name, type: "cyberware",
-        system: { type: kind, isFoundational: true, size: 1, installedItems: { list: [], usedSlots: 0, slots: 7 } },
-      }));
-      await actor.createEmbeddedDocuments("Item", [...core, ...frames]);
-      const ids = actor.items
-        .filter((item) => item.type === "cyberware")
-        .map((item) => item.id);
-      actor.system.installedItems.list = ids;
-      globalThis.game.actors.push(actor);
 
-      // Ловушка один в один как на столе. Во-первых, `CPRActor.create`
-      // заканчивается на `actor.update({...installedItems.list})`, а
-      // `Document#update` отдаёт `updates.shift()` — пустоту, когда менять
-      // нечего; список уже правильный, и создание возвращает НИЧЕГО при
-      // созданном актёре. Во-вторых, хук `createActor` здесь намеренно НЕ
-      // зовётся: у мастера он тоже не выручил, и сборка не должна на него
-      // рассчитывать. Остаётся единственный надёжный признак — актёр,
-      // которого в мире не было.
-      return actor.update({ "system.installedItems.list": ids });
+      // Ловушка со стола целиком. Вызов возвращает НИЧЕГО, а всё остальное
+      // приходит следующими тактами: сперва актёр появляется в мире и звучит
+      // хук, и только потом система доносит навыки и корпуса. Сборка, которая
+      // смотрит сразу после вызова, видит пустоту — на этом она и спотыкалась
+      // трижды подряд.
+      const later = (fn, ticks) => setTimeout(fn, ticks);
+
+      later(() => {
+        globalThis.game.actors.push(actor);
+        globalThis.Hooks.callAll("createActor", actor);
+
+        later(async () => {
+          const core = coreSkillNames().map((name) => ({
+            _id: nextId(), name, type: "skill", system: { level: 0, stat: "int" },
+          }));
+          const frames = [
+            ["External (7 Option Slots)", "cyberwareExternal"],
+            ["Internal (7 Option Slots)", "cyberwareInternal"],
+            ["Fashionware (7 Option Slots)", "fashionware"],
+          ].map(([name, kind]) => ({
+            _id: nextId(), name, type: "cyberware",
+            system: {
+              type: kind, isFoundational: true, size: 1,
+              installedItems: { list: [], usedSlots: 0, slots: 7 },
+            },
+          }));
+          await actor.createEmbeddedDocuments("Item", [...core, ...frames]);
+          actor.system.installedItems.list = actor.items
+            .filter((item) => item.type === "cyberware")
+            .map((item) => item.id);
+        }, 20);
+      }, 10);
+
+      // `CPRActor.create` заканчивается на no-op `update`, а тот возвращает
+      // пустоту. Возвращаем то же самое.
+      return undefined;
     }
 
     async createEmbeddedDocuments(kind, list) {
@@ -447,7 +459,11 @@ function makeFoundryStub({ translate }) {
   globalThis.game = {
     system: { id: "cyberpunk-red-core" },
     folders: [],
-    actors: [],
+    actors: Object.assign([], {
+      get(id) {
+        return this.find((actor) => actor.id === id);
+      },
+    }),
     i18n: {
       localize: (key) => key,
       format: (key, data) => `${key} ${JSON.stringify(data)}`,

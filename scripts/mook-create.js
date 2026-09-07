@@ -474,35 +474,99 @@ async function applyRole(actor, index, plan) {
  * @param {Folder} folder - куда положить
  * @returns {Promise<Object>} - {actor, missing}
  */
-export async function createMook(plan, index, folder) {
-  // Класс берём у системы, а не глобальный `Actor`: раздача базовых навыков и
-  // корпусов под импланты живёт в `CPRActor.create`, и мимо неё актёр выходит
-  // пустым.
-  //
-  // А вот ЧТО вернёт этот вызов — не наше дело и полагаться на это нельзя.
-  // `CPRActor.create` заканчивается на `actor.update({...installedItems.list})`,
-  // а `Document#update` возвращает `updates.shift()` — пустоту, когда менять
-  // нечего. Список корпусов к тому моменту уже правильный, так что система
-  // отдаёт ничто при полностью созданном актёре.
-  //
-  // Ловить его хуком `createActor` тоже оказалось ненадёжно. Поэтому берём то,
-  // что нельзя не заметить: актёр, которого в мире не было до вызова, и есть
-  // наш. К моменту, когда `create` завершился, он уже лежит в `game.actors`.
-  const before = new Set((game.actors ?? []).map((existing) => existing.id));
+/**
+ * Ждёт, пока условие станет верным.
+ *
+ * @async
+ * @param {Function} ready - проверка
+ * @param {Number} step - пауза между проверками, мс
+ * @param {Number} limit - сколько ждать всего, мс
+ * @returns {Promise<Boolean>} - дождались или вышло время
+ */
+async function waitFor(ready, step = 50, limit = 5000) {
+  const until = Date.now() + limit;
+  while (Date.now() < until) {
+    if (ready()) return true;
+    // eslint-disable-next-line no-await-in-loop
+    await new Promise((resolve) => setTimeout(resolve, step));
+  }
+  return false;
+}
+
+/**
+ * Заводит пустую шестёрку и дожидается, пока система её доукомплектует.
+ *
+ * ЗДЕСЬ ТРИ ЛОВУШКИ ПОДРЯД, И ВСЕ ТРИ НАСТУПАЛИ.
+ *
+ * Первая: класс. Глобальный `Actor` — базовый класс Foundry, а раздача 63
+ * базовых навыков и трёх корпусов под импланты живёт в `CPRActor.create`,
+ * который система ставит в `CONFIG.Actor.documentClass`. Мимо него актёр
+ * выходит пустым.
+ *
+ * Вторая: возврат. `CPRActor.create` заканчивается на `actor.update(...)`, а
+ * `Document#update` отдаёт `updates.shift()` — пустоту, когда менять нечего.
+ * Вызов возвращает НИЧЕГО при вполне созданном актёре.
+ *
+ * Третья, из-за которой не помогли обходные пути: система заканчивает работу
+ * ПОЗЖЕ, чем завершается вызов. К моменту, когда `create` вернул управление,
+ * актёра ещё нет ни в `game.actors`, ни в хуке `createActor` — они приходят
+ * следующими тактами, а навыки появляются и того позже. Поэтому и подписка на
+ * хук, снятая сразу после вызова, и мгновенный просмотр списка актёров видели
+ * пустоту. Единственный рабочий способ — дождаться.
+ *
+ * То же самое независимо выяснил модуль `cyberpunk-red-wizards`, который
+ * создаёт НИП в этой же системе.
+ *
+ * @async
+ * @param {Object} plan - расклад
+ * @param {Folder} folder - куда положить
+ * @returns {Promise<Actor>}
+ */
+async function spawnActor(plan, folder) {
+  let arrived = null;
+  const waiting = new Promise((resolve) => {
+    arrived = resolve;
+  });
+  const watcher = Hooks.on("createActor", (document) => arrived(document));
 
   // Без ключа `system`: иначе система примет актёра за копию и ничего не выдаст.
-  await getDocumentClass("Actor").create({
+  const returned = await getDocumentClass("Actor").create({
     name: plan.name,
     type: "mook",
     folder: folder?.id ?? null,
     items: [],
   });
 
-  const fresh = (game.actors ?? []).filter((made) => !before.has(made.id));
-  // Имя — уточнение на случай, если в ту же секунду актёра завёл кто-то ещё,
-  // а не обязательное условие: важно, что актёр новый.
-  const actor = fresh.find((made) => made.name === plan.name) ?? fresh[0] ?? null;
-  if (!actor) throw new Error("актёр не появился в мире после создания");
+  let actor = returned ?? null;
+  if (!actor) {
+    // Хук либо уже сработал, либо сработает следующим тактом.
+    actor = await Promise.race([
+      waiting,
+      waitFor(() => false, 200, 5000).then(() => null),
+    ]);
+  }
+  Hooks.off("createActor", watcher);
+
+  if (!actor) throw new Error("система не отдала созданного актёра");
+
+  // Актёр есть, но навыки система доносит уже после хука. Пока их нет, ставить
+  // уровни некому: `applySkills` не нашёл бы ни одного навыка и полез бы
+  // доставать все шесть десятков из компендиумов поштучно.
+  await waitFor(() => (game.actors.get(actor.id)?.items?.size ?? 0) > 0);
+  return game.actors.get(actor.id) ?? actor;
+}
+
+/**
+ * Собирает шестёрку по раскладу.
+ *
+ * @async
+ * @param {Object} plan - расклад из `planMook`
+ * @param {Map} index - указатель по компендиумам
+ * @param {Folder} folder - куда положить
+ * @returns {Promise<Object>} - {actor, missing}
+ */
+export async function createMook(plan, index, folder) {
+  const actor = await spawnActor(plan, folder);
 
   const missing = [];
   missing.push(...(await applySkills(actor, index, plan.skills)));
