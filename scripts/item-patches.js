@@ -11,6 +11,7 @@ import { MODULE_ID } from "./constants.js";
 import { applyInstallRestrictions } from "./install-restrictions.js";
 import { applyInstalledUsage } from "./effect-usage.js";
 import { applyCarrierPatches } from "./carrier-changes.js";
+import { applyWeaponRules } from "./weapon-rules.js";
 
 export function registerItemPatches() {
   libWrapper.register(
@@ -49,6 +50,7 @@ export function registerItemPatches() {
         );
       }
 
+      applyWeaponRules(this);
       return result;
     },
     "WRAPPER"

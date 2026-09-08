@@ -1,7 +1,11 @@
 {
   "_id": "cprAddWp00050000",
   "effects": [],
-  "flags": {},
+  "flags": {
+    "cpr-addenda": {
+      "weaponRule": "victoria"
+    }
+  },
   "img": "systems/cyberpunk-red-core/icons/compendium/weapons/AssaultRifle.svg",
   "name": "Пулемёт MetaCorp «Victoria»",
   "system": {

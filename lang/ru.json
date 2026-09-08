@@ -48,6 +48,9 @@
       "deployed": "{frame}: комплект установлен, имплантов — {count}.",
       "removed": "{frame}: комплект убран, имплантов — {count}.",
       "failed": "{frame}: не удалось развернуть комплект. Подробности в консоли (F12)."
+    },
+    "weapons": {
+      "victoriaModes": "Victoria: доступны только автоогонь и подавляющий огонь."
     }
   },
   "CPRADDENDA.vehicle.header.namePlaceholder": "Название транспорта",

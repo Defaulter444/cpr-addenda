@@ -48,6 +48,9 @@
       "deployed": "{frame}: kit installed, {count} implants.",
       "removed": "{frame}: kit removed, {count} implants.",
       "failed": "{frame}: could not deploy the kit. See the console (F12) for details."
+    },
+    "weapons": {
+      "victoriaModes": "Victoria supports only autofire and suppressive fire."
     }
   },
   "CPRADDENDA.vehicle.header.namePlaceholder": "Vehicle Name",
