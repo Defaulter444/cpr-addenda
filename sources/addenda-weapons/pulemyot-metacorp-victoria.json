@@ -3,7 +3,8 @@
   "effects": [],
   "flags": {
     "cpr-addenda": {
-      "weaponRule": "victoria"
+      "weaponRule": "victoria",
+      "autofireDvTable": "Пулемёт (Autofire)"
     }
   },
   "img": "systems/cyberpunk-red-core/icons/compendium/weapons/AssaultRifle.svg",

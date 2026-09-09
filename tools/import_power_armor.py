@@ -453,7 +453,7 @@ def build_weapon(spec, doc_id):
     doc["folder"] = None
     doc["sort"] = 0
     doc.pop("_stats", None)
-    doc["flags"] = {}
+    doc["flags"] = json.loads(json.dumps(spec.get("flags", {})))
     doc["ownership"] = {"default": 0}
 
     system = doc["system"]
@@ -530,7 +530,7 @@ def embed(source, doc_id, flags):
     doc.pop("_stats", None)
     doc.setdefault("flags", {})
     doc["flags"].pop("core", None)
-    doc["flags"][MODULE_ID] = flags
+    doc["flags"].setdefault(MODULE_ID, {}).update(flags)
 
     system = doc.setdefault("system", {})
     if doc.get("type") == "weapon":

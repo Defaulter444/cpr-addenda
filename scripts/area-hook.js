@@ -19,6 +19,7 @@ import {
   forgetArea,
   placeArea,
   recallArea,
+  snapshotAreaAttack,
 } from "./area-attacks.js";
 
 /** Карточки, по которым узнаётся именно атака оружием. */
@@ -62,10 +63,12 @@ function isCard(roll, card) {
  * @returns {Number} - сколько фигур подставлено, ноль если не наш случай
  */
 function widenDamage(roll) {
+  if (roll?._cprAddendaAreaResolved) return 0;
   const entity = roll?.entityData;
   if (!entity) return 0;
 
-  const caught = recallArea(entity.actor, entity.item);
+  const token = canvas.scene?.tokens?.get(entity.token);
+  const caught = recallArea(entity.actor, entity.item, token?.actor?.isToken ? token.id : null);
   if (!caught?.length) return 0;
 
   entity.tokens = caught;
@@ -139,31 +142,43 @@ export async function registerAreaAttacks() {
         if (!game.settings.get(MODULE_ID, SETTINGS.explosiveTemplates)) return result;
         if (!isAttackRoll(roll)) return result;
 
-        const actor = game.actors.get(roll?.entityData?.actor);
+        const entity = roll?.entityData;
+        const token = canvas.scene?.tokens?.get(entity?.token);
+        const actor = token?.actor ?? game.actors.get(entity?.actor);
         const item = actor?.items?.get(roll?.entityData?.item);
         const kind = item ? areaKindOf(item) : null;
+
+        // Suppression causes a concentration check, not area damage. It also
+        // invalidates a previous damaging shot from the same weapon.
+        if (isCard(roll, "cpr-suppressive-fire-rollcard")) {
+          if (item) forgetArea(actor?.id, item.id, actor?.isToken ? token?.id : null);
+          return result;
+        }
 
         // Выстрел без зоны отменяет прежнюю: иначе выключенный режим дроби
         // оставил бы за собой список, и обычный выстрел тем же стволом раздал
         // бы урон по вчерашней зоне.
         if (!kind) {
-          if (item) forgetArea(actor?.id, item.id);
+          if (item) forgetArea(actor?.id, item.id, actor?.isToken ? token?.id : null);
           return result;
         }
 
         // «При использовании дроби нельзя выполнять прицельную атаку» (с. 175).
         // Зону не ставим и говорим почему, иначе выглядит как поломка.
         if (kind === SHOT && isCard(roll, AIMED_CARD)) {
-          forgetArea(actor?.id, item.id);
+          forgetArea(actor?.id, item.id, actor?.isToken ? token?.id : null);
           ui.notifications.warn(localize("area.shot.noAimed", { name: item.name }));
           return result;
         }
+
+        const fireMode = isCard(roll, "cpr-autofire-rollcard") ? "autofire" : "attack";
+        const attackSnapshot = snapshotAreaAttack(item, fireMode, kind);
 
         // Зону ставим после того, как карточка атаки ушла в чат: иначе она
         // окажется в журнале раньше самого выстрела.
         Promise.resolve(result)
           .then(() =>
-            placeArea({ item, actor, kind, attackTotal: roll.resultTotal })
+            placeArea({ item, actor, kind, attackTotal: roll.resultTotal, attackSnapshot })
           )
           .catch((error) => {
             console.error(`${MODULE_ID} | зона поражения не поставлена:`, error);

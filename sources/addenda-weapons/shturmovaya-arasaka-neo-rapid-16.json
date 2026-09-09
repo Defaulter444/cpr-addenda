@@ -1,7 +1,12 @@
 {
   "_id": "cprAddWp00020000",
   "effects": [],
-  "flags": {},
+  "flags": {
+    "cpr-addenda": {
+      "weaponRule": "neoRapid16",
+      "autofireDvTable": "Пистолет (стандартный) (Autofire)"
+    }
+  },
   "img": "systems/cyberpunk-red-core/icons/compendium/weapons/Shotgun.svg",
   "name": "Штурмовая Arasaka Neo Rapid 16",
   "system": {

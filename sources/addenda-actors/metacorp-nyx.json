@@ -133,7 +133,9 @@
       "effects": [],
       "flags": {
         "cpr-addenda": {
-          "vehicleMountedPosition": "cprAddPos0000005"
+          "vehicleMountedPosition": "cprAddPos0000005",
+          "weaponRule": "victoria",
+          "autofireDvTable": "Пулемёт (Autofire)"
         }
       },
       "img": "systems/cyberpunk-red-core/icons/compendium/weapons/AssaultRifle.svg",

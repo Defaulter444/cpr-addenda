@@ -16,6 +16,9 @@
 import { MODULE_ID, SETTINGS } from "./constants.js";
 import { loadSystemConfig } from "./cpr-config.js";
 import { registerItemPatches } from "./item-patches.js";
+import { resolveDvTable, getAttackRules, registerSystemDvPatch, toggleWeaponFireMode } from "./weapon-dv.js";
+import { areaKindOf } from "./area-attacks.js";
+import { registerRulerDistancePatch } from "./ruler-distance.js";
 import { registerAimedShotPatch } from "./aimed-shot.js";
 import { registerFormulaPatch } from "./roll-formula.js";
 import { registerPktHooks, registerPktHumanityPatches } from "./pkt-kit.js";
@@ -206,6 +209,8 @@ Hooks.once("ready", async () => {
   // Ставим до всего прочего: без этого предметы модуля со сложными
   // формулами броска роняют установку.
   await registerFormulaPatch();
+  await registerSystemDvPatch();
+  registerRulerDistancePatch();
   await registerPktHumanityPatches();
   await checkDvTableSetting();
 
@@ -223,6 +228,12 @@ Hooks.once("ready", async () => {
   registerPageMap();
 
   const api = {
+    /** Имя таблицы СЛ для выбранного режима, с учётом ствола и автоогня. */
+    resolveDvTable,
+    getAttackRules,
+    toggleWeaponFireMode,
+    /** One area card owns a shared damage roll for every caught target. */
+    handlesAreaAttack: (item) => Boolean(game.settings.get(MODULE_ID, SETTINGS.explosiveTemplates) && areaKindOf(item)),
     /** Проверка «встанет ли эта модификация в этот предмет». */
     checkUpgradeFit,
     /** Разметить модификацию: в какое оружие её можно ставить. */

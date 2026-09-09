@@ -30,6 +30,8 @@
  */
 
 import { MODULE_ID, localize } from "./constants.js";
+import { addendaFlag } from "./weapon-dv.js";
+import { normalizeCarrierChanges, normalizeCarrierRestore } from "./carrier-data.js";
 
 /** Флаг на модификации: что она меняет у носителя. */
 export const CHANGES_FLAG = "carrierChanges";
@@ -83,7 +85,7 @@ export function getCarrierChanges(upgrade) {
   if (!raw || typeof raw !== "object") return {};
 
   const changes = {};
-  for (const [path, change] of Object.entries(raw)) {
+  for (const [path, change] of Object.entries(normalizeCarrierChanges(raw))) {
     if (!change || typeof change !== "object") continue;
     if (!OPERATIONS.includes(change.op)) {
       console.warn(
@@ -126,7 +128,11 @@ export async function applyCarrierChanges(carrier, upgrade) {
   for (const [path, change] of Object.entries(changes)) {
     const current = readPath(carrier, path);
     previous[path] = current ?? null;
-    updates[path] = applyOperation(current, change);
+    const autoUpgrade = ["pistolAutosear", "shotgunAutoControl"].includes(addendaFlag(upgrade, "weaponRule")) ||
+      ["Автоспуск пистолета", "Узел автоматического управления огнём"].includes(upgrade.name);
+    updates[path] = path === "system.fireModes.autoFire" && autoUpgrade
+      ? (carrier.system.quality === "excellent" || Number(current) > 0 ? 4 : 3)
+      : applyOperation(current, change);
   }
 
   restore[upgrade.id] = previous;
@@ -139,7 +145,7 @@ export async function applyCarrierChanges(carrier, upgrade) {
   const overlapping = Object.keys(restore)
     .filter((id) => id !== upgrade.id)
     .filter((id) =>
-      Object.keys(restore[id] ?? {}).some((path) => path in changes)
+      Object.keys(normalizeCarrierRestore(restore[id])).some((path) => path in changes)
     );
   if (overlapping.length) {
     ui.notifications.warn(
@@ -166,12 +172,13 @@ export async function revertCarrierChanges(carrier, upgrade) {
   if (!previous) return;
 
   const updates = {};
-  for (const [path, value] of Object.entries(previous)) {
+  for (const [path, value] of Object.entries(normalizeCarrierRestore(previous))) {
     if (value !== null) updates[path] = value;
   }
 
-  delete restore[upgradeId];
-  updates[`flags.${MODULE_ID}.${RESTORE_FLAG}`] = restore;
+  // Document updates merge objects. Omitting the old key would retain it and
+  // prevent a subsequent installation from saving a fresh original value.
+  updates[`flags.${MODULE_ID}.${RESTORE_FLAG}.-=${upgradeId}`] = null;
 
   await carrier.update(updates);
 }
@@ -191,9 +198,14 @@ export function applyCarrierPatches(item) {
   if (typeof item.installItems === "function") {
     const systemInstall = item.installItems;
     item.installItems = async (itemList) => {
+      const installedBefore = new Set(item.system?.installedItems?.list ?? []);
       const result = await systemInstall.call(item, itemList);
       if (result === false) return result;
-      for (const upgrade of itemList ?? []) {
+      // World containers clone each input upgrade. Store the original values
+      // under the IDs actually installed, so removing a clone can find them.
+      // Embedded items keep their IDs and follow the same path.
+      const installed = item.getInstalledItems?.() ?? itemList ?? [];
+      for (const upgrade of installed.filter(upgrade => !installedBefore.has(upgrade.id))) {
         try {
           await applyCarrierChanges(item, upgrade);
         } catch (err) {

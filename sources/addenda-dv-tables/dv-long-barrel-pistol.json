@@ -1,7 +1,7 @@
 {
   "_id": "cprAddDv02700000",
   "name": "DV Long-Barrel Pistol",
-  "description": "<p>Расширенная таблица СЛ по дистанции (Data Pool).</p>",
+  "description": "<p>Базовая таблица СЛ по дистанции (Data Pool: таблицы боя). Не заменяет её расширенным профилем модификации.</p>",
   "displayRoll": false,
   "formula": "",
   "img": "systems/cyberpunk-red-core/icons/compendium/default/Default_DV_Table.svg",
@@ -16,7 +16,7 @@
         0,
         6
       ],
-      "text": "15",
+      "text": "14",
       "type": "text",
       "weight": 1,
       "flags": {}
@@ -58,7 +58,7 @@
         26,
         50
       ],
-      "text": "19",
+      "text": "20",
       "type": "text",
       "weight": 1,
       "flags": {}
@@ -72,7 +72,7 @@
         51,
         100
       ],
-      "text": "20",
+      "text": "25",
       "type": "text",
       "weight": 1,
       "flags": {}
@@ -86,7 +86,7 @@
         101,
         200
       ],
-      "text": "22",
+      "text": "28",
       "type": "text",
       "weight": 1,
       "flags": {}

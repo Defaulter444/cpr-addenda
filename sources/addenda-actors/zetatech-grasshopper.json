@@ -52,7 +52,8 @@
       "effects": [],
       "flags": {
         "cpr-addenda": {
-          "vehicleMountedPosition": "cprAddPos0000009"
+          "vehicleMountedPosition": "cprAddPos0000009",
+          "autofireDvTable": "Пистолет (стандартный) (Autofire)"
         }
       },
       "img": "systems/cyberpunk-red-core/icons/compendium/weapons/veryHeavyPistol.svg",

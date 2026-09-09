@@ -1,7 +1,7 @@
 {
   "_id": "cprAddDv03800000",
   "name": "СЛ Пистолет",
-  "description": "<p>Расширенная таблица СЛ по дистанции (Data Pool).</p>",
+  "description": "<p>Базовая таблица СЛ по дистанции (Data Pool: таблицы боя). Не заменяет её расширенным профилем модификации.</p>",
   "displayRoll": false,
   "formula": "",
   "img": "systems/cyberpunk-red-core/icons/compendium/default/Default_DV_Table.svg",
@@ -86,7 +86,7 @@
         101,
         200
       ],
-      "text": "35",
+      "text": "30",
       "type": "text",
       "weight": 1,
       "flags": {}

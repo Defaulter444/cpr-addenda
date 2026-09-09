@@ -12,6 +12,7 @@ import { applyInstallRestrictions } from "./install-restrictions.js";
 import { applyInstalledUsage } from "./effect-usage.js";
 import { applyCarrierPatches } from "./carrier-changes.js";
 import { applyWeaponRules } from "./weapon-rules.js";
+import { applyAttackSkillCompatibility } from "./weapon-skill-compat.js";
 
 export function registerItemPatches() {
   libWrapper.register(
@@ -51,6 +52,7 @@ export function registerItemPatches() {
       }
 
       applyWeaponRules(this);
+      applyAttackSkillCompatibility(this);
       return result;
     },
     "WRAPPER"

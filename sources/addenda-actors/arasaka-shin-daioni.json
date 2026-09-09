@@ -52,7 +52,9 @@
       "effects": [],
       "flags": {
         "cpr-addenda": {
-          "vehicleMountedPosition": "cprAddPos0000003"
+          "vehicleMountedPosition": "cprAddPos0000003",
+          "weaponRule": "neoRapid16",
+          "autofireDvTable": "Пистолет (стандартный) (Autofire)"
         }
       },
       "img": "systems/cyberpunk-red-core/icons/compendium/weapons/Shotgun.svg",

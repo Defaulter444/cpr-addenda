@@ -24,6 +24,7 @@
 
 import { MODULE_ID, SETTINGS, localize } from "./constants.js";
 import { SHOT_FLAG, canFireShot, shotModeOn } from "./area-attacks.js";
+import { setWeaponDvTable } from "./weapon-dv.js";
 
 /** Ключ флага режима для конкретного оружия. */
 export function shotFlagKey(itemId) {
@@ -41,11 +42,13 @@ export function shotFlagKey(itemId) {
  * @param {String} itemId - оружие
  * @returns {Promise<Boolean>} - включён ли режим теперь
  */
-export async function toggleShotMode(actor, itemId) {
+export async function toggleShotMode(actor, itemId, token = actor?.sheet?.token) {
   const key = shotFlagKey(itemId);
   const on = Boolean(actor.getFlag(MODULE_ID, key));
   if (on) await actor.unsetFlag(MODULE_ID, key);
   else await actor.setFlag(MODULE_ID, key, true);
+  const item = actor.items.get(itemId);
+  if (item) await setWeaponDvTable(item, actor, item.system.dvTable, token);
   return !on;
 }
 

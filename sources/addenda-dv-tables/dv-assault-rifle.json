@@ -1,7 +1,7 @@
 {
   "_id": "cprAddDv03000000",
   "name": "DV Assault Rifle",
-  "description": "<p>Расширенная таблица СЛ по дистанции (Data Pool).</p>",
+  "description": "<p>Базовая таблица СЛ по дистанции (Data Pool: таблицы боя). Не заменяет её расширенным профилем модификации.</p>",
   "displayRoll": false,
   "formula": "",
   "img": "systems/cyberpunk-red-core/icons/compendium/default/Default_DV_Table.svg",

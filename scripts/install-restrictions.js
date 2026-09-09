@@ -14,6 +14,7 @@
 
 import { MODULE_ID, FLAGS, SETTINGS, getFlag, localize } from "./constants.js";
 import { weaponTypeLabel } from "./cpr-config.js";
+import { weaponUpgradeFamily, installedWeaponUpgrades } from "./weapon-dv.js";
 
 /**
  * Можно ли поставить эту модификацию в этот предмет.
@@ -31,6 +32,13 @@ export function checkUpgradeFit(upgrade, container) {
   // Ограничения касаются только модификаций, вставляемых в предметы.
   if (upgrade?.type !== "itemUpgrade") return pass;
   if (container?.documentName !== "Item") return pass;
+
+  const family = weaponUpgradeFamily(upgrade);
+  if (container.type === "weapon" && family && installedWeaponUpgrades(container).some(
+    (installed) => installed.id !== upgrade.id && weaponUpgradeFamily(installed) === family
+  )) {
+    return { allowed: false, reason: localize("notify.duplicateWeaponUpgrade", { name: upgrade.name }) };
+  }
 
   const allowedTypes = getFlag(upgrade, FLAGS.allowedWeaponTypes);
   const deniedTypes = getFlag(upgrade, FLAGS.deniedWeaponTypes);
@@ -83,6 +91,11 @@ export function checkUpgradeFit(upgrade, container) {
  */
 function checkList(container, itemList) {
   if (!Array.isArray(itemList)) return true;
+  const families = itemList.map(weaponUpgradeFamily).filter(Boolean);
+  if (container?.type === "weapon" && new Set(families).size !== families.length) {
+    ui.notifications.error(localize("notify.duplicateWeaponUpgrade", { name: container.name }));
+    return false;
+  }
   let allowed = true;
   for (const item of itemList) {
     const verdict = checkUpgradeFit(item, container);

@@ -69,7 +69,8 @@ function makeItem({ id, name, system = {}, flags = {} }) {
           node[key] = node[key] ?? {};
           node = node[key];
         }
-        node[last] = value;
+        if (last.startsWith("-=")) delete node[last.slice(2)];
+        else node[last] = value;
       }
     },
   };

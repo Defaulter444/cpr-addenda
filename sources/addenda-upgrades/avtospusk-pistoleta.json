@@ -23,7 +23,9 @@
           "op": "set",
           "value": true
         }
-      }
+      },
+      "weaponRule": "pistolAutosear",
+      "autofireDvTable": "Пистолет (стандартный) (Autofire)"
     }
   },
   "system": {

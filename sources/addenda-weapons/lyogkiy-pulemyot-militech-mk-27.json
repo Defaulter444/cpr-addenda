@@ -1,7 +1,12 @@
 {
   "_id": "cprAddWp00060000",
   "effects": [],
-  "flags": {},
+  "flags": {
+    "cpr-addenda": {
+      "weaponRule": "mk27",
+      "autofireDvTable": "Пулемёт (Autofire)"
+    }
+  },
   "img": "systems/cyberpunk-red-core/icons/compendium/weapons/AssaultRifle.svg",
   "name": "Лёгкий пулемёт Militech MK.27",
   "system": {

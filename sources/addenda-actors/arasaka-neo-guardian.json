@@ -52,7 +52,8 @@
       "effects": [],
       "flags": {
         "cpr-addenda": {
-          "vehicleMountedPosition": "cprAddPos0000001"
+          "vehicleMountedPosition": "cprAddPos0000001",
+          "autofireDvTable": "Пистолет-пулемёт (Autofire)"
         }
       },
       "img": "systems/cyberpunk-red-core/icons/compendium/weapons/heavySMG.svg",
@@ -127,7 +128,8 @@
       "effects": [],
       "flags": {
         "cpr-addenda": {
-          "vehicleMountedPosition": "cprAddPos0000001"
+          "vehicleMountedPosition": "cprAddPos0000001",
+          "autofireDvTable": "Пистолет-пулемёт (Autofire)"
         }
       },
       "img": "systems/cyberpunk-red-core/icons/compendium/weapons/heavySMG.svg",

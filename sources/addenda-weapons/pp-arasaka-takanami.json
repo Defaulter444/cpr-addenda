@@ -1,7 +1,11 @@
 {
   "_id": "cprAddWp00010000",
   "effects": [],
-  "flags": {},
+  "flags": {
+    "cpr-addenda": {
+      "autofireDvTable": "Пистолет-пулемёт (Autofire)"
+    }
+  },
   "img": "systems/cyberpunk-red-core/icons/compendium/weapons/heavySMG.svg",
   "name": "ПП Arasaka Takanami",
   "system": {

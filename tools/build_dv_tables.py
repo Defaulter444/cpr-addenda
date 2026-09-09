@@ -3,8 +3,8 @@
 
 Система берёт таблицы дальности не откуда попало, а из компендиума, указанного
 в её настройке `dvRollTableCompendium`. Значит модуль может отдать свой полный
-набор — с теми значениями, что записаны в документе, а не с системными:
-у системного «Пистолета» на 101–200 метрах стоит 30, тогда как в документе 35.
+набор: базовые таблицы сохраняют значения системы, расширенные профили
+используются установленными модификациями и специальным оружием.
 
 Таблицы в Foundry — это документы RollTable: сама таблица и её строки,
 которые хранятся отдельными записями. Здесь из плоских списков значений
@@ -53,7 +53,7 @@ def slug(text):
     return re.sub(r"-+", "-", "".join(out)).strip("-")[:60]
 
 
-def build_table(index, name, values, bands):
+def build_table(index, name, values, bands, expanded=True):
     """Собирает документ таблицы вместе со строками дистанций."""
     if len(values) != len(bands):
         raise ValueError(
@@ -78,7 +78,8 @@ def build_table(index, name, values, bands):
     return {
         "_id": table_id,
         "name": name,
-        "description": "<p>Расширенная таблица СЛ по дистанции (Data Pool).</p>",
+        "description": ("<p>Расширенная таблица СЛ для модификаций и специального оружия (Data Pool, Solo of Fortune 2045).</p>"
+                        if expanded else "<p>Базовая таблица СЛ по дистанции (Data Pool: таблицы боя). Не заменяет её расширенным профилем модификации.</p>"),
         "displayRoll": False,
         "formula": "",
         "img": ICON,
@@ -135,7 +136,7 @@ def main():
     for section, bands in sections:
         for name, values in data[section].items():
             index += 1
-            table = build_table(index, name, values, bands)
+            table = build_table(index, name, values, bands, expanded=section in ("single", "autofire"))
             path = SOURCES / f"{slug(name)}.json"
             path.write_text(
                 json.dumps(table, ensure_ascii=False, indent=2), encoding="utf-8"

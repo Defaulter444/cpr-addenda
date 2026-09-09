@@ -32,7 +32,8 @@
  */
 
 import { MODULE_ID, SYSTEM_ID, SETTINGS, localize } from "./constants.js";
-import { findSkill } from "./vehicle-skills.js";
+import { getEvasionSkill, canEvadeRanged } from "./ranged-evasion.js";
+import { isShotAttack, getAttackRules } from "./weapon-dv.js";
 
 /* ------------------------------------------------------------------ */
 /*  Что считается площадной атакой                                     */
@@ -110,13 +111,9 @@ export function loadedVariety(item) {
  * @returns {String|null} - BLAST, SHOT или null
  */
 export function areaKindOf(item) {
-  // Дробь — РЕЖИМ стрельбы, и опознаётся только по нему.
-  //
-  // Раньше её узнавали ещё и по заряженному патрону `shotgunShell`. Это было
-  // ошибкой: shotgunShell — обычный патрон дробовика, и зона вставала на КАЖДЫЙ
-  // выстрел, включая прицельный, хотя книга прицельную стрельбу дробью прямо
-  // запрещает. Стрелок сам говорит, чем стреляет, — переключателем «Дробь».
-  if (shotModeOn(item)) return SHOT;
+  // Система различает дробь (shotgunShell) и жакан (shotgunSlug).
+  // Ручной переключатель сохраняется для оружия без установленного боеприпаса.
+  if (isShotAttack(item)) return SHOT;
 
   // У взрыва иначе: ракета и граната взрываются независимо от режима, тут
   // решает заряженное.
@@ -241,9 +238,69 @@ function esc(text) {
 /** Токен стрелка на текущей сцене. */
 function tokenOf(actor) {
   if (!actor) return null;
+  // Unlinked tokens share the base actor id, but have different inventories.
+  if (actor.isToken || actor.token) {
+    return actor.token?.object ?? canvas.tokens?.placeables?.find(
+      (t) => t.document?.uuid === actor.token?.uuid
+    ) ?? null;
+  }
   return (
-    canvas.tokens?.placeables?.find((t) => t.actor?.id === actor.id) ?? null
+    canvas.tokens?.placeables?.find((t) => t.actor === actor) ??
+    canvas.tokens?.placeables?.find((t) => !t.actor?.isToken && t.actor?.id === actor.id) ?? null
   );
+}
+
+const copyProfile = (value) => value === undefined ? undefined : JSON.parse(JSON.stringify(value));
+
+/** Freeze ammunition and damage before the asynchronous chat/template work. */
+export function snapshotAreaAttack(item, fireMode = "attack", kind = areaKindOf(item)) {
+  const rules = getAttackRules(item, fireMode);
+  const ammo = {};
+  for (const key of ["type", "variety", "ablationValue", "overrides"]) {
+    const value = item?._getLoadedAmmoProp?.(key);
+    if (value !== undefined) ammo[key] = copyProfile(value);
+  }
+  const damage = item.system.damage;
+  let formula;
+  try {
+    if (kind === SHOT) item.system.damage = "3d6";
+    formula = item.getWeaponDamage?.() ?? item.system.damage;
+  } finally {
+    item.system.damage = damage;
+  }
+  return {
+    fireMode,
+    shot: kind === SHOT,
+    automaticShot: Boolean(rules.automaticShot),
+    evasionModifier: rules.evasionModifier ?? 0,
+    damageProfile: {
+      formula, ammo,
+      weaponType: item.system.weaponType,
+      ignoreArmorPercent: item.system.ignoreArmorPercent ?? 0,
+      ignoreBelowSP: item.system.ignoreBelowSP ?? 0,
+    },
+  };
+}
+
+/** Core creation is synchronous; restore every temporary property even on error. */
+function createAreaDamageRoll(item, shooter, profile) {
+  if (!profile) return item.createRoll("damage", shooter, { damageType: "attack" });
+  const methods = ["_getLoadedAmmoProp", "getWeaponDamage"];
+  const descriptors = methods.map((key) => Object.getOwnPropertyDescriptor(item, key));
+  const fields = ["weaponType", "ignoreArmorPercent", "ignoreBelowSP"];
+  const previous = fields.map((key) => item.system[key]);
+  try {
+    item._getLoadedAmmoProp = (key) => copyProfile(profile.ammo?.[key]);
+    item.getWeaponDamage = () => profile.formula;
+    for (const key of fields) if (profile[key] !== undefined) item.system[key] = profile[key];
+    return item.createRoll("damage", shooter, { damageType: "attack" });
+  } finally {
+    methods.forEach((key, i) => {
+      if (descriptors[i]) Object.defineProperty(item, key, descriptors[i]);
+      else delete item[key];
+    });
+    fields.forEach((key, i) => { item.system[key] = previous[i]; });
+  }
 }
 
 /**
@@ -336,7 +393,7 @@ export function caughtBy(geometry, tokens, origin = null) {
       name: token.name,
       uuid: token.document?.uuid ?? token.actor?.uuid ?? null,
       ref,
-      canDodge: ref >= DODGE_REF,
+      canDodge: canEvadeRanged(token.actor),
     });
   }
   return caught;
@@ -357,8 +414,8 @@ export function caughtBy(geometry, tokens, origin = null) {
 const lastArea = new Map();
 
 /** Ключ памяти зоны. */
-function areaKey(actorId, itemId) {
-  return `${actorId ?? "?"}:${itemId ?? "?"}`;
+function areaKey(actorId, itemId, tokenId) {
+  return `${tokenId ?? "?"}:${actorId ?? "?"}:${itemId ?? "?"}`;
 }
 
 /**
@@ -368,8 +425,8 @@ function areaKey(actorId, itemId) {
  * @param {String} itemId - оружие
  * @param {Array} caught - фигуры в зоне
  */
-export function rememberArea(actorId, itemId, caught) {
-  lastArea.set(areaKey(actorId, itemId), caught ?? []);
+export function rememberArea(actorId, itemId, caught, tokenId = null) {
+  lastArea.set(areaKey(actorId, itemId, tokenId), caught ?? []);
 }
 
 /**
@@ -379,13 +436,13 @@ export function rememberArea(actorId, itemId, caught) {
  * @param {String} itemId - оружие
  * @returns {Array|null}
  */
-export function recallArea(actorId, itemId) {
-  return lastArea.get(areaKey(actorId, itemId)) ?? null;
+export function recallArea(actorId, itemId, tokenId = null) {
+  return lastArea.get(areaKey(actorId, itemId, tokenId)) ?? null;
 }
 
 /** Забывает зону — например, когда урон по ней уже раздали. */
-export function forgetArea(actorId, itemId) {
-  lastArea.delete(areaKey(actorId, itemId));
+export function forgetArea(actorId, itemId, tokenId = null) {
+  lastArea.delete(areaKey(actorId, itemId, tokenId));
 }
 
 /**
@@ -423,9 +480,10 @@ function asRolled(data) {
  * @param {Object} options - {item, actor, kind, attackTotal}
  * @returns {Promise<MeasuredTemplateDocument|null>}
  */
-export async function placeArea({ item, actor, kind, attackTotal }) {
+export async function placeArea({ item, actor, kind, attackTotal, attackSnapshot = null }) {
   if (!game.settings.get(MODULE_ID, SETTINGS.explosiveTemplates)) return null;
   if (!canvas?.scene) return null;
+  const snapshot = attackSnapshot ?? snapshotAreaAttack(item, "attack", kind);
 
   const grid = canvas.scene.grid;
   const [target] = Array.from(game.user.targets);
@@ -477,7 +535,7 @@ export async function placeArea({ item, actor, kind, attackTotal }) {
       ]
     );
 
-    await postCard({ item, actor, kind, attackTotal, geometry, shooter, created });
+    await postCard({ item, actor, kind, attackTotal, geometry, shooter, created, snapshot });
     return created;
   } catch (error) {
     console.error(`${MODULE_ID} | зона поражения не поставлена:`, error);
@@ -493,7 +551,7 @@ export async function placeArea({ item, actor, kind, attackTotal }) {
  *
  * @async
  */
-async function postCard({ item, actor, kind, attackTotal, geometry, shooter, created }) {
+async function postCard({ item, actor, kind, attackTotal, geometry, shooter, created, snapshot }) {
   const origin = kind === SHOT && shooter ? shooter.center : null;
   const caught = caughtBy(geometry, canvas.tokens?.placeables ?? [], origin);
 
@@ -506,7 +564,8 @@ async function postCard({ item, actor, kind, attackTotal, geometry, shooter, cre
     item?.id,
     (canvas.tokens?.placeables ?? [])
       .filter((t) => inZone.has(t.document?.uuid))
-      .map((t) => t.document)
+      .map((t) => t.document),
+    actor?.isToken ? actor.token?.id : null
   );
 
   const roster = caught.length
@@ -555,7 +614,7 @@ async function postCard({ item, actor, kind, attackTotal, geometry, shooter, cre
       `<div class="cpr-addenda-blast-actions">` +
       `<button type="button" class="cpr-addenda-blast-damage"` +
       ` data-action="cprAddendaAreaDamage">` +
-      `${localize("area.damageButton", { damage: item.system?.damage ?? "?" })}` +
+      `${localize("area.damageButton", { damage: snapshot.damageProfile?.formula ?? item.system?.damage ?? "?" })}` +
       `</button>` +
       // Пересчёт нужен обеим зонам. У дроби — если направление вышло не то, у
       // взрыва — потому что книга прямо велит мастеру перенести промахнувшийся
@@ -570,6 +629,7 @@ async function postCard({ item, actor, kind, attackTotal, geometry, shooter, cre
     flags: {
       [MODULE_ID]: {
         area: {
+          ...snapshot,
           kind,
           weapon: item.uuid,
           shooter: actor?.uuid ?? null,
@@ -634,9 +694,9 @@ async function rollAreaDamage(event, area) {
     return;
   }
 
-  // Площадная атака не бывает очередью: без явного типа система подставила бы
-  // режим прошлого выстрела.
-  const roll = item.createRoll("damage", shooter, { damageType: "damage" });
+  // Automatic shells share ordinary shell damage; later reloads must not
+  // replace the original ammunition, formula, or armor interaction.
+  const roll = createAreaDamageRoll(item, shooter, area.damageProfile);
   if (!roll) {
     ui.notifications.warn(
       localize("vehicle.notify.rollUnsupported", { name: item.name, type: "damage" })
@@ -650,7 +710,8 @@ async function rollAreaDamage(event, area) {
     if (token) targets.push(token);
   }
 
-  await finishRoll(event, shooter, item, roll, null, targets);
+  roll._cprAddendaAreaResolved = true;
+  await finishRoll(event, shooter, item, roll, shooter.token?.id ?? null, targets);
 }
 
 /** Уклонение: бросок за одного из зоны. */
@@ -666,17 +727,22 @@ async function rollAreaDodge(event, area, tokenUuid) {
     return;
   }
 
-  const skill = findSkill(actor, EVASION);
+  const skill = getEvasionSkill(actor);
   if (!skill) {
     ui.notifications.warn(localize("area.noEvasion", { name: actor.name }));
     return;
   }
 
+  const dodgeRoll = skill.createRoll("skill", actor);
+  if (!dodgeRoll) return;
+  if (area.evasionModifier === -3) {
+    dodgeRoll.addMod([{ value: -3, source: game.i18n.localize("CPR.global.itemType.skill.autofire") }]);
+  }
   const cprRoll = await finishRoll(
     event,
     actor,
     skill,
-    skill.createRoll("skill", actor),
+    dodgeRoll,
     document?.id ?? null
   );
   if (!cprRoll) return;
@@ -795,4 +861,5 @@ export const __test = {
   rollAreaDamage,
   rollAreaDodge,
   tokenOf,
+  createAreaDamageRoll,
 };

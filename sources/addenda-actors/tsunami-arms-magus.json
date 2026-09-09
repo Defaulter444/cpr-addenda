@@ -52,7 +52,8 @@
       "effects": [],
       "flags": {
         "cpr-addenda": {
-          "vehicleMountedPosition": "cprAddPos0000008"
+          "vehicleMountedPosition": "cprAddPos0000008",
+          "weaponRule": "deathwind"
         }
       },
       "img": "systems/cyberpunk-red-core/icons/compendium/weapons/SniperRifle.svg",

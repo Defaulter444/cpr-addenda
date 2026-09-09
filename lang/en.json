@@ -50,7 +50,9 @@
       "failed": "{frame}: could not deploy the kit. See the console (F12) for details."
     },
     "weapons": {
-      "victoriaModes": "Victoria supports only autofire and suppressive fire."
+      "victoriaModes": "Victoria supports only autofire and suppressive fire.",
+      "deathwindAimed": "Deathwind cannot make aimed shots.",
+      "shotAimed": "Shotgun shells cannot make aimed shots."
     }
   },
   "CPRADDENDA.vehicle.header.namePlaceholder": "Vehicle Name",
@@ -282,5 +284,6 @@
   "CPRADDENDA.mook.noScene": "No scene is open, so there is nowhere to place the mook. Open a scene and try again.",
   "CPRADDENDA.mook.noTemplate": "No template was found in «{folder}». Mook Maker creates one on world start — check that it is enabled.",
   "CPRADDENDA.mook.notPlaced": "Could not place the mook token on the scene.",
-  "CPRADDENDA.mook.failed": "Could not build the mook. See the console (F12) for details."
+  "CPRADDENDA.mook.failed": "Could not build the mook. See the console (F12) for details.",
+  "CPRADDENDA.notify.duplicateWeaponUpgrade": "Only one modification of this group can be installed: {name}. Remove the existing modification first."
 }

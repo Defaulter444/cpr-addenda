@@ -1,7 +1,11 @@
 {
   "_id": "cprAddWp00090000",
   "effects": [],
-  "flags": {},
+  "flags": {
+    "cpr-addenda": {
+      "autofireDvTable": "Пистолет (стандартный) (Autofire)"
+    }
+  },
   "img": "systems/cyberpunk-red-core/icons/compendium/weapons/veryHeavyPistol.svg",
   "name": "Militech Big Boomer",
   "system": {

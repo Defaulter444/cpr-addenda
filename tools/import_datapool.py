@@ -378,8 +378,10 @@ WEAPON_MODS = {
     "Модификация таблицы дальности": dict(size=0, types=RANGED_ALL),
     "Автоспуск пистолета": dict(
         size=0, types=PISTOLS,
+        rule="pistolAutosear",
         # «Автоогонь (Автоматический пистолет 3) и подавляющий огонь».
-        # Повышение до 4 на оружии отличного качества остаётся мастеру.
+        # Повышение до 4 для отличного качества/имеющегося автоогня
+        # вычисляет applyCarrierChanges при установке.
         changes={
             "system.fireModes.autoFire": {"op": "set", "value": 3},
             "system.fireModes.suppressiveFire": {"op": "set", "value": True},
@@ -387,6 +389,7 @@ WEAPON_MODS = {
     ),
     "Узел автоматического управления огнём": dict(
         size=0, types=["shotgun"],
+        rule="shotgunAutoControl",
         changes={"system.fireModes.autoFire": {"op": "set", "value": 3}},
     ),
     "Внутренний циклический механизм ПП": dict(
@@ -542,12 +545,18 @@ def main():
     for entry in data["weapon_mods"]:
         spec = WEAPON_MODS[entry["name"]]
         counter += 1
-        write("addenda-upgrades", upgrade_item(
+        doc = upgrade_item(
             make_id("Wm", counter), entry["name"], trim_tail(entry["description"]),
             price_of(entry["price"]), entry["page"], "weapon",
             size=spec["size"], weapon_types=spec["types"],
             carrier_changes=spec.get("changes"), modifiers=spec.get("mods"),
-        ))
+        )
+        if spec.get("rule"):
+            doc["flags"]["cpr-addenda"].update({
+                "weaponRule": spec["rule"],
+                "autofireDvTable": "Пистолет (стандартный) (Autofire)",
+            })
+        write("addenda-upgrades", doc)
 
     # 2. Броня.
     for entry in data["armor"]:

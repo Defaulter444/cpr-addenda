@@ -30,32 +30,7 @@ import {
   reconcileEffects,
 } from "./vehicle-effects.js";
 import { findSkill, skillNamesHint } from "./vehicle-skills.js";
-
-/**
- * Утилиты системы. Нужны ровно в одном месте — за списком таблиц дальности при
- * переключении на стрельбу очередью.
- *
- * Импорт отложенный и в try. Статический импорт из системы намертво связал бы
- * загрузку всего модуля с этим файлом: переедет он в следующей версии системы —
- * и `cpr-addenda` не загрузится целиком, вместе с компендиумами. Так же
- * подстрахован справочник конфига в `cpr-config.js`.
- *
- * @returns {Promise<Object|null>}
- */
-async function systemUtils() {
-  try {
-    const mod = await import(
-      `/systems/${SYSTEM_ID}/modules/utils/cpr-systemUtils.js`
-    );
-    return mod.default ?? null;
-  } catch (error) {
-    console.warn(
-      `${MODULE_ID} | утилиты системы недоступны, таблица дальности при очереди не переключится.`,
-      error
-    );
-    return null;
-  }
-}
+import { toggleWeaponFireMode } from "./weapon-dv.js";
 
 /** Экранирование того, что попадает в HTML диалогов. */
 const esc = (value) => Handlebars.escapeExpression(String(value ?? ""));
@@ -916,42 +891,7 @@ export class VehicleSheet extends ActorSheet {
   async _toggleFireMode(event) {
     const weaponId = event.currentTarget.dataset.itemId;
     const fireMode = event.currentTarget.dataset.fireMode;
-    const flag = this.actor.getFlag("cyberpunk-red-core", `firetype-${weaponId}`);
-
-    if (this.token !== null && fireMode === "autofire") {
-      const weapon = this.actor.items.get(weaponId);
-      const weaponDvTable = weapon.system.dvTable;
-      const currentDvTable =
-        weaponDvTable === ""
-          ? foundry.utils.getProperty(this.token, "flags.cprDvTable")
-          : weaponDvTable;
-
-      if (typeof currentDvTable !== "undefined") {
-        const dvTable = currentDvTable.replace(" (Autofire)", "");
-        const utils = await systemUtils();
-        const dvTables = utils ? await utils.GetDvTables() : [];
-        const autofireTables = dvTables.filter(
-          (table) =>
-            table.name.includes(dvTable) && table.name.includes("Autofire")
-        );
-
-        let newDvTable = currentDvTable;
-        if (autofireTables.length > 0) {
-          newDvTable = flag === fireMode ? dvTable : autofireTables[0];
-        }
-        await this.token.update({ "flags.cprDvTable": newDvTable });
-      }
-    }
-
-    if (flag === fireMode) {
-      await this.actor.unsetFlag("cyberpunk-red-core", `firetype-${weaponId}`);
-    } else {
-      await this.actor.setFlag(
-        "cyberpunk-red-core",
-        `firetype-${weaponId}`,
-        fireMode
-      );
-    }
+    return toggleWeaponFireMode(this, weaponId, fireMode);
   }
 
   _getFireCheckbox(weaponId) {

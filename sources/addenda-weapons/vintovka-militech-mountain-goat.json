@@ -1,7 +1,11 @@
 {
   "_id": "cprAddWp00070000",
   "effects": [],
-  "flags": {},
+  "flags": {
+    "cpr-addenda": {
+      "autofireDvTable": "Штурмовая винтовка (Autofire)"
+    }
+  },
   "img": "systems/cyberpunk-red-core/icons/compendium/weapons/AssaultRifle.svg",
   "name": "Винтовка Militech Mountain Goat",
   "system": {

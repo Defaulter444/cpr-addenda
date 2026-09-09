@@ -74,12 +74,11 @@ console.log("Что считается площадной атакой");
     "брошенная граната не даёт взрыв"
   );
 
-  // Дробь — РЕЖИМ, а не патрон. Раньше её опознавали по `shotgunShell`, и зона
-  // вставала на каждый выстрел из дробовика, включая прицельный. Но
-  // shotgunShell — обычный патрон дробовика, и сам по себе зоны не даёт.
+  // Дробь и жакан — разные varieties в системе. Заряженная дробь даёт зону,
+  // а запрет прицельной атаки проверяется до создания броска.
   expect(
-    A.areaKindOf(weapon("shotgunShell", "shotgun")) === null,
-    "дробовик с обычным патроном ставит зону сам по себе"
+    A.areaKindOf({ ...weapon("shotgunShell", "shotgun"), type: "weapon" }) === A.SHOT,
+    "заряженная дробь (shotgunShell) не создаёт зону"
   );
   expect(
     A.areaKindOf(weapon("shotgunSlug", "shotgun")) === null,
@@ -218,9 +217,10 @@ console.log("Направление округляется до сторон с�
   }
 }
 
-console.log("Режим дроби решает за боеприпас");
+console.log("Заряженный боеприпас важнее сохранённого ручного режима");
 {
-  // Стрелок сам сказал, чем стреляет: режим важнее того, что в магазине.
+  // Сохранённый флаг не превращает явно заряженный жакан в дробь.
+  // Без сведений о патроне ручной режим остаётся запасным вариантом.
   const withMode = (on, variety, weaponType) => ({
     id: "wpn0000000000001",
     type: "weapon",
@@ -231,8 +231,12 @@ console.log("Режим дроби решает за боеприпас");
   });
 
   expect(
-    A.areaKindOf(withMode(true, "shotgunSlug", "shotgun")) === A.SHOT,
-    "включённый режим дроби не перебил жакан в магазине"
+    A.areaKindOf(withMode(true, "shotgunSlug", "shotgun")) === null,
+    "сохранённый режим дроби превратил явно заряженный жакан в зону"
+  );
+  expect(
+    A.areaKindOf(withMode(false, "shotgunShell", "shotgun")) === A.SHOT,
+    "явно заряженная дробь не дала зону при выключенном ручном режиме"
   );
   expect(
     A.areaKindOf(withMode(false, "shotgunSlug", "shotgun")) === null,
@@ -292,7 +296,7 @@ console.log("Кто попал в зону");
     name,
     center: { x, y },
     document: { uuid: `Scene.s1.Token.${name}` },
-    actor: { system: { stats: { ref: { value: ref } } } },
+    actor: { itemTypes: { skill: [{ name: "Evasion", system: { level: 0 } }] }, system: { stats: { ref: { value: ref } } } },
   });
 
   const g = A.areaGeometry(A.BLAST, GRID, { x: 1000, y: 700 });
@@ -323,7 +327,7 @@ console.log("Дробь не достаёт сквозь стену");
     name,
     center: { x, y },
     document: { uuid: `Scene.s1.Token.${name}` },
-    actor: { system: { stats: { ref: { value: 9 } } } },
+    actor: { itemTypes: { skill: [{ name: "Evasion", system: { level: 0 } }] }, system: { stats: { ref: { value: 9 } } } },
   });
   const shooter = { x: 1000, y: 700 };
   const g = A.areaGeometry(A.SHOT, GRID, shooter, 0);

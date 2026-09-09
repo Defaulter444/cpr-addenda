@@ -17,7 +17,9 @@
           "op": "set",
           "value": 3
         }
-      }
+      },
+      "weaponRule": "shotgunAutoControl",
+      "autofireDvTable": "Пистолет (стандартный) (Autofire)"
     }
   },
   "system": {

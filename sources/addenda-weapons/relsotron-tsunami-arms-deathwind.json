@@ -1,7 +1,11 @@
 {
   "_id": "cprAddWp00080000",
   "effects": [],
-  "flags": {},
+  "flags": {
+    "cpr-addenda": {
+      "weaponRule": "deathwind"
+    }
+  },
   "img": "systems/cyberpunk-red-core/icons/compendium/weapons/SniperRifle.svg",
   "name": "Рельсотрон Tsunami Arms «Deathwind»",
   "system": {
