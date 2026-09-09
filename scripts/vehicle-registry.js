@@ -13,10 +13,13 @@
 import { MODULE_ID, SETTINGS, VEHICLE_FLAGS, localize } from "./constants.js";
 import { activateAreaCard } from "./area-attacks.js";
 import { VehicleSheet } from "./vehicle-sheet.js";
+import { waitForLegacyVehicleEffects } from "./vehicle-compat.js";
 import {
   reconcilePermissions,
   reconcileEffects,
+  reconcileEffectsAfterPending,
   cleanupOrphanedEffects,
+  hasAddendaVehicleData,
 } from "./vehicle-effects.js";
 
 /** Листы персонажей системы, рядом с эффектами которых рисуется кнопка «выйти». */
@@ -227,6 +230,9 @@ export async function reconcileVehiclesOnReady() {
 
   const vehicleIds = new Set();
   for (const actor of game.actors) {
+    // Include migrated vehicles whose only remaining effects still use VAS
+    // flags; otherwise the old duplicates could survive a client restart.
+    if (hasAddendaVehicleData(actor)) vehicleIds.add(actor.id);
     for (const effect of actor.effects) {
       const owner = effect.getFlag(MODULE_ID, VEHICLE_FLAGS.managedBy);
       if (owner) vehicleIds.add(owner);
@@ -236,7 +242,10 @@ export async function reconcileVehiclesOnReady() {
 
   for (const vehicleId of vehicleIds) {
     const vehicle = game.actors.get(vehicleId);
-    if (vehicle) await reconcileEffects(vehicle);
+    if (vehicle) {
+      await waitForLegacyVehicleEffects(vehicle);
+      await reconcileEffectsAfterPending(vehicle);
+    }
     else await cleanupOrphanedEffects(vehicleId);
   }
 }

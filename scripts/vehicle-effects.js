@@ -18,6 +18,7 @@ import {
   MODULE_ID,
   SETTINGS,
   VEHICLE_FLAGS,
+  VAS_MODULE_ID,
   localize,
   normalize,
 } from "./constants.js";
@@ -236,6 +237,26 @@ export async function reconcilePermissions(actor) {
  */
 const reconcileLocks = new Set();
 
+/** Compatibility cleanup must not be dropped behind an active Addenda pass. */
+export async function reconcileEffectsAfterPending(actor) {
+  const deadline = Date.now() + 30000;
+  while (reconcileLocks.has(actor.id)) {
+    if (Date.now() >= deadline) throw new Error(`Addenda effect reconciliation did not settle for ${actor.id}`);
+    await new Promise(resolve => setTimeout(resolve, 10));
+  }
+  return reconcileEffects(actor);
+}
+
+/** An existing array, including an empty one, marks Addenda's crew ownership. */
+export function hasAddendaVehicleData(actor) {
+  return Array.isArray(actor?.flags?.[MODULE_ID]?.[VEHICLE_FLAGS.positions]);
+}
+
+function effectFromVehicle(effect, vehicleId, includeLegacy = false) {
+  return effect.getFlag(MODULE_ID, VEHICLE_FLAGS.managedBy) === vehicleId ||
+    (includeLegacy && effect.flags?.[VAS_MODULE_ID]?.managedBy === vehicleId);
+}
+
 /**
  * Приводит активные эффекты к текущей рассадке.
  *
@@ -257,6 +278,7 @@ export async function reconcileEffects(actor) {
 
   try {
     const positions = actor.getFlag(MODULE_ID, VEHICLE_FLAGS.positions) || [];
+    const includeLegacy = hasAddendaVehicleData(actor);
 
     // Кому какой эффект положен. Ключ — uuid пассажира.
     const desired = new Map();
@@ -291,7 +313,7 @@ export async function reconcileEffects(actor) {
         desired.has(candidate.uuid) ||
         candidate.effects.some(
           (effect) =>
-            effect.getFlag(MODULE_ID, VEHICLE_FLAGS.managedBy) === actor.id
+            effectFromVehicle(effect, actor.id, includeLegacy)
         )
     );
 
@@ -299,7 +321,7 @@ export async function reconcileEffects(actor) {
       const stale = occupant.effects
         .filter(
           (effect) =>
-            effect.getFlag(MODULE_ID, VEHICLE_FLAGS.managedBy) === actor.id
+            effectFromVehicle(effect, actor.id, includeLegacy)
         )
         .map((effect) => effect.id);
       if (stale.length > 0) {
@@ -326,7 +348,8 @@ export async function reconcileEffects(actor) {
     const ownEffects = actor.effects
       .filter(
         (effect) =>
-          effect.getFlag(MODULE_ID, VEHICLE_FLAGS.occupantMovePos) !== undefined
+          effect.getFlag(MODULE_ID, VEHICLE_FLAGS.occupantMovePos) !== undefined ||
+          (includeLegacy && effect.flags?.[VAS_MODULE_ID]?.occupantMovePos !== undefined)
       )
       .map((effect) => effect.id);
     if (ownEffects.length > 0) {
@@ -377,7 +400,7 @@ export async function cleanupOrphanedEffects(vehicleId) {
     const orphaned = actor.effects
       .filter(
         (effect) =>
-          effect.getFlag(MODULE_ID, VEHICLE_FLAGS.managedBy) === vehicleId
+          effectFromVehicle(effect, vehicleId, true)
       )
       .map((effect) => effect.id);
     if (orphaned.length === 0) continue;

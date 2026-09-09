@@ -19,6 +19,7 @@ import { registerItemPatches } from "./item-patches.js";
 import { resolveDvTable, getAttackRules, registerSystemDvPatch, toggleWeaponFireMode } from "./weapon-dv.js";
 import { areaKindOf } from "./area-attacks.js";
 import { registerRulerDistancePatch } from "./ruler-distance.js";
+import { registerVasCompatibility } from "./vehicle-compat.js";
 import { registerAimedShotPatch } from "./aimed-shot.js";
 import { registerFormulaPatch } from "./roll-formula.js";
 import { registerPktHooks, registerPktHumanityPatches } from "./pkt-kit.js";
@@ -205,6 +206,7 @@ Hooks.once("babele.init", (babele) => {
 });
 
 Hooks.once("ready", async () => {
+  const vasCompatibility = registerVasCompatibility();
   await loadSystemConfig();
   // Ставим до всего прочего: без этого предметы модуля со сложными
   // формулами броска роняют установку.
@@ -219,7 +221,7 @@ Hooks.once("ready", async () => {
   await registerAreaAttacks();
   registerShotMode();
   await migrateVehicleData();
-  warnAboutVasModule();
+  if (!vasCompatibility) warnAboutVasModule();
   await reconcileVehiclesOnReady();
 
   // Ссылки на страницы книги ищут её только среди журналов мира, поэтому

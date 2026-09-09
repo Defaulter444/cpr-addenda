@@ -919,11 +919,13 @@ console.log("Собранный пак актёров: предметы отде
   } else {
     const actors = new Map();
     const items = new Map();
-    const db = new ClassicLevel(packDir, { valueEncoding: "json" });
+    // Opening LevelDB rotates CURRENT/MANIFEST even for read-only iteration.
+    // Inspect a disposable copy so running a selftest never changes the pack.
+    const scratchPack = fs.mkdtempSync(path.join(os.tmpdir(), "cpr-vehicle-pack-"));
+    fs.cpSync(packDir, scratchPack, { recursive: true });
+    const db = new ClassicLevel(scratchPack, { valueEncoding: "json" });
     let opened = false;
     try {
-      // Пока Foundry запущен, база пака заблокирована им. Это не повод падать:
-      // проверка про содержимое пака, а не про то, играет ли сейчас мастер.
       await db.open();
       opened = true;
       for await (const [key, value] of db.iterator()) {
@@ -937,6 +939,9 @@ console.log("Собранный пак актёров: предметы отде
       console.log(`  пропущено: пак недоступен (${error.code ?? error.message}) — закройте Foundry`);
     } finally {
       if (opened) await db.close();
+      if (path.dirname(path.resolve(scratchPack)) !== path.resolve(os.tmpdir()) ||
+          !path.basename(scratchPack).startsWith("cpr-vehicle-pack-")) throw new Error("Unexpected temporary pack path");
+      fs.rmSync(scratchPack, { recursive: true, force: true });
     }
 
     if (!opened) {
