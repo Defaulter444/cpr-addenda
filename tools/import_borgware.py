@@ -41,7 +41,7 @@ SOURCE_REF = {"book": "DataPool", "page": 0}
 
 
 def cyberware(doc_id, name, kind, price, humanity_roll, humanity_static,
-              description, foundational=False, slots=0, effects=None):
+              description, foundational=False, slots=0, effects=None, borg_rule=None):
     """Киберимплант в том виде, в каком его ждёт система.
 
     @param {str} doc_id - идентификатор, 16 символов
@@ -63,7 +63,7 @@ def cyberware(doc_id, name, kind, price, humanity_roll, humanity_static,
         "folder": None,
         "sort": 0,
         "effects": effects or [],
-        "flags": {},
+        "flags": {MODULE_ID: {"borgRule": borg_rule}} if borg_rule else {},
         "system": {
             "ammoVariety": [],
             "attackmod": 0,
@@ -363,7 +363,8 @@ def main():
     written.append(write(
         "addenda-cyberware", "biosistema.json",
         cyberware("cprAddBw00000010", "БИОСИСТЕМА", "borgware", 10000,
-                  "4d6", 14, BIOSYSTEM, foundational=True),
+                  "4d6", 14, BIOSYSTEM, foundational=True,
+                  borg_rule={"kind": "biosystem", "maxHumanityLoss": 4}),
     ))
 
     # 2. Три брони: имплант плюс парный предмет брони.
@@ -375,6 +376,12 @@ def main():
                 f"cprAddBw000000{20 + index:02d}",
                 spec["name"], spec["kind"], spec["price"], "4d6", 14,
                 spec["description"] + PAIR_NOTE.format(name=armor_name),
+                borg_rule={
+                    "kind": "heavyArmor" if spec["sp"] == 13 else "dragoonArmor",
+                    "minimumBody": 10 if spec["sp"] == 13 else 16,
+                    "maxHumanityLoss": 4,
+                    "armor": {"sp": spec["sp"], "penalty": spec["penalty"]},
+                },
             ),
         ))
         written.append(write(
@@ -401,4 +408,5 @@ def main():
     print("\nДальше: node tools/build-packs.js")
 
 
-main()
+if __name__ == "__main__":
+    main()

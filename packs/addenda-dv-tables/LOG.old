@@ -1,14 +1,14 @@
-2026/09/09-23:30:39.926 61a4 Recovering log #409
-2026/09/09-23:30:39.930 61a4 Delete type=0 #409
-2026/09/09-23:30:39.930 61a4 Delete type=3 #408
-2026/09/09-23:30:39.937 cc4 Level-0 table #413: started
-2026/09/09-23:30:39.940 cc4 Level-0 table #413: 30444 bytes OK
-2026/09/09-23:30:39.942 cc4 Delete type=0 #411
-2026/09/09-23:30:39.942 cc4 Manual compaction at level-0 from '!' @ 72057594037927935 : 1 .. '\xef\xbf\xbf' @ 0 : 0; will stop at '!tables.results!cprAddDv04800000.cprAddDr04800400' @ 32394 : 0
-2026/09/09-23:30:39.942 cc4 Compacting 1@0 + 1@1 files
-2026/09/09-23:30:39.944 cc4 Generated table #414@0: 408 keys, 26782 bytes
-2026/09/09-23:30:39.944 cc4 Compacted 1@0 + 1@1 files => 26782 bytes
-2026/09/09-23:30:39.945 cc4 compacted to: files[ 0 1 0 0 0 0 0 ]
-2026/09/09-23:30:39.946 cc4 Delete type=2 #297
-2026/09/09-23:30:39.946 cc4 Delete type=2 #413
-2026/09/09-23:30:39.946 cc4 Manual compaction at level-0 from '!tables.results!cprAddDv04800000.cprAddDr04800400' @ 32394 : 0 .. '\xef\xbf\xbf' @ 0 : 0; will stop at (end)
+2026/09/10-01:00:10.676 6674 Recovering log #419
+2026/09/10-01:00:10.679 6674 Delete type=0 #419
+2026/09/10-01:00:10.679 6674 Delete type=3 #417
+2026/09/10-01:00:10.684 508c Level-0 table #425: started
+2026/09/10-01:00:10.687 508c Level-0 table #425: 30366 bytes OK
+2026/09/10-01:00:10.688 508c Delete type=0 #423
+2026/09/10-01:00:10.688 508c Manual compaction at level-0 from '!' @ 72057594037927935 : 1 .. '\xef\xbf\xbf' @ 0 : 0; will stop at '!tables.results!cprAddDv04800000.cprAddDr04800400' @ 34026 : 0
+2026/09/10-01:00:10.688 508c Compacting 1@0 + 1@1 files
+2026/09/10-01:00:10.690 508c Generated table #426@0: 408 keys, 26787 bytes
+2026/09/10-01:00:10.691 508c Compacted 1@0 + 1@1 files => 26787 bytes
+2026/09/10-01:00:10.692 508c compacted to: files[ 0 1 0 0 0 0 0 ]
+2026/09/10-01:00:10.692 508c Delete type=2 #421
+2026/09/10-01:00:10.692 508c Delete type=2 #425
+2026/09/10-01:00:10.692 508c Manual compaction at level-0 from '!tables.results!cprAddDv04800000.cprAddDr04800400' @ 34026 : 0 .. '\xef\xbf\xbf' @ 0 : 0; will stop at (end)

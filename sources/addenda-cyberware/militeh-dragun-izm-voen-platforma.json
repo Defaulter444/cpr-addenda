@@ -22,7 +22,8 @@
                   }
                 },
                 "cpr-addenda": {
-                  "pktGroup": "free"
+                  "pktGroup": "free",
+                  "pktMaxHumanityLoss": 0
                 }
               },
               "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/cyberarm.svg",
@@ -39,7 +40,7 @@
                 "core": false,
                 "damage": "1d6",
                 "description": {
-                  "value": "Кибернетическая рука. Бесплатная кисть в комплекте."
+                  "value": "<p>Кибернетическая рука. Бесплатная кисть в комплекте.</p>"
                 },
                 "dvTable": "",
                 "favorite": false,
@@ -109,11 +110,12 @@
                     }
                   },
                   "cpr-addenda": {
-                    "pktGroup": "cost"
+                    "pktGroup": "cost",
+                    "pktMaxHumanityLoss": 2
                   }
                 },
                 "img": "systems/cyberpunk-red-core/icons/compendium/black-chrome/reinforced-cyberarm.svg",
-                "name": "Усиление киберруки",
+                "name": "Reinforced Cyberarm Upgrade",
                 "system": {
                   "ammoVariety": [],
                   "attackmod": 0,
@@ -126,7 +128,7 @@
                   "core": false,
                   "damage": "1d6",
                   "description": {
-                    "value": "Требует киберруку. Киберруку, в которую установлено это улучшение, невозможно сломать."
+                    "value": "<p>Requires cyberarm. The cyberarm this is installed on cannot be broken. (See Black Chrome pgs. 21-22 for more details)</p>"
                   },
                   "dvTable": "",
                   "favorite": false,
@@ -183,6 +185,92 @@
                 "ownership": {
                   "default": 0
                 }
+              },
+              {
+                "_id": "cprAddImp0008200",
+                "effects": [],
+                "flags": {
+                  "cyberpunk-red-core": {
+                    "_migration": {
+                      "current": 33,
+                      "previous": "24"
+                    }
+                  },
+                  "cpr-addenda": {
+                    "pktGroup": "cost",
+                    "pktMaxHumanityLoss": 2
+                  }
+                },
+                "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/subdermal_grip.svg",
+                "name": "Подкожный захват",
+                "system": {
+                  "ammoVariety": [],
+                  "attackmod": 0,
+                  "brand": "",
+                  "canIgnoreArmor": true,
+                  "concealable": {
+                    "concealable": false,
+                    "isConcealed": false
+                  },
+                  "core": false,
+                  "damage": "1d6",
+                  "description": {
+                    "value": "<p>Система в кисти, позволяющая пользоваться умным оружием. Требует нейролинк.</p>"
+                  },
+                  "dvTable": "",
+                  "favorite": false,
+                  "fireModes": {
+                    "autoFire": 0,
+                    "suppressiveFire": false
+                  },
+                  "humanityLoss": {
+                    "roll": "0",
+                    "static": 0
+                  },
+                  "ignoreArmorPercent": 50,
+                  "installLocation": "clinic",
+                  "installedItems": {
+                    "allowed": false,
+                    "allowedTypes": [
+                      "itemUpgrade"
+                    ],
+                    "list": [],
+                    "slots": 3,
+                    "usedSlots": 0
+                  },
+                  "isElectronic": true,
+                  "isFoundational": false,
+                  "isRanged": false,
+                  "isWeapon": false,
+                  "magazine": {
+                    "ammoData": null,
+                    "max": 0,
+                    "value": 0
+                  },
+                  "price": {
+                    "market": 100
+                  },
+                  "providesHardening": false,
+                  "revealed": true,
+                  "rof": 1,
+                  "size": 1,
+                  "source": {
+                    "book": "Core",
+                    "page": 366
+                  },
+                  "type": "cyberArm",
+                  "unarmedAutomaticCalculation": true,
+                  "usage": "toggled",
+                  "usesType": "magazine",
+                  "weaponSkill": "Archery",
+                  "weaponType": "assaultRifle"
+                },
+                "type": "cyberware",
+                "folder": null,
+                "sort": 0,
+                "ownership": {
+                  "default": 0
+                }
               }
             ]
           },
@@ -198,7 +286,8 @@
                   }
                 },
                 "cpr-addenda": {
-                  "pktGroup": "free"
+                  "pktGroup": "free",
+                  "pktMaxHumanityLoss": 0
                 }
               },
               "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/cyberarm.svg",
@@ -215,7 +304,7 @@
                 "core": false,
                 "damage": "1d6",
                 "description": {
-                  "value": "Кибернетическая рука. Бесплатная кисть в комплекте."
+                  "value": "<p>Кибернетическая рука. Бесплатная кисть в комплекте.</p>"
                 },
                 "dvTable": "",
                 "favorite": false,
@@ -285,11 +374,12 @@
                     }
                   },
                   "cpr-addenda": {
-                    "pktGroup": "cost"
+                    "pktGroup": "cost",
+                    "pktMaxHumanityLoss": 2
                   }
                 },
                 "img": "systems/cyberpunk-red-core/icons/compendium/black-chrome/reinforced-cyberarm.svg",
-                "name": "Усиление киберруки",
+                "name": "Reinforced Cyberarm Upgrade",
                 "system": {
                   "ammoVariety": [],
                   "attackmod": 0,
@@ -302,7 +392,7 @@
                   "core": false,
                   "damage": "1d6",
                   "description": {
-                    "value": "Требует киберруку. Киберруку, в которую установлено это улучшение, невозможно сломать."
+                    "value": "<p>Requires cyberarm. The cyberarm this is installed on cannot be broken. (See Black Chrome pgs. 21-22 for more details)</p>"
                   },
                   "dvTable": "",
                   "favorite": false,
@@ -359,6 +449,92 @@
                 "ownership": {
                   "default": 0
                 }
+              },
+              {
+                "_id": "cprAddImp0008300",
+                "effects": [],
+                "flags": {
+                  "cyberpunk-red-core": {
+                    "_migration": {
+                      "current": 33,
+                      "previous": "24"
+                    }
+                  },
+                  "cpr-addenda": {
+                    "pktGroup": "cost",
+                    "pktMaxHumanityLoss": 2
+                  }
+                },
+                "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/subdermal_grip.svg",
+                "name": "Подкожный захват",
+                "system": {
+                  "ammoVariety": [],
+                  "attackmod": 0,
+                  "brand": "",
+                  "canIgnoreArmor": true,
+                  "concealable": {
+                    "concealable": false,
+                    "isConcealed": false
+                  },
+                  "core": false,
+                  "damage": "1d6",
+                  "description": {
+                    "value": "<p>Система в кисти, позволяющая пользоваться умным оружием. Требует нейролинк.</p>"
+                  },
+                  "dvTable": "",
+                  "favorite": false,
+                  "fireModes": {
+                    "autoFire": 0,
+                    "suppressiveFire": false
+                  },
+                  "humanityLoss": {
+                    "roll": "0",
+                    "static": 0
+                  },
+                  "ignoreArmorPercent": 50,
+                  "installLocation": "clinic",
+                  "installedItems": {
+                    "allowed": false,
+                    "allowedTypes": [
+                      "itemUpgrade"
+                    ],
+                    "list": [],
+                    "slots": 3,
+                    "usedSlots": 0
+                  },
+                  "isElectronic": true,
+                  "isFoundational": false,
+                  "isRanged": false,
+                  "isWeapon": false,
+                  "magazine": {
+                    "ammoData": null,
+                    "max": 0,
+                    "value": 0
+                  },
+                  "price": {
+                    "market": 100
+                  },
+                  "providesHardening": false,
+                  "revealed": true,
+                  "rof": 1,
+                  "size": 1,
+                  "source": {
+                    "book": "Core",
+                    "page": 366
+                  },
+                  "type": "cyberArm",
+                  "unarmedAutomaticCalculation": true,
+                  "usage": "toggled",
+                  "usesType": "magazine",
+                  "weaponSkill": "Archery",
+                  "weaponType": "assaultRifle"
+                },
+                "type": "cyberware",
+                "folder": null,
+                "sort": 0,
+                "ownership": {
+                  "default": 0
+                }
               }
             ]
           },
@@ -374,7 +550,8 @@
                   }
                 },
                 "cpr-addenda": {
-                  "pktGroup": "free"
+                  "pktGroup": "free",
+                  "pktMaxHumanityLoss": 0
                 }
               },
               "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/cyberaudio_suite.svg",
@@ -391,7 +568,7 @@
                 "core": false,
                 "damage": "1d6",
                 "description": {
-                  "value": "Интерфейс для улучшений аудио."
+                  "value": "<p>Интерфейс для улучшений аудио.</p>"
                 },
                 "dvTable": "",
                 "favorite": false,
@@ -508,7 +685,8 @@
                     }
                   },
                   "cpr-addenda": {
-                    "pktGroup": "cost"
+                    "pktGroup": "cost",
+                    "pktMaxHumanityLoss": 2
                   }
                 },
                 "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/internal_agent.svg",
@@ -525,7 +703,7 @@
                   "core": false,
                   "damage": "1d6",
                   "description": {
-                    "value": "Встроенный агент. По умолчанию только звук, но можно подключить к другим иплантам."
+                    "value": "<p>Встроенный агент. По умолчанию только звук, но можно подключить к другим иплантам.</p>"
                   },
                   "dvTable": "",
                   "favorite": false,
@@ -596,7 +774,8 @@
                   }
                 },
                 "cpr-addenda": {
-                  "pktGroup": "free"
+                  "pktGroup": "free",
+                  "pktMaxHumanityLoss": 0
                 }
               },
               "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/cybereye.svg",
@@ -613,7 +792,7 @@
                 "core": false,
                 "damage": "1d6",
                 "description": {
-                  "value": "Искусственный глаз. Выбирай оптику Кироси!"
+                  "value": "<p>Искусственный глаз. Выбирай оптику Кироси!</p>"
                 },
                 "dvTable": "",
                 "favorite": false,
@@ -634,7 +813,7 @@
                     "cyberware"
                   ],
                   "list": [],
-                  "slots": 4,
+                  "slots": 3,
                   "usedSlots": 0
                 },
                 "isElectronic": true,
@@ -683,7 +862,8 @@
                     }
                   },
                   "cpr-addenda": {
-                    "pktGroup": "cost"
+                    "pktGroup": "cost",
+                    "pktMaxHumanityLoss": 2
                   }
                 },
                 "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/anti_dazzle.svg",
@@ -700,7 +880,7 @@
                   "core": false,
                   "damage": "1d6",
                   "description": {
-                    "value": "Работают в паре. Иммунитет к ослепляющим эффектам (например от светошумовых гранат)."
+                    "value": "<p>Работают в паре. Иммунитет к ослепляющим эффектам (например от светошумовых гранат).</p>"
                   },
                   "dvTable": "",
                   "favorite": false,
@@ -768,7 +948,8 @@
                     }
                   },
                   "cpr-addenda": {
-                    "pktGroup": "cost"
+                    "pktGroup": "cost",
+                    "pktMaxHumanityLoss": 2
                   }
                 },
                 "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/chyron.svg",
@@ -785,7 +966,7 @@
                   "core": false,
                   "damage": "1d6",
                   "description": {
-                    "value": "Маленький экранчик в глазу. Показывает картинку в картинке, чтобы скрасить скуку."
+                    "value": "<p>Маленький экранчик в глазу. Показывает картинку в картинке, чтобы скрасить скуку.</p>"
                   },
                   "dvTable": "",
                   "favorite": false,
@@ -853,7 +1034,8 @@
                     }
                   },
                   "cpr-addenda": {
-                    "pktGroup": "cost"
+                    "pktGroup": "cost",
+                    "pktMaxHumanityLoss": 2
                   }
                 },
                 "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/lowlight_ir_uv.svg",
@@ -870,7 +1052,7 @@
                   "core": false,
                   "damage": "1d6",
                   "description": {
-                    "value": "Работают в паре. Иммунитет к штрафам на зрение из-за освещения, тумана или дыма."
+                    "value": "<p>Работают в паре. Иммунитет к штрафам на зрение из-за освещения, тумана или дыма.</p>"
                   },
                   "dvTable": "",
                   "favorite": false,
@@ -941,7 +1123,8 @@
                   }
                 },
                 "cpr-addenda": {
-                  "pktGroup": "free"
+                  "pktGroup": "free",
+                  "pktMaxHumanityLoss": 0
                 }
               },
               "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/cybereye.svg",
@@ -958,7 +1141,7 @@
                 "core": false,
                 "damage": "1d6",
                 "description": {
-                  "value": "Искусственный глаз. Выбирай оптику Кироси!"
+                  "value": "<p>Искусственный глаз. Выбирай оптику Кироси!</p>"
                 },
                 "dvTable": "",
                 "favorite": false,
@@ -1028,7 +1211,8 @@
                     }
                   },
                   "cpr-addenda": {
-                    "pktGroup": "cost"
+                    "pktGroup": "cost",
+                    "pktMaxHumanityLoss": 2
                   }
                 },
                 "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/anti_dazzle.svg",
@@ -1045,7 +1229,7 @@
                   "core": false,
                   "damage": "1d6",
                   "description": {
-                    "value": "Работают в паре. Иммунитет к ослепляющим эффектам (например от светошумовых гранат)."
+                    "value": "<p>Работают в паре. Иммунитет к ослепляющим эффектам (например от светошумовых гранат).</p>"
                   },
                   "dvTable": "",
                   "favorite": false,
@@ -1113,7 +1297,8 @@
                     }
                   },
                   "cpr-addenda": {
-                    "pktGroup": "cost"
+                    "pktGroup": "cost",
+                    "pktMaxHumanityLoss": 2
                   }
                 },
                 "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/lowlight_ir_uv.svg",
@@ -1130,7 +1315,7 @@
                   "core": false,
                   "damage": "1d6",
                   "description": {
-                    "value": "Работают в паре. Иммунитет к штрафам на зрение из-за освещения, тумана или дыма."
+                    "value": "<p>Работают в паре. Иммунитет к штрафам на зрение из-за освещения, тумана или дыма.</p>"
                   },
                   "dvTable": "",
                   "favorite": false,
@@ -1201,7 +1386,8 @@
                   }
                 },
                 "cpr-addenda": {
-                  "pktGroup": "free"
+                  "pktGroup": "free",
+                  "pktMaxHumanityLoss": 0
                 }
               },
               "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/cyberleg.svg",
@@ -1218,7 +1404,7 @@
                 "core": false,
                 "damage": "1d6",
                 "description": {
-                  "value": "Кибернетическая нога. Бесплатная ступня в комплекте."
+                  "value": "<p>Кибернетическая нога. Бесплатная ступня в комплекте.</p>"
                 },
                 "dvTable": "",
                 "favorite": false,
@@ -1288,11 +1474,12 @@
                     }
                   },
                   "cpr-addenda": {
-                    "pktGroup": "cost"
+                    "pktGroup": "cost",
+                    "pktMaxHumanityLoss": 2
                   }
                 },
                 "img": "systems/cyberpunk-red-core/icons/compendium/black-chrome/reinforced-cyberleg.svg",
-                "name": "Усиление киберноги",
+                "name": "Reinforced Cyberleg Upgrade",
                 "system": {
                   "ammoVariety": [],
                   "attackmod": 0,
@@ -1305,7 +1492,7 @@
                   "core": false,
                   "damage": "1d6",
                   "description": {
-                    "value": "Требует киберногу. Киберногу, в которую установлено это улучшение, невозможно сломать."
+                    "value": "<p>Requires cyberleg. The cyberleg this is installed on cannot be broken. (See Black Chrome pgs. 21-22 for more details)</p>"
                   },
                   "dvTable": "",
                   "favorite": false,
@@ -1377,7 +1564,8 @@
                   }
                 },
                 "cpr-addenda": {
-                  "pktGroup": "free"
+                  "pktGroup": "free",
+                  "pktMaxHumanityLoss": 0
                 }
               },
               "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/cyberleg.svg",
@@ -1394,7 +1582,7 @@
                 "core": false,
                 "damage": "1d6",
                 "description": {
-                  "value": "Кибернетическая нога. Бесплатная ступня в комплекте."
+                  "value": "<p>Кибернетическая нога. Бесплатная ступня в комплекте.</p>"
                 },
                 "dvTable": "",
                 "favorite": false,
@@ -1464,11 +1652,12 @@
                     }
                   },
                   "cpr-addenda": {
-                    "pktGroup": "cost"
+                    "pktGroup": "cost",
+                    "pktMaxHumanityLoss": 2
                   }
                 },
                 "img": "systems/cyberpunk-red-core/icons/compendium/black-chrome/reinforced-cyberleg.svg",
-                "name": "Усиление киберноги",
+                "name": "Reinforced Cyberleg Upgrade",
                 "system": {
                   "ammoVariety": [],
                   "attackmod": 0,
@@ -1481,7 +1670,7 @@
                   "core": false,
                   "damage": "1d6",
                   "description": {
-                    "value": "Требует киберногу. Киберногу, в которую установлено это улучшение, невозможно сломать."
+                    "value": "<p>Requires cyberleg. The cyberleg this is installed on cannot be broken. (See Black Chrome pgs. 21-22 for more details)</p>"
                   },
                   "dvTable": "",
                   "favorite": false,
@@ -1543,135 +1732,6 @@
           },
           {
             "item": {
-              "_id": "cprAddImp0006700",
-              "name": "Имплантированный Эндоскелет Омега",
-              "type": "cyberware",
-              "img": "modules/cpr-addenda/assets/icons/borgware.svg",
-              "folder": null,
-              "sort": 0,
-              "effects": [
-                {
-                  "_id": "cprAddFx8t58fgyp",
-                  "name": "Имплантированный Эндоскелет Омега",
-                  "img": "modules/cpr-addenda/assets/icons/borgware.svg",
-                  "type": "base",
-                  "changes": [
-                    {
-                      "key": "system.stats.body.value",
-                      "mode": 5,
-                      "value": "16",
-                      "priority": null
-                    }
-                  ],
-                  "disabled": false,
-                  "duration": {
-                    "combat": null,
-                    "rounds": null,
-                    "seconds": null,
-                    "startRound": null,
-                    "startTime": null,
-                    "startTurn": null,
-                    "turns": null
-                  },
-                  "description": "«Пользователь увеличивает свой ТЕЛ до 16.» Так же система задаёт ТЕЛ своим «Сигме» и «Бете».",
-                  "origin": null,
-                  "tint": "#ffffff",
-                  "transfer": true,
-                  "statuses": [],
-                  "sort": 0,
-                  "system": {},
-                  "flags": {
-                    "cyberpunk-red-core": {
-                      "changes": {
-                        "cats": {
-                          "0": "stat"
-                        },
-                        "situational": {
-                          "0": {
-                            "isSituational": false,
-                            "onByDefault": false
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              ],
-              "flags": {
-                "cpr-addenda": {
-                  "pktGroup": "free"
-                }
-              },
-              "system": {
-                "ammoVariety": [],
-                "attackmod": 0,
-                "brand": "",
-                "canIgnoreArmor": false,
-                "concealable": {
-                  "concealable": false,
-                  "isConcealed": false
-                },
-                "core": false,
-                "critFailEffect": "jammed",
-                "damage": "1d6",
-                "description": {
-                  "value": "<p>Совершенный эндоскелет, дополненный гидравлическими и миомарными мышцами. Пользователь увеличивает свой ТЕЛ до 16 и не может поднять его до 17 или выше; это увеличение влияет на ПЗ и спасбросок. Для установки требуется ТЕЛ 10 и три «Искусственные мышцы и усиленные кости». Одна установка считается за две отдельные установки боргирования при определении максимальной восстанавливаемой человечности (см. CP:R стр. 229). Входит в комплект корпуса ПКТ — там он идёт бесплатно и без потери человечности.</p>"
-                },
-                "dvTable": "",
-                "favorite": false,
-                "fireModes": {
-                  "autoFire": 0,
-                  "suppressiveFire": false
-                },
-                "humanityLoss": {
-                  "roll": "0",
-                  "static": 0
-                },
-                "ignoreArmorPercent": 0,
-                "ignoreBelowSP": 0,
-                "installLocation": "hospital",
-                "installedItems": {
-                  "allowed": true,
-                  "allowedTypes": [
-                    "itemUpgrade",
-                    "cyberware"
-                  ],
-                  "list": [],
-                  "slots": 3,
-                  "usedSlots": 0
-                },
-                "isElectronic": true,
-                "isFoundational": true,
-                "isRanged": false,
-                "isWeapon": false,
-                "magazine": {
-                  "ammoData": null,
-                  "max": 0,
-                  "value": 0
-                },
-                "price": {
-                  "market": 10000
-                },
-                "providesHardening": false,
-                "revealed": true,
-                "rof": 1,
-                "size": 1,
-                "source": {
-                  "book": "DataPool",
-                  "page": 0
-                },
-                "type": "borgware",
-                "unarmedAutomaticCalculation": true,
-                "usage": "installed",
-                "usesType": "magazine",
-                "weaponSkill": "",
-                "weaponType": ""
-              }
-            },
-            "options": []
-          },
-          {
-            "item": {
               "_id": "cprAddImp0006800",
               "effects": [],
               "flags": {
@@ -1682,7 +1742,8 @@
                   }
                 },
                 "cpr-addenda": {
-                  "pktGroup": "free"
+                  "pktGroup": "free",
+                  "pktMaxHumanityLoss": 0
                 }
               },
               "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/neural_link.svg",
@@ -1699,7 +1760,7 @@
                 "core": false,
                 "damage": "1d6",
                 "description": {
-                  "value": "Доступ к нервной системе."
+                  "value": "<p>Доступ к нервной системе.</p>"
                 },
                 "dvTable": "",
                 "favorite": false,
@@ -1757,178 +1818,7 @@
                 "default": 0
               }
             },
-            "options": [
-              {
-                "_id": "cprAddImp0008200",
-                "effects": [],
-                "flags": {
-                  "cyberpunk-red-core": {
-                    "_migration": {
-                      "current": 33,
-                      "previous": "24"
-                    }
-                  },
-                  "cpr-addenda": {
-                    "pktGroup": "cost"
-                  }
-                },
-                "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/interface_plugs.svg",
-                "name": "Интерфейсные разъёмы",
-                "system": {
-                  "ammoVariety": [],
-                  "attackmod": 0,
-                  "brand": "",
-                  "canIgnoreArmor": true,
-                  "concealable": {
-                    "concealable": false,
-                    "isConcealed": false
-                  },
-                  "core": false,
-                  "damage": "1d6",
-                  "description": {
-                    "value": "Разъёмы в кисти или в голове для подключения к машинам/системам."
-                  },
-                  "dvTable": "",
-                  "favorite": false,
-                  "fireModes": {
-                    "autoFire": 0,
-                    "suppressiveFire": false
-                  },
-                  "humanityLoss": {
-                    "roll": "0",
-                    "static": 0
-                  },
-                  "ignoreArmorPercent": 50,
-                  "installLocation": "clinic",
-                  "installedItems": {
-                    "allowed": false,
-                    "allowedTypes": [
-                      "itemUpgrade"
-                    ],
-                    "list": [],
-                    "slots": 3,
-                    "usedSlots": 0
-                  },
-                  "isElectronic": true,
-                  "isFoundational": false,
-                  "isRanged": false,
-                  "isWeapon": false,
-                  "magazine": {
-                    "ammoData": null,
-                    "max": 0,
-                    "value": 0
-                  },
-                  "price": {
-                    "market": 500
-                  },
-                  "providesHardening": false,
-                  "revealed": true,
-                  "rof": 1,
-                  "size": 1,
-                  "source": {
-                    "book": "Core",
-                    "page": 359
-                  },
-                  "type": "neuralWare",
-                  "unarmedAutomaticCalculation": true,
-                  "usage": "toggled",
-                  "usesType": "magazine",
-                  "weaponSkill": "Archery",
-                  "weaponType": "assaultRifle"
-                },
-                "type": "cyberware",
-                "folder": null,
-                "sort": 0,
-                "ownership": {
-                  "default": 0
-                }
-              },
-              {
-                "_id": "cprAddImp0008300",
-                "effects": [],
-                "flags": {
-                  "cyberpunk-red-core": {
-                    "_migration": {
-                      "current": 33,
-                      "previous": "24"
-                    }
-                  },
-                  "cpr-addenda": {
-                    "pktGroup": "cost"
-                  }
-                },
-                "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/interface_plugs.svg",
-                "name": "Интерфейсные разъёмы",
-                "system": {
-                  "ammoVariety": [],
-                  "attackmod": 0,
-                  "brand": "",
-                  "canIgnoreArmor": true,
-                  "concealable": {
-                    "concealable": false,
-                    "isConcealed": false
-                  },
-                  "core": false,
-                  "damage": "1d6",
-                  "description": {
-                    "value": "Разъёмы в кисти или в голове для подключения к машинам/системам."
-                  },
-                  "dvTable": "",
-                  "favorite": false,
-                  "fireModes": {
-                    "autoFire": 0,
-                    "suppressiveFire": false
-                  },
-                  "humanityLoss": {
-                    "roll": "0",
-                    "static": 0
-                  },
-                  "ignoreArmorPercent": 50,
-                  "installLocation": "clinic",
-                  "installedItems": {
-                    "allowed": false,
-                    "allowedTypes": [
-                      "itemUpgrade"
-                    ],
-                    "list": [],
-                    "slots": 3,
-                    "usedSlots": 0
-                  },
-                  "isElectronic": true,
-                  "isFoundational": false,
-                  "isRanged": false,
-                  "isWeapon": false,
-                  "magazine": {
-                    "ammoData": null,
-                    "max": 0,
-                    "value": 0
-                  },
-                  "price": {
-                    "market": 500
-                  },
-                  "providesHardening": false,
-                  "revealed": true,
-                  "rof": 1,
-                  "size": 1,
-                  "source": {
-                    "book": "Core",
-                    "page": 359
-                  },
-                  "type": "neuralWare",
-                  "unarmedAutomaticCalculation": true,
-                  "usage": "toggled",
-                  "usesType": "magazine",
-                  "weaponSkill": "Archery",
-                  "weaponType": "assaultRifle"
-                },
-                "type": "cyberware",
-                "folder": null,
-                "sort": 0,
-                "ownership": {
-                  "default": 0
-                }
-              }
-            ]
+            "options": []
           }
         ],
         "carried": [
@@ -1942,7 +1832,13 @@
             "effects": [],
             "flags": {
               "cpr-addenda": {
-                "pktGroup": "free"
+                "borgRule": {
+                  "kind": "cyberskull",
+                  "fbcOnly": true,
+                  "maxHumanityLoss": 0
+                },
+                "pktGroup": "free",
+                "pktMaxHumanityLoss": 0
               }
             },
             "system": {
@@ -2012,16 +1908,71 @@
             }
           },
           {
-            "_id": "cprAddImp0007200",
-            "name": "Защитное Покрытие Драгун",
+            "_id": "cprAddImp0006700",
+            "name": "Имплантированный Эндоскелет Омега",
             "type": "cyberware",
             "img": "modules/cpr-addenda/assets/icons/borgware.svg",
             "folder": null,
             "sort": 0,
-            "effects": [],
+            "effects": [
+              {
+                "_id": "cprAddFx8t58fgyp",
+                "name": "Имплантированный Эндоскелет Омега",
+                "img": "modules/cpr-addenda/assets/icons/borgware.svg",
+                "type": "base",
+                "changes": [
+                  {
+                    "key": "system.stats.body.value",
+                    "mode": 5,
+                    "value": "16",
+                    "priority": null
+                  }
+                ],
+                "disabled": false,
+                "duration": {
+                  "combat": null,
+                  "rounds": null,
+                  "seconds": null,
+                  "startRound": null,
+                  "startTime": null,
+                  "startTurn": null,
+                  "turns": null
+                },
+                "description": "«Пользователь увеличивает свой ТЕЛ до 16.» Так же система задаёт ТЕЛ своим «Сигме» и «Бете».",
+                "origin": null,
+                "tint": "#ffffff",
+                "transfer": true,
+                "statuses": [],
+                "sort": 0,
+                "system": {},
+                "flags": {
+                  "cyberpunk-red-core": {
+                    "changes": {
+                      "cats": {
+                        "0": "stat"
+                      },
+                      "situational": {
+                        "0": {
+                          "isSituational": false,
+                          "onByDefault": false
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ],
             "flags": {
               "cpr-addenda": {
-                "pktGroup": "cost"
+                "borgRule": {
+                  "kind": "internalFrame",
+                  "body": 16,
+                  "minimumBody": 10,
+                  "muscleCount": 3,
+                  "maxHumanityLoss": 8
+                },
+                "pktGroup": "free",
+                "pktMaxHumanityLoss": 0
               }
             },
             "system": {
@@ -2037,7 +1988,7 @@
               "critFailEffect": "jammed",
               "damage": "1d6",
               "description": {
-                "value": "<p>Броневое покрытие военной платформы «Драгун». Входит в комплект корпуса ПКТ.</p>"
+                "value": "<p>Совершенный эндоскелет, дополненный гидравлическими и миомарными мышцами. Пользователь увеличивает свой ТЕЛ до 16 и не может поднять его до 17 или выше; это увеличение влияет на ПЗ и спасбросок. Для установки требуется ТЕЛ 10 и три «Искусственные мышцы и усиленные кости». Одна установка считается за две отдельные установки боргирования при определении максимальной восстанавливаемой человечности (см. CP:R стр. 229). Входит в комплект корпуса ПКТ — там он идёт бесплатно и без потери человечности.</p>"
               },
               "dvTable": "",
               "favorite": false,
@@ -2072,7 +2023,7 @@
                 "value": 0
               },
               "price": {
-                "market": 0
+                "market": 10000
               },
               "providesHardening": false,
               "revealed": true,
@@ -2091,34 +2042,42 @@
             }
           },
           {
-            "_id": "cprAddImp0007300",
+            "_id": "cprAddImp0007200",
+            "name": "Броня Драгуна",
+            "type": "cyberware",
+            "img": "modules/cpr-addenda/assets/icons/borgware.svg",
+            "folder": null,
+            "sort": 0,
             "effects": [],
             "flags": {
-              "cyberpunk-red-core": {
-                "_migration": {
-                  "current": 33,
-                  "previous": "24"
-                }
-              },
               "cpr-addenda": {
-                "pktGroup": "cost"
+                "borgRule": {
+                  "kind": "dragoonArmor",
+                  "minimumBody": 16,
+                  "maxHumanityLoss": 4,
+                  "armor": {
+                    "sp": 15,
+                    "penalty": 2
+                  }
+                },
+                "pktGroup": "cost",
+                "pktMaxHumanityLoss": 4
               }
             },
-            "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/hardend_shielding.svg",
-            "name": "Усиленное экранирование (боргимплант)",
             "system": {
               "ammoVariety": [],
               "attackmod": 0,
               "brand": "",
-              "canIgnoreArmor": true,
+              "canIgnoreArmor": false,
               "concealable": {
                 "concealable": false,
                 "isConcealed": false
               },
               "core": false,
+              "critFailEffect": "jammed",
               "damage": "1d6",
               "description": {
-                "value": "Боргимплант. Имплант с этим расширением игнорируют ЭМИ."
+                "value": "<p>Бронепластины с магнитным креплением. Устанавливаются на магнитные точки, вставленные непосредственно в тело. Панели можно быстро менять, чтобы поддерживать бой до тех пор, пока враг не будет нейтрализован.</p><p>Является Боргированием. Внешний киберимплант. Для установки требуется ТЕЛ 16 или выше, если только на пользователе нет корпуса ПКТ. Дает 15 ОС для тела и головы, пользователь получает штраф от брони −2 к РЕА, ЛВК и СКО.</p><p>В качестве действия пользователь может сбросить Броню Драгуна, лишившись ОС и штрафов от брони. Если на пользователе нет комплекта бронепластин, он может активировать магнитную систему в качестве действия и вызвать комплект неприкрепленных пластин в радиусе 6 м от себя. Выбранная бронепластина летит по воздуху и прикрепляется к пользователю.</p><p>Броня Драгуна содержит наноботов, которые восстанавливают ее на 1 очко потерянных ОС в конце каждого дня, если она не теряла ОС в этот день. Дополнительные комплекты пластин можно приобрести за 1 000eb (очень дорогое). Заказ индивидуального дизайна и цвета добавляет 100eb к стоимости.</p><p><em>Киберброня в системе сама по себе бронёй не работает. Чтобы ОС считался, добавьте на лист парный предмет «Броня Драгуна (броня)» — он приходит вместе с имплантом и уже надет.</em></p>"
               },
               "dvTable": "",
               "favorite": false,
@@ -2130,13 +2089,99 @@
                 "roll": "0",
                 "static": 0
               },
-              "ignoreArmorPercent": 50,
+              "ignoreArmorPercent": 0,
+              "ignoreBelowSP": 0,
               "installLocation": "hospital",
               "installedItems": {
                 "allowed": false,
                 "allowedTypes": [
                   "itemUpgrade",
-                  "ammo"
+                  "cyberware"
+                ],
+                "list": [],
+                "slots": 0,
+                "usedSlots": 0
+              },
+              "isElectronic": true,
+              "isFoundational": false,
+              "isRanged": false,
+              "isWeapon": false,
+              "magazine": {
+                "ammoData": null,
+                "max": 0,
+                "value": 0
+              },
+              "price": {
+                "market": 5000
+              },
+              "providesHardening": false,
+              "revealed": true,
+              "rof": 1,
+              "size": 1,
+              "source": {
+                "book": "DataPool",
+                "page": 0
+              },
+              "type": "cyberwareExternal",
+              "unarmedAutomaticCalculation": true,
+              "usage": "installed",
+              "usesType": "magazine",
+              "weaponSkill": "",
+              "weaponType": ""
+            }
+          },
+          {
+            "_id": "cprAddImp0007300",
+            "name": "ПКТ ЭМИ Защита",
+            "type": "cyberware",
+            "img": "modules/cpr-addenda/assets/icons/borgware.svg",
+            "folder": null,
+            "sort": 0,
+            "effects": [],
+            "flags": {
+              "cpr-addenda": {
+                "borgRule": {
+                  "kind": "empCoating",
+                  "fbcOnly": true,
+                  "maxHumanityLoss": 2
+                },
+                "pktGroup": "cost",
+                "pktMaxHumanityLoss": 2
+              }
+            },
+            "system": {
+              "ammoVariety": [],
+              "attackmod": 0,
+              "brand": "",
+              "canIgnoreArmor": false,
+              "concealable": {
+                "concealable": false,
+                "isConcealed": false
+              },
+              "core": false,
+              "critFailEffect": "jammed",
+              "damage": "1d6",
+              "description": {
+                "value": "<p>Расходуемая защита ПКТ от ЭМИ: одно воздействие тратит одно покрытие вместо отключения имплантов.</p>"
+              },
+              "dvTable": "",
+              "favorite": false,
+              "fireModes": {
+                "autoFire": 0,
+                "suppressiveFire": false
+              },
+              "humanityLoss": {
+                "roll": "0",
+                "static": 0
+              },
+              "ignoreArmorPercent": 0,
+              "ignoreBelowSP": 0,
+              "installLocation": "hospital",
+              "installedItems": {
+                "allowed": false,
+                "allowedTypes": [
+                  "itemUpgrade",
+                  "cyberware"
                 ],
                 "list": [],
                 "slots": 0,
@@ -2154,57 +2199,55 @@
               "price": {
                 "market": 1000
               },
-              "providesHardening": true,
+              "providesHardening": false,
               "revealed": true,
               "rof": 1,
               "size": 1,
               "source": {
-                "book": "BC",
-                "page": 17
+                "book": "DataPool",
+                "page": 0
               },
-              "type": "borgware",
+              "type": "cyberwareExternal",
               "unarmedAutomaticCalculation": true,
-              "usage": "toggled",
+              "usage": "installed",
               "usesType": "magazine",
-              "weaponSkill": "Archery",
-              "weaponType": "assaultRifle"
-            },
-            "type": "cyberware",
-            "folder": null,
-            "sort": 0,
-            "ownership": {
-              "default": 0
+              "weaponSkill": "",
+              "weaponType": ""
             }
           },
           {
             "_id": "cprAddImp0007400",
+            "name": "ПКТ ЭМИ Защита",
+            "type": "cyberware",
+            "img": "modules/cpr-addenda/assets/icons/borgware.svg",
+            "folder": null,
+            "sort": 0,
             "effects": [],
             "flags": {
-              "cyberpunk-red-core": {
-                "_migration": {
-                  "current": 33,
-                  "previous": "24"
-                }
-              },
               "cpr-addenda": {
-                "pktGroup": "cost"
+                "borgRule": {
+                  "kind": "empCoating",
+                  "fbcOnly": true,
+                  "maxHumanityLoss": 2
+                },
+                "pktGroup": "cost",
+                "pktMaxHumanityLoss": 2
               }
             },
-            "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/hardend_shielding.svg",
-            "name": "Усиленное экранирование (боргимплант)",
             "system": {
               "ammoVariety": [],
               "attackmod": 0,
               "brand": "",
-              "canIgnoreArmor": true,
+              "canIgnoreArmor": false,
               "concealable": {
                 "concealable": false,
                 "isConcealed": false
               },
               "core": false,
+              "critFailEffect": "jammed",
               "damage": "1d6",
               "description": {
-                "value": "Боргимплант. Имплант с этим расширением игнорируют ЭМИ."
+                "value": "<p>Расходуемая защита ПКТ от ЭМИ: одно воздействие тратит одно покрытие вместо отключения имплантов.</p>"
               },
               "dvTable": "",
               "favorite": false,
@@ -2216,13 +2259,14 @@
                 "roll": "0",
                 "static": 0
               },
-              "ignoreArmorPercent": 50,
+              "ignoreArmorPercent": 0,
+              "ignoreBelowSP": 0,
               "installLocation": "hospital",
               "installedItems": {
                 "allowed": false,
                 "allowedTypes": [
                   "itemUpgrade",
-                  "ammo"
+                  "cyberware"
                 ],
                 "list": [],
                 "slots": 0,
@@ -2240,26 +2284,20 @@
               "price": {
                 "market": 1000
               },
-              "providesHardening": true,
+              "providesHardening": false,
               "revealed": true,
               "rof": 1,
               "size": 1,
               "source": {
-                "book": "BC",
-                "page": 17
+                "book": "DataPool",
+                "page": 0
               },
-              "type": "borgware",
+              "type": "cyberwareExternal",
               "unarmedAutomaticCalculation": true,
-              "usage": "toggled",
+              "usage": "installed",
               "usesType": "magazine",
-              "weaponSkill": "Archery",
-              "weaponType": "assaultRifle"
-            },
-            "type": "cyberware",
-            "folder": null,
-            "sort": 0,
-            "ownership": {
-              "default": 0
+              "weaponSkill": "",
+              "weaponType": ""
             }
           },
           {
@@ -2341,7 +2379,15 @@
             ],
             "flags": {
               "cpr-addenda": {
-                "pktGroup": "cost"
+                "borgRule": {
+                  "kind": "hydraulics",
+                  "fbcOnly": true,
+                  "requiresInternalFrame": true,
+                  "maxHumanityLoss": 2,
+                  "statFloor": 6
+                },
+                "pktGroup": "cost",
+                "pktMaxHumanityLoss": 2
               }
             },
             "system": {
@@ -2357,7 +2403,7 @@
               "critFailEffect": "jammed",
               "damage": "1d6",
               "description": {
-                "value": "<p>Улучшенная гидравлика корпуса: РЕА, ЛВК и СКО пользователя устанавливаются на 6, если только они не являются более высокими. Входит в комплект корпуса ПКТ.</p>"
+                "value": "<p>Для ПКТ с эндоскелетом. Поднимает РЕА, ЛВК и СКО минимум до 6; штрафы применяются после повышения.</p>"
               },
               "dvTable": "",
               "favorite": false,
@@ -2392,7 +2438,7 @@
                 "value": 0
               },
               "price": {
-                "market": 0
+                "market": 5000
               },
               "providesHardening": false,
               "revealed": true,
@@ -2402,7 +2448,7 @@
                 "book": "DataPool",
                 "page": 0
               },
-              "type": "borgware",
+              "type": "cyberwareInternal",
               "unarmedAutomaticCalculation": true,
               "usage": "installed",
               "usesType": "magazine",
@@ -2449,7 +2495,7 @@
         "cyberware"
       ],
       "list": [],
-      "slots": 5,
+      "slots": 6,
       "usedSlots": 0
     },
     "isElectronic": true,

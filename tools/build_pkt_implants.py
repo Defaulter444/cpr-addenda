@@ -24,6 +24,7 @@
 """
 
 import json
+import hashlib
 import os
 import re
 import shutil
@@ -42,7 +43,7 @@ import stat_effects  # noqa: E402  — лежит рядом, до правки 
 STAT_EFFECTS = stat_effects.load()
 
 MODULE_ROOT = Path(__file__).resolve().parent.parent
-DATA_ROOT = MODULE_ROOT.parent.parent
+DATA_ROOT = Path(os.environ.get("CPR_DATA_ROOT", MODULE_ROOT.parent.parent))
 SYSTEM_ROOT = DATA_ROOT / "systems" / "cyberpunk-red-core"
 
 PKT = MODULE_ROOT / "docs" / "pkt.json"
@@ -280,7 +281,7 @@ def own_implant(name, spec, doc_id):
         "folder": None,
         "sort": 0,
         "effects": [],
-        "flags": {},
+        "flags": {MODULE_ID: {"borgRule": spec["borgRule"]}} if spec.get("borgRule") else {},
         "system": {
             "ammoVariety": [],
             "attackmod": 0,
@@ -301,7 +302,7 @@ def own_implant(name, spec, doc_id):
             "humanityLoss": spec.get("humanity", {"roll": "1d6", "static": 0}),
             "ignoreArmorPercent": 0,
             "ignoreBelowSP": 0,
-            "installLocation": "hospital",
+            "installLocation": spec.get("installLocation", "hospital"),
             "installedItems": {
                 "allowed": bool(spec.get("slots")),
                 "allowedTypes": ["itemUpgrade", "cyberware"],
@@ -318,7 +319,7 @@ def own_implant(name, spec, doc_id):
             "providesHardening": False,
             "revealed": True,
             "rof": 1,
-            "size": 1,
+            "size": spec.get("size", 1),
             "source": {"book": "DataPool", "page": 0},
             "type": spec["type"],
             "unarmedAutomaticCalculation": True,
@@ -372,7 +373,12 @@ def tag_group(item, group):
     @param {str} group - "free" или "cost"
     @returns {dict} - он же
     """
-    item.setdefault("flags", {}).setdefault(MODULE_ID, {})["pktGroup"] = group
+    flags = item.setdefault("flags", {}).setdefault(MODULE_ID, {})
+    flags["pktGroup"] = group
+    flags["pktMaxHumanityLoss"] = (0 if group == "free" else
+        flags.get("borgRule", {}).get("maxHumanityLoss",
+            4 if item["system"]["type"] == "borgware" else
+            2 if item["system"]["humanityLoss"]["static"] > 0 else 0))
     return item
 
 
@@ -394,7 +400,8 @@ def strip_humanity(item):
 
 def free_slots(host):
     used = sum(c["system"].get("size", 1) for c in host.get("_options", []))
-    return host["system"]["installedItems"]["slots"] - used
+    # ПКТ удваивает ёмкость фундамента; исходный документ хранит базу.
+    return 2 * host["system"]["installedItems"]["slots"] - used
 
 
 #: Опции, которые документ называет «киберконечностью», не различая руку и ногу.
@@ -486,11 +493,7 @@ def build_kit(tree, frame_type):
                 key=lambda h: (len(h.get("_options", [])), hosts.index(h)),
             )
         if host is None:
-            # Комплект задан документом: раз производитель уместил столько
-            # опций, значит фундамент у него расширенный.
-            host = max(hosts, key=free_slots)
-            host["system"]["installedItems"]["slots"] += size - free_slots(host)
-            widened.append(host["name"])
+            raise ValueError(f"Комплект превышает удвоенную ёмкость: {item['name']}")
 
         host.setdefault("_options", []).append(item)
 
@@ -523,8 +526,17 @@ def main():
     # Собственные импланты кладём и отдельными предметами: их должно быть
     # видно в компендиуме, а не только внутри корпусов.
     own_items = {}
-    for index, (name, spec) in enumerate(sorted(own_specs.items()), start=1):
-        own_items[name] = own_implant(name, spec, (f"cprAddOwn{index:04d}" + "0" * 16)[:16])
+    existing = {d["name"]: d["_id"] for p in FRAMES_DIR.glob("*.json")
+                if (d := json.loads(p.read_text(encoding="utf-8"))).get("_id")}
+    for name, spec in own_specs.items():
+        doc_id = existing.get(name, "cprOwn" + hashlib.sha256(name.encode()).hexdigest()[:10])
+        own_items[name] = own_implant(name, spec, doc_id)
+
+    # Отдельные предметы Addenda также могут входить в корпус ПКТ.
+    for source in FRAMES_DIR.glob("*.json"):
+        doc = json.loads(source.read_text(encoding="utf-8"))
+        if doc["name"] not in system and not doc.get("flags", {}).get(MODULE_ID, {}).get("pktKit"):
+            system[doc["name"]] = doc
 
     slug_re = {
         "а": "a", "б": "b", "в": "v", "г": "g", "д": "d", "е": "e", "ё": "e",
@@ -648,4 +660,5 @@ def main():
             print(f"  {name}")
 
 
-main()
+if __name__ == "__main__":
+    main()

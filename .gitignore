@@ -17,3 +17,7 @@ module.zip
 # Импортёр силовой брони требует её как заготовку, поэтому перед сборкой
 # исходников выполняется `node tools/extract-pa-items.js`.
 docs/power-armor-items.json
+
+# Python build caches
+__pycache__/
+*.pyc

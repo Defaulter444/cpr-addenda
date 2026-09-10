@@ -6,7 +6,15 @@
   "folder": null,
   "sort": 0,
   "effects": [],
-  "flags": {},
+  "flags": {
+    "cpr-addenda": {
+      "borgRule": {
+        "kind": "zeroGravity",
+        "pair": true,
+        "maxHumanityLoss": 2
+      }
+    }
+  },
   "system": {
     "ammoVariety": [],
     "attackmod": 0,
@@ -20,7 +28,7 @@
     "critFailEffect": "jammed",
     "damage": "1d6",
     "description": {
-      "value": "<p>Система удержания и ориентации в невесомости. Входит в комплект корпуса ПКТ.</p>"
+      "value": "<p>Парные двигатели киберног устраняют штраф СКО в невесомости. Каждый занимает 2 слота. Топливо: 100eb на 24 часа.</p>"
     },
     "dvTable": "",
     "favorite": false,
@@ -30,11 +38,11 @@
     },
     "humanityLoss": {
       "roll": "1d6",
-      "static": 0
+      "static": 3
     },
     "ignoreArmorPercent": 0,
     "ignoreBelowSP": 0,
-    "installLocation": "hospital",
+    "installLocation": "clinic",
     "installedItems": {
       "allowed": false,
       "allowedTypes": [
@@ -55,17 +63,17 @@
       "value": 0
     },
     "price": {
-      "market": 0
+      "market": 1000
     },
     "providesHardening": false,
     "revealed": true,
     "rof": 1,
-    "size": 1,
+    "size": 2,
     "source": {
       "book": "DataPool",
       "page": 0
     },
-    "type": "cyberwareInternal",
+    "type": "cyberLeg",
     "unarmedAutomaticCalculation": true,
     "usage": "installed",
     "usesType": "magazine",

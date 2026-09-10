@@ -57,7 +57,7 @@ function withStats(doc) {
     ownership: { default: 0 },
     ...doc,
     _stats: {
-      coreVersion: "12.343",
+      coreVersion: "12.331",
       systemId: "cyberpunk-red-core",
       systemVersion: "v0.92.4",
       createdTime: now,

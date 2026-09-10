@@ -22,7 +22,8 @@
                   }
                 },
                 "cpr-addenda": {
-                  "pktGroup": "free"
+                  "pktGroup": "free",
+                  "pktMaxHumanityLoss": 0
                 }
               },
               "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/cyberarm.svg",
@@ -39,7 +40,7 @@
                 "core": false,
                 "damage": "1d6",
                 "description": {
-                  "value": "Кибернетическая рука. Бесплатная кисть в комплекте."
+                  "value": "<p>Кибернетическая рука. Бесплатная кисть в комплекте.</p>"
                 },
                 "dvTable": "",
                 "favorite": false,
@@ -109,7 +110,8 @@
                     }
                   },
                   "cpr-addenda": {
-                    "pktGroup": "cost"
+                    "pktGroup": "cost",
+                    "pktMaxHumanityLoss": 2
                   }
                 },
                 "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/popup_melee_weapon.svg",
@@ -127,7 +129,7 @@
                   "critFailEffect": "jammed",
                   "damage": "1d6",
                   "description": {
-                    "value": "Скрытое холодное оружие. Во время использования кисть не может ничего держать."
+                    "value": "<p>Скрытое холодное оружие. Во время использования кисть не может ничего держать.</p>"
                   },
                   "dvTable": "",
                   "favorite": false,
@@ -199,7 +201,8 @@
                   }
                 },
                 "cpr-addenda": {
-                  "pktGroup": "free"
+                  "pktGroup": "free",
+                  "pktMaxHumanityLoss": 0
                 }
               },
               "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/cyberarm.svg",
@@ -216,7 +219,7 @@
                 "core": false,
                 "damage": "1d6",
                 "description": {
-                  "value": "Кибернетическая рука. Бесплатная кисть в комплекте."
+                  "value": "<p>Кибернетическая рука. Бесплатная кисть в комплекте.</p>"
                 },
                 "dvTable": "",
                 "favorite": false,
@@ -288,7 +291,8 @@
                   }
                 },
                 "cpr-addenda": {
-                  "pktGroup": "free"
+                  "pktGroup": "free",
+                  "pktMaxHumanityLoss": 0
                 }
               },
               "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/cyberaudio_suite.svg",
@@ -305,7 +309,7 @@
                 "core": false,
                 "damage": "1d6",
                 "description": {
-                  "value": "Интерфейс для улучшений аудио."
+                  "value": "<p>Интерфейс для улучшений аудио.</p>"
                 },
                 "dvTable": "",
                 "favorite": false,
@@ -422,7 +426,8 @@
                     }
                   },
                   "cpr-addenda": {
-                    "pktGroup": "cost"
+                    "pktGroup": "cost",
+                    "pktMaxHumanityLoss": 2
                   }
                 },
                 "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/amplified_hearing.svg",
@@ -439,7 +444,7 @@
                   "core": false,
                   "damage": "1d6",
                   "description": {
-                    "value": "+2 к проверкам восприятия, требующим слух."
+                    "value": "<p>+2 к проверкам восприятия, требующим слух.</p>"
                   },
                   "dvTable": "",
                   "favorite": false,
@@ -507,7 +512,8 @@
                     }
                   },
                   "cpr-addenda": {
-                    "pktGroup": "cost"
+                    "pktGroup": "cost",
+                    "pktMaxHumanityLoss": 2
                   }
                 },
                 "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/radio_communicator.svg",
@@ -524,7 +530,7 @@
                   "core": false,
                   "damage": "1d6",
                   "description": {
-                    "value": "Встроенная рация с радиусом действия 1 миля (1.75 км)."
+                    "value": "<p>Встроенная рация с радиусом действия 1 миля (1.75 км).</p>"
                   },
                   "dvTable": "",
                   "favorite": false,
@@ -592,7 +598,8 @@
                     }
                   },
                   "cpr-addenda": {
-                    "pktGroup": "cost"
+                    "pktGroup": "cost",
+                    "pktMaxHumanityLoss": 2
                   }
                 },
                 "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/scrambler_descrambler.svg",
@@ -609,7 +616,7 @@
                   "core": false,
                   "damage": "1d6",
                   "description": {
-                    "value": "Кодирует и декодирует передачи."
+                    "value": "<p>Кодирует и декодирует передачи.</p>"
                   },
                   "dvTable": "",
                   "favorite": false,
@@ -680,7 +687,8 @@
                   }
                 },
                 "cpr-addenda": {
-                  "pktGroup": "free"
+                  "pktGroup": "free",
+                  "pktMaxHumanityLoss": 0
                 }
               },
               "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/cyberleg.svg",
@@ -697,7 +705,7 @@
                 "core": false,
                 "damage": "1d6",
                 "description": {
-                  "value": "Кибернетическая нога. Бесплатная ступня в комплекте."
+                  "value": "<p>Кибернетическая нога. Бесплатная ступня в комплекте.</p>"
                 },
                 "dvTable": "",
                 "favorite": false,
@@ -767,7 +775,8 @@
                     }
                   },
                   "cpr-addenda": {
-                    "pktGroup": "cost"
+                    "pktGroup": "cost",
+                    "pktMaxHumanityLoss": 2
                   }
                 },
                 "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/grip_foot.svg",
@@ -784,7 +793,7 @@
                   "core": false,
                   "damage": "1d6",
                   "description": {
-                    "value": "Работают в паре. Обеспечивает трение для перемещения вертикально."
+                    "value": "<p>Работают в паре. Обеспечивает трение для перемещения вертикально.</p>"
                   },
                   "dvTable": "",
                   "favorite": false,
@@ -855,7 +864,8 @@
                   }
                 },
                 "cpr-addenda": {
-                  "pktGroup": "free"
+                  "pktGroup": "free",
+                  "pktMaxHumanityLoss": 0
                 }
               },
               "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/cyberleg.svg",
@@ -872,7 +882,7 @@
                 "core": false,
                 "damage": "1d6",
                 "description": {
-                  "value": "Кибернетическая нога. Бесплатная ступня в комплекте."
+                  "value": "<p>Кибернетическая нога. Бесплатная ступня в комплекте.</p>"
                 },
                 "dvTable": "",
                 "favorite": false,
@@ -942,7 +952,8 @@
                     }
                   },
                   "cpr-addenda": {
-                    "pktGroup": "cost"
+                    "pktGroup": "cost",
+                    "pktMaxHumanityLoss": 2
                   }
                 },
                 "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/grip_foot.svg",
@@ -959,7 +970,7 @@
                   "core": false,
                   "damage": "1d6",
                   "description": {
-                    "value": "Работают в паре. Обеспечивает трение для перемещения вертикально."
+                    "value": "<p>Работают в паре. Обеспечивает трение для перемещения вертикально.</p>"
                   },
                   "dvTable": "",
                   "favorite": false,
@@ -1030,7 +1041,8 @@
                   }
                 },
                 "cpr-addenda": {
-                  "pktGroup": "free"
+                  "pktGroup": "free",
+                  "pktMaxHumanityLoss": 0
                 }
               },
               "img": "systems/cyberpunk-red-core/icons/compendium/the_12_days_of_cybermas/kiroshi_monovision.svg",
@@ -1047,7 +1059,7 @@
                 "core": false,
                 "damage": "1d6",
                 "description": {
-                  "value": "Киберпотика в виде защитных очков, заменяющая сразу два мясных глаза. Слишком большой для установки крепления МультиОптик. При установке расширения кибероптики всегда считаются как в паре. Штрафы от критической травмы «Потеря глаза» удваиваются, если цель для зрения полагается только на МоноВозор. Боргимплант."
+                  "value": "<p>Киберпотика в виде защитных очков, заменяющая сразу два мясных глаза. Слишком большой для установки крепления МультиОптик.</p>\n<p>При установке расширения кибероптики всегда считаются как в паре. Штрафы от критической травмы «Потеря глаза» удваиваются, если цель для зрения полагается только на МоноВозор.</p>\n<p>Боргимплант.</p>"
                 },
                 "dvTable": "",
                 "favorite": false,
@@ -1117,7 +1129,8 @@
                     }
                   },
                   "cpr-addenda": {
-                    "pktGroup": "cost"
+                    "pktGroup": "cost",
+                    "pktMaxHumanityLoss": 2
                   }
                 },
                 "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/lowlight_ir_uv.svg",
@@ -1134,7 +1147,7 @@
                   "core": false,
                   "damage": "1d6",
                   "description": {
-                    "value": "Работают в паре. Иммунитет к штрафам на зрение из-за освещения, тумана или дыма."
+                    "value": "<p>Работают в паре. Иммунитет к штрафам на зрение из-за освещения, тумана или дыма.</p>"
                   },
                   "dvTable": "",
                   "favorite": false,
@@ -1252,7 +1265,8 @@
                   }
                 },
                 "cpr-addenda": {
-                  "pktGroup": "free"
+                  "pktGroup": "free",
+                  "pktMaxHumanityLoss": 0
                 }
               },
               "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/implanted_linearframe_beta.svg",
@@ -1269,7 +1283,7 @@
                 "core": false,
                 "damage": "1d6",
                 "description": {
-                  "value": "Требует ТЕЛО 8, две установки наращенных мышц и укреплённых костей. Поднимает ТЕЛО до 14 (влияет на ПЗ, порог ранений и спасбросок от смерти)."
+                  "value": "<ul>\n<li>Требует ТЕЛО 8,  две установки наращенных мышц и укреплённых костей.</li>\n<li>Поднимает ТЕЛО до 14 (влияет на ПЗ, порог ранений и спасбросок от смерти).</li>\n</ul>"
                 },
                 "dvTable": "",
                 "favorite": false,
@@ -1341,7 +1355,8 @@
                   }
                 },
                 "cpr-addenda": {
-                  "pktGroup": "free"
+                  "pktGroup": "free",
+                  "pktMaxHumanityLoss": 0
                 }
               },
               "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/neural_link.svg",
@@ -1358,7 +1373,7 @@
                 "core": false,
                 "damage": "1d6",
                 "description": {
-                  "value": "Доступ к нервной системе."
+                  "value": "<p>Доступ к нервной системе.</p>"
                 },
                 "dvTable": "",
                 "favorite": false,
@@ -1430,7 +1445,13 @@
             "effects": [],
             "flags": {
               "cpr-addenda": {
-                "pktGroup": "free"
+                "borgRule": {
+                  "kind": "cyberskull",
+                  "fbcOnly": true,
+                  "maxHumanityLoss": 0
+                },
+                "pktGroup": "free",
+                "pktMaxHumanityLoss": 0
               }
             },
             "system": {
@@ -1509,7 +1530,13 @@
             "effects": [],
             "flags": {
               "cpr-addenda": {
-                "pktGroup": "cost"
+                "borgRule": {
+                  "kind": "coating",
+                  "fbcOnly": true,
+                  "maxHumanityLoss": 2
+                },
+                "pktGroup": "cost",
+                "pktMaxHumanityLoss": 2
               }
             },
             "system": {
@@ -1525,7 +1552,7 @@
               "critFailEffect": "jammed",
               "damage": "1d6",
               "description": {
-                "value": "<p>Маскировочное покрытие корпуса, подстраивающееся под окружение. Входит в комплект корпуса ПКТ.</p>"
+                "value": "<p>Маскировка после неподвижности: 1/2/3 покрытия — 20/10/3 раунда. Обнаружение: Внимание СЛ17. Перемещение более 2 м за раунд выключает маскировку.</p>"
               },
               "dvTable": "",
               "favorite": false,
@@ -1560,7 +1587,7 @@
                 "value": 0
               },
               "price": {
-                "market": 0
+                "market": 1000
               },
               "providesHardening": false,
               "revealed": true,
@@ -1570,7 +1597,7 @@
                 "book": "DataPool",
                 "page": 0
               },
-              "type": "borgware",
+              "type": "cyberwareExternal",
               "unarmedAutomaticCalculation": true,
               "usage": "installed",
               "usesType": "magazine",
@@ -1588,7 +1615,13 @@
             "effects": [],
             "flags": {
               "cpr-addenda": {
-                "pktGroup": "cost"
+                "borgRule": {
+                  "kind": "coating",
+                  "fbcOnly": true,
+                  "maxHumanityLoss": 2
+                },
+                "pktGroup": "cost",
+                "pktMaxHumanityLoss": 2
               }
             },
             "system": {
@@ -1604,7 +1637,7 @@
               "critFailEffect": "jammed",
               "damage": "1d6",
               "description": {
-                "value": "<p>Маскировочное покрытие корпуса, подстраивающееся под окружение. Входит в комплект корпуса ПКТ.</p>"
+                "value": "<p>Маскировка после неподвижности: 1/2/3 покрытия — 20/10/3 раунда. Обнаружение: Внимание СЛ17. Перемещение более 2 м за раунд выключает маскировку.</p>"
               },
               "dvTable": "",
               "favorite": false,
@@ -1639,7 +1672,7 @@
                 "value": 0
               },
               "price": {
-                "market": 0
+                "market": 1000
               },
               "providesHardening": false,
               "revealed": true,
@@ -1649,7 +1682,7 @@
                 "book": "DataPool",
                 "page": 0
               },
-              "type": "borgware",
+              "type": "cyberwareExternal",
               "unarmedAutomaticCalculation": true,
               "usage": "installed",
               "usesType": "magazine",
@@ -1667,7 +1700,13 @@
             "effects": [],
             "flags": {
               "cpr-addenda": {
-                "pktGroup": "cost"
+                "borgRule": {
+                  "kind": "coating",
+                  "fbcOnly": true,
+                  "maxHumanityLoss": 2
+                },
+                "pktGroup": "cost",
+                "pktMaxHumanityLoss": 2
               }
             },
             "system": {
@@ -1683,7 +1722,7 @@
               "critFailEffect": "jammed",
               "damage": "1d6",
               "description": {
-                "value": "<p>Маскировочное покрытие корпуса, подстраивающееся под окружение. Входит в комплект корпуса ПКТ.</p>"
+                "value": "<p>Маскировка после неподвижности: 1/2/3 покрытия — 20/10/3 раунда. Обнаружение: Внимание СЛ17. Перемещение более 2 м за раунд выключает маскировку.</p>"
               },
               "dvTable": "",
               "favorite": false,
@@ -1718,7 +1757,7 @@
                 "value": 0
               },
               "price": {
-                "market": 0
+                "market": 1000
               },
               "providesHardening": false,
               "revealed": true,
@@ -1728,7 +1767,7 @@
                 "book": "DataPool",
                 "page": 0
               },
-              "type": "borgware",
+              "type": "cyberwareExternal",
               "unarmedAutomaticCalculation": true,
               "usage": "installed",
               "usesType": "magazine",
@@ -1747,7 +1786,8 @@
                 }
               },
               "cpr-addenda": {
-                "pktGroup": "cost"
+                "pktGroup": "cost",
+                "pktMaxHumanityLoss": 2
               }
             },
             "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/subdermal_armor.svg",
@@ -1764,7 +1804,7 @@
               "core": false,
               "damage": "1d6",
               "description": {
-                "value": "Внешний киберимплант*. Броня для тела и головы с ОС11, которая восстанавливается со скоростью 1ОС/сутки. Значения ОС не складываются. *Киберимпланты брони не реализованы в системе, необходимо добавить предмет «Подкожная броня» на бланк персонажа или шестёрки."
+                "value": "<p>Предмет брони для киберимпланта «Подкожная броня».</p>"
               },
               "dvTable": "",
               "favorite": false,
@@ -1832,7 +1872,8 @@
                 }
               },
               "cpr-addenda": {
-                "pktGroup": "cost"
+                "pktGroup": "cost",
+                "pktMaxHumanityLoss": 2
               }
             },
             "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/subdermal_pocket.svg",
@@ -1849,7 +1890,7 @@
               "core": false,
               "damage": "1d6",
               "description": {
-                "value": "Карман 2 на 4 дюйма (5 на 10 см)."
+                "value": "<p>Карман 2 на 4 дюйма (5 на 10 см).</p>"
               },
               "dvTable": "",
               "favorite": false,
@@ -1917,7 +1958,8 @@
                 }
               },
               "cpr-addenda": {
-                "pktGroup": "cost"
+                "pktGroup": "cost",
+                "pktMaxHumanityLoss": 2
               }
             },
             "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/subdermal_pocket.svg",
@@ -1934,7 +1976,7 @@
               "core": false,
               "damage": "1d6",
               "description": {
-                "value": "Карман 2 на 4 дюйма (5 на 10 см)."
+                "value": "<p>Карман 2 на 4 дюйма (5 на 10 см).</p>"
               },
               "dvTable": "",
               "favorite": false,
@@ -2001,7 +2043,8 @@
             "effects": [],
             "flags": {
               "cpr-addenda": {
-                "pktGroup": "cost"
+                "pktGroup": "cost",
+                "pktMaxHumanityLoss": 0
               }
             },
             "system": {
@@ -2149,7 +2192,15 @@
             ],
             "flags": {
               "cpr-addenda": {
-                "pktGroup": "cost"
+                "borgRule": {
+                  "kind": "hydraulics",
+                  "fbcOnly": true,
+                  "requiresInternalFrame": true,
+                  "maxHumanityLoss": 2,
+                  "statFloor": 6
+                },
+                "pktGroup": "cost",
+                "pktMaxHumanityLoss": 2
               }
             },
             "system": {
@@ -2165,7 +2216,7 @@
               "critFailEffect": "jammed",
               "damage": "1d6",
               "description": {
-                "value": "<p>Улучшенная гидравлика корпуса: РЕА, ЛВК и СКО пользователя устанавливаются на 6, если только они не являются более высокими. Входит в комплект корпуса ПКТ.</p>"
+                "value": "<p>Для ПКТ с эндоскелетом. Поднимает РЕА, ЛВК и СКО минимум до 6; штрафы применяются после повышения.</p>"
               },
               "dvTable": "",
               "favorite": false,
@@ -2200,7 +2251,7 @@
                 "value": 0
               },
               "price": {
-                "market": 0
+                "market": 5000
               },
               "providesHardening": false,
               "revealed": true,
@@ -2210,7 +2261,7 @@
                 "book": "DataPool",
                 "page": 0
               },
-              "type": "borgware",
+              "type": "cyberwareInternal",
               "unarmedAutomaticCalculation": true,
               "usage": "installed",
               "usesType": "magazine",

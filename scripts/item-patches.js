@@ -13,6 +13,8 @@ import { applyInstalledUsage } from "./effect-usage.js";
 import { applyCarrierPatches } from "./carrier-changes.js";
 import { applyWeaponRules } from "./weapon-rules.js";
 import { applyAttackSkillCompatibility } from "./weapon-skill-compat.js";
+import { applyBorgItemRules } from "./pkt-rules.js";
+import { applySkillRoleItemCompatibility } from "./skill-role-compat.js";
 
 export function registerItemPatches() {
   libWrapper.register(
@@ -53,6 +55,8 @@ export function registerItemPatches() {
 
       applyWeaponRules(this);
       applyAttackSkillCompatibility(this);
+      applyBorgItemRules(this);
+      applySkillRoleItemCompatibility(this);
       return result;
     },
     "WRAPPER"

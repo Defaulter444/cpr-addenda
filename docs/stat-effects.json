@@ -17,35 +17,98 @@
     "Имплантированный Эндоскелет Омега": {
       "usage": "installed",
       "why": "«Пользователь увеличивает свой ТЕЛ до 16.» Так же система задаёт ТЕЛ своим «Сигме» и «Бете».",
-      "changes": [{ "key": "system.stats.body.value", "mode": 5, "value": "16" }]
+      "changes": [
+        {
+          "key": "system.stats.body.value",
+          "mode": 5,
+          "value": "16"
+        }
+      ]
     },
     "Модернизация Внутренней Гидравлики": {
       "usage": "installed",
       "why": "«Статы РЕА, ЛВК и СКО пользователя устанавливаются на 4, если только они не являются более высокими.»",
       "changes": [
-        { "key": "system.stats.ref.value", "mode": 4, "value": "4" },
-        { "key": "system.stats.dex.value", "mode": 4, "value": "4" },
-        { "key": "system.stats.move.value", "mode": 4, "value": "4" }
+        {
+          "key": "system.stats.ref.value",
+          "mode": 4,
+          "value": "4"
+        },
+        {
+          "key": "system.stats.dex.value",
+          "mode": 4,
+          "value": "4"
+        },
+        {
+          "key": "system.stats.move.value",
+          "mode": 4,
+          "value": "4"
+        }
       ]
     },
     "Тюнинг вер. Модернизация Внутренней Гидравлики": {
       "usage": "installed",
       "why": "«Статы РЕА, ЛВК и СКО пользователя устанавливаются на 6, если только они не являются более высокими.»",
       "changes": [
-        { "key": "system.stats.ref.value", "mode": 4, "value": "6" },
-        { "key": "system.stats.dex.value", "mode": 4, "value": "6" },
-        { "key": "system.stats.move.value", "mode": 4, "value": "6" }
+        {
+          "key": "system.stats.ref.value",
+          "mode": 4,
+          "value": "6"
+        },
+        {
+          "key": "system.stats.dex.value",
+          "mode": 4,
+          "value": "6"
+        },
+        {
+          "key": "system.stats.move.value",
+          "mode": 4,
+          "value": "6"
+        }
       ]
     },
     "Внешний экзоскелет Ω (ОМЕГА)": {
       "usage": "equipped",
       "why": "«Пользователь увеличивает свой ТЕЛ до 16, пока подключен к раме.» Системные внешние остовы сделаны так же.",
-      "changes": [{ "key": "system.stats.body.value", "mode": 5, "value": "16" }]
+      "changes": [
+        {
+          "key": "system.stats.body.value",
+          "mode": 5,
+          "value": "16"
+        }
+      ]
     },
     "Гидравлическая Подкладка Húsafell": {
       "usage": "equipped",
       "why": "«Когда надета, увеличивает ТЕЛО на 2.» Потолок в 10 и запрет складываться с эндоскелетами остаются текстом: условий эффекты не понимают.",
-      "changes": [{ "key": "system.stats.body.value", "mode": 2, "value": "2" }]
+      "changes": [
+        {
+          "key": "system.stats.body.value",
+          "mode": 2,
+          "value": "2"
+        }
+      ]
+    },
+    "Совершенная Модернизация Внутренней Гидравлики": {
+      "usage": "installed",
+      "why": "Минимум 8 до штрафов.",
+      "changes": [
+        {
+          "key": "system.stats.ref.value",
+          "mode": 4,
+          "value": "8"
+        },
+        {
+          "key": "system.stats.dex.value",
+          "mode": 4,
+          "value": "8"
+        },
+        {
+          "key": "system.stats.move.value",
+          "mode": 4,
+          "value": "8"
+        }
+      ]
     }
   }
 }

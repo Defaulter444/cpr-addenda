@@ -214,7 +214,7 @@
   "CPRADDENDA.pkt.wizard.rolled": "Rolled for Humanity: <strong>−{value}</strong>.",
   "CPRADDENDA.pkt.wizard.tookAverage": "Average taken: <strong>−{value}</strong>.",
   "CPRADDENDA.pkt.wizard.confirm.lead": "You are about to install the Full Body Conversion frame <strong>{name}</strong>. This is permanent: the meat body stays on the table.",
-  "CPRADDENDA.pkt.wizard.confirm.warn": "The frame requires an installed Biosystem. The module does not check for it — that call is the GM's.",
+  "CPRADDENDA.pkt.wizard.confirm.warn": "An installed Biosystem is required. Its cost and Humanity Loss are separate from this package. Confirming deactivates the previous body and preserves its cyberware for reuse.",
   "CPRADDENDA.pkt.wizard.facts.implants": "Implants in the kit",
   "CPRADDENDA.pkt.wizard.facts.free": "Without Humanity loss",
   "CPRADDENDA.pkt.wizard.facts.cost": "With Humanity loss",

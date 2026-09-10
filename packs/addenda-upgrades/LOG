@@ -1,3 +1,14 @@
-2026/09/09-23:31:21.832 5380 Recovering log #432
-2026/09/09-23:31:21.835 5380 Delete type=0 #432
-2026/09/09-23:31:21.836 5380 Delete type=3 #430
+2026/09/10-01:06:22.822 2930 Recovering log #444
+2026/09/10-01:06:22.826 2930 Delete type=0 #444
+2026/09/10-01:06:22.826 2930 Delete type=3 #442
+2026/09/10-01:06:22.832 2198 Level-0 table #450: started
+2026/09/10-01:06:22.834 2198 Level-0 table #450: 55649 bytes OK
+2026/09/10-01:06:22.835 2198 Delete type=0 #448
+2026/09/10-01:06:22.835 2198 Manual compaction at level-0 from '!' @ 72057594037927935 : 1 .. '\xef\xbf\xbf' @ 0 : 0; will stop at '!items!cprAddWm00110000' @ 3604 : 0
+2026/09/10-01:06:22.835 2198 Compacting 1@0 + 1@1 files
+2026/09/10-01:06:22.837 2198 Generated table #451@0: 39 keys, 55228 bytes
+2026/09/10-01:06:22.837 2198 Compacted 1@0 + 1@1 files => 55228 bytes
+2026/09/10-01:06:22.838 2198 compacted to: files[ 0 1 0 0 0 0 0 ]
+2026/09/10-01:06:22.838 2198 Delete type=2 #446
+2026/09/10-01:06:22.839 2198 Delete type=2 #450
+2026/09/10-01:06:22.839 2198 Manual compaction at level-0 from '!items!cprAddWm00110000' @ 3604 : 0 .. '\xef\xbf\xbf' @ 0 : 0; will stop at (end)

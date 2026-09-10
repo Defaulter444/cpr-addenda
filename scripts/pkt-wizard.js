@@ -26,7 +26,8 @@
  */
 
 import { MODULE_ID, SYSTEM_ID, localize } from "./constants.js";
-import { getKit, deployKit, kitPartsOf } from "./pkt-kit.js";
+import { getKit, installPktFrame, pendingPktItems, hasUsedPktFrame } from "./pkt-kit.js";
+import { checkBorgPrerequisites } from "./pkt-rules.js";
 
 /** Группы из таблицы документа. */
 const FREE = "free";
@@ -89,7 +90,7 @@ export function summariseKit(kit) {
     const host = entry?.item ?? {};
     const options = entry?.options ?? [];
     all.push(host, ...options);
-    const slots = host.system?.installedItems?.slots ?? 0;
+    const slots = 2 * (host.system?.installedItems?.slots ?? 0);
     const used = options.reduce((sum, o) => sum + (o.system?.size ?? 1), 0);
     places.push({
       host: host.name ?? "",
@@ -321,12 +322,14 @@ async function measureHumanity(frame, type) {
  * @param {Object} chosen - {type, value}
  * @returns {Promise<void>}
  */
-async function applyHumanity(actor, chosen) {
+async function applyHumanity(actor, chosen, startingValue) {
   if (!chosen || chosen.value <= 0) return;
   const humanity = actor.system?.derivedStats?.humanity ?? {};
-  const before = Number.isInteger(humanity.value) ? humanity.value : humanity.max;
+  const before = startingValue ?? (Number.isInteger(humanity.value) ? humanity.value : humanity.max);
   const value = (Number(before) || 0) - chosen.value;
-  await actor.update({ "system.derivedStats.humanity.value": value });
+  const update = { "system.derivedStats.humanity.value": value };
+  if (startingValue !== undefined) update["system.derivedStats.humanity.max"] = actor._calcMaxHumanity();
+  await actor.update(update);
   await actor.setMaxHumanity();
   if (value <= 0) ui.notifications.warn(localize("pkt.wizard.cyberpsycho"));
 }
@@ -382,8 +385,17 @@ export async function runPktWizard(frame) {
   const kit = getKit(frame);
   const actor = frame?.parent;
   if (!kit || !(actor instanceof Actor)) return false;
+  const prerequisite = checkBorgPrerequisites(actor, frame);
+  if (!prerequisite.ok) { ui.notifications.warn(prerequisite.reason); return false; }
+  const reused = hasUsedPktFrame(frame);
+  const pending = pendingPktItems(frame);
+  if (reused && !pending.length) return installPktFrame(frame);
+  const costFrame = reused ? { name: frame.name, parent: actor, system: { humanityLoss: {
+    static: pending.reduce((sum, i) => sum + Number(i.system.humanityLoss.static), 0),
+    roll: pending.map(i => String(i.system.humanityLoss.roll)).join(" + ") || "0",
+  } } } : frame;
 
-  const view = summariseKit(kit);
+  const view = summariseKit(reused ? { carried: pending.map(i => ({ name: i.name, system: i.system, flags: { [MODULE_ID]: { pktGroup: "cost" } } })) } : kit);
   // Лист «шестёрки» можно открыть у актёра любого типа, поэтому смотрим не на
   // тип, а на то, каким листом его сейчас показывают, — как это делает система.
   const isMook =
@@ -404,7 +416,7 @@ export async function runPktWizard(frame) {
     if (step === 0) {
       answer = await askStep({
         title,
-        content: stepConfirm(frame, view),
+        content: stepConfirm(costFrame, view),
         buttons: [no, { key: "next", label: localize("pkt.wizard.yes"), icon: "fas fa-check" }],
       });
     } else if (step === 1) {
@@ -414,7 +426,7 @@ export async function runPktWizard(frame) {
         buttons: [back, no, next],
       });
     } else if (step === 2) {
-      const humanity = frame.system?.humanityLoss ?? {};
+      const humanity = costFrame.system?.humanityLoss ?? {};
       const buttons = [
         back,
         {
@@ -444,14 +456,14 @@ export async function runPktWizard(frame) {
 
       answer = await askStep({
         title,
-        content: stepCost(frame, view, chosen, isMook),
+        content: stepCost(costFrame, view, chosen, isMook),
         buttons,
       });
 
       if (answer === "roll" || answer === "average" || answer === "none") {
         const type =
           answer === "roll" ? "roll" : answer === "average" ? "static" : "none";
-        chosen = await measureHumanity(frame, type);
+        chosen = await measureHumanity(costFrame, type);
         // Остаёмся на этом же шаге: игрок должен увидеть результат броска
         // прежде, чем идти к итогу. К листу число пока не применяется —
         // это произойдёт только после «Установить».
@@ -480,18 +492,7 @@ export async function runPktWizard(frame) {
   // Порядок важен: сперва раскладываем комплект, потом ставим сам корпус и
   // только в самом конце трогаем человечность. Отказ на любом шаге до этой
   // строки не стоит игроку ничего.
-  const deployed = await deployKit(frame);
-  if (!frame.system?.isInstalledInActor) await actor.installItems([frame]);
-  await applyHumanity(actor, chosen);
-
-  // Ноль сам по себе ещё не беда: комплект мог быть разложен раньше, и
-  // `deployKit` тогда честно ничего не делает. Тревога — когда после установки
-  // на листе нет ни одной части комплекта. Молчать об этом нельзя: со стороны
-  // это неотличимо от «модуль ничего не сделал», а мастер именно это и увидел.
-  if (!deployed && !kitPartsOf(actor, frame.id).length) {
-    ui.notifications.warn(localize("pkt.wizard.nothingDeployed", { name: frame.name }));
-  }
-  return true;
+  return installPktFrame(frame, chosen);
 }
 
 /** Внутренности для самопроверки. */

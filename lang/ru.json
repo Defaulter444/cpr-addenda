@@ -214,7 +214,7 @@
   "CPRADDENDA.pkt.wizard.rolled": "Брошено на человечность: <strong>−{value}</strong>.",
   "CPRADDENDA.pkt.wizard.tookAverage": "Принято среднее значение: <strong>−{value}</strong>.",
   "CPRADDENDA.pkt.wizard.confirm.lead": "Вы собираетесь установить корпус полной кибернетической трансформации <strong>{name}</strong>. Операция необратима: мясное тело остаётся на столе.",
-  "CPRADDENDA.pkt.wizard.confirm.warn": "Корпус требует установленной Биосистемы. Модуль её наличие не проверяет — это решение мастера.",
+  "CPRADDENDA.pkt.wizard.confirm.warn": "Для установки требуется Биосистема. Стоимость и потеря Человечности Биосистемы не включены в комплект. При подтверждении предыдущий корпус будет деактивирован; его импланты сохранятся для повторного использования.",
   "CPRADDENDA.pkt.wizard.facts.implants": "Имплантов в комплекте",
   "CPRADDENDA.pkt.wizard.facts.free": "Без потери человечности",
   "CPRADDENDA.pkt.wizard.facts.cost": "С потерей человечности",

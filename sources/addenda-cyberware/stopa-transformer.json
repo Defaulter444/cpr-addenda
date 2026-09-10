@@ -6,7 +6,14 @@
   "folder": null,
   "sort": 0,
   "effects": [],
-  "flags": {},
+  "flags": {
+    "cpr-addenda": {
+      "borgRule": {
+        "kind": "transformFoot",
+        "maxHumanityLoss": 2
+      }
+    }
+  },
   "system": {
     "ammoVariety": [],
     "attackmod": 0,
@@ -20,7 +27,7 @@
     "critFailEffect": "jammed",
     "damage": "1d6",
     "description": {
-      "value": "<p>Стопа, меняющая форму под опору: от плоской подошвы до захвата. Входит в комплект корпуса ПКТ.</p>"
+      "value": "<p>Действием превращает киберногу в киберруку; повторное действие возвращает стопу. СКО −4 (минимум 1), кроме невесомости.</p>"
     },
     "dvTable": "",
     "favorite": false,
@@ -30,11 +37,11 @@
     },
     "humanityLoss": {
       "roll": "1d6",
-      "static": 0
+      "static": 3
     },
     "ignoreArmorPercent": 0,
     "ignoreBelowSP": 0,
-    "installLocation": "hospital",
+    "installLocation": "clinic",
     "installedItems": {
       "allowed": false,
       "allowedTypes": [
@@ -55,7 +62,7 @@
       "value": 0
     },
     "price": {
-      "market": 0
+      "market": 1000
     },
     "providesHardening": false,
     "revealed": true,

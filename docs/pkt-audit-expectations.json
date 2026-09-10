@@ -1,0 +1,124 @@
+{
+  "source": "https://alec-leon.github.io/data-pool/chrome/pkt_packs/",
+  "checked": "2026-09-10",
+  "note": "Independent expectations from the published package lists. HP assumes WILL 6; maxHumanityLoss excludes the separate Biosystem (4). Parts include zero-HL Tech Upgrade markers retained by the importer.",
+  "frames": {
+    "cprAddPkt0001000": {
+      "name": "Водолей",
+      "body": 12,
+      "hp": 55,
+      "maxHumanityLoss": 16,
+      "parts": 16,
+      "sp": 11,
+      "armorPenalty": 0
+    },
+    "cprAddPkt0002000": {
+      "name": "Сера",
+      "body": 12,
+      "hp": 55,
+      "maxHumanityLoss": 18,
+      "parts": 19,
+      "sp": 13,
+      "armorPenalty": 0
+    },
+    "cprAddPkt0003000": {
+      "name": "Коперник",
+      "body": 12,
+      "hp": 55,
+      "maxHumanityLoss": 28,
+      "parts": 23,
+      "sp": 0,
+      "armorPenalty": 0
+    },
+    "cprAddPkt0004000": {
+      "name": "Драгун",
+      "body": 16,
+      "hp": 65,
+      "maxHumanityLoss": 34,
+      "parts": 26,
+      "sp": 15,
+      "armorPenalty": -2
+    },
+    "cprAddPkt0005000": {
+      "name": "Затмение",
+      "body": 14,
+      "hp": 60,
+      "maxHumanityLoss": 28,
+      "parts": 24,
+      "sp": 11,
+      "armorPenalty": 0
+    },
+    "cprAddPkt0006000": {
+      "name": "Паук 2.0",
+      "body": 14,
+      "hp": 60,
+      "maxHumanityLoss": 36,
+      "parts": 28,
+      "sp": 0,
+      "armorPenalty": 0
+    },
+    "cprAddPkt0007000": {
+      "name": "Страж порядка",
+      "body": 12,
+      "hp": 55,
+      "maxHumanityLoss": 24,
+      "parts": 20,
+      "sp": 13,
+      "armorPenalty": 0
+    },
+    "cprAddPkt0008000": {
+      "name": "Яма",
+      "body": 14,
+      "hp": 60,
+      "maxHumanityLoss": 14,
+      "parts": 16,
+      "sp": 13,
+      "armorPenalty": 0
+    },
+    "cprAddPkt0009000": {
+      "name": "Самсон",
+      "body": 16,
+      "hp": 65,
+      "maxHumanityLoss": 18,
+      "parts": 19,
+      "sp": 11,
+      "armorPenalty": 0
+    },
+    "cprAddPkt0010000": {
+      "name": "Близнецы",
+      "body": 12,
+      "hp": 55,
+      "maxHumanityLoss": 4,
+      "parts": 15,
+      "sp": 7,
+      "armorPenalty": 0
+    },
+    "cprAddPkt0011000": {
+      "name": "Мудрец",
+      "body": 12,
+      "hp": 55,
+      "maxHumanityLoss": 30,
+      "parts": 25,
+      "sp": 0,
+      "armorPenalty": 0
+    },
+    "cprAddPkt0012000": {
+      "name": "Класс Альфа",
+      "body": 12,
+      "hp": 55,
+      "maxHumanityLoss": 4,
+      "parts": 12,
+      "sp": 11,
+      "armorPenalty": 0
+    },
+    "cprAddPkt0013000": {
+      "name": "Киль-Дара",
+      "body": 12,
+      "hp": 55,
+      "maxHumanityLoss": 20,
+      "parts": 20,
+      "sp": 0,
+      "armorPenalty": 0
+    }
+  }
+}

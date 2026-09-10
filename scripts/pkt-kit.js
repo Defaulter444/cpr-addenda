@@ -20,12 +20,140 @@
  *   покрытия и прочее борговое                            → в сам корпус.
  *
  * Потеря человечности у имплантов комплекта обнулена при сборке: документ
- * задаёт её один раз за весь комплект, строкой у корпуса. Чтобы система не
- * добавляла к этому своё, здесь же живут две обёртки — они не дают ей бросать
- * кубики за содержимое корпуса и снимать максимум человечности повторно.
+ * задаёт её один раз за весь комплект, строкой у корпуса. Предел восстановления
+ * считается отдельно: каждый платный имплант уменьшает его на 2 или 4,
+ * бесплатные фундаменты и сам предмет-пакет его не уменьшают.
  */
 
 import { MODULE_ID, SYSTEM_ID, FLAGS, SETTINGS, localize } from "./constants.js";
+import { activePktFrame, correctMaxHumanity, checkBorgPrerequisites,
+  humanityPenalty, isFreePktFoundation, syncBorgArmor, registerBorgActorPatches } from "./pkt-rules.js";
+
+const transactions = new WeakSet();
+const clone = value => foundry.utils.deepClone(value);
+
+/** Save only installation/accounting state; unrelated actor data is never rewritten. */
+export function snapshotPktState(actor) {
+  return { ids: new Set(actor.items.map(i => i.id)),
+    installedItems: clone(actor._source?.system?.installedItems ?? actor.system.installedItems),
+    humanity: clone(actor._source?.system?.derivedStats?.humanity ?? actor.system.derivedStats.humanity),
+    hp: clone(actor._source?.system?.derivedStats?.hp ?? actor.system.derivedStats.hp),
+    emp: actor._source?.system?.stats?.emp?.value ?? actor.system.stats.emp.value,
+    items: actor.items.map(i => ({ _id: i.id, "system.installedItems": clone(i._source?.system?.installedItems ?? i.system.installedItems),
+      ...Object.fromEntries(["pktUsed", "pktUsedBy", "pktSeenItems", "pktBody"].map(key => [
+        `flags.${MODULE_ID}.${i.getFlag(MODULE_ID, key) === undefined ? "-=" : ""}${key}`,
+        clone(i.getFlag(MODULE_ID, key) ?? null),
+      ])) })) };
+}
+
+export async function restorePktState(actor, before) {
+  // Scrub references before deleting, avoiding the system's parallel uninstall race.
+  await actor.updateEmbeddedDocuments("Item", before.items.filter(i => actor.items.has(i._id)));
+  await actor.update({ "system.installedItems": before.installedItems });
+  const added = actor.items.filter(i => !before.ids.has(i.id)).map(i => i.id);
+  if (added.length) await actor.deleteEmbeddedDocuments("Item", added, { cprIsMigrating: true });
+  await actor.update({ "system.derivedStats.humanity": before.humanity,
+    "system.derivedStats.hp": before.hp, "system.stats.emp.value": before.emp });
+}
+
+function frameRoots(frame) {
+  const ids = new Set(frame.parent.system.installedItems.list);
+  return [frame, ...kitPartsOf(frame.parent, frame.id), ...extraPktParts(frame)].filter(i => ids.has(i.id));
+}
+
+function extraPktParts(frame) {
+  return frame.parent.items.filter(i => i.getFlag(MODULE_ID, "pktBody")?.frame === frame.id);
+}
+
+/** Includes user-added options attached to the body's existing foundations. */
+export function pktContents(frame) {
+  const actor = frame.parent;
+  const roots = [frame, ...extraPktParts(frame), ...kitPartsOf(actor, frame.id).filter(i => {
+    const slot = i.getFlag(MODULE_ID, FLAGS.pktPart)?.slot;
+    return planKit(getKit(frame))[slot]?.role === "foundation";
+  })];
+  const ids = new Set(roots.map(i => i.id));
+  for (const id of ids) for (const child of actor.items.get(id)?.system.installedItems?.list ?? []) ids.add(child);
+  return [...ids].map(id => actor.items.get(id)).filter(i => i && i.id !== frame.id);
+}
+
+export function hasUsedPktFrame(frame) {
+  return Boolean(frame.getFlag(MODULE_ID, "pktUsed") && frame.getFlag(MODULE_ID, "pktUsedBy") === frame.parent?.id);
+}
+
+export function pendingPktItems(frame) {
+  if (!hasUsedPktFrame(frame)) return [];
+  const known = new Set(frame.getFlag(MODULE_ID, "pktSeenItems") ?? kitPartsOf(frame.parent, frame.id).map(i => i.id));
+  return pktContents(frame).filter(i => i.type === "cyberware" && !known.has(i.id) && !isFreePktFoundation(i));
+}
+
+/** Remove a body as a whole while keeping its options and original item IDs. */
+export async function uninstallPktFrame(frame) {
+  const actor = frame.parent;
+  const roots = frameRoots(frame);
+  if (roots.length) await actor.uninstallItems(roots, { recursive: false, unloadAmmo: false });
+  for (const item of extraPktParts(frame)) {
+    if (!item.system.isInstalledInActor) continue;
+    const host = actor.items.get(item.system.installedIn[0]);
+    if (host) await host.uninstallItems([item], { recursive: false, unloadAmmo: false });
+  }
+  await actor.setMaxHumanity();
+  return true;
+}
+
+/** Transaction boundary used by both the wizard and reinstalling an existing body. */
+export async function installPktFrame(frame, chosen = { type: "none", value: 0 }) {
+  const actor = frame.parent;
+  const prerequisite = checkBorgPrerequisites(actor, frame);
+  if (!prerequisite.ok) { ui.notifications.warn(prerequisite.reason); return false; }
+  if (transactions.has(actor)) throw new Error("Установка корпуса ПКТ уже выполняется.");
+  if (frame.system.isInstalledInActor) return true;
+  transactions.add(actor);
+  const before = snapshotPktState(actor);
+  try {
+    const priorOwner = frame.getFlag(MODULE_ID, "pktUsedBy");
+    if (priorOwner && priorOwner !== actor.id && !kitPartsOf(actor, frame.id).length) {
+      await frame.update({ "system.installedItems.list": [], "system.installedItems.usedSlots": 0 });
+    }
+    const previous = activePktFrame(actor);
+    await deployKit(frame);
+    if (previous && previous.id !== frame.id) await uninstallPktFrame(previous);
+    const roots = kitPartsOf(actor, frame.id).filter(i => {
+      const slot = i.getFlag(MODULE_ID, FLAGS.pktPart)?.slot;
+      return planKit(getKit(frame))[slot]?.role === "foundation";
+    });
+    if (!(await actor.installItems([frame, ...roots]))) throw new Error("Система отказала в установке корпуса ПКТ.");
+    for (const item of extraPktParts(frame)) {
+      if (item.system.isInstalledInActor) continue;
+      const target = item.getFlag(MODULE_ID, "pktBody")?.target;
+      const host = target === actor.id ? actor : actor.items.get(target);
+      if (!host || !(await host.installItems([item]))) throw new Error(`Не удалось вернуть имплант корпуса: ${item.name}`);
+    }
+    if (![frame, ...roots].every(i => i.system.isInstalledInActor)) throw new Error("Корпус установлен не полностью.");
+    await syncBorgArmor(actor);
+    const { applyHumanity } = (await import("./pkt-wizard.js")).__test;
+    // Read the pre-install value: lowering the therapy ceiling must not add a
+    // second, implicit humanity charge before applying the chosen package loss.
+    const value = Number.isInteger(before.humanity.value) ? before.humanity.value : before.humanity.max;
+    const reused = hasUsedPktFrame(frame);
+    const charge = reused && !pendingPktItems(frame).length ? { type: "none", value: 0 } : chosen;
+    if (charge?.value) await applyHumanity(actor, charge, value);
+    else {
+      await actor.update({ "system.derivedStats.humanity.max": actor._calcMaxHumanity(),
+        "system.derivedStats.humanity.value": Math.min(value, actor._calcMaxHumanity()) });
+      await actor.setMaxHumanity();
+    }
+    const max = actor.calcMaxHp();
+    await actor.update({ "system.derivedStats.hp.max": max, "system.derivedStats.hp.value": max });
+    await frame.setFlag(MODULE_ID, "pktUsed", true);
+    await frame.setFlag(MODULE_ID, "pktUsedBy", actor.id);
+    await frame.setFlag(MODULE_ID, "pktSeenItems", pktContents(frame).map(i => i.id));
+    return true;
+  } catch (error) {
+    await restorePktState(actor, before);
+    throw error;
+  } finally { transactions.delete(actor); }
+}
 
 /**
  * Комплект, если предмет его несёт.
@@ -90,7 +218,11 @@ export async function deployKit(frame) {
   if (!kit || !(actor instanceof Actor)) return 0;
 
   // Второй раз не разворачиваем: комплект уже на месте.
-  if (kitPartsOf(actor, frame.id).length) return 0;
+  const existing = kitPartsOf(actor, frame.id);
+  if (existing.length) {
+    if (existing.length !== planKit(kit).length) throw new Error("Комплект ПКТ неполон; восстановите удалённые части перед установкой.");
+    return 0;
+  }
 
   const plan = planKit(kit);
   if (!plan.length) return 0;
@@ -100,7 +232,7 @@ export async function deployKit(frame) {
     delete doc._id;
     doc.flags = {
       ...(doc.flags ?? {}),
-      [MODULE_ID]: { [FLAGS.pktPart]: { frame: frame.id, slot: index } },
+      [MODULE_ID]: { ...(doc.flags?.[MODULE_ID] ?? {}), [FLAGS.pktPart]: { frame: frame.id, slot: index } },
     };
     return doc;
   });
@@ -109,7 +241,9 @@ export async function deployKit(frame) {
   // сами; без этого система полезет искать свой флаг у каждого импланта.
   const created = await actor.createEmbeddedDocuments("Item", docs, {
     createInstalled: false,
+    CPRsplitStack: true,
   });
+  if (created.length !== docs.length) throw new Error("Созданы не все части комплекта ПКТ.");
 
   const bySlot = new Map();
   for (const item of created) {
@@ -130,12 +264,9 @@ export async function deployKit(frame) {
   // Сначала опции в фундаменты, потом фундаменты в персонажа: так у листа ни
   // на одном шаге не окажется фундамента с опциями, висящими в воздухе.
   for (const { host, options } of groups) {
-    if (host && options.length) await host.installItems(options);
+    if (host && options.length && !(await host.installItems(options))) throw new Error(`Не удалось установить опции: ${host.name}`);
   }
-  if (carried.length) await frame.installItems(carried);
-
-  const hosts = groups.map((group) => group.host).filter(Boolean);
-  if (hosts.length) await actor.installItems(hosts);
+  if (carried.length && !(await frame.installItems(carried))) throw new Error(`Не удалось установить оснащение: ${frame.name}`);
 
   return created.length;
 }
@@ -157,33 +288,32 @@ export async function removeKit(frame) {
     .filter((id) => actor.items.has(id));
   if (!parts.length) return 0;
 
-  await actor.deleteEmbeddedDocuments("Item", parts);
+  const deleting = new Set(parts);
+  const actorList = actor.system.installedItems.list.filter(id => !deleting.has(id));
+  await actor.update({ "system.installedItems.list": actorList });
+  const updates = actor.items.filter(i => !deleting.has(i.id) && i.system.installedItems?.list?.some(id => deleting.has(id))).map(i => {
+    const list = i.system.installedItems.list.filter(id => !deleting.has(id));
+    return { _id: i.id, "system.installedItems.list": list,
+      "system.installedItems.usedSlots": list.reduce((sum, id) => sum + (actor.items.get(id)?.system?.size ?? 0), 0) };
+  });
+  if (updates.length) await actor.updateEmbeddedDocuments("Item", updates);
+  await actor.deleteEmbeddedDocuments("Item", parts, { cprIsMigrating: true });
+  await syncBorgArmor(actor);
+  await actor.setMaxHumanity();
   return parts.length;
 }
 
 /**
- * Пересчитывает максимум человечности без учёта комплекта.
- *
- * Система снимает по четыре очка максимума за каждый борговый имплант и по два
- * за любой другой с ненулевой статической потерей. Для комплекта это двойной
- * счёт: документ уже назначил корпусу одну общую потерю, включающую всё
- * содержимое. Штрафы за импланты комплекта возвращаются обратно, штраф за сам
- * корпус остаётся.
+ * Корректирует системный предел восстановления человечности. Учитываются
+ * платные импланты действующего тела и Биосистема. Бесплатные фундаменты,
+ * неактивные корпуса и сам предмет-пакет не дают дополнительного штрафа.
  *
  * @param {Number} base - что насчитала система
  * @param {CPRActor} actor - персонаж
  * @returns {Number}
  */
 export function refundKitHumanity(base, actor) {
-  let refund = 0;
-  for (const item of actor.items) {
-    if (!item.getFlag?.(MODULE_ID, FLAGS.pktPart)) continue;
-    if (item.type !== "cyberware" || !item.system.isInstalledInActor) continue;
-
-    if (item.system.type === "borgware") refund += 4;
-    else if (parseInt(item.system.humanityLoss?.static, 10) > 0) refund += 2;
-  }
-  return base + refund;
+  return correctMaxHumanity(base, actor);
 }
 
 /**
@@ -192,7 +322,7 @@ export function refundKitHumanity(base, actor) {
 export function registerPktHooks() {
   Hooks.on("createItem", async (item, options, userId) => {
     // Создание отрабатывает у всех клиентов, а делать это должен один.
-    if (game.user.id !== userId || !getKit(item)) return;
+    if (game.user.id !== userId || !getKit(item) || options.cprAddendaSkipPktWizard) return;
     if (!(item.parent instanceof Actor)) return;
     try {
       // Комплект больше не разворачивается молча: полная конверсия тела —
@@ -261,6 +391,22 @@ export async function registerPktHumanityPatches() {
   // libWrapper адресует обёртки от globalThis, а классы системы наружу не
   // выставлены — публикуем ссылку под своим именем.
   globalThis.cprAddendaActorClass = CPRActor;
+  registerBorgActorPatches(CPRActor);
+  // Core 0.92.4 CPRMookActor.create starts super.create without returning or
+  // awaiting it. Preserve its token defaults and return the actual document.
+  const { default: CPRMookActor } = await import(`/systems/${SYSTEM_ID}/modules/actor/cpr-mook.js`);
+  if (/super\.create\(createData, options\);/.test(CPRMookActor.create.toString()) &&
+      !/\breturn\b/.test(CPRMookActor.create.toString())) {
+    globalThis.cprAddendaMookActorClass = CPRMookActor;
+    libWrapper.register(MODULE_ID, "cprAddendaMookActorClass.create",
+      function (_wrapped, data, options) {
+        const createData = clone(data);
+        if (typeof data.system === "undefined") createData.prototypeToken = {
+          "sight.enabled": true, bar1: { attribute: "derivedStats.hp" },
+        };
+        return CPRActor.create.call(this, createData, options);
+      }, "MIXED");
+  }
 
   // 1. Установка корпуса: система накапливает формулы всех вложенных имплантов
   //    и бросает кубик за каждый. У корпуса ПКТ своя формула из книги, и она
@@ -270,18 +416,47 @@ export async function registerPktHumanityPatches() {
     "cprAddendaActorClass.prototype.installCyberware",
     async function cprAddendaInstallCyberware(wrapped, itemId) {
       const item = this.getOwnedItem(itemId);
-      if (!getKit(item)) return wrapped(itemId);
-
-      const original = item.recursiveGetAllInstalledItems;
-      item.recursiveGetAllInstalledItems = () => [];
-      try {
-        return await wrapped(itemId);
-      } finally {
-        item.recursiveGetAllInstalledItems = original;
+      const prerequisite = checkBorgPrerequisites(this, item);
+      if (!prerequisite.ok) { ui.notifications.warn(prerequisite.reason); return false; }
+      if (getKit(item)) {
+        const { runPktWizard } = await import("./pkt-wizard.js");
+        return runPktWizard(item);
       }
+      const free = activePktFrame(this) && humanityPenalty(item, this) === 0;
+      const humanityLoss = item.system.humanityLoss;
+      if (free) item.system.humanityLoss = { roll: "0", static: 0 };
+      let result;
+      try { result = await wrapped(itemId); }
+      finally { if (free) item.system.humanityLoss = humanityLoss; }
+      if (result) await syncBorgArmor(this);
+      const frame = activePktFrame(this);
+      if (result && frame) {
+        if (!item.getFlag(MODULE_ID, FLAGS.pktPart)) await item.setFlag(MODULE_ID, "pktBody", { frame: frame.id, target: item.system.installedIn[0] });
+        await frame.setFlag(MODULE_ID, "pktSeenItems", pktContents(frame).map(i => i.id));
+      }
+      return result;
     },
     "MIXED"
   );
+
+  if (CPRActor.prototype.uninstallCyberware) libWrapper.register(MODULE_ID,
+    "cprAddendaActorClass.prototype.uninstallCyberware",
+    async function (wrapped, itemId, foundationalId, skipConfirm = false) {
+      const item = this.getOwnedItem(itemId);
+      if (!getKit(item)) return wrapped(itemId, foundationalId, skipConfirm);
+      // The original method owns the confirmation dialog. Its cancellation
+      // leaves the body installed, so no kit roots are touched in that case.
+      await wrapped(itemId, foundationalId, skipConfirm);
+      if (!item.system.isInstalledInActor) await uninstallPktFrame(item);
+      return true;
+    }, "MIXED");
+
+  if (CPRActor.prototype.loseHumanityValue) libWrapper.register(MODULE_ID,
+    "cprAddendaActorClass.prototype.loseHumanityValue",
+    function (wrapped, items, type) {
+      const payable = activePktFrame(this) ? items.filter(i => humanityPenalty(i, this) > 0) : items;
+      return wrapped(payable, type);
+    }, "MIXED");
 
   // 2. Лист «шестёрки» ставит брошенную на него кибернетику сам, не спрашивая.
   //    Для корпуса ПКТ это гонка: система открывает своё окно установки и

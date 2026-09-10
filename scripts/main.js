@@ -16,6 +16,7 @@
 import { MODULE_ID, SETTINGS } from "./constants.js";
 import { loadSystemConfig } from "./cpr-config.js";
 import { registerItemPatches } from "./item-patches.js";
+import { registerSkillRoleCompatibility } from "./skill-role-compat.js";
 import { resolveDvTable, getAttackRules, registerSystemDvPatch, toggleWeaponFireMode } from "./weapon-dv.js";
 import { areaKindOf } from "./area-attacks.js";
 import { registerRulerDistancePatch } from "./ruler-distance.js";
@@ -165,6 +166,7 @@ Hooks.once("init", () => {
       `${MODULE_ID} | libWrapper не найден. Механика модуля не будет работать, компендиумы останутся доступны.`
     );
   } else {
+    registerSkillRoleCompatibility();
     registerItemPatches();
     // Единственное место, где модуль вмешивается в бросок. Вынесено в
     // отдельную настройку: если что-то пойдёт не так с кубиками или чужими

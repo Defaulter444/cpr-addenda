@@ -6,7 +6,15 @@
   "folder": null,
   "sort": 0,
   "effects": [],
-  "flags": {},
+  "flags": {
+    "cpr-addenda": {
+      "borgRule": {
+        "kind": "cyberskull",
+        "fbcOnly": true,
+        "maxHumanityLoss": 0
+      }
+    }
+  },
   "system": {
     "ammoVariety": [],
     "attackmod": 0,
