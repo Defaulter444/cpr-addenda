@@ -6,7 +6,19 @@
  "folder": null,
  "sort": 0,
  "effects": [],
- "flags": {},
+ "flags": {
+  "cpr-addenda": {
+   "borgRule": {
+    "kind": "dragoonArmor",
+    "minimumBody": 16,
+    "maxHumanityLoss": 4,
+    "armor": {
+     "sp": 15,
+     "penalty": 2
+    }
+   }
+  }
+ },
  "system": {
   "ammoVariety": [],
   "attackmod": 0,

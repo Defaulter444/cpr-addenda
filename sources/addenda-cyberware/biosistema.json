@@ -6,7 +6,14 @@
  "folder": null,
  "sort": 0,
  "effects": [],
- "flags": {},
+ "flags": {
+  "cpr-addenda": {
+   "borgRule": {
+    "kind": "biosystem",
+    "maxHumanityLoss": 4
+   }
+  }
+ },
  "system": {
   "ammoVariety": [],
   "attackmod": 0,

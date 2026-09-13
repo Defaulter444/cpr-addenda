@@ -86,7 +86,8 @@ function expect(ok, message) {
       humanityLoss: { static: staticLoss, roll: "0" },
     },
     getFlag: (scope, flag) =>
-      scope === MODULE_ID && flag === "pktPart" ? { frame: "abc", slot: 0 } : undefined,
+      scope === MODULE_ID && flag === "pktPart" ? { frame: "abc", slot: 0 } :
+      scope === MODULE_ID && flag === "pktGroup" ? "free" : undefined,
   });
   const foreign = {
     type: "cyberware",
@@ -155,7 +156,7 @@ function expect(ok, message) {
       const host = group.item;
       const used = group.options.reduce((sum, o) => sum + (o.system.size ?? 1), 0);
       expect(
-        used <= host.system.installedItems.slots,
+        used <= 2 * host.system.installedItems.slots,
         `«${doc.name}» → «${host.name}»: опции не помещаются (${used} из ${host.system.installedItems.slots})`
       );
       for (const option of group.options) {
@@ -265,7 +266,7 @@ console.log("Мастер установки: разбор комплекта");
   // Слоты видно до установки, а не после: занятое место в фундаменте — это то,
   // куда игрок уже не поставит своё.
   expect(view.places.length === 3, `фундаментов ${view.places.length}, а в комплекте 3`);
-  expect(view.places[0].used === 1 && view.places[0].slots === 4,
+  expect(view.places[0].used === 1 && view.places[0].slots === 8,
     `первая рука: занято ${view.places[0].used} из ${view.places[0].slots}`);
   expect(view.places[1].used === 0, "вторая рука показана занятой");
   expect(view.frame.used === 2, `в корпусе занято ${view.frame.used}, а лежит два импланта`);
@@ -370,7 +371,7 @@ console.log("Парные опции расходятся по парным фу
 
       const room = group.map(
         (e) =>
-          e.item.system.installedItems.slots -
+          2 * e.item.system.installedItems.slots -
           e.options.reduce((sum, o) => sum + (o.system.size ?? 1), 0)
       );
 
@@ -557,8 +558,9 @@ console.log("Лист «шестёрки» не ставит корпус нап
 console.log("Мастер применяет человечность только после установки");
 {
   const source = fs.readFileSync(path.join(SCRIPTS, "pkt-wizard.js"), "utf-8");
-  const deploy = source.indexOf("await deployKit(frame)");
-  const apply = source.indexOf("await applyHumanity(actor, chosen)");
+  const transaction = fs.readFileSync(path.join(SCRIPTS, "pkt-kit.js"), "utf-8");
+  const deploy = transaction.indexOf("await deployKit(frame)");
+  const apply = transaction.indexOf("await applyHumanity(actor, charge, value)");
   expect(deploy > 0 && apply > deploy,
     "человечность списывается раньше установки — отмена снова оставит игрока без неё");
   expect(

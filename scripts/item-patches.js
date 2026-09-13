@@ -1,3 +1,6 @@
+import { applyBorgItemRules } from "./pkt-rules.js";
+import { applyAreaItemRules } from "./area-native.js";
+import { applySkillRoleItemCompatibility } from "./skill-role-compat.js";
 /**
  * Единая точка вмешательства в жизненный цикл предметов.
  *
@@ -49,6 +52,9 @@ export function registerItemPatches() {
         );
       }
 
+      applyBorgItemRules(this);
+      applyAreaItemRules(this);
+      applySkillRoleItemCompatibility(this);
       return result;
     },
     "WRAPPER"

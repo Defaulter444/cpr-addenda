@@ -6,7 +6,16 @@
   "folder": null,
   "sort": 0,
   "effects": [],
-  "flags": {},
+  "flags": {
+    "cpr-addenda": {
+      "borgRule": {
+        "kind": "coating",
+        "fbcOnly": true,
+        "maxHumanityLoss": 0,
+        "maximumBody": 15
+      }
+    }
+  },
   "system": {
     "ammoVariety": [],
     "attackmod": 0,
@@ -20,7 +29,7 @@
     "critFailEffect": "jammed",
     "damage": "1d6",
     "description": {
-      "value": "<p>Покрытие, делающее корпус неотличимым от биологического тела. Входит в комплект корпуса ПКТ.</p>"
+      "value": "<p>Человекоподобный облик ПКТ; ИК показывает холодный металл. Несовместим с Омегой и ТЕЛ 16+.</p>"
     },
     "dvTable": "",
     "favorite": false,
@@ -29,7 +38,7 @@
       "suppressiveFire": false
     },
     "humanityLoss": {
-      "roll": "1d6",
+      "roll": "0",
       "static": 0
     },
     "ignoreArmorPercent": 0,
@@ -55,7 +64,7 @@
       "value": 0
     },
     "price": {
-      "market": 0
+      "market": 1000
     },
     "providesHardening": false,
     "revealed": true,
@@ -65,7 +74,7 @@
       "book": "DataPool",
       "page": 0
     },
-    "type": "borgware",
+    "type": "cyberwareExternal",
     "unarmedAutomaticCalculation": true,
     "usage": "installed",
     "usesType": "magazine",

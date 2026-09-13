@@ -6,7 +6,16 @@
   "folder": null,
   "sort": 0,
   "effects": [],
-  "flags": {},
+  "flags": {
+    "cpr-addenda": {
+      "borgRule": {
+        "kind": "bodyweightCoating",
+        "fbcOnly": true,
+        "maxHumanityLoss": 2,
+        "hardwareSlots": 2
+      }
+    }
+  },
   "system": {
     "ammoVariety": [],
     "attackmod": 0,
@@ -20,7 +29,7 @@
     "critFailEffect": "jammed",
     "damage": "1d6",
     "description": {
-      "value": "<p>Интегрированное сетевое покрытие корпуса. Документ перечисляет его оснащение: Закалённая Схема, Теплоизоляция Проводки, КРАШ Барьер, Змееловка, ТАп «Увеличение Радиуса» (10 м). Входит в комплект корпуса ПКТ.</p>"
+      "value": "<p>Каждая установка даёт два общих слота оборудования встроенным кибердекам и подключает их без личного порта. Работает одна дека одновременно; преимущества бронекостюма «Бодивейт» не складываются.</p>"
     },
     "dvTable": "",
     "favorite": false,
@@ -29,8 +38,8 @@
       "suppressiveFire": false
     },
     "humanityLoss": {
-      "roll": "1d6",
-      "static": 0
+      "roll": "2d6",
+      "static": 7
     },
     "ignoreArmorPercent": 0,
     "ignoreBelowSP": 0,
@@ -55,7 +64,7 @@
       "value": 0
     },
     "price": {
-      "market": 0
+      "market": 1000
     },
     "providesHardening": false,
     "revealed": true,
@@ -65,7 +74,7 @@
       "book": "DataPool",
       "page": 0
     },
-    "type": "borgware",
+    "type": "cyberwareExternal",
     "unarmedAutomaticCalculation": true,
     "usage": "installed",
     "usesType": "magazine",

@@ -53,7 +53,17 @@
       }
     }
   ],
-  "flags": {},
+  "flags": {
+    "cpr-addenda": {
+      "borgRule": {
+        "kind": "internalFrame",
+        "body": 16,
+        "minimumBody": 10,
+        "muscleCount": 3,
+        "maxHumanityLoss": 8
+      }
+    }
+  },
   "system": {
     "ammoVariety": [],
     "attackmod": 0,
@@ -83,17 +93,17 @@
     "ignoreBelowSP": 0,
     "installLocation": "hospital",
     "installedItems": {
-      "allowed": true,
+      "allowed": false,
       "allowedTypes": [
         "itemUpgrade",
         "cyberware"
       ],
       "list": [],
-      "slots": 3,
+      "slots": 0,
       "usedSlots": 0
     },
     "isElectronic": true,
-    "isFoundational": true,
+    "isFoundational": false,
     "isRanged": false,
     "isWeapon": false,
     "magazine": {

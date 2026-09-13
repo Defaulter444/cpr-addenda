@@ -145,3 +145,13 @@
   white-space: nowrap;
   padding: 0 0.4rem;
 }
+.cpr-addenda-aoe { border-left: 3px solid #b4293d; padding: 6px; }
+.cpr-addenda-aoe h3 { font-size: 15px; margin: 8px 0; }
+.cpr-addenda-aoe ul { padding: 0; list-style: none; }
+.cpr-addenda-aoe li { border-top: 1px solid #9995; padding: 8px 0; }
+.cpr-addenda-aoe button { width: auto; font-size: 12px; line-height: 22px; margin: 3px 4px 3px 0; padding: 0 6px; }
+.cpr-addenda-aoe button:disabled { opacity: .45; }
+.cpr-addenda-aoe small { display: block; }
+.cpr-addenda-aoe details { margin-top: 8px; font-size: 12px; }
+.cpr-addenda-throw-grenade { width: auto; flex: 0 0 auto; font-size: 11px; line-height: 20px; }
+.cpr-addenda-shell-info { display: block; width: 100%; font-size: 11px; }

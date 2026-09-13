@@ -16,6 +16,7 @@
 import { MODULE_ID, SETTINGS } from "./constants.js";
 import { loadSystemConfig } from "./cpr-config.js";
 import { registerItemPatches } from "./item-patches.js";
+import { registerSkillRoleCompatibility } from "./skill-role-compat.js";
 import { registerAimedShotPatch } from "./aimed-shot.js";
 import { registerFormulaPatch } from "./roll-formula.js";
 import { registerPktHooks, registerPktHumanityPatches } from "./pkt-kit.js";
@@ -162,6 +163,7 @@ Hooks.once("init", () => {
     );
   } else {
     registerItemPatches();
+    registerSkillRoleCompatibility();
     // Единственное место, где модуль вмешивается в бросок. Вынесено в
     // отдельную настройку: если что-то пойдёт не так с кубиками или чужими
     // модулями, это выключается само по себе, без отключения всего модуля.

@@ -75,7 +75,17 @@
       }
     }
   ],
-  "flags": {},
+  "flags": {
+    "cpr-addenda": {
+      "borgRule": {
+        "kind": "hydraulics",
+        "fbcOnly": true,
+        "requiresInternalFrame": true,
+        "maxHumanityLoss": 2,
+        "statFloor": 6
+      }
+    }
+  },
   "system": {
     "ammoVariety": [],
     "attackmod": 0,
@@ -89,7 +99,7 @@
     "critFailEffect": "jammed",
     "damage": "1d6",
     "description": {
-      "value": "<p>Улучшенная гидравлика корпуса: РЕА, ЛВК и СКО пользователя устанавливаются на 6, если только они не являются более высокими. Входит в комплект корпуса ПКТ.</p>"
+      "value": "<p>Для ПКТ с эндоскелетом. Поднимает РЕА, ЛВК и СКО минимум до 6; штрафы применяются после повышения.</p>"
     },
     "dvTable": "",
     "favorite": false,
@@ -99,7 +109,7 @@
     },
     "humanityLoss": {
       "roll": "1d6",
-      "static": 0
+      "static": 3
     },
     "ignoreArmorPercent": 0,
     "ignoreBelowSP": 0,
@@ -124,7 +134,7 @@
       "value": 0
     },
     "price": {
-      "market": 0
+      "market": 5000
     },
     "providesHardening": false,
     "revealed": true,
@@ -134,7 +144,7 @@
       "book": "DataPool",
       "page": 0
     },
-    "type": "borgware",
+    "type": "cyberwareInternal",
     "unarmedAutomaticCalculation": true,
     "usage": "installed",
     "usesType": "magazine",
