@@ -206,7 +206,7 @@
                   }
                 },
                 "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/subdermal_grip.svg",
-                "name": "Подкожный захват",
+                "name": "Смартлинк",
                 "system": {
                   "ammoVariety": [],
                   "attackmod": 0,
@@ -219,7 +219,7 @@
                   "core": false,
                   "damage": "1d6",
                   "description": {
-                    "value": "<p>Система в кисти, позволяющая пользоваться умным оружием. Требует нейролинк.</p>"
+                    "value": "<p>Смартлинк соединяет умное оружие с нейролинком через пластину в ладони; личный порт для такого соединения не нужен. Требуется нейролинк, в котором имплант занимает один слот опций. Устанавливается в киберруку либо как единственный имплант в обычную руку. Бонус к атаке даёт коннектор смартлинка на самом оружии.</p>"
                   },
                   "dvTable": "",
                   "favorite": false,
@@ -383,7 +383,7 @@
                   }
                 },
                 "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/popup_melee_weapon.svg",
-                "name": "Выкидное холодное оружие",
+                "name": "Выкидное оружие ближнего боя",
                 "system": {
                   "ammoVariety": [],
                   "attackmod": 0,
@@ -474,7 +474,7 @@
                 }
               },
               "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/cyberaudio_suite.svg",
-              "name": "Набор кибераудио",
+              "name": "Комплекс Кибераудио",
               "system": {
                 "ammoVariety": [],
                 "attackmod": 0,
@@ -487,7 +487,7 @@
                 "core": false,
                 "damage": "1d6",
                 "description": {
-                  "value": "<p>Интерфейс для улучшений аудио.</p>"
+                  "value": "<p>Основа для опций кибераудио с тремя слотами. Персонаж может иметь только один комплекс кибераудио.</p>"
                 },
                 "dvTable": "",
                 "favorite": false,
@@ -562,7 +562,7 @@
                   }
                 },
                 "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/audio_recorder.svg",
-                "name": "Диктофон",
+                "name": "Аудио рекордер",
                 "system": {
                   "ammoVariety": [],
                   "attackmod": 0,
@@ -648,7 +648,7 @@
                   }
                 },
                 "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/radio_communicator.svg",
-                "name": "Радиокоммуникатор",
+                "name": "Коммуникатор",
                 "system": {
                   "ammoVariety": [],
                   "attackmod": 0,
@@ -792,7 +792,7 @@
                   }
                 },
                 "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/voice_stress_analyzer.svg",
-                "name": "Анализатор голосового напряжения",
+                "name": "Анализатор голосового стресса",
                 "system": {
                   "ammoVariety": [],
                   "attackmod": 0,
@@ -1149,7 +1149,7 @@
                   }
                 },
                 "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/anti_dazzle.svg",
-                "name": "Антиослепление",
+                "name": "Анти-ослепление",
                 "system": {
                   "ammoVariety": [],
                   "attackmod": 0,
@@ -1235,7 +1235,7 @@
                   }
                 },
                 "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/lowlight_ir_uv.svg",
-                "name": "ПНВ/ИК/УФ",
+                "name": "Слабое освещение/ИК/УФ",
                 "system": {
                   "ammoVariety": [],
                   "attackmod": 0,
@@ -1248,7 +1248,7 @@
                   "core": false,
                   "damage": "1d6",
                   "description": {
-                    "value": "<p>Работают в паре. Иммунитет к штрафам на зрение из-за освещения, тумана или дыма.</p>"
+                    "value": "<p>Пара опций для двух сопряжённых киберглаз, по два слота в каждом. Убирает штрафы к зрению от темноты, дыма и тумана. Позволяет различать тёплую плоть и холодный металл, но не видеть сквозь укрытия.</p>"
                   },
                   "dvTable": "",
                   "favorite": false,
@@ -1368,7 +1368,7 @@
                   }
                 },
                 "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/targeting_scope.svg",
-                "name": "Прицельный модуль",
+                "name": "Тактический прицел",
                 "system": {
                   "ammoVariety": [],
                   "attackmod": 0,
@@ -1381,7 +1381,7 @@
                   "core": false,
                   "damage": "1d6",
                   "description": {
-                    "value": "<p>+1 к проверкам прицельного выстрела.</p>"
+                    "value": "<p>Опция киберглаза: +1 к проверкам прицельного выстрела. Несколько таких имплантов не увеличивают бонус. Требуется киберглаз.</p>"
                   },
                   "dvTable": "",
                   "favorite": false,

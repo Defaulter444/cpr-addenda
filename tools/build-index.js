@@ -57,7 +57,11 @@ async function readPack(dbPath) {
     }
     const db = new ClassicLevel(tmp, { valueEncoding: "json" });
     const docs = [];
-    for await (const [, value] of db.iterator()) docs.push(value);
+    // Embedded ActiveEffects have their own records (!items.effects!). They
+    // are not additional inventory items and must not inflate audit counts.
+    for await (const [key, value] of db.iterator()) {
+      if (key.startsWith("!items!")) docs.push(value);
+    }
     await db.close();
     return docs;
   } finally {

@@ -115,7 +115,7 @@
                   }
                 },
                 "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/grapple_hand.svg",
-                "name": "Грейферная рука",
+                "name": "Рукохват",
                 "system": {
                   "ammoVariety": [],
                   "attackmod": 0,
@@ -128,7 +128,7 @@
                   "core": false,
                   "damage": "1d6",
                   "description": {
-                    "value": "<p>Выдвижной крюк-кошка в твоей ладони.</p>"
+                    "value": "<p>Опция киберруки. Действием запускает крюк к прочной опоре в пределах 30 м. Трос имеет 10 ПЗ и выдерживает двойной вес владельца; при подъёме по нему нет штрафа к передвижению. Отпустить трос можно без действия. Во время работы рука занята. Крючья не служат оружием и не позволяют захватывать противника.</p>"
                   },
                   "dvTable": "",
                   "favorite": false,
@@ -292,7 +292,7 @@
                   }
                 },
                 "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/grapple_hand.svg",
-                "name": "Грейферная рука",
+                "name": "Рукохват",
                 "system": {
                   "ammoVariety": [],
                   "attackmod": 0,
@@ -305,7 +305,7 @@
                   "core": false,
                   "damage": "1d6",
                   "description": {
-                    "value": "<p>Выдвижной крюк-кошка в твоей ладони.</p>"
+                    "value": "<p>Опция киберруки. Действием запускает крюк к прочной опоре в пределах 30 м. Трос имеет 10 ПЗ и выдерживает двойной вес владельца; при подъёме по нему нет штрафа к передвижению. Отпустить трос можно без действия. Во время работы рука занята. Крючья не служат оружием и не позволяют захватывать противника.</p>"
                   },
                   "dvTable": "",
                   "favorite": false,
@@ -469,7 +469,7 @@
                   }
                 },
                 "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/grapple_hand.svg",
-                "name": "Грейферная рука",
+                "name": "Рукохват",
                 "system": {
                   "ammoVariety": [],
                   "attackmod": 0,
@@ -482,7 +482,7 @@
                   "core": false,
                   "damage": "1d6",
                   "description": {
-                    "value": "<p>Выдвижной крюк-кошка в твоей ладони.</p>"
+                    "value": "<p>Опция киберруки. Действием запускает крюк к прочной опоре в пределах 30 м. Трос имеет 10 ПЗ и выдерживает двойной вес владельца; при подъёме по нему нет штрафа к передвижению. Отпустить трос можно без действия. Во время работы рука занята. Крючья не служат оружием и не позволяют захватывать противника.</p>"
                   },
                   "dvTable": "",
                   "favorite": false,
@@ -646,7 +646,7 @@
                   }
                 },
                 "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/grapple_hand.svg",
-                "name": "Грейферная рука",
+                "name": "Рукохват",
                 "system": {
                   "ammoVariety": [],
                   "attackmod": 0,
@@ -659,7 +659,7 @@
                   "core": false,
                   "damage": "1d6",
                   "description": {
-                    "value": "<p>Выдвижной крюк-кошка в твоей ладони.</p>"
+                    "value": "<p>Опция киберруки. Действием запускает крюк к прочной опоре в пределах 30 м. Трос имеет 10 ПЗ и выдерживает двойной вес владельца; при подъёме по нему нет штрафа к передвижению. Отпустить трос можно без действия. Во время работы рука занята. Крючья не служат оружием и не позволяют захватывать противника.</p>"
                   },
                   "dvTable": "",
                   "favorite": false,
@@ -735,7 +735,7 @@
                 }
               },
               "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/cyberaudio_suite.svg",
-              "name": "Набор кибераудио",
+              "name": "Комплекс Кибераудио",
               "system": {
                 "ammoVariety": [],
                 "attackmod": 0,
@@ -748,7 +748,7 @@
                 "core": false,
                 "damage": "1d6",
                 "description": {
-                  "value": "<p>Интерфейс для улучшений аудио.</p>"
+                  "value": "<p>Основа для опций кибераудио с тремя слотами. Персонаж может иметь только один комплекс кибераудио.</p>"
                 },
                 "dvTable": "",
                 "favorite": false,
@@ -1180,7 +1180,7 @@
                   }
                 },
                 "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/grip_foot.svg",
-                "name": "Цепкая стопа",
+                "name": "Цепкая подошва",
                 "system": {
                   "ammoVariety": [],
                   "attackmod": 0,
@@ -1357,7 +1357,7 @@
                   }
                 },
                 "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/grip_foot.svg",
-                "name": "Цепкая стопа",
+                "name": "Цепкая подошва",
                 "system": {
                   "ammoVariety": [],
                   "attackmod": 0,
@@ -1603,7 +1603,7 @@
                   }
                 },
                 "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/image_enhance.svg",
-                "name": "Улучшение изображения",
+                "name": "Усилитель Картинки",
                 "system": {
                   "ammoVariety": [],
                   "attackmod": 0,
@@ -1616,7 +1616,7 @@
                   "core": false,
                   "damage": "1d6",
                   "description": {
-                    "value": "<p>Работают в паре. +2 к проверкам внимания, чтения по губам и сокрытии/обнаружения предмета, требующим зрение.</p>"
+                    "value": "<p>Пара опций для двух сопряжённых киберглаз: +2 к проверкам внимательности, чтения по губам и сокрытия/обнаружения предметов, когда проверка опирается на зрение. Дополнительные установки бонус не увеличивают.</p>"
                   },
                   "dvTable": "",
                   "favorite": false,
@@ -1689,7 +1689,7 @@
                   }
                 },
                 "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/lowlight_ir_uv.svg",
-                "name": "ПНВ/ИК/УФ",
+                "name": "Слабое освещение/ИК/УФ",
                 "system": {
                   "ammoVariety": [],
                   "attackmod": 0,
@@ -1702,7 +1702,7 @@
                   "core": false,
                   "damage": "1d6",
                   "description": {
-                    "value": "<p>Работают в паре. Иммунитет к штрафам на зрение из-за освещения, тумана или дыма.</p>"
+                    "value": "<p>Пара опций для двух сопряжённых киберглаз, по два слота в каждом. Убирает штрафы к зрению от темноты, дыма и тумана. Позволяет различать тёплую плоть и холодный металл, но не видеть сквозь укрытия.</p>"
                   },
                   "dvTable": "",
                   "favorite": false,
@@ -1775,7 +1775,7 @@
                   }
                 },
                 "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/microvideo.svg",
-                "name": "Микровидео",
+                "name": "Микро-видео",
                 "system": {
                   "ammoVariety": [],
                   "attackmod": 0,
@@ -1919,7 +1919,7 @@
                   }
                 },
                 "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/teleoptics.svg",
-                "name": "Телеоптика",
+                "name": "Теле-оптика",
                 "system": {
                   "ammoVariety": [],
                   "attackmod": 0,
@@ -1932,7 +1932,7 @@
                   "core": false,
                   "damage": "1d6",
                   "description": {
-                    "value": "<p>Телескоп в глазу с дальностью обзора 800 м/ярд. +1 к одиночным и прицельным выстрелам на расстоянии от 50 м/ярд.</p>"
+                    "value": "<p>Опция киберглаза: позволяет различать детали на расстоянии до 800 м. Даёт +1 к одиночному или прицельному выстрелу по цели на расстоянии 51 м и дальше. Бонус не складывается с другими такими имплантами или снайперским прицелом. Требуется киберглаз.</p>"
                   },
                   "dvTable": "",
                   "favorite": false,
@@ -2320,7 +2320,7 @@
                   }
                 },
                 "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/tactile_boot.svg",
-                "name": "Тактильный усилитель",
+                "name": "Тактильное усиление",
                 "system": {
                   "ammoVariety": [],
                   "attackmod": 0,

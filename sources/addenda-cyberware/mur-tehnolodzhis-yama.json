@@ -207,7 +207,7 @@
                 }
               },
               "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/cyberaudio_suite.svg",
-              "name": "Набор кибераудио",
+              "name": "Комплекс Кибераудио",
               "system": {
                 "ammoVariety": [],
                 "attackmod": 0,
@@ -220,7 +220,7 @@
                 "core": false,
                 "damage": "1d6",
                 "description": {
-                  "value": "<p>Интерфейс для улучшений аудио.</p>"
+                  "value": "<p>Основа для опций кибераудио с тремя слотами. Персонаж может иметь только один комплекс кибераудио.</p>"
                 },
                 "dvTable": "",
                 "favorite": false,

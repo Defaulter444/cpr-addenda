@@ -314,7 +314,7 @@
                   }
                 },
                 "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/tool_hand.svg",
-                "name": "Рука мультитул",
+                "name": "Рука-мультитул",
                 "system": {
                   "ammoVariety": [],
                   "attackmod": 0,
@@ -491,7 +491,7 @@
                   }
                 },
                 "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/tool_hand.svg",
-                "name": "Рука мультитул",
+                "name": "Рука-мультитул",
                 "system": {
                   "ammoVariety": [],
                   "attackmod": 0,
@@ -580,7 +580,7 @@
                 }
               },
               "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/cyberaudio_suite.svg",
-              "name": "Набор кибераудио",
+              "name": "Комплекс Кибераудио",
               "system": {
                 "ammoVariety": [],
                 "attackmod": 0,
@@ -593,7 +593,7 @@
                 "core": false,
                 "damage": "1d6",
                 "description": {
-                  "value": "<p>Интерфейс для улучшений аудио.</p>"
+                  "value": "<p>Основа для опций кибераудио с тремя слотами. Персонаж может иметь только один комплекс кибераудио.</p>"
                 },
                 "dvTable": "",
                 "favorite": false,
@@ -892,7 +892,7 @@
                   }
                 },
                 "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/anti_dazzle.svg",
-                "name": "Антиослепление",
+                "name": "Анти-ослепление",
                 "system": {
                   "ammoVariety": [],
                   "attackmod": 0,
@@ -1155,7 +1155,7 @@
                   }
                 },
                 "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/anti_dazzle.svg",
-                "name": "Антиослепление",
+                "name": "Анти-ослепление",
                 "system": {
                   "ammoVariety": [],
                   "attackmod": 0,

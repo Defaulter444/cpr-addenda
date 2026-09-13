@@ -207,7 +207,7 @@
                 }
               },
               "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/cyberaudio_suite.svg",
-              "name": "Набор кибераудио",
+              "name": "Комплекс Кибераудио",
               "system": {
                 "ammoVariety": [],
                 "attackmod": 0,
@@ -220,7 +220,7 @@
                 "core": false,
                 "damage": "1d6",
                 "description": {
-                  "value": "<p>Интерфейс для улучшений аудио.</p>"
+                  "value": "<p>Основа для опций кибераудио с тремя слотами. Персонаж может иметь только один комплекс кибераудио.</p>"
                 },
                 "dvTable": "",
                 "favorite": false,
@@ -295,7 +295,7 @@
                   }
                 },
                 "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/radio_communicator.svg",
-                "name": "Радиокоммуникатор",
+                "name": "Коммуникатор",
                 "system": {
                   "ammoVariety": [],
                   "attackmod": 0,
@@ -472,7 +472,7 @@
                   }
                 },
                 "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/lowlight_ir_uv.svg",
-                "name": "ПНВ/ИК/УФ",
+                "name": "Слабое освещение/ИК/УФ",
                 "system": {
                   "ammoVariety": [],
                   "attackmod": 0,
@@ -485,7 +485,7 @@
                   "core": false,
                   "damage": "1d6",
                   "description": {
-                    "value": "<p>Работают в паре. Иммунитет к штрафам на зрение из-за освещения, тумана или дыма.</p>"
+                    "value": "<p>Пара опций для двух сопряжённых киберглаз, по два слота в каждом. Убирает штрафы к зрению от темноты, дыма и тумана. Позволяет различать тёплую плоть и холодный металл, но не видеть сквозь укрытия.</p>"
                   },
                   "dvTable": "",
                   "favorite": false,
@@ -735,7 +735,7 @@
                   }
                 },
                 "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/lowlight_ir_uv.svg",
-                "name": "ПНВ/ИК/УФ",
+                "name": "Слабое освещение/ИК/УФ",
                 "system": {
                   "ammoVariety": [],
                   "attackmod": 0,
@@ -748,7 +748,7 @@
                   "core": false,
                   "damage": "1d6",
                   "description": {
-                    "value": "<p>Работают в паре. Иммунитет к штрафам на зрение из-за освещения, тумана или дыма.</p>"
+                    "value": "<p>Пара опций для двух сопряжённых киберглаз, по два слота в каждом. Убирает штрафы к зрению от темноты, дыма и тумана. Позволяет различать тёплую плоть и холодный металл, но не видеть сквозь укрытия.</p>"
                   },
                   "dvTable": "",
                   "favorite": false,
@@ -1137,7 +1137,7 @@
               }
             },
             "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/radar_sonar_implant.svg",
-            "name": "Радар/сонар-имплант",
+            "name": "Радар/Сканер",
             "system": {
               "ammoVariety": [],
               "attackmod": 0,
@@ -1309,7 +1309,7 @@
               }
             },
             "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/web_foot.svg",
-            "name": "Перепончатая стопа",
+            "name": "Ласты",
             "system": {
               "ammoVariety": [],
               "attackmod": 0,
@@ -1395,7 +1395,7 @@
               }
             },
             "img": "systems/cyberpunk-red-core/icons/compendium/cyberware/web_foot.svg",
-            "name": "Перепончатая стопа",
+            "name": "Ласты",
             "system": {
               "ammoVariety": [],
               "attackmod": 0,
