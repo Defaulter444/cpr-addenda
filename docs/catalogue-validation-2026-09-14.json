@@ -9,7 +9,7 @@
     "weapons": 245,
     "damageRolls": 245,
     "attackRolls": 245,
-    "evidence": "runtime-full-final-2441-pass.json",
+    "evidence": "evidence/catalogue-runtime-2026-09-14.json",
     "sha256": "6e5e5460a81267a80d83552e67b3ea0d1b5e7168efe8171a764b652935f692d3"
   },
   "logic": {
