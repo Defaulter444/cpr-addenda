@@ -1,5 +1,6 @@
 /** Rules shared by the FBC installer and the real system document mixins. */
 import { MODULE_ID } from "./constants.js";
+import { catalogueHumanityExempt, catalogueTemporaryWillHp, catalogueCyberPrerequisite } from './catalogue-rules.js';
 
 const flag = (item, key) => item?.getFlag?.(MODULE_ID, key) ?? item?.flags?.[MODULE_ID]?.[key];
 export const isPktFrame = item => Boolean(flag(item, "pktKit"));
@@ -60,7 +61,8 @@ export function humanityPenalty(item, actor) {
 }
 
 export function correctMaxHumanity(base, actor) {
-  return base + installed(actor).reduce((sum, item) => sum + basePenalty(item) - humanityPenalty(item, actor), 0);
+  return base + installed(actor).reduce((sum, item) => sum + basePenalty(item) -
+    (catalogueHumanityExempt(item, actor) ? 0 : humanityPenalty(item, actor)), 0);
 }
 
 /** BODY prerequisites are checked before a frame's own BODY effect applies. */
@@ -72,6 +74,8 @@ export function checkBorgPrerequisites(actor, item) {
   if (rule.kind === "biosystem" && installed(actor).some(i => i.id !== item.id && borgRule(i).kind === "biosystem"))
     return { ok: false, reason: "Биосистема уже установлена." };
   if (flag(item, "pktPart")) return { ok: true }; // package deployment precedes body activation
+  const catalogueReason = catalogueCyberPrerequisite(actor, item);
+  if (catalogueReason) return { ok:false, reason:catalogueReason };
   if (installedBiosystem(actor) && !fbc && !isPktFrame(item) && rule.kind !== "biosystem" && !item.system.core)
     return { ok: false, reason: "Биосистема вне корпуса ПКТ не может использовать дополнительные киберимпланты." };
   if (rule.fbcOnly && !fbc) return { ok: false, reason: "Этот имплант устанавливается только в корпус ПКТ." };
@@ -224,8 +228,8 @@ export function registerBorgActorPatches(CPRActor) {
   register("getWoundStateMods", function (wrapped, ...args) { return activePktFrame(this) ? 0 : wrapped(...args); });
   register("calcMaxHp", function (wrapped, ...args) {
     const external = this.items.some(i => borgRule(i).kind === "externalFrame" && i.system.equipped === "equipped");
-    if (!external) return wrapped(...args);
-    return 10 + 5 * Math.ceil((this.system.stats.will.value + biologicalBody(this)) / 2) + (this.bonuses.maxHp || 0);
+    const base=external ? 10 + 5 * Math.ceil((this.system.stats.will.value + biologicalBody(this)) / 2) + (this.bonuses.maxHp || 0) : wrapped(...args);
+    return base-catalogueTemporaryWillHp(this);
   });
   register("_createDeathSaveRoll", function (wrapped, ...args) {
     const roll = wrapped(...args);

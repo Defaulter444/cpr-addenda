@@ -5,6 +5,7 @@
 import { ID, BLAST, SHOT, copy, areaGeometry, intersects, sceneScale, rangedDV, coverOutcome, effectiveTargets, snapshotAreaAttack } from './area-rules.js';
 import { canEvadeRanged, getEvasionSkill } from './ranged-evasion.js';
 import { resistanceSkill, applySpecial, empCandidates, rollBodyInjury, expireAreaEffects, gasProtection } from './area-effects.js';
+import { catalogueFireProtection } from './catalogue-rules.js';
 const SYS = 'cyberpunk-red-core';
 const esc = value => Handlebars.escapeExpression(String(value ?? ''));
 let socket, queue = Promise.resolve();
@@ -56,8 +57,11 @@ export function registerAreaWorkflow() {
     queue = queue.then(async () => {
       const key = `${combat.id}:${prev.round}:${prev.turn}`;
       if (actor.getFlag(ID, 'areaFireTick') === key) return;
-      await actor.update({ 'system.derivedStats.hp.value': actor.system.derivedStats.hp.value - 2, [`flags.${ID}.areaFireTick`]: key });
-      await ChatMessage.create({ content: `<p>${esc(actor.name)}: горение, −2 ПЗ (броня не применяется). Для тушения потратьте действие и снимите эффект горения.</p>` });
+      const fires = actor.effects.filter(e => e.flags?.[ID]?.areaFire);
+      if (!fires.length || catalogueFireProtection(actor,game.time.worldTime)) return;
+      const damage = Math.max(...fires.map(e => e.flags[ID].areaFireDamage === 4 ? 4 : 2));
+      await actor.update({ 'system.derivedStats.hp.value': actor.system.derivedStats.hp.value - damage, [`flags.${ID}.areaFireTick`]: key });
+      await ChatMessage.create({ content: `<p>${esc(actor.name)}: горение, −${damage} ПЗ (броня не применяется). Для тушения потратьте действие и снимите эффект горения.</p>` });
     }).catch(reportError);
   });
   Hooks.on('preUpdateActor', (actor, changes) => {
@@ -141,7 +145,7 @@ function collectTargets(area, geometry) {
       const previous = area.targets.find(row => row.uuid === t.document.uuid);
       const canDodge = ['character', 'mook'].includes(t.actor.type) && canEvadeRanged(t.actor);
       const coverUnknown = area.kind === BLAST && sightBlocked(area.blastCentre, t.center, 'move');
-      const immune = gasProtection(t.actor, area.profile.type);
+      const immune = area.profile.delivery!=='liquid' && gasProtection(t.actor, area.profile.type);
       return previous ?? { uuid: t.document.uuid, name: t.name, canDodge, defense: canDodge ? 'pending' : 'hit',
         coverHp: coverUnknown ? null : 0, shield: false, excluded: immune, immunity: immune ? 'Назальные фильтры / противогаз' : null, applied: false };
     });
@@ -258,12 +262,7 @@ export async function resolveAction({ messageId, action, data = {} }, userId) {
     if (area.phase !== 'defenses' || area.damage) return;
     if (effectiveTargets(area).some(t => t.defense === 'pending' || t.coverHp == null)) throw new Error('Сначала разрешите уклонения и неизвестные укрытия.');
     if (area.profile.mode === 'manual') throw new Error('Особый боеприпас: примените его отдельное книжное правило. Автоматический урон отключён.');
-    const { CPRDamageRoll } = await import(`/systems/${SYS}/modules/rolls/cpr-rolls.js`);
-    const p = area.profile;
-    const roll = new CPRDamageRoll(area.name, p.formula, area.weaponType);
-    if (p.mode === 'damage') roll.addMod(p.mods ?? []);
-    await roll.roll();
-    area.damage = { total: roll.resultTotal, formula: roll.formula, faces: [...roll.faces], critical: p.critical && roll.wasCritical() };
+    await rollAreaDamage(area);
   } else if (action === 'apply') {
     if (!area.damage) throw new Error('Сначала бросьте общий урон/эффект.');
     if (effectiveTargets(area).some(t => t.defense === 'pending' || t.coverHp == null)) throw new Error('Защита ещё не разрешена.');
@@ -290,15 +289,38 @@ export async function resolveAction({ messageId, action, data = {} }, userId) {
       if (template && area.profile.mode === 'smoke') await template.setFlag(ID, 'expires', game.time.worldTime + 60);
     }
   } else if (action === 'injury') {
-    if (!row || !row.needsInjury || row.injury) return;
-    row.injury = await rollBodyInjury(target.actor); row.needsInjury = false;
+    if (!row || !row.needsInjury) return;
+    await applyAreaInjuries(area,row,target.actor);
   } else throw new Error('Неизвестное действие площадной атаки.');
   await updateCard(message, area);
   return { phase: area.phase, revision: area.revision };
 }
-async function applyTarget(area, row, actor) {
-  const p = area.profile, damage = area.damage;
-  const cover = coverOutcome(area.kind, damage.total, row.coverHp);
+export async function rollAreaDamage(area) {
+  const { CPRDamageRoll } = await import(`/systems/${SYS}/modules/rolls/cpr-rolls.js`);
+  const p=area.profile;
+  const one=async()=>{
+    const roll=new CPRDamageRoll(area.name,p.formula,area.weaponType);
+    if(p.mode==='damage')roll.addMod(p.mods??[]);
+    await roll.roll();
+    return {total:roll.resultTotal,formula:roll.formula,faces:[...roll.faces],critical:p.critical&&roll.wasCritical()};
+  };
+  if(p.perTargetDamage) {
+    for(const row of effectiveTargets(area))row.damage=await one();
+    area.damage={perTarget:true};
+  } else area.damage=await one();
+}
+export async function applyAreaInjuries(area,row,actor,draw=rollBodyInjury) {
+  if(!row.injury)row.injury=await draw(actor);
+  if((area.profile.expansive || area.profile.type==='expansive') && row.injury.key==='Foreign Object' && !row.extraInjury) {
+    row.extraInjury=await draw(actor,{exclude:['Foreign Object']});
+  }
+  row.needsInjury=false;
+}
+export async function applyTarget(area, row, actor) {
+  const p = area.profile, damage = p.perTargetDamage ? row.damage : area.damage;
+  if(!damage)throw new Error('Для этой цели ещё не брошен урон.');
+  if (p.effect==='fire' && catalogueFireProtection(actor,game.time.worldTime)) { row.outcome='Пожарный костюм защищает от огня';return; }
+  const cover = coverOutcome(area.kind, damage.total, row.coverHp, p.coverImmune);
   row.coverRemaining = cover.remaining;
   if (cover.blocked) { row.outcome = 'Укрытие остановило атаку'; return; }
   if (row.save?.passed) { row.outcome = 'Сопротивление успешно'; return; }
@@ -308,6 +330,7 @@ async function applyTarget(area, row, actor) {
       const shields = actor.getEquippedArmors('shield');
       const hp = Math.max(0, ...shields.map(s => s.system.shieldHitPoints.value));
       if (hp > 0) {
+        if (p.coverImmune) { row.outcome='Щит остановил атаку и не повреждён';return; }
         await actor._ablateArmor('shield', Math.min(hp, damage.total));
         if (area.kind === SHOT || damage.total < hp) { row.outcome = 'Щит остановил атаку'; return; }
       }
@@ -327,16 +350,22 @@ async function applyTarget(area, row, actor) {
     await actor._applyDamage(damage.total, damage.critical ? 5 : 0, 'body', p.ablation,
       area.kind === BLAST ? (area.ammo.variety ?? 'grenade') : 'shotgunShell', p.ignoreArmorPercent, p.ignoreBelowSP, p.lethal,
       { damageReductionRole: true, damageReductionAE: true, useShield: false, brainDamageReduction: false });
-    await applySpecial(actor, p.effect, { penetrated });
+    await applySpecial(actor, p.effect, { penetrated, fireDamage:p.fireDamage });
     if (damage.critical) {
       row.needsInjury = true;
-      try { row.injury = await rollBodyInjury(actor); row.needsInjury = false; }
+      try { await applyAreaInjuries(area,row,actor); }
       catch (error) { row.injuryError = error.message; }
     }
   } else if (p.mode === 'direct') {
     if (!['character', 'mook'].includes(actor.type)) { row.outcome = 'Не является живой целью'; return; }
     await actor.update({ 'system.derivedStats.hp.value': before - damage.total });
-  } else if (p.mode === 'acid') await actor._ablateArmor('body', 1);
+  } else if (p.mode === 'acid') {
+    if (row.shield && actor.getEquippedArmors('shield').some(s=>s.system.shieldHitPoints.value>0)) {
+      await actor._ablateArmor('shield',1);row.outcome='Щит остановил жидкость';return;
+    }
+    await actor._ablateArmor('body',1);
+    if (p.acidAllArmor) await actor._ablateArmor('head',1);
+  }
   else await applySpecial(actor, p.effect, { empIds: row.empIds });
   row.hpBefore = before; row.hpAfter = actor.system.derivedStats?.hp?.value;
   row.outcome = p.mode === 'smoke' ? 'Дым: −4 к действиям, которым он мешает; 1 минута' : 'Применено';
@@ -358,15 +387,16 @@ export function renderCard(area) {
     const move = area.kind === BLAST && t.defense === 'dodged' && !t.moved ? button('dodgeMove','Переместить из зоны',t.uuid) : '';
     return `<li><strong>${esc(t.name)}</strong><br><span>${esc(state)}</span><div>${defense}${special}${emp}${move}</div>` +
       (!complete && !t.applied ? `<div class="aoe-gm">${button('cover',t.coverHp == null ? 'Укрытие: нужны ПЗ' : `Укрытие: ${t.coverHp} ПЗ${t.shield ? ' + щит' : ''}`,t.uuid, Boolean(area.damage))}${button('exclude',t.excluded ? 'Вернуть' : 'Исключить',t.uuid,Boolean(area.damage))}</div>` : '') +
-      (t.applied ? `<small>${esc(t.outcome)}${t.hpBefore !== t.hpAfter ? ` · ПЗ ${t.hpBefore} → ${t.hpAfter}` : ''}${t.coverHp > 0 ? ` · укрытие: ${t.coverRemaining} ПЗ` : ''}${t.injury ? ` · ${esc(t.injury.name)}` : ''}</small>` : '') +
+      (t.damage ? `<p>Урон: ${t.damage.total} (${esc(t.damage.formula)}: ${t.damage.faces.join(', ')})${t.damage.critical?' · критическая травма и +5 ПЗ':''}</p>`:'') +
+      (t.applied ? `<small>${esc(t.outcome)}${t.hpBefore !== t.hpAfter ? ` · ПЗ ${t.hpBefore} → ${t.hpAfter}` : ''}${t.coverHp > 0 ? ` · укрытие: ${t.coverRemaining} ПЗ` : ''}${t.injury ? ` · ${esc(t.injury.name)}` : ''}${t.extraInjury?` · ${esc(t.extraInjury.name)} (без второго бонусного урона)`:''}</small>` : '') +
       (t.error ? `<p>${esc(t.error)}</p>` : '') + (t.needsInjury ? button('injury','Назначить критическую травму',t.uuid) : '') + '</li>';
   }).join('');
-  const damage = area.damage ? `<p><b>Общий урон: ${area.damage.total}</b> (${esc(area.damage.formula)}: ${area.damage.faces.join(', ')})${area.damage.critical ? ' · критическая травма и +5 ПЗ каждой цели' : ''}</p>` : '';
+  const damage = area.damage?.perTarget ? '<p>Урон брошен отдельно для каждой цели.</p>' : area.damage ? `<p><b>Общий урон: ${area.damage.total}</b> (${esc(area.damage.formula)}: ${area.damage.faces.join(', ')})${area.damage.critical ? ' · критическая травма и +5 ПЗ каждой цели' : ''}</p>` : '';
   return `<section class="cpr-addenda-aoe">${area.attackHtml ?? ''}<h3>${esc(area.name)} · ${title}</h3><p>Атака ${area.attack}${area.dv != null ? ` · СЛ ${area.dv}` : ''}</p><p>${status}</p>` +
     (area.weaponFailure ? `<p>Критический провал оружия плохого качества: ${esc(({jammed:'задержка',destroyed:'оружие сломано',destroyedBeyondRepair:'оружие не подлежит ремонту',coinToss:'определите эффект броском монеты'})[area.weaponFailure] ?? 'см. описание оружия')}</p>${area.weaponFailure === 'jammed' ? button('unjam','Устранить задержку · действие') : ''}` : '') +
     (area.phase === 'placement' ? button('place','Указать точку') : '') + (area.phase === 'smart' ? button('smart','Донаведение · 1d10 + 10') : '') + (area.phase === 'scatter' ? `<div class="aoe-gm">${button('scatter','Указать место взрыва')}</div>` : '') +
     `<ul>${roster}</ul>${damage}` + (area.phase === 'defenses' ? `<div>${button('recount','Обновить цели', '',Boolean(area.damage))}${button('damage',area.profile.mode === 'damage' || area.profile.mode === 'direct' ? `Общий урон · ${area.profile.formula}` : 'Подготовить эффект','',Boolean(area.damage))}<span class="aoe-gm">${button('apply','Применить ко всем','',!area.damage)}</span></div>` : '') +
-    `<details><summary>Правила и укрытия</summary><p>Урон бросается один раз; броня и сопротивление считаются отдельно. Успешное уклонение исключает цель. При взрыве разрушенное укрытие пропускает полный урон, а не остаток. Стены Foundry не содержат ПЗ: мастер указывает их кнопкой «Укрытие». Для иммунитета или объекта вне опасности используйте «Исключить».</p><p>Дым: −4 только к действиям, которым мешает видимость. Специальные эффекты нестандартного боеприпаса требуют его отдельного правила.</p></details></section>`;
+    `<details><summary>Правила и укрытия</summary><p>${area.profile.perTargetDamage?'Для «Торнадо сюрикенов» урон бросается отдельно каждой цели.':'Урон бросается один раз.'} Броня и сопротивление считаются отдельно. Успешное уклонение исключает цель. ${area.profile.coverImmune?'Охранная граната не повреждает укрытие или щит; они блокируют попадание.':'При взрыве разрушенное укрытие пропускает полный урон, а не остаток.'} Стены Foundry не содержат ПЗ: мастер указывает их кнопкой «Укрытие». Для иммунитета или объекта вне опасности используйте «Исключить».</p><p>Дым: −4 только к действиям, которым мешает видимость. Специальные эффекты нестандартного боеприпаса требуют его отдельного правила.</p></details></section>`;
 }
 export async function selectPoint({sheet=null} = {}) {
   const restore=sheet?.rendered && !sheet._minimized;

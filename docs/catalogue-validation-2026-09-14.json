@@ -1,0 +1,34 @@
+{
+  "date": "2026-09-14",
+  "foundry": "12.331",
+  "system": "v0.92.4",
+  "native": {
+    "passed": 2441,
+    "failed": 0,
+    "errors": 0,
+    "weapons": 245,
+    "damageRolls": 245,
+    "attackRolls": 245,
+    "evidence": "runtime-full-final-2441-pass.json",
+    "sha256": "6e5e5460a81267a80d83552e67b3ea0d1b5e7168efe8171a764b652935f692d3"
+  },
+  "logic": {
+    "catalogue": 208,
+    "installation": 895,
+    "area": 108,
+    "pktKits": 641,
+    "pktNativeClassAdapter": 219
+  },
+  "ui": [
+    "MicroCutie mode buttons and changing labels",
+    "Tactical Umbrella mode buttons and changing labels",
+    "Junk ammunition armored/unarmored/cancel choices"
+  ],
+  "coverage": {
+    "reviewed-text-and-listed-fields": 1023,
+    "source-conflict-pending": 5,
+    "not-manually-reviewed": 140,
+    "effect-labels-only": 23
+  },
+  "limitations": "See catalogue-audit-2026-09-14.md; native smoke does not verify all special actions."
+}

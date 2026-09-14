@@ -14,6 +14,7 @@
 
 import { MODULE_ID, FLAGS, SETTINGS, getFlag, localize } from "./constants.js";
 import { weaponTypeLabel } from "./cpr-config.js";
+import { catalogueUpgradeFit } from './catalogue-rules.js';
 
 /**
  * Можно ли поставить эту модификацию в этот предмет.
@@ -25,12 +26,14 @@ import { weaponTypeLabel } from "./cpr-config.js";
  * @param {Item|Actor} container - предмет (или актёр), куда её ставят
  * @returns {{allowed: Boolean, reason: String|null}}
  */
-export function checkUpgradeFit(upgrade, container) {
+export function checkUpgradeFit(upgrade, container, requested = []) {
   const pass = { allowed: true, reason: null };
 
   // Ограничения касаются только модификаций, вставляемых в предметы.
   if (upgrade?.type !== "itemUpgrade") return pass;
   if (container?.documentName !== "Item") return pass;
+  const catalogue = catalogueUpgradeFit(upgrade, container, requested);
+  if (!catalogue.allowed) return catalogue;
 
   const allowedTypes = getFlag(upgrade, FLAGS.allowedWeaponTypes);
   const deniedTypes = getFlag(upgrade, FLAGS.deniedWeaponTypes);
@@ -85,7 +88,7 @@ function checkList(container, itemList) {
   if (!Array.isArray(itemList)) return true;
   let allowed = true;
   for (const item of itemList) {
-    const verdict = checkUpgradeFit(item, container);
+    const verdict = checkUpgradeFit(item, container, itemList);
     if (!verdict.allowed) {
       ui.notifications.error(verdict.reason);
       allowed = false;

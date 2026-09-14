@@ -1,6 +1,9 @@
 import { applyBorgItemRules } from "./pkt-rules.js";
 import { applyAreaItemRules } from "./area-native.js";
 import { applySkillRoleItemCompatibility } from "./skill-role-compat.js";
+import { applyCatalogueItemRules } from "./catalogue-runtime.js";
+import { applyCatalogueWeaponRules } from "./catalogue-weapons.js";
+import { applyCatalogueDeckRules } from "./catalogue-decks.js";
 /**
  * Единая точка вмешательства в жизненный цикл предметов.
  *
@@ -55,6 +58,9 @@ export function registerItemPatches() {
       applyBorgItemRules(this);
       applyAreaItemRules(this);
       applySkillRoleItemCompatibility(this);
+      applyCatalogueItemRules(this);
+      applyCatalogueWeaponRules(this);
+      applyCatalogueDeckRules(this);
       return result;
     },
     "WRAPPER"

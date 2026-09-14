@@ -1,0 +1,2415 @@
+[
+  {
+    "uuid": "Compendium.cyberpunk-red-core.black-chrome_armor.Item.r3uE9rEiOK1PQ9kr",
+    "name": "Мотоциклетный шлем МехаМэн",
+    "type": "armor",
+    "book": {
+      "book": "BC",
+      "page": 37
+    },
+    "reference": "equipment/armor:20",
+    "checks": [
+      "translation-only",
+      "source-conflict-pending:Data-Pool-SP15-vs-installed-source-Kevlar-SP7"
+    ],
+    "changed": true,
+    "originalName": "MechaMan Motorcycle Helmet",
+    "pack": "cyberpunk-red-core.black-chrome_armor"
+  },
+  {
+    "uuid": "Compendium.cyberpunk-red-core.black-chrome_clothing.Item.Ik8mQIo1XkBrPmN4",
+    "name": "Голо-одежда от Масетто",
+    "type": "clothing",
+    "book": {
+      "book": "BC",
+      "page": 35
+    },
+    "reference": null,
+    "checks": [],
+    "changed": true,
+    "originalName": "Masetto Holo-Wear",
+    "pack": "cyberpunk-red-core.black-chrome_clothing"
+  },
+  {
+    "uuid": "Compendium.cyberpunk-red-core.black-chrome_cyberware.Item.1I3XvXjC2cYqCTzn",
+    "name": "Киберпалец-брызгалка",
+    "type": "cyberware",
+    "book": {
+      "book": "BC",
+      "page": 26
+    },
+    "reference": null,
+    "checks": [],
+    "changed": true,
+    "originalName": "Squirt Cyberfinger",
+    "pack": "cyberpunk-red-core.black-chrome_cyberware"
+  },
+  {
+    "uuid": "Compendium.cyberpunk-red-core.black-chrome_cyberware.Item.6n9UMTK8mY6yDFB2",
+    "name": "Стандартный киберпалец",
+    "type": "cyberware",
+    "book": {
+      "book": "BC",
+      "page": 26
+    },
+    "reference": null,
+    "checks": [],
+    "changed": true,
+    "originalName": "Standard Cyberfinger",
+    "pack": "cyberpunk-red-core.black-chrome_cyberware"
+  },
+  {
+    "uuid": "Compendium.cyberpunk-red-core.black-chrome_cyberware.Item.AV1y4kaMRtHsVc0D",
+    "name": "Киберпалец-пневмошприц",
+    "type": "cyberware",
+    "book": {
+      "book": "BC",
+      "page": 24
+    },
+    "reference": null,
+    "checks": [],
+    "changed": true,
+    "originalName": "Airhypo Cyberfinger",
+    "pack": "cyberpunk-red-core.black-chrome_cyberware"
+  },
+  {
+    "uuid": "Compendium.cyberpunk-red-core.black-chrome_cyberware.Item.Eajel3kkoOKaczer",
+    "name": "Киберпалец — шариковая ручка",
+    "type": "cyberware",
+    "book": {
+      "book": "BC",
+      "page": 24
+    },
+    "reference": null,
+    "checks": [],
+    "changed": true,
+    "originalName": "Ballpoint Cyberfinger",
+    "pack": "cyberpunk-red-core.black-chrome_cyberware"
+  },
+  {
+    "uuid": "Compendium.cyberpunk-red-core.black-chrome_cyberware.Item.GkcLdOzI3jhtTYPd",
+    "name": "Киберпалец-ножницы/кусачки",
+    "type": "cyberware",
+    "book": {
+      "book": "BC",
+      "page": 26
+    },
+    "reference": null,
+    "checks": [],
+    "changed": true,
+    "originalName": "Wirecutter/Scissors Cyberfingers",
+    "pack": "cyberpunk-red-core.black-chrome_cyberware"
+  },
+  {
+    "uuid": "Compendium.cyberpunk-red-core.black-chrome_cyberware.Item.LY8v30DQnkuCOpIu",
+    "name": "Киберпалец-микрофон",
+    "type": "cyberware",
+    "book": {
+      "book": "BC",
+      "page": 25
+    },
+    "reference": null,
+    "checks": [],
+    "changed": true,
+    "originalName": "Microphone Cyberfinger",
+    "pack": "cyberpunk-red-core.black-chrome_cyberware"
+  },
+  {
+    "uuid": "Compendium.cyberpunk-red-core.black-chrome_cyberware.Item.LvFvoVzl06GzOVi0",
+    "name": "Киберпалец-баллончик с краской",
+    "type": "cyberware",
+    "book": {
+      "book": "BC",
+      "page": 26
+    },
+    "reference": null,
+    "checks": [],
+    "changed": true,
+    "originalName": "Spray Paint Cyberfinger",
+    "pack": "cyberpunk-red-core.black-chrome_cyberware"
+  },
+  {
+    "uuid": "Compendium.cyberpunk-red-core.black-chrome_cyberware.Item.NfrakevKusMULu6P",
+    "name": "Экстра-Сочленение конечности (кибернога)",
+    "type": "cyberware",
+    "book": {
+      "book": "BC",
+      "page": 18
+    },
+    "reference": "chrome/implants:163",
+    "checks": [
+      "translation-only",
+      "source-conflict-pending:Data-Pool-Acrobatics-vs-system-Contortionist"
+    ],
+    "changed": true,
+    "originalName": "Extra-Jointed Cyberleg Upgrade",
+    "pack": "cyberpunk-red-core.black-chrome_cyberware"
+  },
+  {
+    "uuid": "Compendium.cyberpunk-red-core.black-chrome_cyberware.Item.QQcjD2PAqtd0qxY4",
+    "name": "Киберпалец-фонарик",
+    "type": "cyberware",
+    "book": {
+      "book": "BC",
+      "page": 24
+    },
+    "reference": null,
+    "checks": [],
+    "changed": true,
+    "originalName": "Flashlight Cyberfinger",
+    "pack": "cyberpunk-red-core.black-chrome_cyberware"
+  },
+  {
+    "uuid": "Compendium.cyberpunk-red-core.black-chrome_cyberware.Item.Rk3bTGf7Vqdf53Yl",
+    "name": "Киберпалец-отмычка",
+    "type": "cyberware",
+    "book": {
+      "book": "BC",
+      "page": 25
+    },
+    "reference": null,
+    "checks": [],
+    "changed": true,
+    "originalName": "Lockpick Cyberfinger",
+    "pack": "cyberpunk-red-core.black-chrome_cyberware"
+  },
+  {
+    "uuid": "Compendium.cyberpunk-red-core.black-chrome_cyberware.Item.VSw96UuPdlXfu7Hy",
+    "name": "Стимулятор декларативной памяти",
+    "type": "cyberware",
+    "book": {
+      "book": "BC",
+      "page": 18
+    },
+    "reference": null,
+    "checks": [
+      "effect-labels-only"
+    ],
+    "changed": true,
+    "originalName": "Explicit Memory Stimulator",
+    "pack": "cyberpunk-red-core.black-chrome_cyberware"
+  },
+  {
+    "uuid": "Compendium.cyberpunk-red-core.black-chrome_cyberware.Item.Vvi8yU2On6338ALX",
+    "name": "Киберпалец-дротикомёт",
+    "type": "cyberware",
+    "book": {
+      "book": "BC",
+      "page": 24
+    },
+    "reference": null,
+    "checks": [],
+    "changed": true,
+    "originalName": "Dartgun Cyberfinger",
+    "pack": "cyberpunk-red-core.black-chrome_cyberware"
+  },
+  {
+    "uuid": "Compendium.cyberpunk-red-core.black-chrome_cyberware.Item.ag2NOC3S5eOUqQRT",
+    "name": "Киберпалец с отсеком для патронов",
+    "type": "cyberware",
+    "book": {
+      "book": "BC",
+      "page": 24
+    },
+    "reference": null,
+    "checks": [],
+    "changed": true,
+    "originalName": "Bullet Storage Cyberfinger",
+    "pack": "cyberpunk-red-core.black-chrome_cyberware"
+  },
+  {
+    "uuid": "Compendium.cyberpunk-red-core.black-chrome_cyberware.Item.fh46Z1LU3u4gJQLP",
+    "name": "Киберпалец-зажигалка",
+    "type": "cyberware",
+    "book": {
+      "book": "BC",
+      "page": 25
+    },
+    "reference": null,
+    "checks": [],
+    "changed": true,
+    "originalName": "Lighter Cyberfinger",
+    "pack": "cyberpunk-red-core.black-chrome_cyberware"
+  },
+  {
+    "uuid": "Compendium.cyberpunk-red-core.black-chrome_cyberware.Item.hqxjHYkBe9mLzl2B",
+    "name": "Киберпалец-однозарядник",
+    "type": "cyberware",
+    "book": {
+      "book": "BC",
+      "page": 26
+    },
+    "reference": null,
+    "checks": [],
+    "changed": true,
+    "originalName": "One Shot Special Cyberfinger",
+    "pack": "cyberpunk-red-core.black-chrome_cyberware"
+  },
+  {
+    "uuid": "Compendium.cyberpunk-red-core.black-chrome_cyberware.Item.iQMwC5XITZSDn4mz",
+    "name": "Экстра-Сочленение конечности (киберрука)",
+    "type": "cyberware",
+    "book": {
+      "book": "BC",
+      "page": 18
+    },
+    "reference": "chrome/implants:163",
+    "checks": [
+      "translation-only",
+      "source-conflict-pending:Data-Pool-Acrobatics-vs-system-Contortionist"
+    ],
+    "changed": true,
+    "originalName": "Extra-Jointed Cyberarm Upgrade",
+    "pack": "cyberpunk-red-core.black-chrome_cyberware"
+  },
+  {
+    "uuid": "Compendium.cyberpunk-red-core.black-chrome_cyberware.Item.sKD3i5CPsJLJPzIt",
+    "name": "Киберпалец-радиопеленгатор",
+    "type": "cyberware",
+    "book": {
+      "book": "BC",
+      "page": 25
+    },
+    "reference": null,
+    "checks": [],
+    "changed": true,
+    "originalName": "Homing Tracer Cyberfinger",
+    "pack": "cyberpunk-red-core.black-chrome_cyberware"
+  },
+  {
+    "uuid": "Compendium.cyberpunk-red-core.black-chrome_cyberware.Item.syuke8XbziKsSzbV",
+    "name": "Киберпалец с запасом воздуха",
+    "type": "cyberware",
+    "book": {
+      "book": "BC",
+      "page": 26
+    },
+    "reference": null,
+    "checks": [],
+    "changed": true,
+    "originalName": "Mini Air Supply Cyberfinger",
+    "pack": "cyberpunk-red-core.black-chrome_cyberware"
+  },
+  {
+    "uuid": "Compendium.cyberpunk-red-core.black-chrome_cyberware.Item.uOZRE7aMyIIj0f6j",
+    "name": "Киберпалец-лазерная указка",
+    "type": "cyberware",
+    "book": {
+      "book": "BC",
+      "page": 25
+    },
+    "reference": null,
+    "checks": [],
+    "changed": true,
+    "originalName": "Laser Pointer Cyberfinger",
+    "pack": "cyberpunk-red-core.black-chrome_cyberware"
+  },
+  {
+    "uuid": "Compendium.cyberpunk-red-core.dlc_exotics-of-2045.Item.NfrakevKusMULu6P",
+    "name": "Дополнительные сочленения киберноги",
+    "type": "cyberware",
+    "book": {
+      "book": "IRv2",
+      "page": 73
+    },
+    "reference": "chrome/implants:163",
+    "checks": [
+      "translation-only",
+      "source-conflict-pending:Data-Pool-Acrobatics-vs-system-Contortionist"
+    ],
+    "changed": true,
+    "originalName": "Extra-Jointed Cyberleg Upgrade",
+    "pack": "cyberpunk-red-core.dlc_exotics-of-2045"
+  },
+  {
+    "uuid": "Compendium.cyberpunk-red-core.dlc_exotics-of-2045.Item.iQMwC5XITZSDn4mz",
+    "name": "Дополнительные сочленения киберруки",
+    "type": "cyberware",
+    "book": {
+      "book": "IRv2",
+      "page": 73
+    },
+    "reference": "chrome/implants:163",
+    "checks": [
+      "translation-only",
+      "source-conflict-pending:Data-Pool-Acrobatics-vs-system-Contortionist"
+    ],
+    "changed": true,
+    "originalName": "Extra-Jointed Cyberarm Upgrade",
+    "pack": "cyberpunk-red-core.dlc_exotics-of-2045"
+  },
+  {
+    "uuid": "Compendium.cpr-addenda.addenda-gear.Item.cprAddEx00760000",
+    "name": "Ароматизированные Сигареты",
+    "type": "gear",
+    "book": {
+      "book": "Chromebook",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Ароматизированные Сигареты",
+    "pack": "cpr-addenda.addenda-gear"
+  },
+  {
+    "uuid": "Compendium.night-city-agent.services.Item.XpU7OtwtT60fG05u",
+    "name": "Подписка R.E.O. Meatwagon",
+    "type": "gear",
+    "book": {
+      "book": "",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Подписка R.E.O. Meatwagon",
+    "pack": "night-city-agent.services"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.00XWp9ZfRT1oCBFK",
+    "name": "Отделка оружия",
+    "type": "itemUpgrade",
+    "book": {
+      "book": "",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Отделка оружия",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.0BF7aE8rsFg3qKgP",
+    "name": "РеТокс",
+    "type": "drug",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [
+      "effect-labels-only"
+    ],
+    "changed": true,
+    "originalName": "РеТокс",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.0CDThubxOXNOmQtY",
+    "name": "Дробь («Шредер»)",
+    "type": "ammo",
+    "book": {
+      "page": 0,
+      "book": "NC G&C"
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Дробь («Шредер»)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.0JhZqlLoIPatfXzQ",
+    "name": "Психотическая ярость",
+    "type": "drug",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [
+      "effect-labels-only"
+    ],
+    "changed": true,
+    "originalName": "Психотическая ярость",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.0ycYO3dDsA7HIeYj",
+    "name": "Материалы для изготовления (техника), 250eb",
+    "type": "gear",
+    "book": {
+      "book": "Core",
+      "page": 148
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Материалы для изготовления (техника), 250eb",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.158xXALSxlGq6qJg",
+    "name": "Патроны для очень тяжёлого пистолета (кислотные)",
+    "type": "ammo",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Патроны для очень тяжёлого пистолета (кислотные)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.1DcoXC8hzs42udx4",
+    "name": "Стрела (с ядом, вер. G&C)",
+    "type": "ammo",
+    "book": {
+      "book": "Core",
+      "page": 346
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Стрела (с ядом, вер. G&C)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.1ggXioyVR1tPYF30",
+    "name": "Тяжёлая неуязвимость",
+    "type": "drug",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [
+      "effect-labels-only"
+    ],
+    "changed": true,
+    "originalName": "Тяжёлая неуязвимость",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.59BuzBYLdMGUAf5J",
+    "name": "Граната (усыпляющая, вер. G&C)",
+    "type": "ammo",
+    "book": {
+      "book": "Core",
+      "page": 346
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Граната (усыпляющая, вер. G&C)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.5tdHMiPVudSsEQS8",
+    "name": "Броня (вер. G&C)",
+    "type": "program",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Броня (вер. G&C)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.6FWIhwqUpN4lHMJg",
+    "name": "Быстрый Гонсалвес (вер. G&C)",
+    "type": "program",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [
+      "effect-labels-only"
+    ],
+    "changed": true,
+    "originalName": "Быстрый Гонсалвес (вер. G&C)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.72StUEbWDcIKuBAT",
+    "name": "Урон «Опустошителя»",
+    "type": "drug",
+    "book": {
+      "book": "",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [
+      "effect-labels-only"
+    ],
+    "changed": true,
+    "originalName": "Урон «Опустошителя»",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.7i7qT7RG87N05IH7",
+    "name": "Наряд — городской эпатаж (вер. G&C)",
+    "type": "clothing",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [
+      "effect-labels-only"
+    ],
+    "changed": true,
+    "originalName": "Наряд — городской эпатаж (вер. G&C)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.7ysAlFRaRVywsoMS",
+    "name": "Граната (зажигательная, вер. G&C)",
+    "type": "ammo",
+    "book": {
+      "book": "Core",
+      "page": 346
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Граната (зажигательная, вер. G&C)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.80FygvG5kvEsw9vn",
+    "name": "Граната (с биотоксином, вер. G&C)",
+    "type": "ammo",
+    "book": {
+      "book": "Core",
+      "page": 345
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Граната (с биотоксином, вер. G&C)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.87zPrxDjw7WIIJz7",
+    "name": "Отсек для токсинов",
+    "type": "itemUpgrade",
+    "book": {
+      "book": "",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Отсек для токсинов",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.8HiBXhTMq5r2EKlM",
+    "name": "Парашют «Изи-Бриз»",
+    "type": "armor",
+    "book": {
+      "book": "",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Парашют «Изи-Бриз»",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.9aVjOoHKAHnozflV",
+    "name": "Осколок навыка (ближний бой x2)",
+    "type": "cyberware",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Осколок навыка (ближний бой x2)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.9zWdXsEKlHizp3Lb",
+    "name": "Транспортный бонус Тигриных когтей",
+    "type": "gear",
+    "book": {
+      "book": "",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [
+      "effect-labels-only"
+    ],
+    "changed": true,
+    "originalName": "Транспортный бонус Тигриных когтей",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.AC7vMe8yOhSSZXwo",
+    "name": "Стрела (кислотная)",
+    "type": "ammo",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Стрела (кислотная)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.Ab6F2cm7JsFJ7i7N",
+    "name": "Функция EZ-SHRNK (сжатие)",
+    "type": "itemUpgrade",
+    "book": {
+      "book": "",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Функция EZ-SHRNK (сжатие)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.B5j9sgWA2kEvAsVG",
+    "name": "Мягкий хват//полый сердечник",
+    "type": "itemUpgrade",
+    "book": {
+      "book": "",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Мягкий хват//полый сердечник",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.B9TP4sCo4mAOiiSP",
+    "name": "Ампула с биотоксином (вер. G&C)",
+    "type": "gear",
+    "book": {
+      "book": "",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Ампула с биотоксином (вер. G&C)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.BLzhsdLWIpWyXsPZ",
+    "name": "«Гром-палка»",
+    "type": "weapon",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "«Гром-палка»",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.BPleSQO9PrkqxOxH",
+    "name": "Материалы для терапии (медтехник), 500eb",
+    "type": "gear",
+    "book": {
+      "book": "Core",
+      "page": 229
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Материалы для терапии (медтехник), 500eb",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.BUm0iJWVjE6nmscU",
+    "name": "Дрон «WalkMek»",
+    "type": "gear",
+    "book": {
+      "page": 0,
+      "book": "NC G&C"
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Дрон «WalkMek»",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.BVxCwt3yuTY0ad1z",
+    "name": "Наряд — Азия-поп (вер. G&C)",
+    "type": "clothing",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [
+      "effect-labels-only"
+    ],
+    "changed": true,
+    "originalName": "Наряд — Азия-поп (вер. G&C)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.Bgzdx5JoKPlqIznN",
+    "name": "Оружейный ремень",
+    "type": "itemUpgrade",
+    "book": {
+      "book": "",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Оружейный ремень",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.CIPXu84O9XCyRexZ",
+    "name": "Когтистая ступня (вер. G&C)",
+    "type": "cyberware",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Когтистая ступня (вер. G&C)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.CzeEAJPGiP2xmA6H",
+    "name": "«Спираль» (вер. G&C)",
+    "type": "weapon",
+    "book": {
+      "book": "Core",
+      "page": 349
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "«Спираль» (вер. G&C)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.DF4lyogRY213rlbw",
+    "name": "Наряд — бомж-шик (вер. G&C)",
+    "type": "clothing",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [
+      "effect-labels-only"
+    ],
+    "changed": true,
+    "originalName": "Наряд — бомж-шик (вер. G&C)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.EJzpbiYd1utHZuZv",
+    "name": "Кибердека (Отличное, вер. G&C)",
+    "type": "cyberdeck",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Кибердека (Отличное, вер. G&C)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.ETrfRkbVeiBuoIB6",
+    "name": "Червь (вер. G&C)",
+    "type": "program",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [
+      "effect-labels-only"
+    ],
+    "changed": true,
+    "originalName": "Червь (вер. G&C)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.FjecvxjTznS1aktt",
+    "name": "Щит из пуленепробиваемого стекла",
+    "type": "armor",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Щит из пуленепробиваемого стекла",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.G4tPG6L2dN8y9q83",
+    "name": "Граната (самодельная)",
+    "type": "weapon",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Граната (самодельная)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.GnuiCXXoULEAzBHT",
+    "name": "Снайперская винтовка (патроны «Слон»)",
+    "type": "ammo",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Снайперская винтовка (патроны «Слон»)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.H3KyRoaHKgjZDJJU",
+    "name": "Материалы для изготовления (техника), 1000eb",
+    "type": "gear",
+    "book": {
+      "book": "Core",
+      "page": 148
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Материалы для изготовления (техника), 1000eb",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.H5X7bmO5lLuJVk9H",
+    "name": "Осколок навыка (выступление)",
+    "type": "cyberware",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Осколок навыка (выступление)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.Hat1nKbqvilFyvJ5",
+    "name": "Набор инструментов подрывника",
+    "type": "gear",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [
+      "effect-labels-only"
+    ],
+    "changed": true,
+    "originalName": "Набор инструментов подрывника",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.Ih4SA0KlAx2VA1dj",
+    "name": "Биозамок оружия",
+    "type": "itemUpgrade",
+    "book": {
+      "book": "",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Биозамок оружия",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.J3on2r0FOqhhC0YR",
+    "name": "Осколок навыка (техника)",
+    "type": "cyberware",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Осколок навыка (техника)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.JErsb2QGVZH8CQqh",
+    "name": "Гарпун",
+    "type": "ammo",
+    "book": {
+      "book": "",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Гарпун",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.JgSLWNNykYqaxlph",
+    "name": "Броня армированного шасси",
+    "type": "armor",
+    "book": {
+      "book": "",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Броня армированного шасси",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.KbOBuHF3PmaVCIUQ",
+    "name": "Гелевая взрывчатка",
+    "type": "gear",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Гелевая взрывчатка",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.KhBDcnHTDrRet3K7",
+    "name": "Ракета (кассетная)",
+    "type": "ammo",
+    "book": {
+      "book": "",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Ракета (кассетная)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.KmtkmUePEGG5Q8h0",
+    "name": "Материалы для изготовления (киберимпланты), 1000eb",
+    "type": "gear",
+    "book": {
+      "book": "Core",
+      "page": 148
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Материалы для изготовления (киберимпланты), 1000eb",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.Lngekq92VJ33XwsX",
+    "name": "Модификация наряда",
+    "type": "itemUpgrade",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Модификация наряда",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.MNkEWmxfAS24Btcy",
+    "name": "Жакан (кислотный)",
+    "type": "ammo",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Жакан (кислотный)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.MiJkX8duZ0ryxSCY",
+    "name": "Гарпунная пушка",
+    "type": "weapon",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Гарпунная пушка",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.MzxyikFkfbZyUa61",
+    "name": "Ампула со снотворным",
+    "type": "gear",
+    "book": {
+      "book": "",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Ампула со снотворным",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.NXNZbNXboCSxVDc0",
+    "name": "Крюк и трос «Кровожада»",
+    "type": "ammo",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Крюк и трос «Кровожада»",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.NdgKOpZ4qDd0QRl5",
+    "name": "Граната (со слезоточивым газом, вер. G&C)",
+    "type": "ammo",
+    "book": {
+      "book": "Core",
+      "page": 347
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Граната (со слезоточивым газом, вер. G&C)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.QuzCl6scyEF1Vg3v",
+    "name": "Оплата такси",
+    "type": "gear",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Оплата такси",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.QxLeC806zD46euzo",
+    "name": "Наряд — богема (вер. G&C)",
+    "type": "clothing",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [
+      "effect-labels-only"
+    ],
+    "changed": true,
+    "originalName": "Наряд — богема (вер. G&C)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.RPBnsz2qo46GvzE4",
+    "name": "Осколок навыка (дальний бой x2)",
+    "type": "cyberware",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Осколок навыка (дальний бой x2)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.S2iTdaoiTC2kL01g",
+    "name": "Наряд — цвета банды (вер. G&C)",
+    "type": "clothing",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [
+      "effect-labels-only"
+    ],
+    "changed": true,
+    "originalName": "Наряд — цвета банды (вер. G&C)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.S3cl9fw0ArmXZWiI",
+    "name": "Патроны для очень тяжёлого пистолета (экспансивные — переработка)",
+    "type": "ammo",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Патроны для очень тяжёлого пистолета (экспансивные — переработка)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.SQiqqYJ2IAwH6HaO",
+    "name": "Меч (вер. G&C)",
+    "type": "program",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [
+      "effect-labels-only"
+    ],
+    "changed": true,
+    "originalName": "Меч (вер. G&C)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.TlW1fT7vnbbHVoF0",
+    "name": "Наряд — высокая мода (вер. G&C)",
+    "type": "clothing",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Наряд — высокая мода (вер. G&C)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.UJt0gTKsuVtVDVlL",
+    "name": "Материалы для изготовления (киберимпланты), 250eb",
+    "type": "gear",
+    "book": {
+      "book": "Core",
+      "page": 148
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Материалы для изготовления (киберимпланты), 250eb",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.UKTwWYF0PNozdqGB",
+    "name": "Кумулятивные заряды",
+    "type": "gear",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Кумулятивные заряды",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.V5o0dyFoUYBVQsl0",
+    "name": "Улучшенный тяжёлый арморджек (Голова)",
+    "type": "armor",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Улучшенный тяжёлый арморджек (Голова)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.VADgcYJOX7iC3m9E",
+    "name": "Складные компоненты",
+    "type": "itemUpgrade",
+    "book": {
+      "book": "",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Складные компоненты",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.WgIFvOkJ8D1UzHBD",
+    "name": "«Кровожад»",
+    "type": "cyberware",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "«Кровожад»",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.YDmjW22TaVlPb1xl",
+    "name": "Хрупкие кромки",
+    "type": "itemUpgrade",
+    "book": {
+      "book": "",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Хрупкие кромки",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.Yhi5WAL2wvco0KwD",
+    "name": "Патроны для среднего пистолета (термитные)",
+    "type": "ammo",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Патроны для среднего пистолета (термитные)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.YkJUOWWjMuEel57c",
+    "name": "Перепончатая ступня (вер. G&C)",
+    "type": "cyberware",
+    "book": {
+      "book": "NC G&C",
+      "page": 367
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Перепончатая ступня (вер. G&C)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.ZWD9AIOctJDJ2l2A",
+    "name": "Осколок навыка (восприятие)",
+    "type": "cyberware",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Осколок навыка (восприятие)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.Zn6yXua7wYNPijab",
+    "name": "Патроны для среднего пистолета (кислотные)",
+    "type": "ammo",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Патроны для среднего пистолета (кислотные)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.a7xFor0OklEuTYMx",
+    "name": "Патроны для среднего пистолета (экспансивные — переработка)",
+    "type": "ammo",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Патроны для среднего пистолета (экспансивные — переработка)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.a9jFAOevGxzlTL43",
+    "name": "Винтовочные патроны (термитные)",
+    "type": "ammo",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Винтовочные патроны (термитные)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.aMMFle0itifsJ5e2",
+    "name": "Утяжелённое оружие",
+    "type": "itemUpgrade",
+    "book": {
+      "book": "",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Утяжелённое оружие",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.axLPuSaukO0KlQi2",
+    "name": "Стелс Сталкера",
+    "type": "drug",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [
+      "effect-labels-only"
+    ],
+    "changed": true,
+    "originalName": "Стелс Сталкера",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.b6DMIu5AkNEm4ry3",
+    "name": "Ампула с ядом (вер. G&C)",
+    "type": "gear",
+    "book": {
+      "book": "",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Ампула с ядом (вер. G&C)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.bzxi77QrqnZcV1Pr",
+    "name": "Осколочная пушка Мусорщиков",
+    "type": "weapon",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Осколочная пушка Мусорщиков",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.c9i4uOsHLyfUgDsa",
+    "name": "Щит (вер. G&C)",
+    "type": "program",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Щит (вер. G&C)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.cBWILI3omPfM0a2i",
+    "name": "Улучшенные прицелы",
+    "type": "cyberware",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Улучшенные прицелы",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.cDwnKHFRrbdcoBsn",
+    "name": "Стрела (с биотоксином, вер. G&C)",
+    "type": "ammo",
+    "book": {
+      "book": "Core",
+      "page": 345
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Стрела (с биотоксином, вер. G&C)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.cMgjvdwTASBkBKsA",
+    "name": "Стиратель (вер. G&C)",
+    "type": "program",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Стиратель (вер. G&C)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.dDHdpd3mZ4Ca4UEa",
+    "name": "Черепные пластины",
+    "type": "armor",
+    "book": {
+      "book": "",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Черепные пластины",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.dRxkoEcrFd75Eoak",
+    "name": "Электризованная рукоять",
+    "type": "cyberware",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Электризованная рукоять",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.dkugzXCAcaJtFWFj",
+    "name": "Улучшенный металгир (Голова)",
+    "type": "armor",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Улучшенный металгир (Голова)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.euBZt3ggUrn3TWBf",
+    "name": "Осколок навыка (техника x2)",
+    "type": "cyberware",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Осколок навыка (техника x2)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.fJHggwGm9Tj1udEP",
+    "name": "Наземный дрон",
+    "type": "gear",
+    "book": {
+      "page": 0,
+      "book": "NC G&C"
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Наземный дрон",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.fiIxu1nCw3lMtcun",
+    "name": "«Мумбо-Юмбо»",
+    "type": "drug",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [
+      "effect-labels-only"
+    ],
+    "changed": true,
+    "originalName": "«Мумбо-Юмбо»",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.gamW2wgtuxIkKTVI",
+    "name": "Устройство активной маскировки",
+    "type": "gear",
+    "book": {
+      "book": "",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Устройство активной маскировки",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.hEcYjYzcWUdCiuW8",
+    "name": "Улучшенный средний арморджек (Тело)",
+    "type": "armor",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Улучшенный средний арморджек (Тело)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.hLs4Po0nQltZ2VEM",
+    "name": "Патроны для тяжёлого пистолета (кислотные)",
+    "type": "ammo",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Патроны для тяжёлого пистолета (кислотные)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.hriZjGe3kZhgrjr0",
+    "name": "Материалы для изготовления (оружие), 1000eb",
+    "type": "gear",
+    "book": {
+      "book": "Core",
+      "page": 148
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Материалы для изготовления (оружие), 1000eb",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.ic9ClLEALLAIh3kB",
+    "name": "Кибердека (вер. G&C)",
+    "type": "cyberdeck",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Кибердека (вер. G&C)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.ilyrFD6bLpo7XGIH",
+    "name": "Коктейль Молотова (вер. G&C)",
+    "type": "weapon",
+    "book": {
+      "book": "BC+",
+      "page": 4
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Коктейль Молотова (вер. G&C)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.ir3j7PrDFg2dYEJG",
+    "name": "Наряд — спортивки (вер. G&C)",
+    "type": "clothing",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [
+      "effect-labels-only"
+    ],
+    "changed": true,
+    "originalName": "Наряд — спортивки (вер. G&C)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.irvqwDGLqyKKdy14",
+    "name": "Воздушный дрон",
+    "type": "gear",
+    "book": {
+      "page": 0,
+      "book": "NC G&C"
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Воздушный дрон",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.ivguRygnMnb0WEeg",
+    "name": "Дорогое альпинистское снаряжение",
+    "type": "gear",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Дорогое альпинистское снаряжение",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.jJlgmvEuM61ZVA57",
+    "name": "Материалы для изготовления (оружие), 500eb",
+    "type": "gear",
+    "book": {
+      "book": "Core",
+      "page": 148
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Материалы для изготовления (оружие), 500eb",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.jR8jy0pgtC5wCcNt",
+    "name": "Улучшенный средний арморджек (Голова)",
+    "type": "armor",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Улучшенный средний арморджек (Голова)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.jTVBMPcjNWVBHjGt",
+    "name": "Автоулучшенные рефлексы",
+    "type": "cyberware",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Автоулучшенные рефлексы",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.jhoUf3WMcaQbiNdr",
+    "name": "Черепные пластины",
+    "type": "cyberware",
+    "book": {
+      "book": "",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Черепные пластины",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.l4Tn7nMQbSj1hXs4",
+    "name": "Пушка «Бастард»",
+    "type": "weapon",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Пушка «Бастард»",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.lRbQlhuvwOgrrNnk",
+    "name": "Мод «Опустошитель»",
+    "type": "cyberware",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Мод «Опустошитель»",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.lgqltzFMifa8A8RV",
+    "name": "Банхаммер (вер. G&C)",
+    "type": "program",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [
+      "effect-labels-only"
+    ],
+    "changed": true,
+    "originalName": "Банхаммер (вер. G&C)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.mVZ7Yx0GIDmyRtAP",
+    "name": "Осколок навыка (дальний бой)",
+    "type": "cyberware",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Осколок навыка (дальний бой)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.mXRreHR7BDn6yu5z",
+    "name": "Патроны для очень тяжёлого пистолета (термитные)",
+    "type": "ammo",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Патроны для очень тяжёлого пистолета (термитные)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.mjeHBqT9sz60RGK0",
+    "name": "Усиленный щит",
+    "type": "armor",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Усиленный щит",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.mudvHaMswgLhkVCh",
+    "name": "Наряд — обычный шик (вер. G&C)",
+    "type": "clothing",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Наряд — обычный шик (вер. G&C)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.npsSFTXbFgzkxpBi",
+    "name": "Осколок навыка (образование)",
+    "type": "cyberware",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Осколок навыка (образование)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.o9PXaS85Tv3bWuiO",
+    "name": "Шоковая палка",
+    "type": "weapon",
+    "book": {
+      "book": "",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [
+      "effect-labels-only"
+    ],
+    "changed": true,
+    "originalName": "Шоковая палка",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.obVygb5exnu2XKEV",
+    "name": "Улучшенный металгир (Тело)",
+    "type": "armor",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Улучшенный металгир (Тело)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.p9CcNsrlUGZVFw52",
+    "name": "Винтовочные патроны (экспансивные — переработка)",
+    "type": "ammo",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Винтовочные патроны (экспансивные — переработка)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.pdIgLXI1suBJddcI",
+    "name": "Патроны для тяжёлого пистолета (экспансивные — переработка)",
+    "type": "ammo",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Патроны для тяжёлого пистолета (экспансивные — переработка)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.prInBBi7e4oOdyvj",
+    "name": "Винтовочные патроны (кислотные)",
+    "type": "ammo",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Винтовочные патроны (кислотные)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.pten4yQ96khTETGA",
+    "name": "Прыжковый усилитель (вер. G&C)",
+    "type": "cyberware",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Прыжковый усилитель (вер. G&C)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.q8glVKy0t20dT7rs",
+    "name": "Настроенные прицелы",
+    "type": "itemUpgrade",
+    "book": {
+      "book": "Homebrew",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Настроенные прицелы",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.qPoNKsGkyrqr7lUe",
+    "name": "Нагреваемые потрошители",
+    "type": "cyberware",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Нагреваемые потрошители",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.qgHGSrdtWb9dsL3a",
+    "name": "Улучшенная противоосколочная броня (Голова)",
+    "type": "armor",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Улучшенная противоосколочная броня (Голова)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.raj6ISC9EFCvwflW",
+    "name": "Наряд — деловой стиль (вер. G&C)",
+    "type": "clothing",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [
+      "effect-labels-only"
+    ],
+    "changed": true,
+    "originalName": "Наряд — деловой стиль (вер. G&C)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.rwg7wZM5nHgq9HXU",
+    "name": "Миномётная позиция",
+    "type": "weapon",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Миномётная позиция",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.s9EYxqaniu8PH3Gr",
+    "name": "Наряд — кочевническая кожа (вер. G&C)",
+    "type": "clothing",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [
+      "effect-labels-only"
+    ],
+    "changed": true,
+    "originalName": "Наряд — кочевническая кожа (вер. G&C)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.sIf9UgAo2VOgMAEt",
+    "name": "Наряд — голый/нижнее бельё (вер. G&C)",
+    "type": "clothing",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [
+      "effect-labels-only"
+    ],
+    "changed": true,
+    "originalName": "Наряд — голый/нижнее бельё (вер. G&C)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.sc5CU4QyAqFg5lVU",
+    "name": "Патроны для тяжёлого пистолета (термитные)",
+    "type": "ammo",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Патроны для тяжёлого пистолета (термитные)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.se4PZ6IevRDLLn67",
+    "name": "Цепкие ступни (вер. G&C)",
+    "type": "cyberware",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Цепкие ступни (вер. G&C)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.sh0GjAumkzzXN3qg",
+    "name": "Осколок навыка (социальные)",
+    "type": "cyberware",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Осколок навыка (социальные)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.ssHRqKxWaBSzzu1T",
+    "name": "Ступни-ролики (вер. G&C)",
+    "type": "cyberware",
+    "book": {
+      "book": "Core",
+      "page": 366
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Ступни-ролики (вер. G&C)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.t1SSV9KaHdPnmmzy",
+    "name": "Улучшенная противоосколочная броня (Тело)",
+    "type": "armor",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Улучшенная противоосколочная броня (Тело)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.tXQ97NMldsBNffk4",
+    "name": "Заточенные кромки//закалённый сердечник",
+    "type": "itemUpgrade",
+    "book": {
+      "book": "",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Заточенные кромки//закалённый сердечник",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.tYszp6eij9hqrl1e",
+    "name": "Осколок навыка (ближний бой)",
+    "type": "cyberware",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Осколок навыка (ближний бой)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.twYK3xTjeLi3wNq1",
+    "name": "Функция EZ-XTND (удлинение)",
+    "type": "itemUpgrade",
+    "book": {
+      "book": "",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Функция EZ-XTND (удлинение)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.u3zxd4mpZPXm9Tmt",
+    "name": "Осколок навыка (физические)",
+    "type": "cyberware",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Осколок навыка (физические)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.uAZtCeC3qQlVYxlg",
+    "name": "Стрела (экспансивная — переработка)",
+    "type": "ammo",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Стрела (экспансивная — переработка)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.uTm47n28HoGudjo5",
+    "name": "«Ботинок будущего»",
+    "type": "cyberware",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "«Ботинок будущего»",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.uxcohbBDJmdGtP2M",
+    "name": "Кибердека (жёсткая прошивка, вер. G&C)",
+    "type": "cyberware",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Кибердека (жёсткая прошивка, вер. G&C)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.v0UfnGANTsYnVkFQ",
+    "name": "Кибердека (Плохое — NC, вер. G&C)",
+    "type": "cyberdeck",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Кибердека (Плохое — NC, вер. G&C)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.vAeWlh0RLNQtnGXb",
+    "name": "Улучшенный тяжёлый арморджек (Тело)",
+    "type": "armor",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Улучшенный тяжёлый арморджек (Тело)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.w79L77tDINlwU9gS",
+    "name": "Материалы для изготовления (оружие), 250eb",
+    "type": "gear",
+    "book": {
+      "book": "Core",
+      "page": 148
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Материалы для изготовления (оружие), 250eb",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.wDjkMqwJ38rQE6z2",
+    "name": "Стрела (усыпляющая, вер. G&C)",
+    "type": "ammo",
+    "book": {
+      "book": "Core",
+      "page": 346
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Стрела (усыпляющая, вер. G&C)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.wGPNJQVb0i7E16lu",
+    "name": "Вирус (СЛ XX)",
+    "type": "program",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Вирус (СЛ XX)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.wQ2Ti0zc9wY7JjL6",
+    "name": "Граната (с ядом, вер. G&C)",
+    "type": "ammo",
+    "book": {
+      "book": "Core",
+      "page": 346
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Граната (с ядом, вер. G&C)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.xn8FjEYtMSb8Mu2n",
+    "name": "Модификация наряда (навыки x2)",
+    "type": "itemUpgrade",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Модификация наряда (навыки x2)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.y0pvGRstGbuIIGr2",
+    "name": "Жакан (экспансивный — переработка)",
+    "type": "ammo",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Жакан (экспансивный — переработка)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.yhHzgKpvCbpf4i5M",
+    "name": "Материалы для изготовления (киберимпланты), 500eb",
+    "type": "gear",
+    "book": {
+      "book": "Core",
+      "page": 148
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Материалы для изготовления (киберимпланты), 500eb",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.zaHnICRTJptnpYLy",
+    "name": "Материалы для изготовления (техника), 500eb",
+    "type": "gear",
+    "book": {
+      "book": "Core",
+      "page": 148
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Материалы для изготовления (техника), 500eb",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.zf145DyjczGbedJ9",
+    "name": "Осколок навыка (управление)",
+    "type": "cyberware",
+    "book": {
+      "book": "NC G&C",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Осколок навыка (управление)",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  },
+  {
+    "uuid": "Compendium.night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22.Item.zqYYWdnH7yvfNrw9",
+    "name": "Провод-ретривер",
+    "type": "itemUpgrade",
+    "book": {
+      "book": "",
+      "page": 0
+    },
+    "reference": null,
+    "checks": [],
+    "changed": false,
+    "originalName": "Провод-ретривер",
+    "pack": "night-city-gang-and-corp-mook-pack.NCGangsnCorpsItems22"
+  }
+]

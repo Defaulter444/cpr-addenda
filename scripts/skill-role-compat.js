@@ -1357,7 +1357,7 @@ function withAttackAliases(actor, callback) {
     const martial = resolveCoreSkill(actor, "Martial Arts");
     for (const item of this) {
       if (item.type !== "skill") continue;
-      const known = byName.get(item.name);
+      const known = byName.get(item.name) ?? (item === martial ? { name: item.name, ru: item.name } : null);
       if (!known) continue;
       for (const name of new Set([known.name, known.ru, ...(item === martial ? ["Martial Arts", "Боевые искусства"] : [])])) {
         if (name === item.name) continue;
@@ -1387,13 +1387,20 @@ export function applySkillRoleItemCompatibility(item) {
   if (typeof item._createAttackRoll !== "function" || item._createAttackRoll[ATTACK]) return;
   const attack = item._createAttackRoll;
   const compatible = function (type, actor, ...args) {
+    const required = ['autofire', 'suppressive'].includes(type) ? 'Autofire' : this.system.weaponSkill;
+    if (!resolveCoreSkill(actor, required)) {
+      ui.notifications.warn(required === 'Martial Arts' || required === 'Боевые искусства'
+        ? 'Для атаки боевыми искусствами сначала добавьте персонажу изученный стиль с уровнем выше 0.'
+        : `У персонажа отсутствует навык оружия: ${required || 'не указан'}. Проверьте настройку предмета.`);
+      return null;
+    }
     return withAttackAliases(actor, () => attack.call(this, type, actor, ...args));
   };
   compatible[ATTACK] = true;
   item._createAttackRoll = compatible;
 }
 
-export function registerSkillRoleCompatibility() {
+export function registerSkillRoleCompatibility(filterModifiers = result => result) {
   if (game.system.id !== "cyberpunk-red-core") return false;
   if (globalThis[STATE]) return true;
   globalThis.cprAddendaSkillRoleCore = { SystemUtils, CPRRoleItem, CPRMod };
@@ -1438,13 +1445,15 @@ export function registerSkillRoleCompatibility() {
     try { return wrapped(type, actor, sub ? { ...info, subRoleName: ability.name } : info); }
     finally { ability.skill = original; }
   });
-  register("cprAddendaSkillRoleCore.CPRMod.getAllModifiers", function (wrapped, ...args) {
-    return wrapped(...args).map(mod => {
+  register("cprAddendaSkillRoleCore.CPRMod.getAllModifiers", function (wrapped, effects, disabled = false) {
+    effects = Array.from(effects);
+    const result = wrapped(effects, disabled).map(mod => {
       const key = keyOf(mod.key);
       // Preserve CPRMod's prototype, ID, flags and numeric behavior.
       if (key !== mod.key) mod.key = key;
       return mod;
     });
+    return filterModifiers(result, effects, disabled);
   });
   register("CONFIG.ActiveEffect.documentClass.prototype.apply", function (wrapped, actor, change, ...args) {
     const key = keyOf(change.key);

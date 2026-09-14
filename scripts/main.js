@@ -53,6 +53,8 @@ import {
 } from "./corebook.js";
 import { bookPage } from "./corebook-pages.js";
 import { registerMookButton } from "./mook-button.js";
+import { registerCatalogue, migrateCatalogue, catalogueStatus } from "./catalogue.js";
+import { registerCatalogueRules, applyCatalogueModifiers } from "./catalogue-runtime.js";
 
 /**
  * Настройки модуля. Все три — переключатели, потому что мастер должен иметь
@@ -163,7 +165,9 @@ Hooks.once("init", () => {
     );
   } else {
     registerItemPatches();
-    registerSkillRoleCompatibility();
+    registerSkillRoleCompatibility(applyCatalogueModifiers);
+    registerCatalogue();
+    registerCatalogueRules();
     // Единственное место, где модуль вмешивается в бросок. Вынесено в
     // отдельную настройку: если что-то пойдёт не так с кубиками или чужими
     // модулями, это выключается само по себе, без отключения всего модуля.
@@ -209,6 +213,11 @@ Hooks.once("ready", async () => {
   // формулами броска роняют установку.
   await registerFormulaPatch();
   await registerPktHumanityPatches();
+  try { await migrateCatalogue(); }
+  catch (error) {
+    console.error(`${MODULE_ID} | catalogue migration`, error);
+    ui.notifications.warn('Addenda: каталог исправлений не загружен. Подробности в консоли.');
+  }
   await checkDvTableSetting();
 
   // Перенос данных транспорта — до сверки эффектов: сверка читает уже новые
@@ -245,6 +254,8 @@ Hooks.once("ready", async () => {
     findCorebookPage,
     /** Куда в русском издании ведёт номер страницы из английского. */
     bookPage,
+    catalogueStatus,
+    migrateCatalogue,
   };
 
   const module = game.modules.get(MODULE_ID);

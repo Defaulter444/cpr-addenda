@@ -1,5 +1,6 @@
 import { ID, areaKindOf } from './area-rules.js';
 import { createAreaAttack, tokenOf, registerAreaWorkflow } from './area-workflow.js';
+import { registerCatalogueWeaponCards, renderCatalogueWeaponCard } from './catalogue-weapons.js';
 export function isAttackRoll(roll) {
   return /cpr-(?:attack|aimed-attack|autofire)-rollcard/.test(roll?.rollCard ?? '');
 }
@@ -7,7 +8,9 @@ export async function registerAreaAttacks() {
   registerAreaWorkflow();
   const { default: CPRChat } = await import('/systems/cyberpunk-red-core/modules/chat/cpr-chat.js');
   globalThis.cprAddendaChatClass = CPRChat;
+  registerCatalogueWeaponCards(CPRChat);
   libWrapper.register(ID, 'cprAddendaChatClass.RenderRollCard', async function (wrapped, roll, ...rest) {
+    if (roll._addendaNonlethal) return renderCatalogueWeaponCard(wrapped, roll, ...rest);
     if (!game.settings.get(ID, 'explosiveTemplates') || !isAttackRoll(roll)) return wrapped(roll, ...rest);
     const entity = roll.entityData;
     const token = canvas.scene?.tokens.get(entity?.token);

@@ -1,4 +1,5 @@
 import { ID, copy } from './area-rules.js';
+import { catalogueFlashProtection, catalogueIdentity, catalogueFireProtection } from './catalogue-rules.js';
 const SYS = 'cyberpunk-red-core';
 const originalName = item => item.getFlag?.('babele', 'originalName') ?? item.name;
 export function installedCyberware(actor) {
@@ -12,7 +13,10 @@ export function installedCyberware(actor) {
 export function empCandidates(actor) {
   const implanted = new Set(installedCyberware(actor).map(i => i.id));
   const items = actor.items.contents;
+  const internalShield = items.some(i => implanted.has(i.id) && !empDisabled(i) &&
+    catalogueIdentity(i) === 'Hardened Shielding (Internal)');
   const hardened = item => {
+    if (internalShield && item.type === 'cyberware' && item.system.type === 'cyberwareInternal') return true;
     const pending=[item], seen=new Set();
     while(pending.length) {
       const current=pending.pop(); if(seen.has(current.id)) continue; seen.add(current.id);
@@ -27,7 +31,8 @@ export function empCandidates(actor) {
 export function gasProtection(actor, type) {
   if (!['biotoxin','poison','sleep'].includes(type)) return false;
   return installedCyberware(actor).some(i => !empDisabled(i) && /^(Nasal Filters|Назальные фильтры)$/i.test(originalName(i))) ||
-    actor.items.some(i => i.system.equipped === 'equipped' && /^(Gas Mask|Противогаз)$/i.test(originalName(i)));
+    actor.items.some(i => i.system.equipped === 'equipped' && !empDisabled(i) &&
+      (catalogueIdentity(i) === 'Anti-Smog Breathing Mask' || /^(Gas Mask|Противогаз)$/i.test(originalName(i))));
 }
 export function resistanceSkill(actor, kind) {
   const names = kind === 'cybertech' ? ['Cybertech', 'Кибертехника'] : ['Resist Torture/Drugs', 'Сопротивление пыткам/наркотикам', 'Сопротивление пыткам и наркотикам'];
@@ -61,16 +66,20 @@ async function temporaryInjury(actor, name) {
   data.flags ??= {}; data.flags[ID] = { temporaryAreaInjury: true, expires: game.time.worldTime + 60 };
   await actor.createEmbeddedDocuments('Item', [data]);
 }
-export async function applySpecial(actor, effect, { empIds = [], penetrated = false } = {}) {
+export async function applySpecial(actor, effect, { empIds = [], penetrated = false, fireDamage = 2 } = {}) {
+  if (effect==='fire' && catalogueFireProtection(actor,game.time.worldTime)) return;
   if (effect === 'fire' && penetrated) {
     const existing = actor.effects.find(e => e.flags?.[ID]?.areaFire);
-    if (!existing) await actor.createEmbeddedDocuments('ActiveEffect', [{ name: 'Горение — 2 ПЗ в конце хода',
-      img: 'icons/svg/fire.svg', flags: { [ID]: { areaFire: true } } }]);
+    const amount = fireDamage === 4 ? 4 : 2;
+    const data = { name:`Горение — ${amount} ПЗ в конце хода`,img:'icons/svg/fire.svg',
+      flags:{[ID]:{areaFire:true,areaFireDamage:amount}} };
+    if (!existing) await actor.createEmbeddedDocuments('ActiveEffect', [data]);
+    else if ((existing.flags[ID].areaFireDamage ?? 2) < amount) await existing.update(data);
   }
   if (['flashbang', 'teargas'].includes(effect)) {
-    const cyber = installedCyberware(actor).filter(i => !empDisabled(i));
-    if (effect === 'teargas' || !cyber.some(i => /Anti.Dazzle|Защита от (вспыш|ослеп)|Антиблик/i.test(originalName(i)))) await temporaryInjury(actor, 'Damaged Eye');
-    if (effect === 'flashbang' && !cyber.some(i => /Level Damper|Защита от громк|Поглотитель звука|Ограничитель громкости/i.test(originalName(i)))) await temporaryInjury(actor, 'Damaged Ear');
+    const protection = catalogueFlashProtection(actor, game.time.worldTime);
+    if (effect === 'teargas' || !protection.eyes) await temporaryInjury(actor, 'Damaged Eye');
+    if (effect === 'flashbang' && !protection.ears) await temporaryInjury(actor, 'Damaged Ear');
   }
   if (effect === 'sleep') {
     const unconscious = CONFIG.statusEffects.find(e => /unconscious|без сознания/i.test(`${e.id} ${e.name} ${game.i18n.localize(e.name ?? e.label ?? '')}`));
@@ -89,7 +98,7 @@ export async function applySpecial(actor, effect, { empIds = [], penetrated = fa
     }
   }
 }
-export async function rollBodyInjury(actor) {
+export async function rollBodyInjury(actor, {exclude=[]} = {}) {
   const setting = game.settings.get(SYS, 'criticalInjuryRollTableCompendium');
   const tables = await game.packs.get(setting).getDocuments();
   const table = tables.find(t => /Critical Injuries \(Body\)|Критические травмы тела|Критические повреждения.*тела/i.test(`${originalName(t)} ${t.name}`));
@@ -100,10 +109,11 @@ export async function rollBodyInjury(actor) {
     const result = results[0];
     const source = injuries.find(i => i.id === result?.documentId || i.name === result?.text || originalName(i) === result?.text);
     if (!source) throw new Error('Результат таблицы не связан с предметом критической травмы.');
+    if (exclude.includes(originalName(source))) continue;
     if (game.settings.get(SYS, 'preventDuplicateCriticalInjuries') === 'reroll' && actor.items.some(i => i.type === 'criticalInjury' && i.name === source.name)) continue;
     const data = source.toObject(); delete data._id; delete data.folder;
     await actor.createEmbeddedDocuments('Item', [data]);
-    return { name: source.name, roll: roll.total };
+    return { name: source.name, key: originalName(source), roll: roll.total };
   }
   return { name: 'Все доступные травмы уже получены' };
 }

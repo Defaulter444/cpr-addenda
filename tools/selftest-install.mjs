@@ -20,11 +20,13 @@ import fs from "fs";
 import path from "path";
 import os from "os";
 import { fileURLToPath, pathToFileURL } from "url";
+import { catalogueUpdate, writePath } from '../scripts/catalogue-data.js';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const MODULE_ROOT = path.resolve(HERE, "..");
 const SOURCES = path.join(MODULE_ROOT, "sources");
 const SCRIPTS = path.join(MODULE_ROOT, "scripts");
+const catalogue = new Map(JSON.parse(fs.readFileSync(path.join(MODULE_ROOT, 'data/catalogue.json'), 'utf8')).entries.map(e => [e.uuid,e]));
 
 const ALL_WEAPON_TYPES = [
   "assaultRifle", "bow", "grenadeLauncher", "heavyMelee", "heavyPistol",
@@ -50,7 +52,7 @@ for (const file of fs.readdirSync(SCRIPTS)) {
   if (!file.endsWith(".js")) continue;
   const body = fs
     .readFileSync(path.join(SCRIPTS, file), "utf-8")
-    .replace(/from "\.\/([^"]+)\.js"/g, 'from "./$1.mjs"');
+    .replace(/from (["'])\.\/([^"']+)\.js\1/g, 'from "./$2.mjs"');
   fs.writeFileSync(path.join(tmp, file.replace(/\.js$/, ".mjs")), body, "utf-8");
 }
 const { checkUpgradeFit } = await import(
@@ -70,7 +72,9 @@ function asDocument(data) {
 
 function makeWeapon(weaponType) {
   return {
-    name: `Оружие (${weaponType})`,
+    // Core uses one weaponType for bows and crossbows; this positive fixture
+    // represents the crossbow. The ordinary bow is asserted separately below.
+    name: weaponType === 'bow' ? 'Crossbow' : `Оружие (${weaponType})`,
     documentName: "Item",
     type: "weapon",
     system: { weaponType },
@@ -108,6 +112,8 @@ function report(ok, message) {
 console.log(`Модификаций в проверке: ${upgrades.length}\n`);
 
 for (const raw of upgrades) {
+  const entry = catalogue.get(`Compendium.cpr-addenda.addenda-upgrades.Item.${raw._id}`);
+  for (const [field,value] of Object.entries(catalogueUpdate(raw,entry) ?? {})) writePath(raw,field,value);
   const upgrade = asDocument(raw);
   const allowed = raw.flags?.["cpr-addenda"]?.allowedWeaponTypes ?? [];
   const carrierType = raw.system.type;

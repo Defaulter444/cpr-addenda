@@ -1,12 +1,14 @@
 /** CPR core Explosives / Shotgun Shells / Throw; Data Pool weapons/ammunition.
  * Pure rules, shared by UI, the GM resolver and regression tests. */
-import { getAttackRules, isShotAttack } from './weapon-dv.js';
+import { getAttackRules, isShotAttack, isAttackItem } from './weapon-dv.js';
+import { catalogueIdentity, CATALOGUE_FLAMETHROWERS } from './catalogue-rules.js';
 export const ID = 'cpr-addenda';
 export const BLAST = 'blast', SHOT = 'shot';
 export const copy = value => value == null ? value : JSON.parse(JSON.stringify(value));
 export function areaKindOf(item) {
+  if (catalogueIdentity(item)==='Molotov Cocktail') return BLAST;
   if (item?.type === 'ammo') return item.system.variety === 'grenade' ? BLAST : null;
-  if (item?.type !== 'weapon') return null;
+  if (!isAttackItem(item)) return null;
   if (isShotAttack(item)) return SHOT;
   let variety;
   try { variety = item._getLoadedAmmoProp?.('variety'); } catch { /* Empty weapon. */ }
@@ -40,9 +42,23 @@ export function snapshotAreaAttack(item, fireMode = 'attack', kind = areaKindOf(
   if (item.type !== 'ammo') for (const key of ['type', 'variety', 'ablationValue', 'overrides']) {
     try { ammo[key] = copy(item._getLoadedAmmoProp?.(key)); } catch { /* Empty weapon. */ }
   }
+  if (catalogueIdentity(item)==='Molotov Cocktail') Object.assign(ammo,{type:'incendiary',variety:'grenade',ablationValue:1});
   let damageRoll;
-  if (item.type === 'weapon') damageRoll = item.createRoll('damage', item.actor, { damageType: 'attack' });
+  if (isAttackItem(item)) damageRoll = item.createRoll('damage', item.actor, { damageType: 'attack' });
   const profile = ammoProfile(ammo, kind, damageRoll?.formula ?? (kind === SHOT ? '3d6' : '6d6'));
+  const ammunitionKey=catalogueIdentity(item.type==='ammo'?item:item.getInstalledItems?.('ammo')?.[0]);
+  if (ammunitionKey==='Grenade (KTech Security)') Object.assign(profile,{formula:'5d6',ablation:2,coverImmune:true});
+  if (ammunitionKey==='Grenade (Shuriken Tornado)') Object.assign(profile,{formula:'6d6',mode:'damage',ablation:2,critical:true,perTargetDamage:true,expansive:true});
+  if (catalogueIdentity(item)==='Molotov Cocktail') Object.assign(profile,{formula:'5d6',effect:'fire',fireDamage:2});
+  if (CATALOGUE_FLAMETHROWERS.includes(catalogueIdentity(item))) Object.assign(profile,
+    { formula:'3d6', mode:'damage', ablation:1, effect:'fire', fireDamage:4, critical:false, resistance:null });
+  if (catalogueIdentity(item)==='Aegis') Object.assign(profile,
+    {formula:'4d6',mode:'damage',ablation:0,lethal:false,critical:false,effect:null,resistance:null});
+  if (catalogueIdentity(item)==='Nomad Air Cannon') {
+    profile.delivery='liquid';profile.acidAllArmor=true;
+    if (!['acid','poison','biotoxin'].includes(profile.type)) Object.assign(profile,
+      {formula:'0',mode:'effect',ablation:0,critical:false,effect:null,resistance:null});
+  }
   return { kind, fireMode, ...getAttackRules(item, fireMode), ammo,
     profile: { ...profile, mods: copy(damageRoll?.mods ?? []),
       ignoreArmorPercent: damageRoll?.rollCardExtraArgs?.ignoreArmorPercent ?? 0,
@@ -92,9 +108,10 @@ export function rangedDV(distance, { kind, thrown, weaponType }, rows = null) {
   const i = bounds.findIndex(x => distance <= x);
   return i < 0 ? null : dvs[i];
 }
-export function coverOutcome(kind, damage, hp) {
+export function coverOutcome(kind, damage, hp, coverImmune=false) {
   if (hp == null) return { unresolved: true };
   if (hp <= 0) return { blocked: false, remaining: 0 };
+  if (coverImmune) return {blocked:true,remaining:hp};
   return { blocked: kind === SHOT || damage < hp, remaining: Math.max(0, hp - damage) };
 }
 export function effectiveTargets(area) {

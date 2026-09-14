@@ -35,6 +35,8 @@ eq(coverOutcome('blast',20,20),{blocked:false,remaining:0});
 eq(coverOutcome('blast',19,20),{blocked:true,remaining:1});
 eq(coverOutcome('shot',20,20),{blocked:true,remaining:0});
 eq(coverOutcome('blast',20,null),{unresolved:true});
+eq(coverOutcome('blast',30,1,true),{blocked:true,remaining:1});
+eq(coverOutcome('blast',30,0,true),{blocked:false,remaining:0});
 eq(effectiveTargets({targets:[{uuid:'A',defense:'dodged'},{uuid:'B',applied:true},{uuid:'C',excluded:true},{uuid:'D',defense:'hit'}]}).map(t=>t.uuid),['D']);
 eq(areaKindOf({type:'weapon',system:{weaponType:'shotgun'},_getLoadedAmmoProp:()=> 'shotgunSlug',actor:{getFlag:()=>true}}),null);
 eq(areaKindOf({type:'weapon',system:{weaponType:'shotgun'},_getLoadedAmmoProp:()=> 'shotgunShell'}),'shot');

@@ -41,7 +41,7 @@ for (const file of fs.readdirSync(SCRIPTS)) {
   if (!file.endsWith(".js")) continue;
   const body = fs
     .readFileSync(path.join(SCRIPTS, file), "utf-8")
-    .replace(/from "\.\/([^"]+)\.js"/g, 'from "./$1.mjs"');
+    .replace(/from (["'])\.\/([^"']+)\.js\1/g, 'from "./$2.mjs"');
   fs.writeFileSync(path.join(tmp, file.replace(/\.js$/, ".mjs")), body, "utf-8");
 }
 

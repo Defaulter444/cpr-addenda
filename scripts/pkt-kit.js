@@ -26,6 +26,7 @@
  */
 
 import { MODULE_ID, SYSTEM_ID, FLAGS, SETTINGS, localize } from "./constants.js";
+import { catalogueExternalCyberware } from "./catalogue-rules.js";
 import { activePktFrame, correctMaxHumanity, checkBorgPrerequisites,
   humanityPenalty, isFreePktFoundation, syncBorgArmor, registerBorgActorPatches } from "./pkt-rules.js";
 
@@ -454,7 +455,7 @@ export async function registerPktHumanityPatches() {
   if (CPRActor.prototype.loseHumanityValue) libWrapper.register(MODULE_ID,
     "cprAddendaActorClass.prototype.loseHumanityValue",
     function (wrapped, items, type) {
-      const payable = activePktFrame(this) ? items.filter(i => humanityPenalty(i, this) > 0) : items;
+      const payable = items.filter(i => !catalogueExternalCyberware(i,this) && (!activePktFrame(this) || humanityPenalty(i,this)>0));
       return wrapped(payable, type);
     }, "MIXED");
 

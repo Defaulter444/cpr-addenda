@@ -1,5 +1,6 @@
 import { MODULE_ID, SYSTEM_ID } from "./constants.js";
 import { normalizeCarrierChanges } from "./carrier-data.js";
+import { catalogueIdentity } from './catalogue-rules.js';
 
 // A barrel changes the single-shot table, not the weapon's Autofire family.
 const AUTO_TABLES = {
@@ -65,8 +66,13 @@ export function hasShotgunAutoControl(item) {
   );
 }
 
+export function isAttackItem(item) {
+  return item?.type === 'weapon' || (item?.type === 'cyberware' && item.system.isWeapon) ||
+    (item?.type === 'itemUpgrade' && item.system.modifiers?.secondaryWeapon?.configured);
+}
 export function isShotAttack(item) {
-  if (item?.type !== "weapon") return false;
+  if (!isAttackItem(item)) return false;
+  if (['Flamethrower','Dragon Flamethrower','Burst Flamethrower','Crusher','Aegis','Nomad Air Cannon'].includes(catalogueIdentity(item))) return true;
   let variety;
   try { variety = item._getLoadedAmmoProp?.("variety"); } catch { /* No loaded ammo. */ }
   if (variety) return variety === "shotgunShell";

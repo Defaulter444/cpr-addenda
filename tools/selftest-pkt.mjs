@@ -26,7 +26,7 @@ function prepare() {
     if (!file.endsWith(".js")) continue;
     const body = fs
       .readFileSync(path.join(SCRIPTS, file), "utf-8")
-      .replace(/from "\.\/([^"]+)\.js"/g, 'from "./$1.mjs"');
+      .replace(/from ['"]\.\/([^'"]+)\.js['"]/g, 'from "./$1.mjs"');
     fs.writeFileSync(path.join(tmp, file.replace(/\.js$/, ".mjs")), body, "utf-8");
   }
   return tmp;
