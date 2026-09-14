@@ -100,7 +100,10 @@ export async function createAreaAttack({ item, actor, roll, snapshot, shooter, a
 }
 async function updateCard(message, area) {
   area.revision++;
+  const resolved = !area.animationResolved && ['defenses', 'miss'].includes(area.phase);
+  if (resolved) area.animationResolved = true;
   await message.update({ [`flags.${ID}.area`]: area, content: renderCard(area) });
+  if (resolved) Hooks.callAll('cprAddendaAreaResolved', message, area);
 }
 function owned(user, document) { return user?.isGM || document?.testUserPermission(user, 'OWNER'); }
 async function rollDefense(roll, actor, data) {

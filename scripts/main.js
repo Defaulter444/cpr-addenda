@@ -14,6 +14,7 @@
  */
 
 import { MODULE_ID, SETTINGS } from "./constants.js";
+import { registerWeaponAnimations, weaponAnimationStatus } from './weapon-animations.js';
 import { loadSystemConfig } from "./cpr-config.js";
 import { registerItemPatches } from "./item-patches.js";
 import { registerSkillRoleCompatibility } from "./skill-role-compat.js";
@@ -158,6 +159,7 @@ Hooks.once("init", () => {
   registerMookButton();
 
   registerSettings();
+  registerWeaponAnimations();
 
   if (typeof libWrapper !== "function" && !globalThis.libWrapper) {
     console.error(
@@ -256,6 +258,7 @@ Hooks.once("ready", async () => {
     bookPage,
     catalogueStatus,
     migrateCatalogue,
+    weaponAnimationStatus,
   };
 
   const module = game.modules.get(MODULE_ID);

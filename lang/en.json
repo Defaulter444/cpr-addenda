@@ -279,5 +279,7 @@
   "CPRADDENDA.mook.noScene": "No scene is open, so there is nowhere to place the mook. Open a scene and try again.",
   "CPRADDENDA.mook.noTemplate": "No template was found in «{folder}». Mook Maker creates one on world start — check that it is enabled.",
   "CPRADDENDA.mook.notPlaced": "Could not place the mook token on the scene.",
-  "CPRADDENDA.mook.failed": "Could not build the mook. See the console (F12) for details."
+  "CPRADDENDA.mook.failed": "Could not build the mook. See the console (F12) for details.",
+  "CPRADDENDA.settings.weaponAnimations.name": "JB2A weapon animations",
+  "CPRADDENDA.settings.weaponAnimations.hint": "Automatic weapon and area effects. Requires Sequencer and a JB2A library. Target a token before attacking. Custom Automated Animations entries take priority; AA visual miss prediction is temporarily disabled."
 }
