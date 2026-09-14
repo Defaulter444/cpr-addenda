@@ -1,4 +1,4 @@
-import { WEAPON_EFFECTS, weaponAnimationProfile, areaAnimationEffect, isAnimatedWeaponRoll, animationRecipients } from './weapon-animation-profiles.js';
+import { WEAPON_EFFECTS, resolveWeaponEffect, weaponAnimationProfile, areaAnimationEffect, isAnimatedWeaponRoll, animationRecipients } from './weapon-animation-profiles.js';
 const ID = 'cpr-addenda';
 const played = new Set();
 const enabled = () => game.settings.get(ID, 'weaponAnimations');
@@ -11,9 +11,15 @@ function claim(id) {
   return true;
 }
 export function weaponAnimationStatus() {
+  const files = Object.fromEntries(Object.keys(WEAPON_EFFECTS).map(key => [key, available(key)]));
   return { enabled: enabled(), sequencer: Boolean(game.modules.get('sequencer')?.active),
     libraries: ['jb2a_patreon', 'JB2A_DnD5e'].filter(id => game.modules.get(id)?.active),
-    effects: Object.fromEntries(Object.entries(WEAPON_EFFECTS).map(([key, path]) => [key, Boolean(globalThis.Sequencer?.Database.entryExists(path))])) };
+    files, effects: Object.fromEntries(Object.entries(files).map(([key, path]) => [key, Boolean(path)])) };
+}
+function notifyMissingAnimationModules() {
+  if (!game.user.isGM || !enabled()) return;
+  const status = weaponAnimationStatus();
+  if (!status.sequencer || !status.libraries.length) ui.notifications.warn(game.i18n.localize('CPRADDENDA.animations.missingModules'));
 }
 async function syncAACompatibility() {
   if (!game.user.isGM || !game.modules.get('autoanimations')?.active) return;
@@ -33,9 +39,9 @@ export function registerWeaponAnimations() {
   game.settings.register(ID, 'weaponAnimations', {
     name:'CPRADDENDA.settings.weaponAnimations.name', hint:'CPRADDENDA.settings.weaponAnimations.hint',
     scope:'world', config:true, type:Boolean, default:false,
-    onChange: () => syncAACompatibility().catch(report),
+    onChange: () => { notifyMissingAnimationModules(); syncAACompatibility().catch(report); },
   });
-  Hooks.once('ready', () => syncAACompatibility().catch(report));
+  Hooks.once('ready', () => { notifyMissingAnimationModules(); syncAACompatibility().catch(report); });
   Hooks.on('AutomatedAnimations-WorkflowStart', (data, animationData) => {
     if (!enabled() || !weaponAnimationProfile(data.item)) return;
     // CPR emits attack, damage and item cards. Only our post-roll dispatch may
@@ -48,8 +54,7 @@ export function registerWeaponAnimations() {
   Hooks.on('cprAddendaAreaResolved', (message, area) => { playAreaAnimation(message, area).catch(report); });
 }
 function available(effect) {
-  const path = WEAPON_EFFECTS[effect];
-  return path && globalThis.Sequencer?.Database.entryExists(path) ? path : null;
+  return resolveWeaponEffect(effect, path => globalThis.Sequencer?.Database.entryExists(path));
 }
 function section(sequence, effect, location, message) {
   const file = available(effect);

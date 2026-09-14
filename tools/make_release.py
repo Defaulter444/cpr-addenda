@@ -81,6 +81,15 @@ def main():
         if name
     ]
 
+    # JB2A is installed separately by each host. Never ship its library or a
+    # copied Foundry world as part of this code-and-content module release.
+    unexpected = [name for name in files if
+                  name.lower().endswith('.webm') or
+                  any(part.lower() in {'jb2a_patreon', 'jb2a_dnd5e', 'worlds'}
+                      for part in Path(name).parts)]
+    if unexpected:
+        raise SystemExit('В архив попали внешние анимации или миры: ' + ', '.join(unexpected))
+
     if OUT.exists():
         OUT.unlink()
 

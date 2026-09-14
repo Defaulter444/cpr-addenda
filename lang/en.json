@@ -281,5 +281,6 @@
   "CPRADDENDA.mook.notPlaced": "Could not place the mook token on the scene.",
   "CPRADDENDA.mook.failed": "Could not build the mook. See the console (F12) for details.",
   "CPRADDENDA.settings.weaponAnimations.name": "JB2A weapon animations",
-  "CPRADDENDA.settings.weaponAnimations.hint": "Automatic weapon and area effects. Requires Sequencer and a JB2A library. Target a token before attacking. Custom Automated Animations entries take priority; AA visual miss prediction is temporarily disabled."
+  "CPRADDENDA.settings.weaponAnimations.hint": "Automatic weapon and area effects. Requires Sequencer and a JB2A library. Target a token before attacking. Custom Automated Animations entries take priority; AA visual miss prediction is temporarily disabled.",
+  "CPRADDENDA.animations.missingModules": "For Addenda animations, enable Sequencer and either JB2A - Jules&Ben’s Animated Assets (free) or JB2A Patreon, then reload the world."
 }

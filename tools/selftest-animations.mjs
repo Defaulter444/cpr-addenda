@@ -1,9 +1,16 @@
 import assert from 'node:assert/strict';
-import {weaponAnimationProfile as profile, areaAnimationEffect, animationRecipients, isAnimatedWeaponRoll} from '../scripts/weapon-animation-profiles.js';
+import {WEAPON_EFFECTS, FREE_WEAPON_EFFECTS, resolveWeaponEffect, weaponAnimationProfile as profile, areaAnimationEffect, animationRecipients, isAnimatedWeaponRoll} from '../scripts/weapon-animation-profiles.js';
 import {registerWeaponAnimations} from '../scripts/weapon-animations.js';
 let checks=0;
 const eq=(a,b,label)=>{assert.deepEqual(a,b,label);checks++;};
 const item=(type,name='Моё оружие',more={})=>({type:'weapon',name,system:{weaponType:type,...more}});
+for(const [key,path] of Object.entries(WEAPON_EFFECTS)) {
+  eq(resolveWeaponEffect(key,()=>true),path,'Prefer installed Patreon variant: '+key);
+  const free=FREE_WEAPON_EFFECTS[key]??path;
+  eq(resolveWeaponEffect(key,p=>p===free),free,'Free-only library: '+key);
+  eq(resolveWeaponEffect(key,()=>false),null,'Missing asset: '+key);
+}
+eq(resolveWeaponEffect('unknown',()=>true),null,'Unknown profile cannot select an arbitrary asset');
 for(const type of ['assaultRifle','heavyPistol','heavySmg','medPistol','rocketLauncher','shotgun','smg','sniperRifle','vHeavyPistol','bow','thrownWeapon','lightMelee','medMelee','heavyMelee','vHeavyMelee','unarmed','martialArts','grenadeLauncher']) eq(Boolean(profile(item(type))),true,type);
 eq(profile({type:'gear',name:'Пистолет',system:{}}),null,'No animation for descriptive gear');
 eq(profile(item('shotgun')).effect,'bullet','Slugs are individual shots');

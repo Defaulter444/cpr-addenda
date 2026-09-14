@@ -281,5 +281,6 @@
   "CPRADDENDA.mook.notPlaced": "Не удалось поставить токен шестёрки на сцену.",
   "CPRADDENDA.mook.failed": "Не удалось собрать шестёрку. Подробности в консоли (F12).",
   "CPRADDENDA.settings.weaponAnimations.name": "Анимации оружия JB2A",
-  "CPRADDENDA.settings.weaponAnimations.hint": "Автоматические эффекты для оружия и площадных атак. Требуются Sequencer и библиотека JB2A. Выберите цель на сцене перед атакой. Индивидуальные настройки Automated Animations имеют приоритет; визуальный расчёт промаха AA временно отключается."
+  "CPRADDENDA.settings.weaponAnimations.hint": "Автоматические эффекты для оружия и площадных атак. Требуются Sequencer и библиотека JB2A. Выберите цель на сцене перед атакой. Индивидуальные настройки Automated Animations имеют приоритет; визуальный расчёт промаха AA временно отключается.",
+  "CPRADDENDA.animations.missingModules": "Для анимаций Addenda включите Sequencer и библиотеку JB2A: бесплатную JB2A - Jules&Ben’s Animated Assets либо JB2A Patreon. Затем перезагрузите мир."
 }

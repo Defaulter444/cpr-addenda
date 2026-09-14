@@ -1,0 +1,1044 @@
+{
+  "release": "0.22.0",
+  "date": "2026-09-14",
+  "environment": {
+    "foundry": "12.331",
+    "cyberpunk-red-core": "0.92.4",
+    "sequencer": "3.6.11",
+    "JB2A_DnD5e": "0.9.0",
+    "jb2a_patreon": "0.7.6",
+    "autoanimations": "5.1.4"
+  },
+  "scope": "Isolated native Foundry world; actual CPR roll cards and Sequencer effects. Free and paid runs use the wider installed module stack; minimal uses only Addenda, its required dependencies, Sequencer, free JB2A and the verification harness.",
+  "limitations": [
+    "Profile selection was checked for 291 attack-capable catalogue objects in the wider module stack. Native rolls use representative weapon classes, not a separate attack with each object.",
+    "Paid run enables both JB2A libraries and resolves the primary variants. Free and minimal runs disable Patreon and Automated Animations.",
+    "Single GM browser session; recipient restrictions checked in emitted effects, not with a second live player browser."
+  ],
+  "sourceTests": {
+    "selftest-animations.mjs": 96,
+    "selftest-area.mjs": 108,
+    "selftest-catalogue.mjs": 208,
+    "selftest-i18n.mjs": 1133
+  },
+  "native": [
+    {
+      "configuration": "free",
+      "rawReportSha256": "57a3f821e6aa229dfd9b133f5fff18dbe6d0e198f04fd9987b430adfb50a5876",
+      "automatedAnimations": false,
+      "status": {
+        "enabled": true,
+        "sequencer": true,
+        "libraries": [
+          "JB2A_DnD5e"
+        ],
+        "files": {
+          "bullet": "jb2a.bullet.02.orange",
+          "arrow": "jb2a.arrow.physical.white.01",
+          "bolt": "jb2a.bolt.physical.orange",
+          "blade": "jb2a.sword.melee.01.white",
+          "knife": "jb2a.dagger.melee.02.white",
+          "blunt": "jb2a.maul.melee.standard.white",
+          "punch": "jb2a.unarmed_strike.physical.01.blue",
+          "claws": "jb2a.claws.200px.red",
+          "bite": "jb2a.bite.200px.red",
+          "shock": "jb2a.static_electricity.01.blue",
+          "smoke": "jb2a.smoke.puff.centered.grey",
+          "flash": "jb2a.impact.005.orange",
+          "explosion": "jb2a.explosion.01.orange",
+          "flame": "jb2a.fire_jet.orange",
+          "laser": "jb2a.lasershot.blue"
+        },
+        "effects": {
+          "bullet": true,
+          "arrow": true,
+          "bolt": true,
+          "blade": true,
+          "knife": true,
+          "blunt": true,
+          "punch": true,
+          "claws": true,
+          "bite": true,
+          "shock": true,
+          "smoke": true,
+          "flash": true,
+          "explosion": true,
+          "flame": true,
+          "laser": true
+        }
+      },
+      "checks": [
+        {
+          "name": "Every attack item gets a profile",
+          "passed": true
+        },
+        {
+          "name": "All effect database keys exist",
+          "passed": true
+        },
+        {
+          "name": "Native attack Средний пистолет",
+          "passed": true
+        },
+        {
+          "name": "No repeated effect Средний пистолет",
+          "passed": true
+        },
+        {
+          "name": "Damage does not replay Средний пистолет",
+          "passed": true
+        },
+        {
+          "name": "Native attack Тяжёлый пистолет (отличное качество)",
+          "passed": true
+        },
+        {
+          "name": "No repeated effect Тяжёлый пистолет (отличное качество)",
+          "passed": true
+        },
+        {
+          "name": "Damage does not replay Тяжёлый пистолет (отличное качество)",
+          "passed": true
+        },
+        {
+          "name": "Native attack Очень тяжёлый пистолет",
+          "passed": true
+        },
+        {
+          "name": "No repeated effect Очень тяжёлый пистолет",
+          "passed": true
+        },
+        {
+          "name": "Damage does not replay Очень тяжёлый пистолет",
+          "passed": true
+        },
+        {
+          "name": "Native attack Пистолет-пулемёт",
+          "passed": true
+        },
+        {
+          "name": "No repeated effect Пистолет-пулемёт",
+          "passed": true
+        },
+        {
+          "name": "Damage does not replay Пистолет-пулемёт",
+          "passed": true
+        },
+        {
+          "name": "Native attack Рейнметалл EMG-86",
+          "passed": true
+        },
+        {
+          "name": "No repeated effect Рейнметалл EMG-86",
+          "passed": true
+        },
+        {
+          "name": "Damage does not replay Рейнметалл EMG-86",
+          "passed": true
+        },
+        {
+          "name": "Native attack Снайперская винтовка (плохое качество)",
+          "passed": true
+        },
+        {
+          "name": "No repeated effect Снайперская винтовка (плохое качество)",
+          "passed": true
+        },
+        {
+          "name": "Damage does not replay Снайперская винтовка (плохое качество)",
+          "passed": true
+        },
+        {
+          "name": "Native attack Конститьюшенал Армс «Ураган»",
+          "passed": true
+        },
+        {
+          "name": "No repeated effect Конститьюшенал Армс «Ураган»",
+          "passed": true
+        },
+        {
+          "name": "Damage does not replay Конститьюшенал Армс «Ураган»",
+          "passed": true
+        },
+        {
+          "name": "Native attack Арбалет",
+          "passed": true
+        },
+        {
+          "name": "No repeated effect Арбалет",
+          "passed": true
+        },
+        {
+          "name": "Damage does not replay Арбалет",
+          "passed": true
+        },
+        {
+          "name": "Native attack Томагавк (плохое качество)",
+          "passed": true
+        },
+        {
+          "name": "No repeated effect Томагавк (плохое качество)",
+          "passed": true
+        },
+        {
+          "name": "Damage does not replay Томагавк (плохое качество)",
+          "passed": true
+        },
+        {
+          "name": "Native attack Бита с шипами (плохое качество)",
+          "passed": true
+        },
+        {
+          "name": "No repeated effect Бита с шипами (плохое качество)",
+          "passed": true
+        },
+        {
+          "name": "Damage does not replay Бита с шипами (плохое качество)",
+          "passed": true
+        },
+        {
+          "name": "Native attack Очень тяжёлое оружие ближнего боя (отличное качество)",
+          "passed": true
+        },
+        {
+          "name": "No repeated effect Очень тяжёлое оружие ближнего боя (отличное качество)",
+          "passed": true
+        },
+        {
+          "name": "Damage does not replay Очень тяжёлое оружие ближнего боя (отличное качество)",
+          "passed": true
+        },
+        {
+          "name": "Area final point plays once",
+          "passed": true
+        },
+        {
+          "name": "Area durable animation marker",
+          "passed": true
+        },
+        {
+          "name": "Area recount does not replay",
+          "passed": true
+        },
+        {
+          "name": "Miss waits for scatter",
+          "passed": true
+        },
+        {
+          "name": "Scatter plays at resolved point",
+          "passed": true
+        },
+        {
+          "name": "Scatter centre persisted",
+          "passed": true
+        },
+        {
+          "name": "Shotgun shell creates three tracers",
+          "passed": true
+        },
+        {
+          "name": "Autofire sequence repeats five tracers",
+          "passed": true
+        },
+        {
+          "name": "Blind effect restricted to GM",
+          "passed": true
+        },
+        {
+          "name": "Per-item disabled animation respected",
+          "passed": true
+        }
+      ],
+      "media": [
+        {
+          "kind": "bullet",
+          "file": "modules/JB2A_DnD5e/Library/Generic/Weapon_Attacks/Ranged/Bullet_02_Regular_Orange_05ft_600x400.webm",
+          "decoded": true,
+          "width": 600,
+          "height": 400
+        },
+        {
+          "kind": "arrow",
+          "file": "modules/JB2A_DnD5e/Library/Generic/Weapon_Attacks/Ranged/Arrow01_01_Regular_White_05ft_600x400.webm",
+          "decoded": true,
+          "width": 600,
+          "height": 400
+        },
+        {
+          "kind": "bolt",
+          "file": "modules/JB2A_DnD5e/Library/Generic/Weapon_Attacks/Ranged/Bolt01_01_Regular_Orange_Physical_05ft_600x400.webm",
+          "decoded": true,
+          "width": 600,
+          "height": 400
+        },
+        {
+          "kind": "blade",
+          "file": "modules/JB2A_DnD5e/Library/Generic/Weapon_Attacks/Melee/Sword01_01_Regular_White_800x600.webm",
+          "decoded": true,
+          "width": 800,
+          "height": 600
+        },
+        {
+          "kind": "knife",
+          "file": "modules/JB2A_DnD5e/Library/Generic/Weapon_Attacks/Melee/Dagger02_01_Regular_White_800x600.webm",
+          "decoded": true,
+          "width": 800,
+          "height": 600
+        },
+        {
+          "kind": "blunt",
+          "file": "modules/JB2A_DnD5e/Library/Generic/Weapon_Attacks/Melee/Maul01_01_Regular_White_800x600.webm",
+          "decoded": true,
+          "width": 800,
+          "height": 600
+        },
+        {
+          "kind": "punch",
+          "file": "modules/JB2A_DnD5e/Library/Generic/Unarmed_Attacks/Unarmed_Strike/UnarmedStrike_01_Regular_Blue_Physical01_800x600.webm",
+          "decoded": true,
+          "width": 800,
+          "height": 600
+        },
+        {
+          "kind": "claws",
+          "file": "modules/JB2A_DnD5e/Library/Generic/Creature/Claws_01_Regular_Red_200x200.webm",
+          "decoded": true,
+          "width": 200,
+          "height": 200
+        },
+        {
+          "kind": "bite",
+          "file": "modules/JB2A_DnD5e/Library/Generic/Creature/Bite_01_Regular_Red_200x200.webm",
+          "decoded": true,
+          "width": 200,
+          "height": 200
+        },
+        {
+          "kind": "shock",
+          "file": "modules/JB2A_DnD5e/Library/Generic/Lightning/StaticElectricity_01_Regular_Blue_400x400.webm",
+          "decoded": true,
+          "width": 400,
+          "height": 400
+        },
+        {
+          "kind": "smoke",
+          "file": "modules/JB2A_DnD5e/Library/Generic/Smoke/SmokePuff01_01_Regular_Grey_400x400.webm",
+          "decoded": true,
+          "width": 400,
+          "height": 400
+        },
+        {
+          "kind": "flash",
+          "file": "modules/JB2A_DnD5e/Library/Generic/Impact/Impact_05_Regular_Orange_400x400.webm",
+          "decoded": true,
+          "width": 400,
+          "height": 400
+        },
+        {
+          "kind": "explosion",
+          "file": "modules/JB2A_DnD5e/Library/Generic/Explosion/Explosion_01_Orange_400x400.webm",
+          "decoded": true,
+          "width": 400,
+          "height": 400
+        },
+        {
+          "kind": "flame",
+          "file": "modules/JB2A_DnD5e/Library/Generic/Fire/FireJet_01_Orange_15ft_600x200.webm",
+          "decoded": true,
+          "width": 600,
+          "height": 200
+        },
+        {
+          "kind": "laser",
+          "file": "modules/JB2A_DnD5e/Library/Generic/Weapon_Attacks/Ranged/LaserShot_01_Regular_Blue_05ft_600x400.webm",
+          "decoded": true,
+          "width": 600,
+          "height": 400
+        }
+      ],
+      "errors": []
+    },
+    {
+      "configuration": "paid",
+      "rawReportSha256": "305fe9549feb7f44b51d8a2762bf93c7b785297873225fbe90f98fb9ff65bada",
+      "automatedAnimations": true,
+      "status": {
+        "enabled": true,
+        "sequencer": true,
+        "libraries": [
+          "jb2a_patreon",
+          "JB2A_DnD5e"
+        ],
+        "files": {
+          "bullet": "jb2a.bullet.02.orange",
+          "arrow": "jb2a.arrow.physical.white.01",
+          "bolt": "jb2a.bolt.physical.white",
+          "blade": "jb2a.sword.melee.01.white",
+          "knife": "jb2a.dagger.melee.02.white",
+          "blunt": "jb2a.maul.melee.standard.white",
+          "punch": "jb2a.unarmed_strike.physical.01.orange",
+          "claws": "jb2a.claws.200px.bright_orange",
+          "bite": "jb2a.bite.200px.grey",
+          "shock": "jb2a.static_electricity.01.blue",
+          "smoke": "jb2a.smoke.puff.centered.dark_black",
+          "flash": "jb2a.impact.005.white",
+          "explosion": "jb2a.explosion.01.orange",
+          "flame": "jb2a.fire_jet.orange",
+          "laser": "jb2a.lasershot.blue"
+        },
+        "effects": {
+          "bullet": true,
+          "arrow": true,
+          "bolt": true,
+          "blade": true,
+          "knife": true,
+          "blunt": true,
+          "punch": true,
+          "claws": true,
+          "bite": true,
+          "shock": true,
+          "smoke": true,
+          "flash": true,
+          "explosion": true,
+          "flame": true,
+          "laser": true
+        }
+      },
+      "checks": [
+        {
+          "name": "Every attack item gets a profile",
+          "passed": true
+        },
+        {
+          "name": "All effect database keys exist",
+          "passed": true
+        },
+        {
+          "name": "Native attack Средний пистолет",
+          "passed": true
+        },
+        {
+          "name": "No repeated effect Средний пистолет",
+          "passed": true
+        },
+        {
+          "name": "Damage does not replay Средний пистолет",
+          "passed": true
+        },
+        {
+          "name": "Native attack Тяжёлый пистолет (отличное качество)",
+          "passed": true
+        },
+        {
+          "name": "No repeated effect Тяжёлый пистолет (отличное качество)",
+          "passed": true
+        },
+        {
+          "name": "Damage does not replay Тяжёлый пистолет (отличное качество)",
+          "passed": true
+        },
+        {
+          "name": "Native attack Очень тяжёлый пистолет",
+          "passed": true
+        },
+        {
+          "name": "No repeated effect Очень тяжёлый пистолет",
+          "passed": true
+        },
+        {
+          "name": "Damage does not replay Очень тяжёлый пистолет",
+          "passed": true
+        },
+        {
+          "name": "Native attack Пистолет-пулемёт",
+          "passed": true
+        },
+        {
+          "name": "No repeated effect Пистолет-пулемёт",
+          "passed": true
+        },
+        {
+          "name": "Damage does not replay Пистолет-пулемёт",
+          "passed": true
+        },
+        {
+          "name": "Native attack Рейнметалл EMG-86",
+          "passed": true
+        },
+        {
+          "name": "No repeated effect Рейнметалл EMG-86",
+          "passed": true
+        },
+        {
+          "name": "Damage does not replay Рейнметалл EMG-86",
+          "passed": true
+        },
+        {
+          "name": "Native attack Снайперская винтовка (плохое качество)",
+          "passed": true
+        },
+        {
+          "name": "No repeated effect Снайперская винтовка (плохое качество)",
+          "passed": true
+        },
+        {
+          "name": "Damage does not replay Снайперская винтовка (плохое качество)",
+          "passed": true
+        },
+        {
+          "name": "Native attack Конститьюшенал Армс «Ураган»",
+          "passed": true
+        },
+        {
+          "name": "No repeated effect Конститьюшенал Армс «Ураган»",
+          "passed": true
+        },
+        {
+          "name": "Damage does not replay Конститьюшенал Армс «Ураган»",
+          "passed": true
+        },
+        {
+          "name": "Native attack Арбалет",
+          "passed": true
+        },
+        {
+          "name": "No repeated effect Арбалет",
+          "passed": true
+        },
+        {
+          "name": "Damage does not replay Арбалет",
+          "passed": true
+        },
+        {
+          "name": "Native attack Томагавк (плохое качество)",
+          "passed": true
+        },
+        {
+          "name": "No repeated effect Томагавк (плохое качество)",
+          "passed": true
+        },
+        {
+          "name": "Damage does not replay Томагавк (плохое качество)",
+          "passed": true
+        },
+        {
+          "name": "Native attack Бита с шипами (плохое качество)",
+          "passed": true
+        },
+        {
+          "name": "No repeated effect Бита с шипами (плохое качество)",
+          "passed": true
+        },
+        {
+          "name": "Damage does not replay Бита с шипами (плохое качество)",
+          "passed": true
+        },
+        {
+          "name": "Native attack Очень тяжёлое оружие ближнего боя (отличное качество)",
+          "passed": true
+        },
+        {
+          "name": "No repeated effect Очень тяжёлое оружие ближнего боя (отличное качество)",
+          "passed": true
+        },
+        {
+          "name": "Damage does not replay Очень тяжёлое оружие ближнего боя (отличное качество)",
+          "passed": true
+        },
+        {
+          "name": "Area final point plays once",
+          "passed": true
+        },
+        {
+          "name": "Area durable animation marker",
+          "passed": true
+        },
+        {
+          "name": "Area recount does not replay",
+          "passed": true
+        },
+        {
+          "name": "Miss waits for scatter",
+          "passed": true
+        },
+        {
+          "name": "Scatter plays at resolved point",
+          "passed": true
+        },
+        {
+          "name": "Scatter centre persisted",
+          "passed": true
+        },
+        {
+          "name": "Shotgun shell creates three tracers",
+          "passed": true
+        },
+        {
+          "name": "Autofire sequence repeats five tracers",
+          "passed": true
+        },
+        {
+          "name": "Blind effect restricted to GM",
+          "passed": true
+        },
+        {
+          "name": "Per-item disabled animation respected",
+          "passed": true
+        }
+      ],
+      "media": [
+        {
+          "kind": "bullet",
+          "file": "modules/JB2A_DnD5e/Library/Generic/Weapon_Attacks/Ranged/Bullet_02_Regular_Orange_05ft_600x400.webm",
+          "decoded": true,
+          "width": 600,
+          "height": 400
+        },
+        {
+          "kind": "arrow",
+          "file": "modules/JB2A_DnD5e/Library/Generic/Weapon_Attacks/Ranged/Arrow01_01_Regular_White_05ft_600x400.webm",
+          "decoded": true,
+          "width": 600,
+          "height": 400
+        },
+        {
+          "kind": "bolt",
+          "file": "modules/jb2a_patreon/Library/Generic/Weapon_Attacks/Ranged/Bolt01_01_Regular_White_Physical_05ft_600x400.webm",
+          "decoded": true,
+          "width": 600,
+          "height": 400
+        },
+        {
+          "kind": "blade",
+          "file": "modules/JB2A_DnD5e/Library/Generic/Weapon_Attacks/Melee/Sword01_01_Regular_White_800x600.webm",
+          "decoded": true,
+          "width": 800,
+          "height": 600
+        },
+        {
+          "kind": "knife",
+          "file": "modules/JB2A_DnD5e/Library/Generic/Weapon_Attacks/Melee/Dagger02_01_Regular_White_800x600.webm",
+          "decoded": true,
+          "width": 800,
+          "height": 600
+        },
+        {
+          "kind": "blunt",
+          "file": "modules/JB2A_DnD5e/Library/Generic/Weapon_Attacks/Melee/Maul01_01_Regular_White_800x600.webm",
+          "decoded": true,
+          "width": 800,
+          "height": 600
+        },
+        {
+          "kind": "punch",
+          "file": "modules/jb2a_patreon/Library/Generic/Unarmed_Attacks/Unarmed_Strike/UnarmedStrike_01_Regular_Orange_Physical01_800x600.webm",
+          "decoded": true,
+          "width": 800,
+          "height": 600
+        },
+        {
+          "kind": "claws",
+          "file": "modules/jb2a_patreon/Library/Generic/Creature/Claws_01_Bright_Orange_200x200.webm",
+          "decoded": true,
+          "width": 200,
+          "height": 200
+        },
+        {
+          "kind": "bite",
+          "file": "modules/jb2a_patreon/Library/Generic/Creature/Bite_01_Regular_Grey_200x200.webm",
+          "decoded": true,
+          "width": 200,
+          "height": 200
+        },
+        {
+          "kind": "shock",
+          "file": "modules/JB2A_DnD5e/Library/Generic/Lightning/StaticElectricity_01_Regular_Blue_400x400.webm",
+          "decoded": true,
+          "width": 400,
+          "height": 400
+        },
+        {
+          "kind": "smoke",
+          "file": "modules/jb2a_patreon/Library/Generic/Smoke/SmokePuff01_01_Dark_Black_400x400.webm",
+          "decoded": true,
+          "width": 400,
+          "height": 400
+        },
+        {
+          "kind": "flash",
+          "file": "modules/jb2a_patreon/Library/Generic/Impact/Impact_05_Regular_White_400x400.webm",
+          "decoded": true,
+          "width": 400,
+          "height": 400
+        },
+        {
+          "kind": "explosion",
+          "file": "modules/JB2A_DnD5e/Library/Generic/Explosion/Explosion_01_Orange_400x400.webm",
+          "decoded": true,
+          "width": 400,
+          "height": 400
+        },
+        {
+          "kind": "flame",
+          "file": "modules/JB2A_DnD5e/Library/Generic/Fire/FireJet_01_Orange_15ft_600x200.webm",
+          "decoded": true,
+          "width": 600,
+          "height": 200
+        },
+        {
+          "kind": "laser",
+          "file": "modules/JB2A_DnD5e/Library/Generic/Weapon_Attacks/Ranged/LaserShot_01_Regular_Blue_05ft_600x400.webm",
+          "decoded": true,
+          "width": 600,
+          "height": 400
+        }
+      ],
+      "errors": []
+    },
+    {
+      "configuration": "minimal",
+      "rawReportSha256": "1ad5b310cf26425fdb42c02374a0d813ed3ee21b33dadd345e49b0870ef278c3",
+      "automatedAnimations": false,
+      "status": {
+        "enabled": true,
+        "sequencer": true,
+        "libraries": [
+          "JB2A_DnD5e"
+        ],
+        "files": {
+          "bullet": "jb2a.bullet.02.orange",
+          "arrow": "jb2a.arrow.physical.white.01",
+          "bolt": "jb2a.bolt.physical.orange",
+          "blade": "jb2a.sword.melee.01.white",
+          "knife": "jb2a.dagger.melee.02.white",
+          "blunt": "jb2a.maul.melee.standard.white",
+          "punch": "jb2a.unarmed_strike.physical.01.blue",
+          "claws": "jb2a.claws.200px.red",
+          "bite": "jb2a.bite.200px.red",
+          "shock": "jb2a.static_electricity.01.blue",
+          "smoke": "jb2a.smoke.puff.centered.grey",
+          "flash": "jb2a.impact.005.orange",
+          "explosion": "jb2a.explosion.01.orange",
+          "flame": "jb2a.fire_jet.orange",
+          "laser": "jb2a.lasershot.blue"
+        },
+        "effects": {
+          "bullet": true,
+          "arrow": true,
+          "bolt": true,
+          "blade": true,
+          "knife": true,
+          "blunt": true,
+          "punch": true,
+          "claws": true,
+          "bite": true,
+          "shock": true,
+          "smoke": true,
+          "flash": true,
+          "explosion": true,
+          "flame": true,
+          "laser": true
+        }
+      },
+      "checks": [
+        {
+          "name": "Every attack item gets a profile",
+          "passed": true
+        },
+        {
+          "name": "All effect database keys exist",
+          "passed": true
+        },
+        {
+          "name": "Native attack Средний пистолет",
+          "passed": true
+        },
+        {
+          "name": "No repeated effect Средний пистолет",
+          "passed": true
+        },
+        {
+          "name": "Damage does not replay Средний пистолет",
+          "passed": true
+        },
+        {
+          "name": "Native attack Тяжёлый пистолет (отличное качество)",
+          "passed": true
+        },
+        {
+          "name": "No repeated effect Тяжёлый пистолет (отличное качество)",
+          "passed": true
+        },
+        {
+          "name": "Damage does not replay Тяжёлый пистолет (отличное качество)",
+          "passed": true
+        },
+        {
+          "name": "Native attack Очень тяжёлый пистолет",
+          "passed": true
+        },
+        {
+          "name": "No repeated effect Очень тяжёлый пистолет",
+          "passed": true
+        },
+        {
+          "name": "Damage does not replay Очень тяжёлый пистолет",
+          "passed": true
+        },
+        {
+          "name": "Native attack Пистолет-пулемёт",
+          "passed": true
+        },
+        {
+          "name": "No repeated effect Пистолет-пулемёт",
+          "passed": true
+        },
+        {
+          "name": "Damage does not replay Пистолет-пулемёт",
+          "passed": true
+        },
+        {
+          "name": "Native attack Рейнметалл EMG-86",
+          "passed": true
+        },
+        {
+          "name": "No repeated effect Рейнметалл EMG-86",
+          "passed": true
+        },
+        {
+          "name": "Damage does not replay Рейнметалл EMG-86",
+          "passed": true
+        },
+        {
+          "name": "Native attack Снайперская винтовка (плохое качество)",
+          "passed": true
+        },
+        {
+          "name": "No repeated effect Снайперская винтовка (плохое качество)",
+          "passed": true
+        },
+        {
+          "name": "Damage does not replay Снайперская винтовка (плохое качество)",
+          "passed": true
+        },
+        {
+          "name": "Native attack Конститьюшенал Армс «Ураган»",
+          "passed": true
+        },
+        {
+          "name": "No repeated effect Конститьюшенал Армс «Ураган»",
+          "passed": true
+        },
+        {
+          "name": "Damage does not replay Конститьюшенал Армс «Ураган»",
+          "passed": true
+        },
+        {
+          "name": "Native attack Арбалет",
+          "passed": true
+        },
+        {
+          "name": "No repeated effect Арбалет",
+          "passed": true
+        },
+        {
+          "name": "Damage does not replay Арбалет",
+          "passed": true
+        },
+        {
+          "name": "Native attack Томагавк (плохое качество)",
+          "passed": true
+        },
+        {
+          "name": "No repeated effect Томагавк (плохое качество)",
+          "passed": true
+        },
+        {
+          "name": "Damage does not replay Томагавк (плохое качество)",
+          "passed": true
+        },
+        {
+          "name": "Native attack Бита с шипами (плохое качество)",
+          "passed": true
+        },
+        {
+          "name": "No repeated effect Бита с шипами (плохое качество)",
+          "passed": true
+        },
+        {
+          "name": "Damage does not replay Бита с шипами (плохое качество)",
+          "passed": true
+        },
+        {
+          "name": "Native attack Очень тяжёлое оружие ближнего боя (отличное качество)",
+          "passed": true
+        },
+        {
+          "name": "No repeated effect Очень тяжёлое оружие ближнего боя (отличное качество)",
+          "passed": true
+        },
+        {
+          "name": "Damage does not replay Очень тяжёлое оружие ближнего боя (отличное качество)",
+          "passed": true
+        },
+        {
+          "name": "Area final point plays once",
+          "passed": true
+        },
+        {
+          "name": "Area durable animation marker",
+          "passed": true
+        },
+        {
+          "name": "Area recount does not replay",
+          "passed": true
+        },
+        {
+          "name": "Miss waits for scatter",
+          "passed": true
+        },
+        {
+          "name": "Scatter plays at resolved point",
+          "passed": true
+        },
+        {
+          "name": "Scatter centre persisted",
+          "passed": true
+        },
+        {
+          "name": "Shotgun shell creates three tracers",
+          "passed": true
+        },
+        {
+          "name": "Autofire sequence repeats five tracers",
+          "passed": true
+        },
+        {
+          "name": "Blind effect restricted to GM",
+          "passed": true
+        },
+        {
+          "name": "Per-item disabled animation respected",
+          "passed": true
+        }
+      ],
+      "media": [
+        {
+          "kind": "bullet",
+          "file": "modules/JB2A_DnD5e/Library/Generic/Weapon_Attacks/Ranged/Bullet_02_Regular_Orange_05ft_600x400.webm",
+          "decoded": true,
+          "width": 600,
+          "height": 400
+        },
+        {
+          "kind": "arrow",
+          "file": "modules/JB2A_DnD5e/Library/Generic/Weapon_Attacks/Ranged/Arrow01_01_Regular_White_05ft_600x400.webm",
+          "decoded": true,
+          "width": 600,
+          "height": 400
+        },
+        {
+          "kind": "bolt",
+          "file": "modules/JB2A_DnD5e/Library/Generic/Weapon_Attacks/Ranged/Bolt01_01_Regular_Orange_Physical_05ft_600x400.webm",
+          "decoded": true,
+          "width": 600,
+          "height": 400
+        },
+        {
+          "kind": "blade",
+          "file": "modules/JB2A_DnD5e/Library/Generic/Weapon_Attacks/Melee/Sword01_01_Regular_White_800x600.webm",
+          "decoded": true,
+          "width": 800,
+          "height": 600
+        },
+        {
+          "kind": "knife",
+          "file": "modules/JB2A_DnD5e/Library/Generic/Weapon_Attacks/Melee/Dagger02_01_Regular_White_800x600.webm",
+          "decoded": true,
+          "width": 800,
+          "height": 600
+        },
+        {
+          "kind": "blunt",
+          "file": "modules/JB2A_DnD5e/Library/Generic/Weapon_Attacks/Melee/Maul01_01_Regular_White_800x600.webm",
+          "decoded": true,
+          "width": 800,
+          "height": 600
+        },
+        {
+          "kind": "punch",
+          "file": "modules/JB2A_DnD5e/Library/Generic/Unarmed_Attacks/Unarmed_Strike/UnarmedStrike_01_Regular_Blue_Physical01_800x600.webm",
+          "decoded": true,
+          "width": 800,
+          "height": 600
+        },
+        {
+          "kind": "claws",
+          "file": "modules/JB2A_DnD5e/Library/Generic/Creature/Claws_01_Regular_Red_200x200.webm",
+          "decoded": true,
+          "width": 200,
+          "height": 200
+        },
+        {
+          "kind": "bite",
+          "file": "modules/JB2A_DnD5e/Library/Generic/Creature/Bite_01_Regular_Red_200x200.webm",
+          "decoded": true,
+          "width": 200,
+          "height": 200
+        },
+        {
+          "kind": "shock",
+          "file": "modules/JB2A_DnD5e/Library/Generic/Lightning/StaticElectricity_01_Regular_Blue_400x400.webm",
+          "decoded": true,
+          "width": 400,
+          "height": 400
+        },
+        {
+          "kind": "smoke",
+          "file": "modules/JB2A_DnD5e/Library/Generic/Smoke/SmokePuff01_01_Regular_Grey_400x400.webm",
+          "decoded": true,
+          "width": 400,
+          "height": 400
+        },
+        {
+          "kind": "flash",
+          "file": "modules/JB2A_DnD5e/Library/Generic/Impact/Impact_05_Regular_Orange_400x400.webm",
+          "decoded": true,
+          "width": 400,
+          "height": 400
+        },
+        {
+          "kind": "explosion",
+          "file": "modules/JB2A_DnD5e/Library/Generic/Explosion/Explosion_01_Orange_400x400.webm",
+          "decoded": true,
+          "width": 400,
+          "height": 400
+        },
+        {
+          "kind": "flame",
+          "file": "modules/JB2A_DnD5e/Library/Generic/Fire/FireJet_01_Orange_15ft_600x200.webm",
+          "decoded": true,
+          "width": 600,
+          "height": 200
+        },
+        {
+          "kind": "laser",
+          "file": "modules/JB2A_DnD5e/Library/Generic/Weapon_Attacks/Ranged/LaserShot_01_Regular_Blue_05ft_600x400.webm",
+          "decoded": true,
+          "width": 600,
+          "height": 400
+        }
+      ],
+      "errors": [],
+      "activeModules": [
+        "audit-harness",
+        "cpr-addenda",
+        "JB2A_DnD5e",
+        "lib-wrapper",
+        "pdf-pager",
+        "sequencer",
+        "socketlib"
+      ]
+    }
+  ]
+}

@@ -2,7 +2,7 @@
   "id": "cpr-addenda",
   "title": "Cyberpunk RED: Addenda",
   "description": "<p>Добавляет в систему Cyberpunk RED предметы, которых нет в штатных компендиумах, и механику для них: ограничение установки модификаций по типам оружия и эффекты, работающие только пока модификация установлена.</p><p>Содержит русский лист транспорта: посты экипажа, закреплённое за постами оружие, модификаторы характеристик и автоматическую выдачу прав доступа. Лист перенесён из MMuton's CPR Vehicle Actor Sheet с разрешения автора.</p>",
-  "version": "0.21.0",
+  "version": "0.22.0",
   "authors": [
     {
       "name": "Horusian"
@@ -10,7 +10,7 @@
   ],
   "compatibility": {
     "minimum": "12",
-    "verified": "12.343"
+    "verified": "12.331"
   },
   "relationships": {
     "systems": [
@@ -38,6 +38,16 @@
       {
         "id": "socketlib",
         "type": "module"
+      }
+    ],
+    "recommends": [
+      {
+        "id": "sequencer",
+        "type": "module",
+        "compatibility": {
+          "minimum": "3.6.0",
+          "verified": "3.6.11"
+        }
       }
     ]
   },
@@ -185,5 +195,5 @@
   "bugs": "https://github.com/Defaulter444/cpr-addenda/issues",
   "license": "LICENSE",
   "socket": true,
-  "download": "https://github.com/Defaulter444/cpr-addenda/releases/download/v0.21.0/module.zip"
+  "download": "https://github.com/Defaulter444/cpr-addenda/releases/download/v0.22.0/module.zip"
 }

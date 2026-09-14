@@ -11,6 +11,15 @@ export const WEAPON_EFFECTS = Object.freeze({
   smoke: 'jb2a.smoke.puff.centered.dark_black', flash: 'jb2a.impact.005.white',
   explosion: 'jb2a.explosion.01.orange', flame: 'jb2a.fire_jet.orange', laser: 'jb2a.lasershot.blue',
 });
+// Same animation families in the free library, with its available colours.
+export const FREE_WEAPON_EFFECTS = Object.freeze({
+  bolt: 'jb2a.bolt.physical.orange', punch: 'jb2a.unarmed_strike.physical.01.blue',
+  claws: 'jb2a.claws.200px.red', bite: 'jb2a.bite.200px.red',
+  smoke: 'jb2a.smoke.puff.centered.grey', flash: 'jb2a.impact.005.orange',
+});
+export function resolveWeaponEffect(effect, entryExists) {
+  return [WEAPON_EFFECTS[effect], FREE_WEAPON_EFFECTS[effect]].find(path => path && entryExists(path)) ?? null;
+}
 export function weaponAnimationProfile(item) {
   if (!isAttackItem(item) && !(item?.type === 'ammo' && item.system?.variety === 'grenade')) return null;
   const s = item.system ?? {}, key = catalogueIdentity(item),
